@@ -12,20 +12,29 @@
  * $Id$
  */
 
-global $delimiter;
-
 require_once('../src/validate.php');
 require_once('../functions/imap.php');
+require_once('../functions/display_messages.php');
+
+/* get globals we may need */
+
+$username = $_SESSION['username'];
+$key = $_COOKIE['key'];
+$delimiter = $_SESSION['delimiter'];
+$onetimepad = $_SESSION['onetimepad'];
+
+$old = $_POST['old'];
+    
+/* end of get globals */
+
+displayPageHeader($color, 'None');
 
 if ($old == '') {
-    displayPageHeader($color, 'None');
-    echo "<html><body bgcolor=$color[4]>";
-    plain_error_message(_("You have not selected a folder to rename. Please do so.")."<BR><A HREF=\"../src/folders.php\">"._("Click here to go back")."</A>.", $color);
+    plain_error_message(_("You have not selected a folder to rename. Please do so.").
+        "<BR><A HREF=\"../src/folders.php\">"._("Click here to go back")."</A>.", $color);
     exit;
 }
 
-
-$imapConnection = sqimap_login($username, $key, $imapServerAddress, $imapPort, 0);
 
 if (substr($old, strlen($old) - strlen($delimiter)) == $delimiter) {
     $isfolder = TRUE;
@@ -33,6 +42,8 @@ if (substr($old, strlen($old) - strlen($delimiter)) == $delimiter) {
 } else {
     $isfolder = FALSE;
 }
+
+$old = imap_utf7_decode_local($old);
 
 if (strpos($old, $delimiter)) {
     $old_name = substr($old, strrpos($old, $delimiter)+1, strlen($old));
@@ -42,7 +53,6 @@ if (strpos($old, $delimiter)) {
     $old_parent = '';
 }
 
-displayPageHeader($color, 'None');
 echo "<br><TABLE align=center border=0 WIDTH=\"95%\" COLS=1>".
      "<TR><TD BGCOLOR=\"$color[0]\" ALIGN=CENTER><B>".
      _("Rename a folder").
@@ -60,6 +70,4 @@ echo "<INPUT TYPE=SUBMIT VALUE=\""._("Submit")."\">\n".
      "</FORM><BR></TD></TR>".
      "</TABLE>";
 
-/** Log out this session **/
-sqimap_logout($imapConnection);
 ?>

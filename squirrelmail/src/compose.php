@@ -25,54 +25,97 @@ require_once('../functions/smtp.php');
 require_once('../functions/display_messages.php');
 require_once('../functions/plugin.php');
 
-/* --------------------- Specific Functions ------------------------------ */
+/* lets get the global vars we may need */
+$key  = $_COOKIE['key'];
 
+$username = $_SESSION['username'];
+$onetimepad = $_SESSION['onetimepad'];
+$base_uri = $_SESSION['base_uri'];
+$delimiter = $_SESSION['delimiter'];
 
+if (isset($_POST['return'])) {
+    $html_addr_search_done = 'Use Addresses';
+}
+if ( isset($_SESSION['composesession']) ) {
+    $composesession = $_SESSION['composesession'];
+}
+sqextractGlobalVar('session');
+sqextractGlobalVar('mailbox');
+sqextractGlobalVar('identity');
+sqextractGlobalVar('send_to');
+sqextractGlobalVar('send_to_cc');
+sqextractGlobalVar('send_to_bcc');
+sqextractGlobalVar('subject');
+sqextractGlobalVar('body');
+sqextractGlobalVar('mailprio');
+sqextractGlobalVar('request_mdn');
+sqextractGlobalVar('request_dr');
+sqextractGlobalVar('html_addr_search');
+sqextractGlobalVar('mail_sent');
+sqextractGlobalVar('passed_id');
 
-/**
- * Does the opposite of sqWordWrap()
- */
-function sqUnWordWrap(&$body) {
-    $lines = explode("\n", $body);
-    $body = '';
-    $PreviousSpaces = '';
-    for ($i = 0; $i < count($lines); $i ++) {
-        ereg("^([\t >]*)([^\t >].*)?$", $lines[$i], $regs);
-        $CurrentSpaces = $regs[1];
-        if (isset($regs[2])) {
-            $CurrentRest = $regs[2];
-        }
-        
-        if ($i == 0) {
-            $PreviousSpaces = $CurrentSpaces;
-            $body = $lines[$i];
-        } else if (($PreviousSpaces == $CurrentSpaces) /* Do the beginnings match */
-                   && (strlen($lines[$i - 1]) > 65)    /* Over 65 characters long */
-                   && strlen($CurrentRest)) {          /* and there's a line to continue with */
-            $body .= ' ' . $CurrentRest;
-        } else {
-            $body .= "\n" . $lines[$i];
-            $PreviousSpaces = $CurrentSpaces;
-        }
-    }
-    $body .= "\n";
+if ( isset($_POST['sigappend']) ) {
+    $sigappend = $_POST['sigappend'];
+}
+/* From addressbook search */
+if ( isset($_POST['from_htmladdr_search']) ) {
+    $from_htmladdr_search = $_POST['from_htmladdr_search'];
+}
+if ( isset($_POST['addr_search_done']) ) {
+    $html_addr_search_done = $_POST['addr_search_done'];
+}
+if ( isset($_POST['send_to_search']) ) {
+    $send_to_search = &$_POST['send_to_search'];
 }
 
-/* ----------------------------------------------------------------------- */
+/* From read_body.php */
+sqextractGlobalVar('reply_subj');
+sqextractGlobalVar('forward_subj');
+sqextractGlobalVar('reply_id');
+sqextractGlobalVar('forward_id');
+
+/* Attachments */
+sqextractGlobalVar('attach');
+if ( isset($_POST['do_delete']) ) {
+    $do_delete = $_POST['do_delete'];
+}
+if ( isset($_POST['delete']) ) {
+    $delete = &$_POST['delete'];
+}
+if ( isset($_POST['attachments']) ) {
+    $attachments = &$_POST['attachments'];
+}
+elseif ( isset($_SESSION['attachments'])) {
+    $attachments = &$_SESSION['attachments'];
+}
+
+/* Forward message as attachment */
+if ( isset($_GET['attachedmessages']) ) {
+    $attachedmessages = $_GET['attachedmessages'];
+}
+
+/* Drafts */
+sqextractGlobalVar('draft');
+sqextractGlobalVar('draft_id');
+sqextractGlobalVar('ent_num');
+sqextractGlobalVar('saved_draft');
+sqextractGlobalVar('delete_draft');
 
 if (!isset($attachments)) {
     $attachments = array();
-    session_register('attachments');
+    sqsession_register($attachments, 'attachments');
 }
 
 if (!isset($composesession)) {
     $composesession = 0;
-    session_register('composesession');
+    sqsession_register($composesession, 'composesession');
 }
 
 if (!isset($session) || (isset($newmessage) && $newmessage)) {
+    sqsession_unregister('composesession');
     $session = "$composesession" +1; 
     $composesession = $session;        
+    sqsession_register($composesession, 'composesession');
 }     
 
 if (!isset($mailbox) || $mailbox == '' || ($mailbox == 'None')) {
@@ -108,7 +151,7 @@ if (isset($draft)) {
             }
             else {
             Header("Location: right_main.php?mailbox=$draft_folder&sort=$sort".
-                   "&startMessage=1&note=$draft_message");
+                   "&startMessage=1&note=".urlencode($draft_message));
             exit();
             }
         }
@@ -116,9 +159,9 @@ if (isset($draft)) {
 }
 
 if (isset($send)) {
-    if (isset($HTTP_POST_FILES['attachfile']) &&
-        $HTTP_POST_FILES['attachfile']['tmp_name'] &&
-        $HTTP_POST_FILES['attachfile']['tmp_name'] != 'none') {
+    if (isset($_FILES['attachfile']) &&
+        $_FILES['attachfile']['tmp_name'] &&
+        $_FILES['attachfile']['tmp_name'] != 'none') {
         $AttachFailure = saveAttachedFiles($session);
     }
     if (checkInput(false) && !isset($AttachFailure)) {
@@ -182,8 +225,9 @@ if (isset($send)) {
             Header("Location: compose.php?mail_sent=yes");
         }
         else {
-            Header("Location: right_main.php?mailbox=$urlMailbox&sort=$sort".
-                   "&startMessage=1");
+            if ($Result != 0) {
+                Header("Location: right_main.php?mailbox=$urlMailbox&sort=$sort".                       "&startMessage=1");
+            }
         }
     } else {
         /*
@@ -237,9 +281,9 @@ if (isset($send)) {
     }
     showInputForm($session);
 } elseif (isset($html_addr_search)) {
-    if (isset($HTTP_POST_FILES['attachfile']) &&
-        $HTTP_POST_FILES['attachfile']['tmp_name'] &&
-        $HTTP_POST_FILES['attachfile']['tmp_name'] != 'none') {
+    if (isset($_FILES['attachfile']) &&
+        $_FILES['attachfile']['tmp_name'] &&
+        $_FILES['attachfile']['tmp_name'] != 'none') {
         if (saveAttachedFiles($session)) {
             plain_error_message(_("Could not move/copy file. File not attached"), $color);
         }
@@ -279,6 +323,7 @@ elseif (isset($sigappend)) {
     }
     showInputForm($session);
 } elseif (isset($do_delete)) {
+        sqsession_unregister('attachments');
         if ($compose_new_win == '1') {
             compose_Header($color, $mailbox);
         }
@@ -293,13 +338,13 @@ elseif (isset($sigappend)) {
                            . $attachments[$index]['localfilename'];
     	    unlink ($attached_file);
     	    unset ($attachments[$index]);
+	    sqsession_register($attachments, 'attachments');
         }
     }
 
     showInputForm($session);
     
 } elseif (isset($attachedmessages)) {
-
     /*
      * This handles the case if we attache message 
      */
@@ -363,7 +408,8 @@ exit();
 function newMail () {
     global $forward_id, $imapConnection, $msg, $ent_num, $body_ary, $body,
            $reply_id, $send_to, $send_to_cc, $mailbox, $send_to_bcc, $editor_size,
-           $draft_id, $use_signature, $composesession, $forward_cc, $passed_id;
+           $draft_id, $use_signature, $composesession, $forward_cc, $passed_id,
+           $edit_as_new;
 
     $send_to = decodeHeader($send_to, false);
     $send_to_cc = decodeHeader($send_to_cc, false);
@@ -378,10 +424,7 @@ function newMail () {
         $id = $reply_id;
     } elseif ($passed_id) {
         $id = $passed_id;
-    }
-
-
-    if ($draft_id){
+    } elseif ($draft_id){
         $id = $draft_id;
         $use_signature = FALSE;
     }
@@ -415,7 +458,7 @@ function newMail () {
         sqUnWordWrap($body);
         
         /* this corrects some wrapping/quoting problems on replies */
-        if ($reply_id) {
+        if ($reply_id || $edit_as_new || $forward_id || $draft_id) {
             $rewrap_body = explode("\n", $body);
             for ($i=0;$i<count($rewrap_body);$i++) {
                 sqWordWrap($rewrap_body[$i], ($editor_size - 2));
@@ -534,6 +577,7 @@ function getAttachments($message, $session) {
 
     $hashed_attachment_dir = getHashedDir($username, $attachment_dir);
     if (count($message->entities) == 0) {
+        sqsession_unregister('attachments');
         if ($message->header->entity_id != $ent_num) {
             $filename = decodeHeader($message->header->filename);
 
@@ -557,13 +601,14 @@ function getAttachments($message, $session) {
 	    $newAttachment['session'] = $session;
 
             /* Write Attachment to file */
-            $fp = fopen ("$hashed_attachment_dir/$localfilename", 'w');
+            $fp = fopen ("$hashed_attachment_dir/$localfilename", 'wb');
             fputs($fp, decodeBody(mime_fetch_body($imapConnection,
                 $id, $message->header->entity_id),
                 $message->header->encoding));
             fclose ($fp);
 
             $attachments[] = $newAttachment;
+	    sqsession_register($attachments, 'attachments');
         }
     } else {
         for ($i = 0; $i < count($message->entities); $i++) {
@@ -762,12 +807,13 @@ function showInputForm ($session) {
          ' value="' . _("Add") .'">' . "\n" .
          '     </TD>' . "\n" .
          '   </TR>' . "\n";
-
+    
     if (count($attachments)) {
         $hashed_attachment_dir = getHashedDir($username, $attachment_dir);
         echo '<tr><td bgcolor="' . $color[0] . '" align=right>' . "\n" .
              '&nbsp;' .
              '</td><td align=left bgcolor="' . $color[0] . '">';
+
         foreach ($attachments as $key => $info) {
     	    if ($info['session'] == $session) { 
             	$attached_file = "$hashed_attachment_dir/$info[localfilename]";
@@ -857,9 +903,9 @@ function checkInput ($show) {
      * using $show=false, and then when i'm ready to display the error
      * message, show=true
      */
-    global $body, $send_to, $subject, $color;
+    global $body, $send_to, $send_to_bcc, $subject, $color;
 
-    if ($send_to == "") {
+    if ($send_to == '' && $send_to_bcc == '') {
         if ($show) {
             plain_error_message(_("You have not filled in the \"To:\" field."), $color);
         }
@@ -871,7 +917,12 @@ function checkInput ($show) {
 
 /* True if FAILURE */
 function saveAttachedFiles($session) {
-    global $HTTP_POST_FILES, $attachment_dir, $attachments, $username;
+    global $_FILES, $attachment_dir, $attachments, $username;
+
+    /* get out of here if no file was attached at all */
+    if (! is_uploaded_file($_FILES['attachfile']['tmp_name']) ) {   
+        return true;
+    }
 
     $hashed_attachment_dir = getHashedDir($username, $attachment_dir);
     $localfilename = GenerateRandomString(32, '', 7);
@@ -881,28 +932,28 @@ function saveAttachedFiles($session) {
         $full_localfilename = "$hashed_attachment_dir/$localfilename";
     }
 
-    if (!@rename($HTTP_POST_FILES['attachfile']['tmp_name'], $full_localfilename)) {
-        if (!@copy($HTTP_POST_FILES['attachfile']['tmp_name'], $full_localfilename)) {
-            return true;
-        }
+    if (!@move_uploaded_file($_FILES['attachfile']['tmp_name'], $full_localfilename)) {
+        return true;
     }
 
     $newAttachment['localfilename'] = $localfilename;
-    $newAttachment['remotefilename'] = $HTTP_POST_FILES['attachfile']['name'];
-    $newAttachment['type'] = strtolower($HTTP_POST_FILES['attachfile']['type']);
+    $newAttachment['remotefilename'] = $_FILES['attachfile']['name'];
+    $newAttachment['type'] = strtolower($_FILES['attachfile']['type']);
     $newAttachment['session'] = $session;
 
     if ($newAttachment['type'] == "") {
          $newAttachment['type'] = 'application/octet-stream';
     }
-
+    sqsession_unregister('attachments');
     $attachments[] = $newAttachment;
+    sqsession_register($attachments, 'attachments');
 }
 
 
 function ClearAttachments($session)
 {
     global $username, $attachments, $attachment_dir;
+
     $hashed_attachment_dir = getHashedDir($username, $attachment_dir);
 
     $rem_attachments = array();
@@ -919,7 +970,9 @@ function ClearAttachments($session)
 	        }
         }
     }
+    sqsession_unregister('attachments');
     $attachments = $rem_attachments;
+    sqsession_register($attachments, 'attachments');
 }
 
 
@@ -960,7 +1013,8 @@ function getReplyCitation($orig_from)
         $end   = '">';
         break;
     case 'user-defined':
-        $start = $reply_citation_start . ' ';
+        $start = $reply_citation_start . 
+		 ($reply_citation_start == '' ? '' : ' ');
         $end   = $reply_citation_end;
         break;
     default:

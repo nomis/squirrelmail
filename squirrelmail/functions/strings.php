@@ -16,7 +16,7 @@
  * SquirrelMail version number -- DO NOT CHANGE
  */
 global $version;
-$version = '1.2.7 [CVS]';
+$version = '1.2.10';
 
 /**
  * Wraps text at $wrap characters
@@ -70,6 +70,37 @@ function sqWordWrap(&$line, $wrap) {
 }
 
 /**
+ * Does the opposite of sqWordWrap()
+ */
+function sqUnWordWrap(&$body) {
+    $lines = explode("\n", $body);
+    $body = '';
+    $PreviousSpaces = '';
+    for ($i = 0; $i < count($lines); $i ++) {
+        ereg("^([\t >]*)([^\t >].*)?$", $lines[$i], $regs);
+        $CurrentSpaces = $regs[1];
+        if (isset($regs[2])) {
+            $CurrentRest = $regs[2];
+        }
+        else {
+            $CurrentRest = '';
+        }
+        if ($i == 0) {
+            $PreviousSpaces = $CurrentSpaces;
+            $body = $lines[$i];
+        } else if (($PreviousSpaces == $CurrentSpaces) /* Do the beginnings match */
+                   && (strlen($lines[$i - 1]) > 65)    /* Over 65 characters long */
+                   && strlen($CurrentRest)) {          /* and there's a line to continue with */
+            $body .= ' ' . $CurrentRest;
+        } else {
+            $body .= "\n" . $lines[$i];
+            $PreviousSpaces = $CurrentSpaces;
+        }
+    }
+    $body .= "\n";
+}
+
+/**
  * If $haystack is a full mailbox name and $needle is the mailbox
  * separator character, returns the last part of the mailbox name.
  */
@@ -99,11 +130,16 @@ function parseAddrs($text) {
     $text = ereg_replace('\\([^\\)]*\\)', '', $text);
     $text = str_replace(',', ';', $text);
     $array = explode(';', $text);
-    for ($i = 0; $i < count ($array); $i++) {
-        $array[$i] = eregi_replace ('^.*[<]', '', $array[$i]);
-        $array[$i] = eregi_replace ('[>].*$', '', $array[$i]);
+
+    foreach($array as $part) {
+        $part = eregi_replace ('^.*[<]', '', $part);
+        $part = eregi_replace ('[>].*$', '', $part);
+
+        if($part != '')
+            $new_array[] = $part;
     }
-    return $array;
+
+    return $new_array;
 }
 
 /**
@@ -124,17 +160,17 @@ function getLineOfAddrs($array) {
 }
 
 function php_self () {
-    global $PHP_SELF, $HTTP_SERVER_VARS;
+    global $PHP_SELF, $_SERVER;
     
-    if (isset($HTTP_SERVER_VARS['REQUEST_URI']) && !empty($HTTP_SERVER_VARS['REQUEST_URI']) ) {
-        return $HTTP_SERVER_VARS['REQUEST_URI'];
+    if (isset($_SERVER['REQUEST_URI']) && !empty($_SERVER['REQUEST_URI']) ) {
+        return $_SERVER['REQUEST_URI'];
     }
 
     if (isset($PHP_SELF) && !empty($PHP_SELF)) {
         return $PHP_SELF;
-    } else if (isset($HTTP_SERVER_VARS['PHP_SELF']) &&
-               !empty($HTTP_SERVER_VARS['PHP_SELF'])) {
-        return $HTTP_SERVER_VARS['PHP_SELF'];
+    } else if (isset($_SERVER['PHP_SELF']) &&
+               !empty($_SERVER['PHP_SELF'])) {
+        return $_SERVER['PHP_SELF'];
     } else {
         return '';
     }
@@ -152,9 +188,8 @@ function php_self () {
  */
 function get_location () {
     
-    global $PHP_SELF, $SERVER_NAME, $HTTP_HOST, $SERVER_PORT,
-        $HTTP_SERVER_VARS;
-    
+    global $_SERVER, $imap_server_type;
+
     /* Get the path, handle virtual directories */
     $path = substr(php_self(), 0, strrpos(php_self(), '/'));
     
@@ -168,37 +203,44 @@ function get_location () {
      */
     $getEnvVar = getenv('HTTPS');
     if ((isset($getEnvVar) && !strcasecmp($getEnvVar, 'on')) ||
-        (isset($HTTP_SERVER_VARS['HTTPS'])) ||
-        (isset($HTTP_SERVER_VARS['SERVER_PORT']) &&
-         $HTTP_SERVER_VARS['SERVER_PORT'] == 443)) {
+        (isset($_SERVER['HTTPS'])) ||
+        (isset($_SERVER['SERVER_PORT']) &&
+         $_SERVER['SERVER_PORT'] == 443)) {
         $proto = 'https://';
     }
     
     /* Get the hostname from the Host header or server config. */
     $host = '';
-    if (isset($HTTP_HOST) && !empty($HTTP_HOST)) {
-        $host = $HTTP_HOST;
-    } else if (isset($SERVER_NAME) && !empty($SERVER_NAME)) {
-        $host = $SERVER_NAME;
-    } else if (isset($HTTP_SERVER_VARS['SERVER_NAME']) &&
-               !empty($HTTP_SERVER_VARS['SERVER_NAME'])) {
-        $host = $HTTP_SERVER_VARS['SERVER_NAME'];
+    if (isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])) {
+        $host = $_SERVER['HTTP_HOST'];
+    } else if (isset($_SERVER['SERVER_NAME']) &&
+               !empty($_SERVER['SERVER_NAME'])) {
+        $host = $_SERVER['SERVER_NAME'];
     }
 
-    
     $port = '';
     if (! strstr($host, ':')) {
-        if (isset($SERVER_PORT)) {
-            if (($SERVER_PORT != 80 && $proto == 'http://')
-                || ($SERVER_PORT != 443 && $proto == 'https://')) {
-                $port = sprintf(':%d', $SERVER_PORT);
+        if (isset($_SERVER['SERVER_PORT'])) {
+            if (($_SERVER['SERVER_PORT'] != 80 && $proto == 'http://')
+                || ($_SERVER['SERVER_PORT'] != 443 && $proto == 'https://')) {
+                $port = sprintf(':%d', $_SERVER['SERVER_PORT']);
             }
         }
     }
+
+    /* this is a workaround for the weird macosx caching that
+       causes Apache to return 16080 as the port number, which causes
+       SM to bail */
+           
+    if ($imap_server_type == 'macosx' && $port == ':16080') {
+        $port = '';
+    }
+    
     
     /* Fallback is to omit the server name and use a relative */
     /* URI, although this is not RFC 2616 compliant.          */
     return ($host ? $proto . $host . $port . $path : $path);
+   
 }
 
 
@@ -277,7 +319,7 @@ function sq_mt_seed($Val) {
  * the same 'random' numbers twice in one session.
  */
 function sq_mt_randomize() {
-    global $REMOTE_PORT, $REMOTE_ADDR, $UNIQUE_ID;
+    global $_SERVER;
     static $randomized;
     
     if ($randomized) {
@@ -286,8 +328,9 @@ function sq_mt_randomize() {
     
     /* Global. */
     sq_mt_seed((int)((double) microtime() * 1000000));
-    sq_mt_seed(md5($REMOTE_PORT . $REMOTE_ADDR . getmypid()));
-    
+    if (isset($_SERVER['REMOTE_PORT']) && isset($_SERVER['REMOTE_ADDR'])) {
+        sq_mt_seed(md5($_SERVER['REMOTE_PORT'] . $_SERVER['REMOTE_ADDR'] . getmypid()));
+    }
     /* getrusage */
     if (function_exists('getrusage')) {
         /* Avoid warnings with Win32 */
@@ -303,8 +346,10 @@ function sq_mt_randomize() {
     }
     
     /* Apache-specific */
-    sq_mt_seed(md5($UNIQUE_ID));
-    
+    if(isset($_SERVER['UNIQUE_ID'])) {
+        sq_mt_seed(md5($_SERVER['UNIQUE_ID']));
+    }
+
     $randomized = 1;
 }
 

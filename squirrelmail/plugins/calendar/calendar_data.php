@@ -2,8 +2,10 @@
 /*
  *  calendar_data.php
  *
- *  Copyright (c) 2001 Michal Szczotka <michal@tuxy.org>
- *  Licensed under the GNU GPL. For full terms see the file COPYING.
+ * Copyright (c) 2002 The SquirrelMail Project Team
+ * Licensed under the GNU GPL. For full terms see the file COPYING.
+ *
+ * Originally contrubuted by Michal Szczotka <michal@tuxy.org>
  *
  *  functions to operate on calendar data files.
  *
@@ -52,12 +54,16 @@ function writecalendardata() {
         while ( $calfoo = each ($calendardata)) {
             while ( $calbar = each ($calfoo['value'])) {
                 $calfoobar = $calendardata[$calfoo['key']][$calbar['key']];
+    if (!isset($calfoobar['reminder'])) {
+        $calfoobar['reminder'] = "";
+    }
                 $calstr = "$calfoo[key]|$calbar[key]|$calfoobar[length]|$calfoobar[priority]|$calfoobar[title]|$calfoobar[message]|$calfoobar[reminder]\n";
                 fwrite($fp, $calstr, 4096);
             }
 
         }
         fclose ($fp);
+        @unlink($filename);
         rename($filetmp,$filename);
     }
 }

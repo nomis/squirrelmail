@@ -21,7 +21,7 @@ function sqimap_search($imapConnection, $search_where, $search_what, $mailbox,
                        $color, $search_position = '', $search_all, $count_all) {
 
     global $msgs, $message_highlight_list, $squirrelmail_language, $languages,
-           $index_order, $pos, $allow_charset_search;
+           $index_order, $pos, $allow_charset_search, $imap_server_type;
 
     $pos = $search_position;
 
@@ -33,9 +33,25 @@ function sqimap_search($imapConnection, $search_where, $search_what, $mailbox,
     $search_what  = ereg_replace('[ ]{2,}', ' ', $search_what);
     $multi_search = explode(' ', $search_what);
     $search_string = '';
-    foreach ($multi_search as $multi_search_part) {
-        $search_string .= $search_where . ' {' . strlen($multi_search_part)
-            . "}\r\n" . $multi_search_part . ' ';
+
+    /* it seems macosx does not support the prefered search 
+       syntax so we fall back to the older style. This IMAP
+       server has a problem with multiple search terms. Instead
+       of returning the messages that match all the terms it
+       returns the messages that match each term. Could be fixed
+       on the client side, but should be fixed on the server
+       as per the RFC */
+
+    if ($imap_server_type == 'macosx') {
+        foreach ($multi_search as $multi_search_part) {
+            $search_string .= $search_where . ' ' .$multi_search_part . ' ';
+        }
+    }
+    else {
+        foreach ($multi_search as $multi_search_part) {
+            $search_string .= $search_where . ' {' . strlen($multi_search_part)
+                . "}\r\n" . $multi_search_part . ' ';
+        }
     }
 
     $search_string = trim($search_string);
@@ -51,7 +67,7 @@ function sqimap_search($imapConnection, $search_where, $search_what, $mailbox,
     }
 
     /* read data back from IMAP */
-    $readin = sqimap_run_command($imapConnection, $ss, true, $result, $message);
+    $readin = sqimap_run_command($imapConnection, $ss, false, $result, $message);
 
     /* try US-ASCII charset if search fails */
     if (isset($languages[$squirrelmail_language]['CHARSET']) 
@@ -136,43 +152,26 @@ function sqimap_search($imapConnection, $search_where, $search_what, $mailbox,
             $messages[$j]['FLAG_ANSWERED'] = $flag_answered[$j];
             $messages[$j]['FLAG_SEEN'] = $flag_seen[$j];
             $messages[$j]['FLAG_FLAGGED'] = $flag_flagged[$j];
-/*
-            $num = 0;
-            while ($num < count($flags[$j])) {
-                if ($flags[$j][$num] == 'Deleted') {
-                    $messages[$j]['FLAG_DELETED'] = true;
-                } else if ($flags[$j][$num] == 'Answered') {
-                    $messages[$j]['FLAG_ANSWERED'] = true;
-                } else if ($flags[$j][$num] == 'Seen') {
-                    $messages[$j]['FLAG_SEEN'] = true;
-                } else if ($flags[$j][$num] == 'Flagged') {
-                    $messages[$j]['FLAG_FLAGGED'] = true;
-                }
-                $num++;
-            }
-*/	    
             $j++;
 
     }
 
-    /* Find and remove the ones that are deleted */
-    $i = 0;
-    $j = 0;
+    /* we used to skip deleted messages but now we don't :) */
+    $j =0;
+    $i =0;
     while ($j < count($messagelist)) {
-        if (isset($messages[$j]['FLAG_DELETED']) && $messages[$j]['FLAG_DELETED']) {
-            $j++;
-            continue;
-        }
-        $msgs[$i] = $messages[$j];
-
+            $msgs[$i] = $messages[$j];
         $i++;
         $j++;
     }
+
     $numMessages = $i;
-
     /* There's gotta be messages in the array for it to sort them. */
-
-    if (count($messagelist) > 0) {
+    if ($numMessages = 0) {
+        $messagelist = array();
+        $msgs = array();
+    }
+    if (count($messagelist) > 0 ) {
         $j=0;
         if (!isset ($msg)) {
             $msg = '';
@@ -188,7 +187,9 @@ function sqimap_search($imapConnection, $search_where, $search_what, $mailbox,
                 "move_messages.php?msg=$msg&mailbox=$urlMailbox&pos=$pos&where=" . urlencode($search_where) . "&what=".urlencode($search_what),
                 $mailbox,
                 -1,
-                '<b>' . _("Found") . ' ' . count($messagelist) . ' ' . _("messages") . '</b></tr><tr>'.
+                '<div align="left"><b><big>'. _("Folder:") .' '.(($mailbox == 'INBOX') ? _("INBOX") : $mailbox).
+                '</big></b></div></td><td align="right">'.
+                '<b>' . _("Found") . ' ' . count($messagelist) . ' ' . _("messages") . '</b>'.
                 get_selectall_link($start_msg, $sort));
         }
         else {
@@ -196,18 +197,13 @@ function sqimap_search($imapConnection, $search_where, $search_what, $mailbox,
                 "move_messages.php?msg=$msg&mailbox=$urlMailbox&pos=$pos&where=" . urlencode($search_where) . "&what=".urlencode($search_what),
                 $mailbox,
                 -1,
-                '<b>' . _("Found") . ' ' . count($messagelist) . ' ' . _("messages") . '</b></tr><tr>');
+                '<div align="left"><b><big>'. _("Folder:") .' '.(($mailbox == 'INBOX') ? _("INBOX") : $mailbox).
+                '</big></b></div></td><td align="right">'.
+                '<b>' . _("Found") . ' ' . count($messagelist) . ' ' . _("messages") . '</b>');
         }
-        if ( $mailbox == 'INBOX' ) {
-            $showbox = _("INBOX");
-        } else {
-            $showbox = $mailbox;
-        }
-        echo '<b><big>' . _("Folder:") . " $showbox</big></b>";
         while ($j < count($msgs)) {
             printMessageInfo($imapConnection, $msgs[$j]["ID"], 0, $j, $mailbox, '', 0, $search_where, $search_what);
             $j++;
-            echo '</td></tr>';
         }
         echo '</table></td></tr></table></form>';
         $count_all = count($msgs);

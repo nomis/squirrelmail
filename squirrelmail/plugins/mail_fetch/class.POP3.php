@@ -40,9 +40,6 @@ class POP3 {
     var $BANNER     = '';       //  Holds the banner returned by the
                                 //  pop server - used for apop()
 
-    var $RFC1939    = TRUE;     //  Set by noop(). See rfc1939.txt
-                                //
-
     var $ALLOWAPOP  = FALSE;    //  Allow or disallow apop()
                                 //  This must be set to true
                                 //  manually
@@ -83,6 +80,7 @@ class POP3 {
             unset($this->FP);
             return false;
         }
+        if (!(isset($port)) || !$port) {$port = 110;}
 
         $fp = fsockopen("$server", $port, $errno, $errstr);
 
@@ -105,12 +103,6 @@ class POP3 {
         }
         $this->FP = $fp;
         $this->BANNER = $this->parse_banner($reply);
-        $this->RFC1939 = $this->noop();
-        if($this->RFC1939) {
-            $this->ERROR = _("POP3: premature NOOP OK, NOT an RFC 1939 Compliant server");
-            $this->quit();
-            return false;
-        } else
             return true;
     }
 
@@ -165,12 +157,6 @@ class POP3 {
                 //  Auth successful.
                 $count = $this->last("count");
                 $this->COUNT = $count;
-                $this->RFC1939 = $this->noop();
-                if(!$this->RFC1939) {
-                    $this->ERROR = _("POP3 pass:") . ' ' . _("NOOP failed. Server not RFC 1939 compliant");
-                    $this->quit();
-                    return false;
-                } else
                     return $count;
             }
         }
@@ -214,12 +200,6 @@ class POP3 {
                     //  Auth successful.
                     $count = $this->last("count");
                     $this->COUNT = $count;
-                    $this->RFC1939 = $this->noop();
-                    if(!$this->RFC1939) {
-                        $this->ERROR = _("POP3 apop:") . ' ' . _("NOOP failed. Server not RFC 1939 compliant");
-                        $this->quit();
-                        return false;
-                    } else
                         return $count;
                 }
             }

@@ -13,7 +13,13 @@
 require_once('../functions/prefs.php');
 
 /* Just for poor wretched souls with E_ALL. :) */
-global $username, $data_dir;
+global $data_dir;
+
+if ( !check_php_version(4,1) ) {
+    global $_SESSION;
+}
+
+$username = $_SESSION['username'];
 
 /**
  * Example:

@@ -22,9 +22,12 @@ define('SMOPT_GRP_TZ', 3);
 
 /* Define the optpage load function for the personal options page. */
 function load_optpage_data_personal() {
-    global $data_dir, $username, $edit_identity, $edit_name,
-           $full_name, $reply_to, $email_address, $signature;
-
+    global $data_dir, $edit_identity, $edit_name,
+           $full_name, $reply_to, $email_address, $signature, $tzChangeAllowed;
+    if ( !check_php_version(4,1) ) {
+        global $_SESSION;
+    }        
+    $username = $_SESSION['username'];
     /* Set the values of some global variables. */
     $full_name = getPref($data_dir, $username, 'full_name');
     $reply_to = getPref($data_dir, $username, 'reply_to');
@@ -117,7 +120,7 @@ function load_optpage_data_personal() {
         );
     }
     
-    if (  !ini_get("safe_mode") ) {
+    if (  $tzChangeAllowed ) {
         $TZ_ARRAY[SMPREF_NONE] = _("Same as server");
         $fd = fopen('../locale/timezones.cfg','r');
         while (!feof ($fd)) {
@@ -204,6 +207,10 @@ function load_optpage_data_personal() {
 
 function save_option_signature($option) {
     global $data_dir, $username;
+    if ( !check_php_version(4,1) ) {
+        global $_SESSION;
+    } 
+    $username = $_SESSION['username'];
     setSig($data_dir, $username, 'g', $option->new_value);
 }
 

@@ -9,26 +9,22 @@
 * $Id$
 */
 
+/*
+ * Set a different session name to stop session conflicts on same server
+ * with software such as Gallery.  This *must* be set above all the rest
+ * of the code to stop other items launching a session first
+ */
+
+ini_set('session.name' , 'SQMSESSID');
+
 session_start();
 
 require_once('../functions/i18n.php');
 require_once('../functions/auth.php');
 require_once('../functions/strings.php');
+require_once('../src/global.php');
 
 is_logged_in();
-
-/* Remove all slashes for form values. */
-if (get_magic_quotes_gpc()) {
-    global $REQUEST_METHOD;
-
-    if ($REQUEST_METHOD == 'POST') {
-        global $HTTP_POST_VARS;
-        RemoveSlashes($HTTP_POST_VARS);
-    } else if ($REQUEST_METHOD == 'GET') {
-        global $HTTP_GET_VARS;
-        RemoveSlashes($HTTP_GET_VARS);
-    }
-}
 
 /**
 * Auto-detection
@@ -39,16 +35,23 @@ if (get_magic_quotes_gpc()) {
 *
 * This is for a RedHat package bug and a Konqueror (pre 2.1.1?) bug
 */
-global $send, $PHP_SELF;
+
+$PHP_SELF = $_SERVER['PHP_SELF'];
+
+if (isset($_POST['send'])) {
+    $send = $_POST['send'];
+}
+elseif (isset($_GET['send'])) {
+    $send = $_GET['send'];
+}
+
 if (isset($send)
     && (substr($send, 0, 1) == "\n")
     && (substr($PHP_SELF, -12) == '/compose.php')) {
     if ($REQUEST_METHOD == 'POST') {
-        global $HTTP_POST_VARS;
-        TrimArray($HTTP_POST_VARS);
+        TrimArray($_POST);
     } else {
-        global $HTTP_GET_VARS;
-        TrimArray($HTTP_GET_VARS);
+        TrimArray($_GET);
     }
 }
 
@@ -66,7 +69,7 @@ if (isset($send)
  * Reset the $theme() array in case a value was passed via a cookie.
  * This is until theming is rewritten.
  */
-global $theme;
+
 unset($theme);
 $theme=array();
 
@@ -76,12 +79,22 @@ require_once('../functions/page_header.php');
 require_once('../functions/prefs.php');
 
 /* Set up the language (i18n.php was included by auth.php). */
-global $username, $data_dir;
 set_up_language(getPref($data_dir, $username, 'language'));
 
 $timeZone = getPref($data_dir, $username, 'timezone');
+
+/* Check to see if we are allowed to set the TZ environment variable.
+ * We are able to do this if ... 
+ *   safe_mode is disabled OR
+ *   safe_mode_allowed_env_vars is empty (you are allowed to set any) OR
+ *   safe_mode_allowed_env_vars contains TZ 
+ */
+$tzChangeAllowed = (!ini_get('safe_mode')) ||
+		   !strcmp(ini_get('safe_mode_allowed_env_vars'),'') || 
+		   preg_match('/^([\w_]+,)*TZ/', ini_get('safe_mode_allowed_env_vars')); 
+
 if ( $timeZone != SMPREF_NONE && ($timeZone != "") 
-    && !ini_get("safe_mode")) {
+    && $tzChangeAllowed ) {
     putenv("TZ=".$timeZone);
 }
 ?>
