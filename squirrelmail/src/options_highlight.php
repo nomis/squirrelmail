@@ -9,25 +9,16 @@
     **
     **  $Id$
     **/
+   include ("../src/validate.php");
 
-   session_start();
-
-   if (!isset($strings_php))
-      include('../functions/strings.php');
-   if (!isset($config_php))
-      include('../config/config.php');
-   if (!isset($page_header_php))
-      include('../functions/page_header.php');
-   if (!isset($display_messages_php))
-      include('../functions/display_messages.php');
-   if (!isset($imap_php))
-      include('../functions/imap.php');
-   if (!isset($array_php))
-      include('../functions/array.php');
-   if (!isset($i18n_php))
-      include('../functions/i18n.php');
-   if (!isset($plugin_php))
-      include('../functions/plugin.php');
+   include('../functions/strings.php');
+   include('../config/config.php');
+   include('../functions/page_header.php');
+   include('../functions/display_messages.php');
+   include('../functions/imap.php');
+   include('../functions/array.php');
+   include('../functions/i18n.php');
+   include('../functions/plugin.php');
 
    if (! isset($action))
        $action = '';
@@ -78,7 +69,7 @@
          echo "<nobr><small>[<a href=\"options_highlight.php?action=edit&theid=$i\">" . _("Edit") . "</a>]&nbsp;[<a href=\"options_highlight.php?action=delete&theid=$i\">"._("Delete")."</a>]</small></nobr>\n";
          echo '   </td>';
          echo '   <td bgcolor="' . $message_highlight_list[$i]['color'] . "\">\n";
-         echo '      ' . $message_highlight_list[$i]['name'] . '&nbsp';
+         echo '      ' . $message_highlight_list[$i]['name'] . '&nbsp;';
          echo "   </td>\n";
          echo '   <td bgcolor="' . $message_highlight_list[$i]['color'] . "\">\n";
          echo '      '.$message_highlight_list[$i]['match_type'].' = ' . $message_highlight_list[$i]['value'];

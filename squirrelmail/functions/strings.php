@@ -2,80 +2,11 @@
    
    /* $Id$ */
 
-   $strings_php = true;
-   $fix_form_endlines = false;
-   
-   // Remove all slashes for form values
-   if (get_magic_quotes_gpc())
-   {
-       global $REQUEST_METHOD;
-       if ($REQUEST_METHOD == "POST")
-       {
-           global $HTTP_POST_VARS;
-            RemoveSlashes($HTTP_POST_VARS);
-       }
-       elseif ($REQUEST_METHOD == "GET")
-       {
-           global $HTTP_GET_VARS;
-            RemoveSlashes($HTTP_GET_VARS);
-       }
-   }
-
-   // Auto-detection
-   //
-   // if $send (the form button's name) contains "\n" as the first char
-   // and the script is compose.php, then trim everything.  Otherwise,
-   // we don't have to worry.
-   global $send, $PHP_SELF;
-   if (isset($send) && substr($send, 0, 1) == "\n" &&
-       substr($PHP_SELF, -12) == "/compose.php")
-   {
-      if ($REQUEST_METHOD == "POST") {
-         TrimArray($HTTP_POST_VARS);
-      } else {
-         TrimArray($HTTP_GET_VARS);
-      }
-   }
-
-   //**************************************************************************
-   // Trims every element in the array
-   //**************************************************************************
-   function TrimArray(&$array) {
-      foreach ($array as $k => $v) {
-         global $$k;
-         if (is_array($$k)) {
-            foreach ($$k as $k2 => $v2) {
-	       $$k[$k2] = substr($v2, 1);
-            }
-         } else {
-            $$k = substr($v, 1);
-         }
-      }
-   }
-   
-   
-   //**************************************************************************
-   // Removes slashes from every element in the array
-   //**************************************************************************
-   function RemoveSlashes($array)
-   {
-       foreach ($array as $k => $v)
-       {
-           global $$k;
-            if (is_array($$k))
-            {
-                foreach ($$k as $k2 => $v2)
-                {
-                    $newArray[stripslashes($k2)] = stripslashes($v2);
-                }
-                $$k = $newArray;
-            }
-            else
-            {
-                $$k = stripslashes($v);
-            }
-       }
-   }
+   if (defined ('strings_php')) { 
+      return; 
+   } else { 
+      define ('strings_php', true); 
+   } 
 
 
    //*************************************************************************
@@ -241,11 +172,8 @@
 
    function translateText(&$body, $wrap_at, $charset) {
       global $where, $what; // from searching
-                  global $url_parser_php;
 
-      if (!isset($url_parser_php)) {
-         include '../functions/url_parser.php';
-      }
+      include '../functions/url_parser.php';
       
       $body_ary = explode("\n", $body);
       $PriorQuotes = 0;
@@ -289,7 +217,7 @@
    }
 
    /* SquirrelMail version number -- DO NOT CHANGE */
-   $version = '1.0.3 [cvs]';
+   $version = '1.0.6 [cvs]';
 
 
    function find_mailbox_name ($mailbox) {
@@ -568,6 +496,12 @@
       }
       
       return $String;
+   }
+   
+   
+   function quoteIMAP($str)
+   {
+       return ereg_replace('(["\\])', '\\\\1', $str);
    }
 
 ?>

@@ -11,14 +11,10 @@
     **  $Id$
     **/
 
-   if (!isset($strings_php))
-      include("../functions/strings.php");
-   if (!isset($config_php))
-      include("../config/config.php");
-   if (!isset($i18n_php))
-      include("../functions/i18n.php");
-   if (!isset($plugin_php))
-      include("../functions/plugin.php");
+   include("../functions/strings.php");
+   include("../config/config.php");
+   include("../functions/i18n.php");
+   include("../functions/plugin.php");
 
    // $squirrelmail_language is set by a cookie when the user selects
    // language and logs out
@@ -34,8 +30,8 @@
 
    // In case the last session was not terminated properly, make sure
    // we get a new one.
-	$cookie_params = session_get_cookie_params(); 
-	setcookie(session_name(),"",0,$cookie_params["domain"].$cookie_params["path"]); 
+   $cookie_params = session_get_cookie_params(); 
+   setcookie(session_name(),"",0,$cookie_params["domain"].$cookie_params["path"]); 
 
    echo "<HTML>";
    echo "<HEAD><TITLE>";

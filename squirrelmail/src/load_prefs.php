@@ -11,16 +11,18 @@
     **  $Id$
     **/
 
-   if (!isset($config_php))
-      include("../config/config.php");
-   if (!isset($prefs_php))
-      include("../functions/prefs.php");
-   if (!isset($plugin_php))
-      include("../functions/plugin.php");
+   if (defined ('load_prefs_php')) { 
+      return; 
+   } else { 
+      define ('load_prefs_php', true); 
+   }
+
+   $theme = array();
+   include("../src/validate.php");
+   include("../config/config.php");
+   include("../functions/prefs.php");
+   include("../functions/plugin.php");
       
-   $load_prefs_php = true;
-   if (!isset($username))
-       $username = '';
    checkForPrefs($data_dir, $username);
 
    $chosen_theme = getPref($data_dir, $username, "chosen_theme");
@@ -62,7 +64,7 @@
       }
    }
 
-    if (!isset($download_php)) session_register("theme_css");
+    if (!defined ("download_php")) session_register("theme_css");
 
    $use_javascript_addr_book = getPref($data_dir, $username, "use_javascript_addr_book");
    if ($use_javascript_addr_book == "")
@@ -137,6 +139,10 @@
    if ($use_signature == "")
       $use_signature = false;
 
+   $prefix_sig = getPref($data_dir, $username, "prefix_sig");
+   if ($prefix_sig == "")
+      $prefix_sig = true;
+
    $left_refresh = getPref($data_dir, $username, "left_refresh");
    if ($left_refresh == "")
       $left_refresh = false;
@@ -182,8 +188,6 @@
    $location_of_buttons = getPref($data_dir, $username, 'location_of_buttons');
    if ($location_of_buttons == '')
        $location_of_buttons = 'between';
-       
-   $collapse_folders = getPref($data_dir, $username, 'collapse_folders');
 
    do_hook("loading_prefs");
 

@@ -9,7 +9,11 @@
     **  $Id$
     **/
 
-   $mailbox_display_php = true;
+    if (defined ('mailbox_display_php')) { 
+       return; 
+    } else { 
+       define ('mailbox_display_php', true); 
+    } 
 
    function printMessageInfo($imapConnection, $t, $i, $key, $mailbox, $sort, $startMessage, $where, $what) {
       global $checkall;
@@ -225,6 +229,8 @@
             $end = $startMessage + $show_num - 1;
             if ($numMessages < $show_num)
                 $end_loop = $numMessages;
+            else if ($numMessages - $startMessage + 1 < $show_num)
+                $end_loop = $numMessages - $startMessage + 1;
             else
                 $end_loop = $show_num;
          } else {
@@ -574,7 +580,7 @@
                break;
                
             case 4: # subject
-               echo '   <TD WIDTH=%><B>'. _("Subject") ."</B>\n";
+               echo '   <TD><B>'. _("Subject") ."</B>\n";
                if ($sort == 4)
                  echo "   <A HREF=\"right_main.php?newsort=5&startMessage=1&mailbox=$urlMailbox\" TARGET=\"right\"><IMG SRC=\"../images/up_pointer.gif\" BORDER=0></A></TD>\n";
                elseif ($sort == 5)

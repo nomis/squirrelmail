@@ -15,27 +15,16 @@
     **
     **  $Id$
     **/
+   include ("../src/validate.php");
 
-   session_start();
-
-   if (!isset($config_php))
-      include('../config/config.php');
-   if (!isset($strings_php))
-      include('../functions/strings.php');
-   if (!isset($auth_php))
-      include('../functions/auth.php');
-   if (!isset($page_header_php))
-      include('../functions/page_header.php');
-   if (!isset($date_php))
-      include('../functions/date.php');
-   if (!isset($smtp_php))
-      include('../functions/smtp.php');
-   if (!isset($display_messages_php))
-      include('../functions/display_messages.php');
-   if (!isset($addressbook_php))
-      include('../functions/addressbook.php');
-   if (!isset($plugin_php))
-      include('../functions/plugin.php');
+   include('../functions/strings.php');
+   include('../config/config.php');
+   include('../functions/page_header.php');
+   include('../functions/date.php');
+   include('../functions/smtp.php');
+   include('../functions/display_messages.php');
+   include('../functions/addressbook.php');
+   include('../functions/plugin.php');
 
    include('../src/load_prefs.php');
 
@@ -85,11 +74,12 @@
          printf("<tr%s nowrap><td nowrap align=center width=\"5%%\">".
                 "<input type=checkbox name=\"send_to_search[]\" value=\"%s\">&nbsp;To".
                 "<input type=checkbox name=\"send_to_cc_search[]\" value=\"%s\">&nbsp;Cc&nbsp;".
+                "<input type=checkbox name=\"send_to_bcc_search[]\" value=\"%s\">&nbsp;Bcc&nbsp;".
                 "<td nowrap>&nbsp;%s&nbsp;<td nowrap>&nbsp;".
                 "%s".
                 "<td nowrap>&nbsp;%s&nbsp;",
                 ($line % 2) ? " bgcolor=\"$color[0]\"" : "", 
-                htmlspecialchars($row["email"]), htmlspecialchars($row["email"]), 
+                htmlspecialchars($row["email"]), htmlspecialchars($row["email"]), htmlspecialchars($row["email"]), 
                 $row["name"], $row["email"], $row["label"]);
          if($includesource)
             printf("<td nowrap>&nbsp;%s", $row["source"]);
