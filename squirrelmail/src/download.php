@@ -10,19 +10,15 @@
     **
     **  $Id$
     **/
+   define ("download_php", true);
 
-   if (!isset($strings_php))
-      include("../functions/strings.php");
-   if (!isset($config_php))
-      include("../config/config.php");
-   if (!isset($imap_php))
-      include("../functions/imap.php");
-   if (!isset($mime_php))
-      include("../functions/mime.php");
-   if (!isset($date_php))
-      include("../functions/date.php");
-   if (!isset($i18n_php))
-      include("../functions/i18n.php");
+   include ("../src/validate.php");
+   include("../functions/strings.php");
+   include("../config/config.php");
+   include("../functions/imap.php");
+   include("../functions/mime.php");
+   include("../functions/date.php");
+   include("../functions/i18n.php");
 
    session_start();
    header("Pragma: ");
@@ -87,6 +83,9 @@
    if (isset($override_type1))
        $type1 = $override_type1;
    $filename = decodeHeader($header->filename);
+   if (!$filename) {
+      $filename = decodeHeader($header->name);
+   }
 
    if (strlen($filename) < 1) {
       if ($type1 == "plain" && $type0 == "text")                  $suffix = "txt";
@@ -117,9 +116,9 @@
          case "text":
             $body = mime_fetch_body($imapConnection, $passed_id, $passed_ent_id);
             $body = decodeBody($body, $header->encoding);
+            set_up_language(getPref($data_dir, $username, "language"));
             header("Content-Disposition: attachment; filename=\"$filename\"");
             header("Content-type: application/octet-stream; name=\"$filename\"");
-            set_up_language(getPref($data_dir, $username, "language"));
             if ($type1 == "plain") {
                echo _("Subject") . ": " . decodeHeader($top_header->subject) . "\n";
                echo "   " . _("From") . ": " . decodeHeader($top_header->from) . "\n";
@@ -129,8 +128,8 @@
             echo trim($body);
             break;
          default:
-            header("Content-Disposition: attachment; filename=\"$filename\"");
-            header("Content-type: application/octet-stream; name=\"$filename\"");
+            header("Content-Disposition: inline; filename=\"$filename\"");
+            header("Content-type: application/download; name=\"$filename\"");
             mime_print_body_lines ($imapConnection, $passed_id, $passed_ent_id, $header->encoding);
             break;
       }
@@ -146,7 +145,7 @@
                 $body = mime_fetch_body($imapConnection, $passed_id, $passed_ent_id);
                 $body = decodeBody($body, $header->encoding);
                 header("Content-type: $type0/$type1; name=\"$filename\"");
-                header("Content-Disposition: attachment; filename=\"$filename\"");
+                header("Content-Disposition: inline; filename=\"$filename\"");
                 echo $body;
             }
             break;
@@ -158,7 +157,7 @@
             break;
          default:
             header("Content-type: $type0/$type1; name=\"$filename\"");
-            header("Content-Disposition: attachment; filename=\"$filename\"");
+            header("Content-Disposition: inline; filename=\"$filename\"");
             mime_print_body_lines ($imapConnection, $passed_id, $passed_ent_id, $header->encoding);
             break;
       }

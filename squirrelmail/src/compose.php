@@ -14,29 +14,20 @@
     **
     ** $Id$
     **/
-    
+   include ("../src/validate.php");
+
    session_start();
 
-   if (!isset($strings_php))
-      include("../functions/strings.php");
-   if (!isset($config_php))
-      include("../config/config.php");
-   if (!isset($page_header_php))
-      include("../functions/page_header.php");
-   if (!isset($imap_php))
-      include("../functions/imap.php");
-   if (!isset($date_php))
-      include("../functions/date.php");
-   if (!isset($mime_php))
-      include("../functions/mime.php");
-   if (!isset($smtp_php))
-      include("../functions/smtp.php");
-   if (!isset($display_messages_php))
-      include("../functions/display_messages.php");
-   if (!isset($auth_php))
-      include ("../functions/auth.php");
-   if (!isset($plugin_php))
-      include ("../functions/plugin.php");
+   include("../functions/strings.php");
+   include("../config/config.php");
+   include("../functions/page_header.php");
+   include("../functions/imap.php");
+   include("../functions/date.php");
+   include("../functions/mime.php");
+   include("../functions/smtp.php");
+   include("../functions/display_messages.php");
+   include ("../functions/auth.php");
+   include ("../functions/plugin.php");
 
    include("../src/load_prefs.php");
 
@@ -158,44 +149,50 @@
       
       if (!$message) {
            sqimap_mailbox_select($imapConnection, $mailbox);
-           $message = sqimap_get_message($imapConnection, $forward_id, $mailbox); }
-      
-      if (!$message->entities) {
-      if ($message->header->entity_id != $ent_num) {
-      $filename = decodeHeader($message->header->filename);
-      
-      if ($filename == "")
-              $filename = "untitled-".$message->header->entity_id;
-      
-      $localfilename = md5($filename.", $REMOTE_IP, REMOTE_PORT, $UNIQUE_ID, extra-stuff here");
-      
-        // Write File Info
-        $fp = fopen ($attachment_dir.$localfilename.".info", "w");
-        fputs ($fp, strtolower($message->header->type0)."/".strtolower($message->header->type1)."\n".$filename."\n");
-        fclose ($fp);
-
-        // Write Attachment to file
-        $fp = fopen ($attachment_dir.$localfilename, "w");
-      fputs ($fp, decodeBody(mime_fetch_body($imapConnection, $forward_id, $message->header->entity_id), $message->header->encoding));
-      fclose ($fp);
-      
-      $attachments[$localfilename] = $filename;
-      
+           $message = sqimap_get_message($imapConnection, $forward_id, 
+	       $mailbox);
       }
+      
+      if (count($message->entities) == 0) {
+          if ($message->header->entity_id != $ent_num) {
+              $filename = decodeHeader($message->header->filename);
+      
+              if ($filename == "")
+                  $filename = "untitled-".$message->header->entity_id;
+      
+              $localfilename = GenerateRandomString(32, '', 7);
+	      while (isset($attachments[$localfilename]))
+	          $localfilename = GenerateRandomString(32, '', 7);
+      
+              // Write File Info
+              $fp = fopen ($attachment_dir.$localfilename.".info", "w");
+              fputs ($fp, strtolower($message->header->type0)."/".
+	          strtolower($message->header->type1)."\n".$filename."\n");
+              fclose ($fp);
+
+              // Write Attachment to file
+              $fp = fopen ($attachment_dir.$localfilename, "w");
+              fputs ($fp, decodeBody(mime_fetch_body($imapConnection, 
+	          $forward_id, $message->header->entity_id), 
+		  $message->header->encoding));
+              fclose ($fp);
+      
+              $attachments[$localfilename] = $filename;
+          }
       } else {
-              for ($i = 0; $i < count($message->entities); $i++) {
+          for ($i = 0; $i < count($message->entities); $i++) {
               getAttachments($message->entities[$i]);
-              }       
+          }       
       }
       return;
-      }       
+   }       
 
    function showInputForm () {
       global $send_to, $send_to_cc, $reply_subj, $forward_subj, $body,
-         $passed_body, $color, $use_signature, $signature, $editor_size,
-         $attachments, $subject, $newmail, $use_javascript_addr_book,
-         $send_to_bcc, $reply_id, $mailbox, $from_htmladdr_search,
-         $location_of_buttons;
+         $passed_body, $color, $use_signature, $signature, $prefix_sig, 
+         $editor_size, $attachments, $subject, $newmail, 
+         $use_javascript_addr_book, $send_to_bcc, $reply_id, $mailbox, 
+         $from_htmladdr_search, $location_of_buttons;
 
       $subject = decodeHeader($subject);
       $reply_subj = decodeHeader($reply_subj);
@@ -280,7 +277,10 @@
       echo "         &nbsp;&nbsp;<TEXTAREA NAME=body ROWS=20 COLS=\"$editor_size\" WRAP=HARD>";
       echo htmlspecialchars($body);
       if ($use_signature == true && $newmail == true && !isset($from_htmladdr_search)) {
-         echo "\n\n-- \n" . htmlspecialchars($signature);
+        if ( $prefix_sig == true )
+          echo "\n\n-- \n" . htmlspecialchars($signature);
+        else
+          echo "\n\n" . htmlspecialchars($signature);
       }
       echo "</TEXTAREA><BR>\n";
       echo "      </TD>\n";
@@ -302,7 +302,7 @@
       echo " value=\"" . _("Add") ."\">\n";
       echo "     </td>\n";
       echo "   </tr>\n";
-      if (isset($attachments) && count($attachments)>0) {
+      if (count($attachments) > 0) {
          echo "<tr><td bgcolor=\"$color[0]\" align=right>\n";
          echo "&nbsp;";
          echo "</td><td align=left bgcolor=\"$color[0]\">";
@@ -369,6 +369,8 @@
       
       is_logged_in();
       $localfilename = GenerateRandomString(32, '', 7);
+      while (isset($attachments[$localfilename]))
+          $localfilename = GenerateRandomString(32, '', 7);
       
       if (!@rename($HTTP_POST_FILES['attachfile']['tmp_name'], $attachment_dir.$localfilename)) {
          if (!@copy($HTTP_POST_FILES['attachfile']['tmp_name'], $attachment_dir.$localfilename)) {
@@ -459,6 +461,12 @@
          $send_to_cc .= $send_to_cc_search[$i];   
       }
       
+      for ($i=0; $i < count($send_to_bcc_search); $i++) {
+         if ($send_to_bcc)
+            $send_to_bcc .= ", ";
+         $send_to_bcc .= $send_to_bcc_search[$i];   
+      }
+      
       showInputForm();
    } else if (isset($html_addr_search)) {
       // I am using an include so as to elminiate an extra unnecessary click.  If you
@@ -480,23 +488,16 @@
       }
 
       showInputForm();
-	} else if (isset($smtpErrors)) {
-      $imapConnection = sqimap_login($username, $key, $imapServerAddress, $imapPort, 0);
-      displayPageHeader($color, $mailbox);
-
-      $newmail = true;
-      if ($forward_id && $ent_num)  getAttachments(0);
-              
-      newMail();
-      showInputForm();
-      sqimap_logout($imapConnection);
    } else {
-      $imapConnection = sqimap_login($username, $key, $imapServerAddress, $imapPort, 0);
+      // This handles the default case as well as the error case
+      // (they had the same code) --> if (isset($smtpErrors))
+      $imapConnection = sqimap_login($username, $key, $imapServerAddress, 
+          $imapPort, 0);
       displayPageHeader($color, $mailbox);
 
       $newmail = true;
-		
-      if (isset($forward_id) && isset($ent_num))  getAttachments(0);
+      if (isset($forward_id) && $forward_id && isset($ent_num) && $ent_num)
+          getAttachments(0);
               
       newMail();
       showInputForm();

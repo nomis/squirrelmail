@@ -11,21 +11,16 @@
     **
     **  $Id$
     **/
+   include ("../src/validate.php");
 
    session_start();
 
-   if (!isset($strings_php))
-      include("../functions/strings.php");
-   if (!isset($config_php))
-      include("../config/config.php");
-   if (!isset($page_header_php))
-      include("../functions/page_header.php");
-   if (!isset($imap_php))
-      include("../functions/imap.php");
-   if (!isset($array_php))
-      include("../functions/array.php");
-   if (!isset($plugin_php))
-      include("../functions/plugin.php");
+   include("../functions/strings.php");
+   include("../config/config.php");
+   include("../functions/page_header.php");
+   include("../functions/imap.php");
+   include("../functions/array.php");
+   include("../functions/plugin.php");
 
    include("../src/load_prefs.php");
 
@@ -159,9 +154,9 @@
    echo "<TT><SELECT NAME=subfolder>\n";
    if (strtolower($imap_server_type) != "courier"){
      if ($default_sub_of_inbox == false)
-       echo '<OPTION SELECTED>[ '._("None")." ]\n";
+       echo '<OPTION SELECTED VALUE="">[ '._("None")." ]\n";
      else
-       echo '<OPTION>[ '._("None")." ]\n";
+       echo '<OPTION VALUE="">[ '._("None")." ]\n";
    }
 
    for ($i = 0; $i < count($boxes); $i++) {

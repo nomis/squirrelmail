@@ -12,7 +12,11 @@
  ** $Id$
  **/
 
-   $i18n_php = true;
+   if (defined ('i18n_php')) { 
+      return; 
+   } else { 
+      define ('i18n_php', true); 
+   }
    if (! isset($squirrelmail_language)) { $squirrelmail_language = ''; }
 
    // This array specifies the available languages.
@@ -21,6 +25,9 @@
    
    $languages['ca']['NAME']    = 'Catalan';
    $languages['ca']['CHARSET'] = 'iso-8859-1';
+
+   $languages['hr']['NAME']    = 'Croatian';
+   $languages['hr']['CHARSET'] = 'iso-8859-2';
 
    $languages['cs_CZ']['NAME']    = 'Czech';
    $languages['cs_CZ']['CHARSET'] = 'iso-8859-2';

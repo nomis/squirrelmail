@@ -8,7 +8,12 @@
     **/
 
    $debug_mime = false;
-   $mime_php = true;
+   if (defined ('mime_php')) { 
+      return; 
+   } else { 
+      define ('mime_php', true); 
+   } 
+
 
    if (!isset($i18n_php))
       include "../functions/i18n.php";
@@ -28,7 +33,7 @@
       var $encoding = '', $size = 0, $to = array(), $from = '', $date = '';
       var $cc = array(), $bcc = array(), $reply_to = '', $subject = '';
       var $id = 0, $mailbox = '', $description = '', $filename = '';
-      var $entity_id = 0, $message_id = 0;
+      var $entity_id = 0, $message_id = 0, $name = '';
    }
    
    class message {
@@ -568,11 +573,17 @@
          if (!$message->entities) {
             $type0 = strtolower($message->header->type0);
             $type1 = strtolower($message->header->type1);
+            $name = decodeHeader($message->header->name);
             
             if ($message->header->entity_id != $ent_id) {
                $filename = decodeHeader($message->header->filename);
                if (trim($filename) == "") {
-                  $display_filename = "untitled-".$message->header->entity_id;
+                  if (trim($name) == "") { 
+                     $display_filename = "untitled-".$message->header->entity_id; 
+                  } else { 
+                     $display_filename = $name; 
+                     $filename = $name; 
+                  } 
                } else {
                   $display_filename = $filename;
                }
@@ -666,7 +677,7 @@
             $replace = ereg_replace("_", " ", $res[3]);
 	    // Convert lowercase Quoted Printable to uppercase for
 	    // quoted_printable_decode to understand it.
-	    while (ereg("(=([0-9][abcdef])|([abcdef][0-9])|([abcdef][abcdef]))", $replace, $res)) {
+	    while (ereg("(=(([0-9][abcdef])|([abcdef][0-9])|([abcdef][abcdef])))", $replace, $res)) {
 	       $replace = str_replace($res[1], strtoupper($res[1]), $replace);
 	    }
             $replace = quoted_printable_decode($replace);
@@ -674,9 +685,10 @@
 
          $replace = charset_decode ($res[1], $replace);
 
-         $string = eregi_replace
-            ('=\\?([^?]+)\\?(q|b)\\?([^?]+)\\?=',
+         // Remove the name of the character set.
+         $string = eregi_replace ('=\\?([^?]+)\\?(q|b)\\?([^?]+)\\?=',
              $replace, $string);
+
          // In case there should be more encoding in the string: recurse
          return (decodeHeader($string));
       } else         
@@ -691,7 +703,6 @@
 
       // Encode only if the string contains 8-bit characters or =?
       if (ereg("([\200-\377]|=\\?)", $string)) {
-         $newstring = "=?$default_charset?Q?";
          
          // First the special characters
          $string = str_replace("=", "=3D", $string);
@@ -703,7 +714,6 @@
 	    $replace = chr($ch);
 	    $insert = sprintf("=%02X", $ch);
             $string = str_replace($replace, $insert, $string);
-	    $ch++;
          }
 
          $newstring = "=?$default_charset?Q?".$string."?=";

@@ -7,6 +7,12 @@
     **  $Id$
     **/
 
+    if (defined ('imap_mailbox_php')) { 
+       return; 
+    } else { 
+       define ('imap_mailbox_php', true); 
+    } 
+
    /******************************************************************************
     **  Expunges a mailbox 
     ******************************************************************************/
@@ -137,11 +143,11 @@
          // a parent.
          $boxesbyname[$mailbox] = $g;
          $parentfolder = readMailboxParent($mailbox, $dm);
-         if((eregi("^inbox".quotemeta($dm), $mailbox)) || 
-            (ereg("^".$folder_prefix, $mailbox)) ||
-            ( isset($boxesbyname[$parentfolder]) && (strlen($parentfolder) > 0) ) ) {
+         if((strtolower(substr($mailbox, 0, 5)) == "inbox") ||
+            (substr($mailbox, 0, strlen($folder_prefix)) == $folder_prefix) ||
+            (isset($boxesbyname[$parentfolder]) && (strlen($parentfolder) > 0) ) ) {
             $indent = $dm_count - (countCharInString($folder_prefix, $dm));
-            if ($indent)
+            if ($indent > 0)
                 $boxes[$g]["formatted"]  = str_repeat("&nbsp;&nbsp;", $indent);
             else
                 $boxes[$g]["formatted"] = '';
@@ -154,11 +160,16 @@
          if (substr($mailbox, -1) == $dm)
             $mailbox = substr($mailbox, 0, strlen($mailbox) - 1);
          $boxes[$g]['unformatted'] = $mailbox;
-         $boxes[$g]['unformatted-disp'] = ereg_replace('^' . $folder_prefix, '', $mailbox);
+         //$boxes[$g]['unformatted-disp'] = ereg_replace('^' . $folder_prefix, '', $mailbox);
+         if (substr($mailbox,0,strlen($folder_prefix))==$folder_prefix) { 
+            $boxes[$g]['unformatted-disp'] = substr($mailbox, strlen($folder_prefix));
+         } else if (strtolower($mailbox) == "inbox") {
+            $boxes[$g]['unformatted-disp'] = $mailbox;
+         }
          $boxes[$g]['id'] = $g;
 
          if (isset($line[$g]))
-         ereg("\(([^)]*)\)",$line[$g],$regs);
+            ereg("\(([^)]*)\)",$line[$g],$regs);
          $flags = trim(strtolower(str_replace('\\', '',$regs[1])));
          if ($flags) {
             $boxes[$g]['flags'] = explode(' ', $flags);
@@ -186,7 +197,6 @@
     **  See comment on sqimap_mailbox_parse() for info about the returned array.
     ******************************************************************************/
    function sqimap_mailbox_list ($imap_stream) {
-      global $load_prefs_php, $prefs_php, $config_php;
       global $data_dir, $username, $list_special_folders_first;
       global $trash_folder, $sent_folder;
       global $move_to_trash, $move_to_sent;
@@ -194,9 +204,9 @@
       $inbox_in_list = false;
       $inbox_subscribed = false;
 
-      if (!isset($load_prefs_php)) include "../src/load_prefs.php";
-      else global $folder_prefix;
-      if (!function_exists ("ary_sort")) include "../functions/array.php";
+      include "../src/load_prefs.php";
+      global $folder_prefix;
+      include "../functions/array.php";
 
       $dm = sqimap_get_delimiter ($imap_stream);
 
@@ -242,7 +252,7 @@
          if (isset($read[0]))
          $sorted_list_ary[$i] = $read[0];
          else
-         $sorget_list_ary[$i] = "";
+         $sorted_list_ary[$i] = "";
          if (isset($sorted_list_ary[$i]) && find_mailbox_name($sorted_list_ary[$i]) == "INBOX")
             $inbox_in_list = true;
       }
