@@ -1,15 +1,15 @@
 <chapter>
    <title>
-      Rağyti
+      RaÅ¡yti
    </title>
    <summary>
-      Ğis punktas leidşia rağyti ir siøsti laiğkus naudojant SquirrelMail.
+      Å is punktas leidÅ¾ia raÅ¡yti ir siÅ³sti laiÅ¡kus naudojant SquirrelMail.
    </summary>
    <description>
       <p>
-      Pasirinkæ "Rağyti" meniu punktà jûs atsidursite naujame puslapyje.
-      Èia jûs rasite kelis laukus ir mygtukus. Priklausomai nuo to, kaip
-      jûs patekote á ğá puslapá, dalis laukø jau gali bûti uşpildyti.
+      PasirinkÄ™ "RaÅ¡yti" meniu punktÄ… jÅ«s atsidursite naujame puslapyje.
+      ÄŒia jÅ«s rasite kelis laukus ir mygtukus. Priklausomai nuo to, kaip
+      jÅ«s patekote Ä¯ Å¡Ä¯ puslapÄ¯, dalis laukÅ³ jau gali bÅ«ti uÅ¾pildyti.
       </p>
    </description>
 </chapter>
@@ -20,13 +20,13 @@
    </title>
    <description>
       <p>
-      Pirmiausia <B>Kam:</B> laukas. Jame reikia rağyti asmens ar asmenø, 
-      kuriems siunèiate laiğkà adresà. Vedant kelis adresus, jie yra 
-      atskiriami kableliais. Galima pasinauti mygtuku "Adresai" ir uşpildyti 
-      laukus adresais iğ adresø knygos. Laukas turi nustatytà ilgá ir 
-      surağius daugiau adresø, jûs jø nebematysite. Adresus galima pamatyti
-      judant tame lauke su klaviatûros judëjimo klaviğais. Bet kuriuo atveju 
-      visi adresai, kuriuos ten surağysite bus panaudoti siunèiant laiğkà.
+      Pirmiausia <B>Kam:</B> laukas. Jame reikia raÅ¡yti asmens ar asmenÅ³, 
+      kuriems siunÄiate laiÅ¡kÄ… adresÄ…. Vedant kelis adresus, jie yra 
+      atskiriami kableliais. Galima pasinauti mygtuku "Adresai" ir uÅ¾pildyti 
+      laukus adresais iÅ¡ adresÅ³ knygos. Laukas turi nustatytÄ… ilgÄ¯ ir 
+      suraÅ¡ius daugiau adresÅ³, jÅ«s jÅ³ nebematysite. Adresus galima pamatyti
+      judant tame lauke su klaviatÅ«ros judÄ—jimo klaviÅ¡ais. Bet kuriuo atveju 
+      visi adresai, kuriuos ten suraÅ¡ysite bus panaudoti siunÄiant laiÅ¡kÄ….
       </p>
    </description>
 </section>
@@ -37,13 +37,13 @@
    </title>
    <description>
       <p>
-      Toliau eina <B>CC:</B> laukas.  CC yra angliğkø şodşiø <B>Carbon 
-      Copy</B> sutrumpinimas. Jei norite nusiøsti laiğko kopijà dar kam nors, 
-      jûs galite ávesti to asmens adresà ğiame lauke. Tai yra savotiğkas bûdas 
-      supaşindinti treèià asmená su vykstanèiu susirağinëjimu. Laukelis savo 
-      talpa nesiskiria nuo <B>Kam:</B> ir <B>BCC:</B> laukø. <B>Kam:</B> lauke
-      rağomi asmenys, kuriems tas laiskas adresuotas. <B>CC:</B> ir <B>BCC:</B> 
-      laukai yra informacinio pobûdşio.
+      Toliau eina <B>CC:</B> laukas.  CC yra angliÅ¡kÅ³ Å¾odÅ¾iÅ³ <B>Carbon 
+      Copy</B> sutrumpinimas. Jei norite nusiÅ³sti laiÅ¡ko kopijÄ… dar kam nors, 
+      jÅ«s galite Ä¯vesti to asmens adresÄ… Å¡iame lauke. Tai yra savotiÅ¡kas bÅ«das 
+      supaÅ¾indinti treÄiÄ… asmenÄ¯ su vykstanÄiu susiraÅ¡inÄ—jimu. Laukelis savo 
+      talpa nesiskiria nuo <B>Kam:</B> ir <B>BCC:</B> laukÅ³. <B>Kam:</B> lauke
+      raÅ¡omi asmenys, kuriems tas laiskas adresuotas. <B>CC:</B> ir <B>BCC:</B> 
+      laukai yra informacinio pobÅ«dÅ¾io.
       </p>
    </description>
 </section>
@@ -54,10 +54,10 @@
    </title>
    <description>
       <p>
-      BCC yra angliğkø şodşiø <B>Blind Carbon Copy</B> sutrumpinimas, reiğkiantis
-      slaptà kopijà. Laukas yra naudojamas nusiøsti kam nors laiğko kopijà taip, 
-      kad iğ <B>Kam:</B> or <B>CC:</B> adresatø <I>neşinotø</I>, kad tokia kopija 
-      buvo nusiøsta.
+      BCC yra angliÅ¡kÅ³ Å¾odÅ¾iÅ³ <B>Blind Carbon Copy</B> sutrumpinimas, reiÅ¡kiantis
+      slaptÄ… kopijÄ…. Laukas yra naudojamas nusiÅ³sti kam nors laiÅ¡ko kopijÄ… taip, 
+      kad iÅ¡ <B>Kam:</B> or <B>CC:</B> adresatÅ³ <I>neÅ¾inotÅ³</I>, kad tokia kopija 
+      buvo nusiÅ³sta.
       </p>
    </description>
 </section>
@@ -68,8 +68,8 @@
    </title>
    <description>
       <p>
-      Trumpas aprağymas apie tai, kà rağote laiğke. Atminkite, kad tikslus laiğko 
-      temos gali padëti gavëjui ávertinti laiğkà.
+      Trumpas apraÅ¡ymas apie tai, kÄ… raÅ¡ote laiÅ¡ke. Atminkite, kad tikslus laiÅ¡ko 
+      temos gali padÄ—ti gavÄ—jui Ä¯vertinti laiÅ¡kÄ….
       </p>
    </description>
 </section>
@@ -80,10 +80,10 @@
    </title>
    <description>
       <p>
-      Ğis mygtu atidaro adresø knygà ir leidşia pasirinkti adresus iğ jos.
-      Norëdami apriboti iğvedamus adresus, turite kà nors ávesti á paieğkos
-      laukà ir paspausti mygtukà "Ieğkoti". Adresø knygà uş savo funkcionalumà
-      uşsitarnavo atskirà pagalbos sistemos skyriø. Apie jà daugiau informacijos 
+      Å is mygtu atidaro adresÅ³ knygÄ… ir leidÅ¾ia pasirinkti adresus iÅ¡ jos.
+      NorÄ—dami apriboti iÅ¡vedamus adresus, turite kÄ… nors Ä¯vesti Ä¯ paieÅ¡kos
+      laukÄ… ir paspausti mygtukÄ… "IeÅ¡koti". AdresÅ³ knygÄ… uÅ¾ savo funkcionalumÄ…
+      uÅ¾sitarnavo atskirÄ… pagalbos sistemos skyriÅ³. Apie jÄ… daugiau informacijos 
       rasite skyriuje "Adresai". 
       </p>
    </description>
@@ -91,12 +91,12 @@
 
 <section>
    <title>
-      Şinutës tekstas
+      Å½inutÄ—s tekstas
    </title>
    <description>
       <p>
-      Didelis tusèias laukas yra skirtas suvesti jûsø laiğko tekstui. Jei 
-      yra nustatytas koks nors parağas, jis irgi ten pasirodys. 
+      Didelis tusÄias laukas yra skirtas suvesti jÅ«sÅ³ laiÅ¡ko tekstui. Jei 
+      yra nustatytas koks nors paraÅ¡as, jis irgi ten pasirodys. 
       </p>
    </description>
 </section>
@@ -107,22 +107,22 @@
    </title>
    <description>
       <p>
-      Èia jûs galite pridëti failà prie laiğko. Failas turëtø bûti kur nors 
-      jûsø kompiuteryje ar lokaliame tinkle. Browse mygtukas (jo pavadinimas
-      priklauso nuo jûsø naudojamos narğyklës) atidaro dialogo langà, 
-      leidşiantá surasti failà, kurá norite prikabinti. Taip pat jûs galite 
-      suvesti pilnà kelià iki failo prie mygtuko esanèiame lauke. Paspaudus 
-      mygtukà "Pridëti" failas turëtø pasirodyti sàrağe şemiau şinutës teksto.
+      ÄŒia jÅ«s galite pridÄ—ti failÄ… prie laiÅ¡ko. Failas turÄ—tÅ³ bÅ«ti kur nors 
+      jÅ«sÅ³ kompiuteryje ar lokaliame tinkle. Browse mygtukas (jo pavadinimas
+      priklauso nuo jÅ«sÅ³ naudojamos narÅ¡yklÄ—s) atidaro dialogo langÄ…, 
+      leidÅ¾iantÄ¯ surasti failÄ…, kurÄ¯ norite prikabinti. Taip pat jÅ«s galite 
+      suvesti pilnÄ… keliÄ… iki failo prie mygtuko esanÄiame lauke. Paspaudus 
+      mygtukÄ… "PridÄ—ti" failas turÄ—tÅ³ pasirodyti sÄ…raÅ¡e Å¾emiau Å¾inutÄ—s teksto.
       </p>
       <p>
-      Prikabinus bent vienà failà turëtø atsirasti dar vienas mygtukas. Jis
-      leidşia iğtrinti vienà ar kelis prikabintus failus.
+      Prikabinus bent vienÄ… failÄ… turÄ—tÅ³ atsirasti dar vienas mygtukas. Jis
+      leidÅ¾ia iÅ¡trinti vienÄ… ar kelis prikabintus failus.
       </p>
       <p>
-      Pats failø prikabinimo procesas gali uştrukti priklausomai nuo prikabinamo
-      failo dydşio ir jûsø susijungimo greièio. Gali bûti, kad didesnio failo 
-      jums tiesiog nepavyks prikabinti arba serveris atsisakys priimti didesná 
-      laiğkà.
+      Pats failÅ³ prikabinimo procesas gali uÅ¾trukti priklausomai nuo prikabinamo
+      failo dydÅ¾io ir jÅ«sÅ³ susijungimo greiÄio. Gali bÅ«ti, kad didesnio failo 
+      jums tiesiog nepavyks prikabinti arba serveris atsisakys priimti didesnÄ¯ 
+      laiÅ¡kÄ….
       <p>
    </description>
 </section>

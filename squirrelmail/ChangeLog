@@ -2,9 +2,84 @@
 *** SquirrelMail Stable Series 1.4 ***
 **************************************
 
-Version 1.4.1 -- CVS
---------------------
+Version 1.4.2
+-------------
+  - Fix message highlighting for text containing spaces.
+  - Added feature to allow user to switch on full date display in mailboxes instead
+    of just partial date/time based on time of email, and current date.
+  - Fixed bug that would cause e-mails dated in the future to be displayed with only
+    the time.
+  - Custom CSS option now works properly.
+  - Fix SquirrelSpell JS incompatibility with other plugins that use forms like
+    Link Buttons (#774454).
+  - Fix when forwarding messages as attachment from message list, the displayed
+    subject was wrong (appearing to the user that the wrong messages were attached).
+    Closes #772371.
+  - Fix that when user has no theme preference set, Alien Glow would be selected under
+    display preferences instead of Default.
+  - Remove chosen_theme from default_pref because this (wrongly) overrides the default
+    theme defined in config.php.
+  - Define defaults for missing colors in incomplete themes.
+  - Updated 'action' to be 'smaction' so that plugins can modify the submit/action of
+    forms.  This was suggested for the gpg plugin, but might be useful elsewhere.
+  - Fix bug that after sending reply user was returned to the first page of the
+    message list, which should be the last-active page (use startMessage).
+  - Fix forwarded emails as attachment from appended ) to the email.
+  - Prevent username and password from being sent in error message if IMAP
+    drops connection during login.
+  - Workaround for Mozilla bug #200412 in order to show multipart/related html mail.
+  - Fix for disappearing '0' from decoded strings (bug #784193).
+  - Add Minimal BW theme: a colorless environment for browsers that don't support colors.
+  - Replace all session_start() calls with sqsession_is_active() to be compatible
+    with upcoming PHP 4.3.3.
+  - Encoding of Russian translation changed to utf-8. Lithuanian translation changed
+    to utf-8. Fix allows to use national letters in folder names correctly.
+  - Reintroduced mailbox-tree caching in order to limit the number of IMAP calls.
+  - Fix for delete_move_next plugin when using server threading.
+  - Calendar plugin: in month view, display events on the same day sorted by time,
+    and include the time of the event in its tooltip.
+  - Fix nbsp instead of space and allow wider character set in filename when
+    downloading attachment.
+  - Fix to prevent mailboxes being deleted in selected state which is against
+    RFC3501.
+  - Fix reply all address string in case the personal name contained a comma 
+    (address separator).
+  - Added Malaysian translation.
+  - conf.pl will no longer offer to detect login methods if TLS is being used,
+    as the detection code does not support it.
+  - Fix somewhat uncommon bug in paginator (bug #767289)
 
+Version 1.4.1 -- 7 July 2003
+----------------------------
+  - Fixes to conf.pl for handling relative dirs outside the SM tree (bug #715119) and 
+    the default delete_folder values for Courier-IMAP and UW-IMAP (bug #715550).
+  - Fixed problem with \ in passwords/usernames on login, fixes bug #718116.
+  - Added lowsrc to the list of untrusted attributes in HTML email.
+  - Fixed message highlighting for To, CC and From and
+    for RFC1522 headers (bug #719564).
+  - Fix for Folders being listed in create/remove/rename operations
+    (bugs #725443, #722823, #729225).
+  - Fixed incorrect folding inside message-id's.
+  - Fix for bad attachment view link (bugs #697381, #729295).
+  - Fix comp_in_new in search and addressbook not having right parameters (bug #731768).
+  - Fix max attachment filesize off by factor 10 when ini_var set in bytes
+    (bug #730742).
+  - Fixed language bug in posting on modifying/deleting servers on mail_fetch plugin
+    (#742705).
+  - Fixed infinite loop in parseAddress on invalid mailadress (#742584).
+  - Added Welsh translation.
+  - Fixed error with appending sent mail to sent folder when one wasn't set, or user
+    preferred not to append the sent mail.
+  - Updated plugin documentation.
+  - Added Faroese translation.
+  - Fix for bug #719619 (xhtml-style css definitions weren't working).
+  - Fix bug #722933 where resuming a draft message would lose the reference headers.
+  - Fix that sending of read receipts failed when JavaScript on and comp in new off
+    (bug #738130).
+  - New function: sm_print_r() intended for debugging.  See
+    functions/strings.php.
+  - Update config_default to use SM_PATH. (bug #766577)
+  - Minor misc. performance enhancements.
 
 Version 1.4.0 -- 3 April 2003
 -----------------------------

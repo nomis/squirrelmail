@@ -69,7 +69,7 @@ if ( -e "config.php" ) {
     close(FILE);
 
     if ( $config_version ne $conf_pl_version ) {
-        system "clear";
+        clear_screen();
         print $WHT. "WARNING:\n" . $NRM;
         print "  The file \"config/config.php\" was found, but it is for\n";
         print "  an older version of SquirrelMail. It is possible to still\n";
@@ -122,7 +122,7 @@ if ( -e "config.php" ) {
     close(FILE);
 
     if ( $config_version ne $conf_pl_version ) {
-        system "clear";
+        clear_screen();
         print $WHT. "WARNING:\n" . $NRM;
         print "  You are trying to use a 'config_default.php' from an older\n";
         print "  version of SquirrelMail. This is HIGHLY unrecommended. You\n";
@@ -246,7 +246,7 @@ while ( $line = <FILE> ) {
     }
 }
 close FILE;
-if ( $useSendmail ne "true" ) {
+if ( lc($useSendmail) ne "true" ) {
     $useSendmail = "false";
 }
 if ( !$sendmail_path ) {
@@ -382,7 +382,7 @@ if ( $config_use_color == 1 ) {
 }
 
 while ( ( $command ne "q" ) && ( $command ne "Q" ) ) {
-    system "clear";
+    clear_screen();
     print $WHT. "SquirrelMail Configuration : " . $NRM;
     if    ( $config == 1 ) { print "Read: config.php"; }
     elsif ( $config == 2 ) { print "Read: config_default.php"; }
@@ -1137,43 +1137,47 @@ sub command111 {
 # Now offers to detect supported mechs, assuming server & port are set correctly
 
 sub command112a {
-	print "If you have already set the hostname and port number, I can try to\n";
-	print "detect the mechanisms your IMAP server supports.\n";
-	print "I will try to detect CRAM-MD5 and DIGEST-MD5 support.  I can't test\n";
-	print "for \"login\" without knowing a username and password.\n";
-	print "Auto-detecting is optional - you can safely say \"n\" here.\n";
-	print "\nTry to detect supported mechanisms? [y/N]: ";
-	$inval=<STDIN>;
-	chomp($inval);
-	if ($inval =~ /^y\b/i) {
-	  # Yes, let's try to detect.
-	  print "Trying to detect IMAP capabilities...\n";
-	  my $host = $imapServerAddress . ':'. $imapPort;
-	  print "CRAM-MD5:\t";
-	  my $tmp = detect_auth_support('IMAP',$host,'CRAM-MD5');
-	  if (defined($tmp)) {
-		  if ($tmp eq 'YES') {
-		  	print "$WHT SUPPORTED$NRM\n";
-		  } else {
-		    print "$WHT NOT SUPPORTED$NRM\n";
-		  }
-      } else {
-	    print $WHT . " ERROR DETECTING$NRM\n";
-	  }
+    if ($use_imap_tls =~ /^true\b/i) {
+        print "Auto-detection of login methods is unavailable when using TLS.\n";
+    } else {
+	    print "If you have already set the hostname and port number, I can try to\n";
+    	print "detect the mechanisms your IMAP server supports.\n";
+    	print "I will try to detect CRAM-MD5 and DIGEST-MD5 support.  I can't test\n";
+    	print "for \"login\" without knowing a username and password.\n";
+    	print "Auto-detecting is optional - you can safely say \"n\" here.\n";
+    	print "\nTry to detect supported mechanisms? [y/N]: ";
+    	$inval=<STDIN>;
+    	chomp($inval);
+    	if ($inval =~ /^y\b/i) {
+    	  # Yes, let's try to detect.
+    	  print "Trying to detect IMAP capabilities...\n";
+    	  my $host = $imapServerAddress . ':'. $imapPort;
+    	  print "CRAM-MD5:\t";
+    	  my $tmp = detect_auth_support('IMAP',$host,'CRAM-MD5');
+    	  if (defined($tmp)) {
+    		  if ($tmp eq 'YES') {
+    		  	print "$WHT SUPPORTED$NRM\n";
+    		  } else {
+    		    print "$WHT NOT SUPPORTED$NRM\n";
+    		  }
+          } else {
+    	    print $WHT . " ERROR DETECTING$NRM\n";
+    	  }
 
-	  print "DIGEST-MD5:\t";
-	  $tmp = detect_auth_support('IMAP',$host,'DIGEST-MD5');
-	  if (defined($tmp)) {
-	  	if ($tmp eq 'YES') {
-			print "$WHT SUPPORTED$NRM\n";
-		} else {
-			print "$WHT NOT SUPPORTED$NRM\n";
-		}
-	  } else {
-	    print $WHT . " ERROR DETECTING$NRM\n";
-	  }
+    	  print "DIGEST-MD5:\t";
+    	  $tmp = detect_auth_support('IMAP',$host,'DIGEST-MD5');
+    	  if (defined($tmp)) {
+    	  	if ($tmp eq 'YES') {
+    			print "$WHT SUPPORTED$NRM\n";
+    		} else {
+    			print "$WHT NOT SUPPORTED$NRM\n";
+    		}
+    	  } else {
+    	    print $WHT . " ERROR DETECTING$NRM\n";
+    	  }
 	  
-	} 
+    	} 
+    }
 	  print "\nWhat authentication mechanism do you want to use for IMAP connections?\n\n";
 	  print $WHT . "login" . $NRM . " - Plaintext. If you can do better, you probably should.\n";
 	  print $WHT . "cram-md5" . $NRM . " - Slightly better than plaintext methods.\n";
@@ -1195,79 +1199,83 @@ sub command112a {
 # SMTP authentication type
 # Possible choices: none, plain, cram-md5, digest-md5
 sub command112b {
-    print "If you have already set the hostname and port number, I can try to\n";
-    print "automatically detect the mechanisms your SMTP server supports.\n";
-	print "Auto-detection is *optional* - you can safely say \"n\" here.\n";
-    print "\nTry to detect auth mechanisms? [y/N]: ";
-    $inval=<STDIN>;
-    chomp($inval);
-    if ($inval =~ /^y\b/i) {
-		# Yes, let's try to detect.
-		print "Trying to detect supported methods (SMTP)...\n";
+    if ($use_smtp_tls =~ /^true\b/i) {
+        print "Auto-detection of login methods is unavailable when using TLS.\n";
+    } else {
+        print "If you have already set the hostname and port number, I can try to\n";
+        print "automatically detect the mechanisms your SMTP server supports.\n";
+    	print "Auto-detection is *optional* - you can safely say \"n\" here.\n";
+        print "\nTry to detect auth mechanisms? [y/N]: ";
+        $inval=<STDIN>;
+        chomp($inval);
+        if ($inval =~ /^y\b/i) {
+    		# Yes, let's try to detect.
+    		print "Trying to detect supported methods (SMTP)...\n";
 		
-		# Special case!
-		# Check none by trying to relay to junk@microsoft.com
-		$host = $smtpServerAddress . ':' . $smtpPort;
-		use IO::Socket;
-		my $sock = IO::Socket::INET->new($host);
-		print "Testing none:\t\t$WHT";
-		if (!defined($sock)) {
-			print " ERROR TESTING\n";
-			close $sock;
-		} else {
-			print $sock "mail from: tester\@squirrelmail.org\n";
-			$got = <$sock>;  # Discard
-			print $sock "rcpt to: junk\@microsoft.com\n";
-			$got = <$sock>;  # This is the important line
-			if ($got =~ /^250\b/) {  # SMTP will relay without auth
-				print "SUPPORTED$NRM\n";
-	        } else {
-			  print "NOT SUPPORTED$NRM\n";
-        	}
-			print $sock "rset\n";
-			print $sock "quit\n";
-			close $sock;
-		}
-		# Try login (SquirrelMail default)
-		print "Testing login:\t\t";
-		$tmp=detect_auth_support('SMTP',$host,'LOGIN');
-		if (defined($tmp)) {
-        	if ($tmp eq 'YES') {
-            	print $WHT . "SUPPORTED$NRM\n";
-	        } else {
-    	        print $WHT . "NOT SUPPORTED$NRM\n";
-        	}
-	      } else {
-    		  print $WHT . "ERROR DETECTING$NRM\n";
-      	}
-
-		# Try CRAM-MD5
-        print "Testing CRAM-MD5:\t";
-        $tmp=detect_auth_support('SMTP',$host,'CRAM-MD5');
-        if (defined($tmp)) {
-            if ($tmp eq 'YES') {
-                print $WHT . "SUPPORTED$NRM\n";
-            } else {
-                print $WHT . "NOT SUPPORTED$NRM\n";
+    		# Special case!
+    		# Check none by trying to relay to junk@microsoft.com
+    		$host = $smtpServerAddress . ':' . $smtpPort;
+    		use IO::Socket;
+    		my $sock = IO::Socket::INET->new($host);
+    		print "Testing none:\t\t$WHT";
+    		if (!defined($sock)) {
+    			print " ERROR TESTING\n";
+    			close $sock;
+    		} else {
+    			print $sock "mail from: tester\@squirrelmail.org\n";
+    			$got = <$sock>;  # Discard
+    			print $sock "rcpt to: junk\@microsoft.com\n";
+    			$got = <$sock>;  # This is the important line
+    			if ($got =~ /^250\b/) {  # SMTP will relay without auth
+    				print "SUPPORTED$NRM\n";
+    	        } else {
+    			  print "NOT SUPPORTED$NRM\n";
+            	}
+    			print $sock "rset\n";
+    			print $sock "quit\n";
+    			close $sock;
+    		}
+    		# Try login (SquirrelMail default)
+    		print "Testing login:\t\t";
+    		$tmp=detect_auth_support('SMTP',$host,'LOGIN');
+    		if (defined($tmp)) {
+            	if ($tmp eq 'YES') {
+                	print $WHT . "SUPPORTED$NRM\n";
+    	        } else {
+        	        print $WHT . "NOT SUPPORTED$NRM\n";
+            	}
+    	      } else {
+        		  print $WHT . "ERROR DETECTING$NRM\n";
+          	}
+    
+    		# Try CRAM-MD5
+            print "Testing CRAM-MD5:\t";
+            $tmp=detect_auth_support('SMTP',$host,'CRAM-MD5');
+            if (defined($tmp)) {
+                if ($tmp eq 'YES') {
+                    print $WHT . "SUPPORTED$NRM\n";
+                } else {
+                    print $WHT . "NOT SUPPORTED$NRM\n";
+                }
+              } else {
+                  print $WHT . "ERROR DETECTING$NRM\n";
             }
-          } else {
-              print $WHT . "ERROR DETECTING$NRM\n";
-        }
+    
 
-
-        print "Testing DIGEST-MD5:\t";
-        $tmp=detect_auth_support('SMTP',$host,'DIGEST-MD5');
-        if (defined($tmp)) {
-            if ($tmp eq 'YES') {
-                print $WHT . "SUPPORTED$NRM\n";
-            } else {
-                print $WHT . "NOT SUPPORTED$NRM\n";
+            print "Testing DIGEST-MD5:\t";
+            $tmp=detect_auth_support('SMTP',$host,'DIGEST-MD5');
+            if (defined($tmp)) {
+                if ($tmp eq 'YES') {
+                    print $WHT . "SUPPORTED$NRM\n";
+                } else {
+                    print $WHT . "NOT SUPPORTED$NRM\n";
+                }
+              } else {
+                  print $WHT . "ERROR DETECTING$NRM\n";
             }
-          } else {
-              print $WHT . "ERROR DETECTING$NRM\n";
-        }
-    } 
-    print "\tWhat authentication mechanism do you want to use for SMTP connections?\n";
+        } 
+    }
+    print "\nWhat authentication mechanism do you want to use for SMTP connections?\n";
     print $WHT . "none" . $NRM . " - Your SMTP server does not require authorization.\n";
     print $WHT . "login" . $NRM . " - Plaintext. If you can do better, you probably should.\n";
     print $WHT . "cram-md5" . $NRM . " - Slightly better than plaintext.\n";
@@ -1764,13 +1772,13 @@ sub command214 {
 
 # Automatically delete folders 
 sub command215 {
-    print "Should folders selected for deletion bypass the Trash folder?\n\n";
-
     if ( $imap_server_type == "courier" ) {
         print "Courier(or Courier-IMAP) IMAP servers do not support ";
         print "subfolders of Trash. \n";
         print "Deleting folders will bypass the trash folder and ";
         print "be immediately deleted.\n\n";
+        print "If this is not the correct value for your server,\n";
+        print "please use option D on the Main Menu to configure your server correctly.\n\n";
         print "Press any key to continue...\n";
         $new_delete = <STDIN>;
         $delete_folder = "true";
@@ -1779,10 +1787,13 @@ sub command215 {
         print "mail to also contain folders.\n";
         print "Deleting folders will bypass the trash folder and";
         print "be immediately deleted\n\n";
+        print "If this is not the correct value for your server,\n";
+        print "please use option D on the Main Menu to configure your server correctly.\n\n";
         print "Press any key to continue...\n";
         $new_delete = <STDIN>;
         $delete_folder = "true";
     } else { 
+        print "Should folders selected for deletion bypass the Trash folder?\n\n";
         if ( lc($delete_folder) eq "true" ) {
             $default_value = "y";
         } else {
@@ -2880,7 +2891,7 @@ sub save_data {
 }
 
 sub set_defaults {
-    system "clear";
+    clear_screen();
     print $WHT. "SquirrelMail Configuration : " . $NRM;
     if    ( $config == 1 ) { print "Read: config.php"; }
     elsif ( $config == 2 ) { print "Read: config_default.php"; }
@@ -3008,9 +3019,11 @@ sub set_defaults {
 # prepended to the path, if not, then the path will be
 # converted to an absolute path, e.g.
 #   '../images/logo.gif'      --> SM_PATH . 'images/logo.gif'
+#   '../../someplace/data'    --> '/absolute/path/someplace/data'
 #   'images/logo.gif'         --> SM_PATH . 'config/images/logo.gif'
 #   '/absolute/path/logo.gif' --> '/absolute/path/logo.gif'
 #   'http://whatever/'        --> 'http://whatever'
+#   $some_var/path            --> "$some_var/path"
 sub change_to_SM_path() {
     my ($old_path) = @_;
     my $new_path = '';
@@ -3024,7 +3037,16 @@ sub change_to_SM_path() {
     return "\'" . $old_path . "\'"  if ( $old_path =~ /^\w:\// );
     return $old_path                if ( $old_path =~ /^\'(\/|http)/ );
     return $old_path                if ( $old_path =~ /^\'\w:\// );
-    return $old_path                if ( $old_path =~ /^(\$|SM_PATH)/);
+    return $old_path                if ( $old_path =~ /^SM_PATH/);
+   
+    if ( $old_path =~ /^\$/ ) {
+        # check if it's a single var, or a $var/path combination
+        # if it's $var/path, enclose in ""
+        if ( $old_path =~ /\// ) {
+            return '"'.$old_path.'"';
+        }
+        return $old_path;
+    }
     
     # Remove remaining '
     $old_path =~ s/\'//g;
@@ -3034,6 +3056,14 @@ sub change_to_SM_path() {
 
     if ( $#rel_path > 1 ) {
         # more than two levels away. Make it absolute.
+        @abs_path = split(/\//, $dir);
+        
+        # Lop off the relative pieces of the absolute path..
+        for ( $i = 0; $i <= $#rel_path; $i++ ) {
+            pop @abs_path;
+            shift @rel_path;
+        }
+        push @abs_path, @rel_path;
         $new_path = "\'" . join('/', @abs_path) . "\'";
     } elsif ( $#rel_path > 0 ) {
         # it's within the SM tree, prepend SM_PATH
@@ -3061,7 +3091,7 @@ sub change_to_rel_path() {
 
     if ( $old_path =~ /^SM_PATH/ ) {
         $new_path =~ s/^SM_PATH . \'/\.\.\//;
-	$new_path =~ s/\.\.\/config\///;
+        $new_path =~ s/\.\.\/config\///;
     }
 
     return $new_path;
@@ -3143,4 +3173,12 @@ sub detect_auth_support {
 	print $sock $logout; # Try to log out, but we don't really care if this fails
 	close $sock;
 	return 'YES';
+}
+
+sub clear_screen() {
+    if ( $^O =~ /^mswin/i) {
+        system "cls";
+    } else {
+        system "clear";
+    }
 }

@@ -19,7 +19,8 @@ define('SMOPT_GRP_MESSAGE', 2);
 /* Define the optpage load function for the display options page. */
 function load_optpage_data_display() {
     global $theme, $language, $languages, $js_autodetect_results,
-    $compose_new_win, $default_use_mdn, $squirrelmail_language, $allow_thread_sort;
+    $compose_new_win, $default_use_mdn, $squirrelmail_language, $allow_thread_sort,
+    $optmode;
 
     /* Build a simple array into which we will build options. */
     $optgrps = array();
@@ -58,7 +59,7 @@ function load_optpage_data_display() {
     }
     closedir($handle);
     
-    if ( count( $css_values > 1 ) ) {
+    if ( count( $css_values ) > 1 ) {
     
         $optvals[SMOPT_GRP_GENERAL][] = array(
             'name'    => 'custom_css',
@@ -99,17 +100,18 @@ function load_optpage_data_display() {
                            SMPREF_JS_OFF        => _("Never"))
     );
 
-    $js_autodetect_script =
-        "<SCRIPT LANGUAGE=\"JavaScript\" TYPE=\"text/javascript\"><!--\n".
-           "document.forms[0].new_js_autodetect_results.value = '" . SMPREF_JS_ON . "';\n".
-        "// --></SCRIPT>\n";
-    $js_autodetect_results = SMPREF_JS_OFF;
+
+    if ($optmode != 'submit')
+       $onLoadScript = 'document.forms[0].new_js_autodetect_results.value = \'' . SMPREF_JS_ON . '\'';
+    else
+       $onLoadScript = '';
+
     $optvals[SMOPT_GRP_GENERAL][] = array(
         'name'    => 'js_autodetect_results',
         'caption' => '',
         'type'    => SMOPT_TYPE_HIDDEN,
         'refresh' => SMOPT_REFRESH_NONE,
-        'script'  => $js_autodetect_script,
+        //'post_script' => $js_autodetect_script,
         'save'    => 'save_option_javascript_autodetect'
     );
 
@@ -145,6 +147,13 @@ function load_optpage_data_display() {
         'type'    => SMOPT_TYPE_INTEGER,
         'refresh' => SMOPT_REFRESH_NONE,
         'size'    => SMOPT_SIZE_TINY
+    );
+
+    $optvals[SMOPT_GRP_MAILBOX][] = array(
+        'name'    => 'show_full_date',
+        'caption' => _("Always Show Full Date"),
+        'type'    => SMOPT_TYPE_BOOLEAN,
+        'refresh' => SMOPT_REFRESH_NONE
     );
 
     /*** Load the General Options into the array ***/
@@ -292,7 +301,8 @@ function load_optpage_data_display() {
     /* Assemble all this together and return it as our result. */
     $result = array(
         'grps' => $optgrps,
-        'vals' => $optvals
+        'vals' => $optvals,
+        'xtra' => $onLoadScript
     );
     return ($result);
 }

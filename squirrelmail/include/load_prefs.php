@@ -41,31 +41,33 @@ for ($i = 0; $i < count($theme); ++$i){
 }
 $chosen_theme = (!$found_theme ? '' : $chosen_theme);
 
+/**
+* This theme as a failsafe if no themes were found. It makes
+* no sense to cause the whole thing to exit just because themes
+* were not found. This is the absolute last resort.
+* Moved here to provide 'sane' defaults for incomplete themes.
+*/
+$color[0]  = '#DCDCDC';  /* light gray    TitleBar               */
+$color[1]  = '#800000';  /* red                                  */
+$color[2]  = '#CC0000';  /* light red     Warning/Error Messages */
+$color[3]  = '#A0B8C8';  /* green-blue    Left Bar Background    */
+$color[4]  = '#FFFFFF';  /* white         Normal Background      */
+$color[5]  = '#FFFFCC';  /* light yellow  Table Headers          */
+$color[6]  = '#000000';  /* black         Text on left bar       */
+$color[7]  = '#0000CC';  /* blue          Links                  */
+$color[8]  = '#000000';  /* black         Normal text            */
+$color[9]  = '#ABABAB';  /* mid-gray      Darker version of #0   */
+$color[10] = '#666666';  /* dark gray     Darker version of #9   */
+$color[11] = '#770000';  /* dark red      Special Folders color  */
+$color[12] = '#EDEDED';
+$color[15] = '#002266';  /* (dark blue)      Unselectable folders */
+
 if (isset($chosen_theme) && $found_theme && (file_exists($chosen_theme))) {
     @include_once($chosen_theme);
 } else {
     if (isset($theme) && isset($theme[$theme_default]) && file_exists($theme[$theme_default]['PATH'])) {
         @include_once($theme[$theme_default]['PATH']);
-    } else {
-        /**
-         * This theme as a failsafe if no themes were found. It makes
-         * no sense to cause the whole thing to exit just because themes
-         * were not found. This is the absolute last resort.
-         */
-         $color[0]  = '#DCDCDC';  /* light gray    TitleBar               */
-         $color[1]  = '#800000';  /* red                                  */
-         $color[2]  = '#CC0000';  /* light red     Warning/Error Messages */
-         $color[3]  = '#A0B8C8';  /* green-blue    Left Bar Background    */
-         $color[4]  = '#FFFFFF';  /* white         Normal Background      */
-         $color[5]  = '#FFFFCC';  /* light yellow  Table Headers          */
-         $color[6]  = '#000000';  /* black         Text on left bar       */
-         $color[7]  = '#0000CC';  /* blue          Links                  */
-         $color[8]  = '#000000';  /* black         Normal text            */
-         $color[9]  = '#ABABAB';  /* mid-gray      Darker version of #0   */
-         $color[10] = '#666666';  /* dark gray     Darker version of #9   */
-         $color[11] = '#770000';  /* dark red      Special Folders color  */
-         $color[12] = '#EDEDED';
-         $color[15] = '#002266';  /* (dark blue)      Unselectable folders */         
+        $chosen_theme = $theme[$theme_default]['PATH'];
     }
 }
 
@@ -257,6 +259,10 @@ $search_memory = getPref($data_dir, $username, 'search_memory', 0);
 $forward_cc = getPref($data_dir, $username, 'forward_cc', 0);
 
 $mailbox_select_style = getPref($data_dir, $username, 'mailbox_select_style', 0);
+
+/* Allow user to customize, and display the full date, instead of day, or time based
+   on time distance from date of message */
+$show_full_date = getPref($data_dir, $username, 'show_full_date', 0);
 
 do_hook('loading_prefs');
 

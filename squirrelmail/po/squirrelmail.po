@@ -1,12 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-01-25 09:07+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-09-20 11:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,10 +89,10 @@ msgstr ""
 msgid "E-mail address"
 msgstr ""
 
-msgid "First name"
+msgid "Last name"
 msgstr ""
 
-msgid "Last name"
+msgid "First name"
 msgstr ""
 
 msgid "Additional info"
@@ -122,6 +124,15 @@ msgstr ""
 
 #, c-format
 msgid "Add to %s"
+msgstr ""
+
+msgid "said"
+msgstr ""
+
+msgid "quote"
+msgstr ""
+
+msgid "who"
 msgstr ""
 
 msgid "Subject"
@@ -206,15 +217,6 @@ msgid "Save Draft"
 msgstr ""
 
 msgid "You have not filled in the \"To:\" field."
-msgstr ""
-
-msgid "said"
-msgstr ""
-
-msgid "quote"
-msgstr ""
-
-msgid "who"
 msgstr ""
 
 msgid "Draft folder"
@@ -362,9 +364,6 @@ msgstr ""
 msgid "Download this as a file"
 msgstr ""
 
-msgid "Not available"
-msgstr ""
-
 msgid "INBOX"
 msgstr ""
 
@@ -372,6 +371,9 @@ msgid "purge"
 msgstr ""
 
 msgid "Last Refresh"
+msgstr ""
+
+msgid "refresh unseen/total info"
 msgstr ""
 
 msgid "Save folder tree"
@@ -423,6 +425,12 @@ msgid "subject"
 msgstr ""
 
 msgid "Edit"
+msgstr ""
+
+msgid "Up"
+msgstr ""
+
+msgid "Down"
 msgstr ""
 
 msgid "No highlighting is defined"
@@ -592,10 +600,10 @@ msgstr ""
 msgid "Message not printable"
 msgstr ""
 
-msgid "Printer Friendly"
+msgid "CC"
 msgstr ""
 
-msgid "CC"
+msgid "Printer Friendly"
 msgstr ""
 
 msgid "Print"
@@ -632,7 +640,7 @@ msgstr ""
 msgid "Read receipt"
 msgstr ""
 
-msgid "send"
+msgid "sent"
 msgstr ""
 
 msgid "requested"
@@ -659,9 +667,6 @@ msgid "Edit Message as New"
 msgstr ""
 
 msgid "View Message"
-msgstr ""
-
-msgid "Up"
 msgstr ""
 
 msgid "Forward"
@@ -876,6 +881,27 @@ msgstr ""
 msgid "Saturday"
 msgstr ""
 
+msgid "Sun"
+msgstr ""
+
+msgid "Mon"
+msgstr ""
+
+msgid "Tue"
+msgstr ""
+
+msgid "Wed"
+msgstr ""
+
+msgid "Thu"
+msgstr ""
+
+msgid "Fri"
+msgstr ""
+
+msgid "Sat"
+msgstr ""
+
 msgid "January"
 msgstr ""
 
@@ -912,10 +938,49 @@ msgstr ""
 msgid "December"
 msgstr ""
 
+msgid "Jan"
+msgstr ""
+
+msgid "Feb"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "Apr"
+msgstr ""
+
+msgid "Ma&#121;"
+msgstr ""
+
+msgid "Jun"
+msgstr ""
+
+msgid "Jul"
+msgstr ""
+
+msgid "Aug"
+msgstr ""
+
+msgid "Sep"
+msgstr ""
+
+msgid "Oct"
+msgstr ""
+
+msgid "Nov"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
 msgid "D, F j, Y g:i a"
 msgstr ""
 
 msgid "D, F j, Y G:i"
+msgstr ""
+
+msgid "M j, Y"
 msgstr ""
 
 msgid "g:i a"
@@ -928,9 +993,6 @@ msgid "D, g:i a"
 msgstr ""
 
 msgid "D, G:i"
-msgstr ""
-
-msgid "M j, Y"
 msgstr ""
 
 #, c-format
@@ -969,6 +1031,12 @@ msgid ""
 msgstr ""
 
 #, c-format
+msgid ""
+"Preference file, %s, could not be copied from temporary file, %s. Contact "
+"your system administrator to resolve this issue."
+msgstr ""
+
+#, c-format
 msgid "Error opening %s"
 msgstr ""
 
@@ -997,12 +1065,21 @@ msgid ""
 "to resolve this issue."
 msgstr ""
 
+#, c-format
+msgid ""
+"Signature file, %s, could not be copied from temporary file, %s. Contact "
+"your system administrator to resolve this issue."
+msgstr ""
+
 msgid ""
 "You need to have php4 installed with the multibyte string function enabled "
-"(using configure option --with-mbstring)."
+"(using configure option --enable-mbstring)."
 msgstr ""
 
 msgid "ERROR : No available imapstream."
+msgstr ""
+
+msgid "ERROR : Connection dropped by imap-server."
 msgstr ""
 
 msgid "ERROR : Could not complete request."
@@ -1018,6 +1095,12 @@ msgid "ERROR : Bad or malformed request."
 msgstr ""
 
 msgid "Server responded: "
+msgstr ""
+
+msgid "ERROR : Imap server closed the connection."
+msgstr ""
+
+msgid "ERROR : Unknown imap response."
 msgstr ""
 
 #, c-format
@@ -1046,19 +1129,22 @@ msgid ""
 "folder."
 msgstr ""
 
-msgid "Unknown response from IMAP server: "
-msgstr ""
-
-msgid "Unknown message number in reply from server: "
-msgstr ""
-
 msgid "(no subject)"
 msgstr ""
 
 msgid "Unknown Sender"
 msgstr ""
 
-msgid "(unknown sender)"
+msgid "Unknown response from IMAP server: "
+msgstr ""
+
+msgid "The server couldn't find the message you requested."
+msgstr ""
+
+msgid ""
+"Most probably your message list was out of date and the message has been "
+"moved away or deleted (perhaps by another program accessing the same "
+"mailbox)."
 msgstr ""
 
 msgid "Unknown date"
@@ -1287,6 +1373,9 @@ msgstr ""
 msgid "Maximum Number of Pages to Show"
 msgstr ""
 
+msgid "Always Show Full Date"
+msgstr ""
+
 msgid "Message Display and Composition"
 msgstr ""
 
@@ -1431,7 +1520,7 @@ msgstr ""
 msgid "Unseen and Total"
 msgstr ""
 
-msgid "Enable Collapsable Folders"
+msgid "Enable Collapsible Folders"
 msgstr ""
 
 msgid "Enable Cumulative Unread Message Notification"
@@ -1913,7 +2002,7 @@ msgstr ""
 msgid "15 min."
 msgstr ""
 
-msgid "35 min."
+msgid "30 min."
 msgstr ""
 
 msgid "45 min."
@@ -1997,44 +2086,6 @@ msgid "COMMERCIAL - RBL+ Dial-up entries."
 msgstr ""
 
 msgid ""
-"FREE - Osirusoft Relays - Osirusofts list of verified open relays. Seems to "
-"include servers used by abuse@uunet.net auto-replies too."
-msgstr ""
-
-msgid "FREE - Osirusoft Dialups - Osirusofts Dialup Spam Source list."
-msgstr ""
-
-msgid ""
-"FREE - Osirusoft Confirmed Spam Source - Sites that continually spam and "
-"have been manually added after multiple nominations. Use with caution. Seems "
-"to catch abuse auto-replies from some ISPs."
-msgstr ""
-
-msgid ""
-"FREE - Osirusoft Smart Hosts - List of hosts that are secure but relay for "
-"other mail servers that are not secure."
-msgstr ""
-
-msgid ""
-"FREE - Osirusoft Spamware Developers - It is believed that these are IP "
-"ranges of companies that are known to produce spam software. Seems to catch "
-"abuse auto-replies from some ISPs."
-msgstr ""
-
-msgid ""
-"FREE - Osirusoft Unconfirmed OptIn Servers - List of listservers that opt "
-"users in without confirmation."
-msgstr ""
-
-msgid ""
-"FREE - Osirusoft Insecure formmail.cgi scripts - List of insecure formmail."
-"cgi scripts. (planned)."
-msgstr ""
-
-msgid "FREE - Osirusoft Open Proxy Servers - List of Open Proxy Servers."
-msgstr ""
-
-msgid ""
 "FREE - ORDB was born when ORBS went off the air. It seems to have fewer "
 "false positives than ORBS did though."
 msgstr ""
@@ -2069,7 +2120,6 @@ msgstr ""
 msgid "FREE - SPAMhaus - A list of well-known SPAM sources."
 msgstr ""
 
-#, c-format
 msgid ""
 "FREE, for now - SPAMCOP - An interesting solution that lists servers that "
 "have a very high spam to legit email ratio (85% or more)."
@@ -2165,9 +2215,6 @@ msgid "Header"
 msgstr ""
 
 msgid "Contains:"
-msgstr ""
-
-msgid "Down"
 msgstr ""
 
 #, c-format
@@ -2548,9 +2595,6 @@ msgstr ""
 msgid "Confirm Delete"
 msgstr ""
 
-msgid "Mofify a Server"
-msgstr ""
-
 msgid "Undefined Function"
 msgstr ""
 
@@ -2575,9 +2619,6 @@ msgid ""
 msgstr ""
 
 msgid "Message Details"
-msgstr ""
-
-msgid "Message details"
 msgstr ""
 
 msgid "Close Window"
@@ -2625,9 +2666,7 @@ msgstr ""
 
 msgid ""
 "Select from the list of <b>server files</b> the media file to play when new "
-"mail arrives.  Selecting <b>local media</b> will play the file specified in "
-"the <b>local media file</b> box to play from the local computer.  If no file "
-"is specified, the system will use a default from the server."
+"mail arrives.  If no file is specified, \"(none)\", no sound will be used."
 msgstr ""
 
 msgid "Enable Media Playing"
@@ -2651,13 +2690,10 @@ msgstr ""
 msgid "Select server file:"
 msgstr ""
 
-msgid "(local media)"
+msgid "(none)"
 msgstr ""
 
 msgid "Try"
-msgstr ""
-
-msgid "Local Media File:"
 msgstr ""
 
 msgid "Current File:"
@@ -2692,6 +2728,9 @@ msgid "%s New Message"
 msgstr ""
 
 msgid "Test Sound"
+msgstr ""
+
+msgid "No sound specified"
 msgstr ""
 
 msgid "Loading the sound..."
@@ -3059,24 +3098,30 @@ msgstr ""
 msgid "Your server options are as follows:"
 msgstr ""
 
-msgid ""
-"13 language pairs, maximum of 1000 characters translated, powered by Systran"
+msgid "Maximum of 1000 characters translated, powered by Systran"
 msgstr ""
 
-msgid ""
-"10 language pairs, maximum of 25 kilobytes translated, powered by Systran"
+#, c-format
+msgid "Number of supported language pairs: %s"
 msgstr ""
 
-msgid "12 language pairs, no known limits, powered by Systran"
+msgid "No known limits, powered by Systran"
 msgstr ""
 
-msgid ""
-"767 language pairs, no known limits, powered by Translation Experts's "
-"InterTran"
+msgid "No known limits, powered by Translation Experts's InterTran"
 msgstr ""
 
-msgid ""
-"8 language pairs, no known limits, powered by GPLTrans (free, open source)"
+#, c-format
+msgid "Number of supported languages: %s"
+msgstr ""
+
+msgid "No known limits, powered by GPLTrans (free, open source)"
+msgstr ""
+
+msgid "Hellenic translations, no known limits, powered by Systran"
+msgstr ""
+
+msgid "Russian translations, maximum of 500 characters translated"
 msgstr ""
 
 msgid ""
@@ -3126,6 +3171,9 @@ msgstr ""
 msgid "English"
 msgstr ""
 
+msgid "Chinese"
+msgstr ""
+
 msgid "French"
 msgstr ""
 
@@ -3133,6 +3181,12 @@ msgid "German"
 msgstr ""
 
 msgid "Italian"
+msgstr ""
+
+msgid "Japanese"
+msgstr ""
+
+msgid "Korean"
 msgstr ""
 
 msgid "Portuguese"
@@ -3180,9 +3234,6 @@ msgstr ""
 msgid "Icelandic"
 msgstr ""
 
-msgid "Japanese"
-msgstr ""
-
 msgid "Latin American Spanish"
 msgstr ""
 
@@ -3214,6 +3265,18 @@ msgid "Indonesian"
 msgstr ""
 
 msgid "Latin"
+msgstr ""
+
+msgid "to English"
+msgstr ""
+
+msgid "from English"
+msgstr ""
+
+msgid "Interface language"
+msgstr ""
+
+msgid "Translation direction"
 msgstr ""
 
 msgid "Delivery error report"

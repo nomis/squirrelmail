@@ -1,25 +1,25 @@
 # Translation of Squirrelmail interface to Hellenic (Greek)
 # Copyright (c) 1999-2003 The Squirrelmail Development Team
-# "George P. Kremmydas" <george@kefalonia-ithaki.gr>, 2004.
+# "George P. Kremmydas" <george@kefalonia-ithaki.gr>, 2003.
 # Proofreading & some help by Alexandros Vellis <avel@noc.uoa.gr>
 msgid ""
 msgstr ""
-"Project-Id-Version: $Id$ POT-Creation-Date: 2003-01-25 09:07+0100\n"
-"POT-Creation-Date: 2003-01-25 09:07+0100\n"
-"PO-Revision-Date: 2003-02-18 22:52+0200\n"
+"Project-Id-Version: $Id: squirrelmail.po,v 1.5.2.1 2003/06/25 10:42:46 tokul "
+"Exp $ POT-Creation-Date: 2003-05-02 14:08+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-09-20 11:04+0300\n"
+"PO-Revision-Date: 2003-09-11 17:30+0300\n"
 "Last-Translator: George P. Kremmydas <george@kefalonia-ithaki.gr>\n"
-"Language-Team: Greek Squirrelmail i18n team <squirrelmail-i18n@lists."
-"sourceforge.net>\n"
+"Language-Team: Greek <squirrelmail-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-7\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
 
 msgid "Address Book"
 msgstr "Βιβλίο Διευθύνσεων"
 
 msgid "All"
-msgstr "Όλα"
+msgstr "Όλοι"
 
 msgid "Name"
 msgstr "Όνομα"
@@ -88,11 +88,11 @@ msgstr "Πρέπει να είναι μοναδικό"
 msgid "E-mail address"
 msgstr "Διεύθυνση E-mail"
 
-msgid "First name"
-msgstr "Όνομα"
-
 msgid "Last name"
 msgstr "Επώνυμο"
+
+msgid "First name"
+msgstr "Όνομα"
 
 msgid "Additional info"
 msgstr "Πρόσθετες πληροφορίες"
@@ -126,6 +126,15 @@ msgstr "Διαγραφή επιλεγμένων"
 #, c-format
 msgid "Add to %s"
 msgstr "Προσθήκη στο %s"
+
+msgid "said"
+msgstr "είπε"
+
+msgid "quote"
+msgstr "ανέφερε"
+
+msgid "who"
+msgstr "ποιός"
 
 msgid "Subject"
 msgstr "Θέμα"
@@ -212,15 +221,6 @@ msgstr "Αποθήκευση Προχείρου"
 
 msgid "You have not filled in the \"To:\" field."
 msgstr "Δεν έχετε συμπληρώσει το πεδίο \"Προς:\"."
-
-msgid "said"
-msgstr "είπε"
-
-msgid "quote"
-msgstr "ανέφερε"
-
-msgid "who"
-msgstr "ποιός"
 
 msgid "Draft folder"
 msgstr "Φάκελος Πρόχειρα"
@@ -342,8 +342,7 @@ msgid ""
 "The help has not been translated to %s.  It will be displayed in English "
 "instead."
 msgstr ""
-"Η βοήθεια δεν έχει μεταφραστεί στα %s.  Γι αυτό το λόγο θα εμφανιστεί στα "
-"Αγγλικά."
+"Η βοήθεια δεν έχει μεταφραστεί στη γλώσσα %s. Θα εμφανιστεί στα Αγγλικά."
 
 msgid "Some or all of the help documents are not present!"
 msgstr "Κάποια ή όλα τα έγγραφα βοήθειας δεν υπάρχουν!"
@@ -369,9 +368,6 @@ msgstr "Εμφάνιση μηνύματος"
 msgid "Download this as a file"
 msgstr "Κατέβασμα ως αρχείο"
 
-msgid "Not available"
-msgstr "Mη διαθέσιμο"
-
 msgid "INBOX"
 msgstr "ΕΙΣΕΡΧΟΜΕΝΑ"
 
@@ -380,6 +376,9 @@ msgstr "εκκαθάριση"
 
 msgid "Last Refresh"
 msgstr "Τελευταία Ενημέρωση"
+
+msgid "refresh unseen/total info"
+msgstr "ανανέωση πληροφοριών μη αναγνωσμένων/συνολικών"
 
 msgid "Save folder tree"
 msgstr "Αποθήκευση δέντρου φακέλων"
@@ -431,6 +430,12 @@ msgstr "θέμα"
 
 msgid "Edit"
 msgstr "Επεξεργασία"
+
+msgid "Up"
+msgstr "Πάνω"
+
+msgid "Down"
+msgstr "Κάτω"
 
 msgid "No highlighting is defined"
 msgstr "Δεν έχει οριστεί μαρκάρισμα"
@@ -615,11 +620,11 @@ msgstr ""
 msgid "Message not printable"
 msgstr "Μη εκτυπώσιμο μήνυμα"
 
-msgid "Printer Friendly"
-msgstr "Φιλικό για Εκτύπωση"
-
 msgid "CC"
 msgstr "Αντίγραφο"
+
+msgid "Printer Friendly"
+msgstr "Φιλικό για Εκτύπωση"
 
 msgid "Print"
 msgstr "Εκτύπωση"
@@ -655,11 +660,11 @@ msgstr "Mailer"
 msgid "Read receipt"
 msgstr "Απόδειξη ανάγνωσης"
 
-msgid "send"
-msgstr "αποστολή"
+msgid "sent"
+msgstr "απεστάλη"
 
 msgid "requested"
-msgstr "αιτούμενο"
+msgstr "αιτήθηκε"
 
 msgid ""
 "The message sender has requested a response to indicate that you have read "
@@ -685,9 +690,6 @@ msgstr "Επεξεργασία Μηνύματος ως Νέο"
 
 msgid "View Message"
 msgstr "Εμφάνιση μηνύματος"
-
-msgid "Up"
-msgstr "Πάνω"
 
 msgid "Forward"
 msgstr "Προώθηση"
@@ -901,6 +903,27 @@ msgstr "Παρασκευή"
 msgid "Saturday"
 msgstr "Σάββατο"
 
+msgid "Sun"
+msgstr "Κυρ"
+
+msgid "Mon"
+msgstr "Δευ"
+
+msgid "Tue"
+msgstr "Τρι"
+
+msgid "Wed"
+msgstr "Τετ"
+
+msgid "Thu"
+msgstr "Πεμ"
+
+msgid "Fri"
+msgstr "Παρ"
+
+msgid "Sat"
+msgstr "Σαβ"
+
 msgid "January"
 msgstr "Ιανουάριος"
 
@@ -937,11 +960,50 @@ msgstr "Νοέμβριος"
 msgid "December"
 msgstr "Δεκέμβριος"
 
+msgid "Jan"
+msgstr "Ιαν"
+
+msgid "Feb"
+msgstr "Φεβ"
+
+msgid "Mar"
+msgstr "Μαρ"
+
+msgid "Apr"
+msgstr "Απρ"
+
+msgid "Ma&#121;"
+msgstr "Μάι"
+
+msgid "Jun"
+msgstr "Ιουν"
+
+msgid "Jul"
+msgstr "Ιουλ"
+
+msgid "Aug"
+msgstr "Αυγ"
+
+msgid "Sep"
+msgstr "Σεπ"
+
+msgid "Oct"
+msgstr "Οκτ"
+
+msgid "Nov"
+msgstr "Νοε"
+
+msgid "Dec"
+msgstr "Δεκ"
+
 msgid "D, F j, Y g:i a"
 msgstr "D, F j, Y g:i a"
 
 msgid "D, F j, Y G:i"
 msgstr "D, F j, Y G:i"
+
+msgid "M j, Y"
+msgstr "M j, Y"
 
 msgid "g:i a"
 msgstr "g:i a"
@@ -954,9 +1016,6 @@ msgstr "D, g:i a"
 
 msgid "D, G:i"
 msgstr "D, G:i"
-
-msgid "M j, Y"
-msgstr "M j, Y"
 
 #, c-format
 msgid "Preference database error (%s). Exiting abnormally"
@@ -1000,6 +1059,15 @@ msgstr ""
 "διαχειριστή του συστήματος για να επιλύσετε αυτό το θέμα."
 
 #, c-format
+msgid ""
+"Preference file, %s, could not be copied from temporary file, %s. Contact "
+"your system administrator to resolve this issue."
+msgstr ""
+"Το αρχείο προτιμήσεων, %s, δεν ήταν δυνατόν να αντιγραφεί από το προσωρινό "
+"αρχείο %s. Επικοινωνήστε με τον διαχειριστή του συστήματος για να επιλύσετε "
+"αυτό το θέμα."
+
+#, c-format
 msgid "Error opening %s"
 msgstr "Σφάλμα στο άνοιγμα %s"
 
@@ -1034,15 +1102,27 @@ msgstr ""
 "Το αρχείο υπογραφής, %s, δεν ήταν δυνατό να γραφτεί. Επικοινωνήστε με τον "
 "διαχειριστή του συστήματος για να επιλύσετε αυτό το θέμα."
 
+#, c-format
+msgid ""
+"Signature file, %s, could not be copied from temporary file, %s. Contact "
+"your system administrator to resolve this issue."
+msgstr ""
+"Το αρχείο υπογραφής, %s, δεν ήταν δυνατόν να αντιγραφεί από το προσωρινό "
+"αρχείο %s. Επικοινωνήστε με τον διαχειριστή του συστήματος για να επιλύσετε "
+"αυτό το θέμα."
+
 msgid ""
 "You need to have php4 installed with the multibyte string function enabled "
-"(using configure option --with-mbstring)."
+"(using configure option --enable-mbstring)."
 msgstr ""
-"Πρέπει να έχετε εγκαταστήσει php4 με ενεργοποιημένη multibyte string "
-"function (χρήση επιλογής ρυθμίσεων --with-mbstring)"
+"Πρέπει να έχετε εγκαταστήσει php4 με ενεργοποιημένες τις λειτουργίες "
+"multibyte string (χρήση επιλογής ρυθμίσεων --with-mbstring)"
 
 msgid "ERROR : No available imapstream."
 msgstr "ΣΦΑΛΜΑ : Μη διαθέσιμο imapstream."
+
+msgid "ERROR : Connection dropped by imap-server."
+msgstr "ΣΦΑΛΜΑ : Η σύνδεση διακόπηκε από τον εξυπηρετητή imap."
 
 msgid "ERROR : Could not complete request."
 msgstr "ΣΦΑΛΜΑ: Δεν ήταν δυνατό να ολοκληρωθεί το αίτημα."
@@ -1058,6 +1138,12 @@ msgstr "ΣΦΑΛΜΑ: Κακό η κακώς διαμορφωμένο."
 
 msgid "Server responded: "
 msgstr "Απόκριση του εξυπηρετητή:"
+
+msgid "ERROR : Imap server closed the connection."
+msgstr "ΣΦΑΛΜΑ : Ο Imap εξυπηρετητής έκλεισε τη σύνδεση."
+
+msgid "ERROR : Unknown imap response."
+msgstr "ΣΦΑΛΜΑ : Άγνωστη Απόκριση imap."
 
 #, c-format
 msgid "Error connecting to IMAP server: %s."
@@ -1087,20 +1173,26 @@ msgstr ""
 "Αφαιρέστε τα μη απαραίτητα μηνύματα από τον φάκελο σας και ξεκινήστε με τον "
 "φάκελο Διαγραμμένα."
 
-msgid "Unknown response from IMAP server: "
-msgstr "Άγνωστη απόκριση από τον εξυπηρετητή IMAP: "
-
-msgid "Unknown message number in reply from server: "
-msgstr "Άγνωστος αριθμός μηνυμάτων στην απόκριση από τον εξυπηρετητή: "
-
 msgid "(no subject)"
 msgstr "(κανένα θέμα)"
 
 msgid "Unknown Sender"
 msgstr "Άγνωστος Αποστολέας"
 
-msgid "(unknown sender)"
-msgstr "(άγνωστος αποστολέας)"
+msgid "Unknown response from IMAP server: "
+msgstr "Άγνωστη απόκριση από τον εξυπηρετητή IMAP: "
+
+msgid "The server couldn't find the message you requested."
+msgstr "Ο εξυπηρετητής δε μπόρεσε να βρει το μήνυμα που ζητήσατε."
+
+msgid ""
+"Most probably your message list was out of date and the message has been "
+"moved away or deleted (perhaps by another program accessing the same "
+"mailbox)."
+msgstr ""
+"Πιθανόν η λίστα μηνυμάτων σας ήταν παλιά και το μήνυμα στο μεταξύ "
+"μετακινήθηκε ή διαγράφηκε (ίσως από κάποιο άλλο πρόγραμμα που είχε πρόσβαση "
+"στον ίδιο φάκελο)."
 
 msgid "Unknown date"
 msgstr "Άγνωστη ημερομηνία"
@@ -1346,6 +1438,9 @@ msgstr "Ενεργοποίηση Επιλογέα Σελίδων"
 msgid "Maximum Number of Pages to Show"
 msgstr "Μέγιστος Αριθμός Σελίδων για Εμφάνιση"
 
+msgid "Always Show Full Date"
+msgstr "Πάντοτε Εμφάνιση ολόκληρης της Ημερομηνίας"
+
 msgid "Message Display and Composition"
 msgstr "Εμφάνιση Μηνύματος και Συγγραφής"
 
@@ -1490,7 +1585,7 @@ msgstr "Μόνο όσα δεν έχουν Κοιταχτεί"
 msgid "Unseen and Total"
 msgstr "Όσα δεν έχουν κοιταχτεί και Συνολικά"
 
-msgid "Enable Collapsable Folders"
+msgid "Enable Collapsible Folders"
 msgstr "Ενεργοποίηση Πτυσσόμενων Φακέλων"
 
 msgid "Enable Cumulative Unread Message Notification"
@@ -1977,8 +2072,8 @@ msgstr "0 λεπτά"
 msgid "15 min."
 msgstr "15 λεπτά"
 
-msgid "35 min."
-msgstr "35 λεπτά"
+msgid "30 min."
+msgstr "30 λεπτά"
 
 msgid "45 min."
 msgstr "45 λεπτά"
@@ -2070,67 +2165,6 @@ msgstr "ΕΜΠΟΡΙΚΗ - RBL+ Εγγραφές  OpenRelay."
 
 msgid "COMMERCIAL - RBL+ Dial-up entries."
 msgstr "ΕΜΠΟΡΙΚΗ  - RBL+ Εγγραφές Dial-up."
-
-msgid ""
-"FREE - Osirusoft Relays - Osirusofts list of verified open relays. Seems to "
-"include servers used by abuse@uunet.net auto-replies too."
-msgstr ""
-"ΔΩΡΕΑΝ- Osirusoft Relays - Η λίστα των διαπιστωμένων ανοικτών αναμεταδόσεων "
-"Osirusoft . Φαίνεται να περιλαμβάνει εξυπηρετητές που χρησιμοποιούνται και "
-"από το abuse@uunet.net auto-replies."
-
-msgid "FREE - Osirusoft Dialups - Osirusofts Dialup Spam Source list."
-msgstr ""
-"ΔΩΡΕΑΝ - Osirusoft Dialups - Η λίστα κακόβουλου ηλεκτρονικού ταχυδρομείου "
-"dialup πρόσβασης Osirusoft."
-
-msgid ""
-"FREE - Osirusoft Confirmed Spam Source - Sites that continually spam and "
-"have been manually added after multiple nominations. Use with caution. Seems "
-"to catch abuse auto-replies from some ISPs."
-msgstr ""
-"ΔΩΡΕΑΝ - Πηγή Επιβεβαιωμένης Κακόβουλης Αλληλογραφίας Osirusoft -  Κόμβοι "
-"που συνεχώς στέλνουν κακόβουλη αλληλογραφία και έχουν προστεθεί με το χέρι "
-"μετά από πολλαπλές συστάσεις. Χρησιμοποιήστε με προσοχή. Φαίνεται να πιάνει "
-"κατάχρηση αυτόματης-απάντησης από μερικούς παροχείς πρόσβασης (ISPs)."
-
-msgid ""
-"FREE - Osirusoft Smart Hosts - List of hosts that are secure but relay for "
-"other mail servers that are not secure."
-msgstr ""
-"ΔΩΡΕΑΝ - Osirusoft Smart Hosts - Λίστες εξυπηρετητών που είναι ασφαλείς αλλά "
-"αναδιανέμουν προς άλλους εξυπηρετητές ηλεκτρονικού ταχυδρομείου που δεν "
-"είναι ασφαλείς."
-
-msgid ""
-"FREE - Osirusoft Spamware Developers - It is believed that these are IP "
-"ranges of companies that are known to produce spam software. Seems to catch "
-"abuse auto-replies from some ISPs."
-msgstr ""
-"ΔΩΡΕΑΝ - Osirusoft Spamware Developers - Πιστεύεται ότι αυτές είναι περιοχές "
-"διευθύνσεων IP από εταιρείες που είναι γνωστές ότι παράγουν κακόβουλο "
-"λογισμικό.  Φαίνεται να πιάνει κατάχρηση αυτόματης-απάντησης από μερικούς "
-"παροχείς πρόσβασης (ISPs)."
-
-msgid ""
-"FREE - Osirusoft Unconfirmed OptIn Servers - List of listservers that opt "
-"users in without confirmation."
-msgstr ""
-"ΔΩΡΕΑΝ - Osirusoft Unconfirmed OptIn Servers - Λίστα εξυπηρετητών με λίστες "
-"ηλεκτρονικού ταχυδρομείου που επιτρέπουν πρόσβαση στους χρήστες χωρίς "
-"επιβεβαίωση."
-
-msgid ""
-"FREE - Osirusoft Insecure formmail.cgi scripts - List of insecure formmail."
-"cgi scripts. (planned)."
-msgstr ""
-"ΔΩΡΕΑΝ - Osirusoft Μη-ασφαλή formmail.cgi scripts - Λίστα μη-ασφαλών  "
-"formmail.cgi scripts. (προγραμματισμένο)."
-
-msgid "FREE - Osirusoft Open Proxy Servers - List of Open Proxy Servers."
-msgstr ""
-"ΔΩΡΕΑΝ - Osirusoft Ανοιχτοί Proxy Εξυπηρετητές - Λίστα Ανοιχτών Proxy "
-"Εξυπηρετητών."
 
 msgid ""
 "FREE - ORDB was born when ORBS went off the air. It seems to have fewer "
@@ -2316,9 +2350,6 @@ msgstr "Κεφαλίδα"
 
 msgid "Contains:"
 msgstr "Περιέχει:"
-
-msgid "Down"
-msgstr "Κάτω"
 
 #, c-format
 msgid "If <b>%s</b> contains <b>%s</b> then move to <b>%s</b>"
@@ -2669,7 +2700,7 @@ msgid ""
 "encryption anyway. Additionally, the encryption that we do to save it on the "
 "server can be undone by a hacker reading the source to this file."
 msgstr ""
-"Πρέπει να γνωρίζεται ότι η κρυπτογράφηση που χρησιμοποιείται για να "
+"Πρέπει να γνωρίζετε ότι η κρυπτογράφηση που χρησιμοποιείται για να "
 "αποθηκευτεί ο κωδικός σας δεν είναι τελείως ασφαλής. Ωστόσο, αν "
 "χρησιμοποιείτε pop, έτσι και αλλιώς δεν υπάρχει κρυπτογράφηση. Επιπλέον, η "
 "κρυπτογράφηση που κάνουμε για να τον αποθηκεύσουμε στον εξυπηρετητή μπορεί "
@@ -2718,7 +2749,7 @@ msgid "Modify"
 msgstr "Προσαρμογή"
 
 msgid "No-one server in use. Try to add."
-msgstr "Κανένας εξυπηρετητής σε χρήση. Προσπάθεια προσθήκης."
+msgstr "Κανένας εξυπηρετητής σε χρήση. Προσπαθήστε να προσθέσετε έναν."
 
 msgid "Fetching Servers"
 msgstr "Fetching Servers"
@@ -2734,9 +2765,6 @@ msgstr "Επιβεβαίωση διαγραφής επιλεγμένου εξυπηρετητή;"
 
 msgid "Confirm Delete"
 msgstr "Επιβεβαίωση Διαγραφής"
-
-msgid "Mofify a Server"
-msgstr "Τροποποίησε Εξυπηρετητή"
 
 msgid "Undefined Function"
 msgstr "Μη ορισμένη Λειτουργία"
@@ -2764,9 +2792,6 @@ msgstr ""
 "γραμματοκιβώτιο pop3 στον λογαριασμό σας σε αυτόν τον εξυπηρετητή."
 
 msgid "Message Details"
-msgstr "Λεπτομέρειες Μηνύματος"
-
-msgid "Message details"
 msgstr "Λεπτομέρειες Μηνύματος"
 
 msgid "Close Window"
@@ -2834,16 +2859,11 @@ msgstr ""
 
 msgid ""
 "Select from the list of <b>server files</b> the media file to play when new "
-"mail arrives.  Selecting <b>local media</b> will play the file specified in "
-"the <b>local media file</b> box to play from the local computer.  If no file "
-"is specified, the system will use a default from the server."
+"mail arrives.  If no file is specified, \"(none)\", no sound will be used."
 msgstr ""
 "Επέλεξε από την λίστα των <b>αρχείων εξυπηρετητή</b> το αρχείο πολυμέσων που "
-"θα εκτελεστεί όταν καταφθάνει νέο ταχυδρομείο.  Επιλέγοντας <b>τοπικά "
-"πολυμέσα</b> θα εκτελέσει το αρχείο που καθορίζεται στο κουτί<b>αρχείο "
-"τοπικών πολυμέσων</b> για να εκτελεστεί από τον τοπικό υπολογιστή.  Αν δεν "
-"έχει ορισθεί κάποιο αρχείο, το σύστημα θα χρησιμοποιήσει ένα εξ ορισμού από "
-"τον εξυπηρετητή."
+"θα εκτελεστεί όταν καταφθάνει νέο ταχυδρομείο. Αν δεν έχει ορισθεί κάποιο "
+"αρχείο, \"(κανένα)\", δε θα χρησιμοποιηθεί κάποιος ήχος."
 
 msgid "Enable Media Playing"
 msgstr "Ενεργοποίηση Εκτέλεσης Πολυμέσων"
@@ -2866,14 +2886,11 @@ msgstr "Εμφάνιση παραθύρου με νέο ταχυδρομείο"
 msgid "Select server file:"
 msgstr "Επιλογή αρχείου εξυπηρετητή:"
 
-msgid "(local media)"
-msgstr "(τοπικά πολυμέσα)"
+msgid "(none)"
+msgstr "(κανένα)"
 
 msgid "Try"
 msgstr "Δοκιμή"
-
-msgid "Local Media File:"
-msgstr "Τοπικό Αρχείο Πολυμέσων"
 
 msgid "Current File:"
 msgstr "Τρέχον Αρχείο:"
@@ -2910,6 +2927,9 @@ msgstr "%s Νέο Μήνυμα"
 
 msgid "Test Sound"
 msgstr "Έλεγχος Ήχου"
+
+msgid "No sound specified"
+msgstr "Δεν έχει καθοριστεί ήχος"
 
 msgid "Loading the sound..."
 msgstr "Φόρτωμα ήχου..."
@@ -3355,35 +3375,38 @@ msgstr "Αποθήκευση Επιλογών Μετάφρασης"
 msgid "Your server options are as follows:"
 msgstr "Οι επιλογές του εξυπηρετητή σας έχουν ως εξής:"
 
-msgid ""
-"13 language pairs, maximum of 1000 characters translated, powered by Systran"
-msgstr "13 ζεύγη γλωσσών, μέγιστο μετάφρασης 1000 χαρακτήρων, από το Systran"
+msgid "Maximum of 1000 characters translated, powered by Systran"
+msgstr "Μέγιστο μετάφρασης 1000 χαρακτήρων, από το Systran"
 
-msgid ""
-"10 language pairs, maximum of 25 kilobytes translated, powered by Systran"
-msgstr "10 ζεύγη γλωσσών, μέγιστο μετάφρασης 25 kilobytes, από το Systran"
+#, c-format
+msgid "Number of supported language pairs: %s"
+msgstr "Αριθμός υποστηριζόμενων ζευγαριών γλωσσών: %s"
 
-msgid "12 language pairs, no known limits, powered by Systran"
-msgstr "12 ζεύγη γλωσσών, κανένας γνωστός περιορισμός, από το Systran"
+msgid "No known limits, powered by Systran"
+msgstr "Κανένας γνωστός περιορισμός, από το Systran"
 
-msgid ""
-"767 language pairs, no known limits, powered by Translation Experts's "
-"InterTran"
+msgid "No known limits, powered by Translation Experts's InterTran"
+msgstr "Kανένας γνωστός περιορισμός, από το InterTran των Translation Experts"
+
+#, c-format
+msgid "Number of supported languages: %s"
+msgstr "Αριθμός υποστηριζόμενων γλωσσών: %s"
+
+msgid "No known limits, powered by GPLTrans (free, open source)"
 msgstr ""
-"767 ζεύγη γλωσσών, κανένας γνωστός περιορισμός, από το Translation Experts's "
-"InterTran"
+"Κανένας γνωστός περιορισμός, από το GPLTrans (ελεύθερο, ανοικτός κώδικας)"
 
-msgid ""
-"8 language pairs, no known limits, powered by GPLTrans (free, open source)"
-msgstr ""
-"8 ζεύγη γλωσσών, κανένας γνωστός περιορισμός, από το GPLTrans (ελεύθερο, "
-"ανοικτός κώδικας)"
+msgid "Hellenic translations, no known limits, powered by Systran"
+msgstr "Ελληνικές μεταφράσεις, κανένας γνωστός περιορισμός, από το Systran"
+
+msgid "Russian translations, maximum of 500 characters translated"
+msgstr "Ρώσσικες μεταφράσεις, μέγιστο μετάφρασης 500 χαρακτήρων"
 
 msgid ""
 "You also decide if you want the translation box displayed, and where it will "
 "be located."
 msgstr ""
-"Επίσης αποφασίζετε αν θέλετε να εμφανίζεται το κουτί μετάφρασης, και που θα "
+"Επίσης αποφασίζετε αν θέλετε να εμφανίζεται το κουτί μετάφρασης, και πού θα "
 "είναι τοποθετημένο."
 
 msgid "Select your translator:"
@@ -3430,6 +3453,9 @@ msgstr "%s σε %s"
 msgid "English"
 msgstr "Αγγλικά"
 
+msgid "Chinese"
+msgstr "Κινέζικα"
+
 msgid "French"
 msgstr "Γαλλικά"
 
@@ -3438,6 +3464,12 @@ msgstr "Γερμανικά"
 
 msgid "Italian"
 msgstr "Ιταλικά"
+
+msgid "Japanese"
+msgstr "Ιαπωνικά"
+
+msgid "Korean"
+msgstr "Κορεάτικα"
 
 msgid "Portuguese"
 msgstr "Πορτογαλικά"
@@ -3484,9 +3516,6 @@ msgstr "Ουγγρική"
 msgid "Icelandic"
 msgstr "Ισλανδικά"
 
-msgid "Japanese"
-msgstr "Ιαπωνικά"
-
 msgid "Latin American Spanish"
 msgstr "Ισπανικά Λατινικής Αμερικής"
 
@@ -3520,115 +3549,82 @@ msgstr "Ινδονησιακά"
 msgid "Latin"
 msgstr "Λατινικά"
 
+msgid "to English"
+msgstr "σε Αγγλικά"
+
+msgid "from English"
+msgstr "από Αγγλικά"
+
+msgid "Interface language"
+msgstr "Γλώσσα διεπαφής"
+
+msgid "Translation direction"
+msgstr "Κατεύθυνση μετάφρασης"
+
 msgid "Delivery error report"
 msgstr "Αναφορά σφάλματος παράδοσης"
 
 msgid "Undelivered Message Headers"
 msgstr "Κεφαλίδες Μη-Απεσταλμένων Μηνυμάτων"
 
-#~ msgid "Viewing a message attachment"
-#~ msgstr "Βλέπετε ένα συνημμένο με μορφή μηνύματος"
-
-#~ msgid "Cc:"
-#~ msgstr "Αντίγραφο:"
-
-#~ msgid "Bcc:"
-#~ msgstr "2ο Αντίγραφο:"
-
-#~ msgid "<No subject>"
-#~ msgstr "<Χωρίς Θέμα>"
-
-#~ msgid "Enable Subtle Printer Friendly Link"
-#~ msgstr "Εμφάνιση Δεσμού Φιλικής Εκτύπωσης"
-
-#~ msgid "Enable request/confirm reading"
-#~ msgstr "Ενεργοποίηση απαίτησης/επιβεβαίωσης ανάγνωσης"
-
-#~ msgid "Use receive date for sort"
-#~ msgstr "Χρήση ημερομηνίας παραλαβής για ταξινόμηση"
-
-#~ msgid "There was an error contacting the mail server."
+#~ msgid ""
+#~ "FREE - Osirusoft Relays - Osirusofts list of verified open relays. Seems "
+#~ "to include servers used by abuse@uunet.net auto-replies too."
 #~ msgstr ""
-#~ "Παρουσιάστηκε σφάλμα στην επικοινωνία με τον εξυπηρετητή ταχυδρομείου."
+#~ "ΔΩΡΕΑΝ- Osirusoft Relays - Η λίστα των διαπιστωμένων ανοικτών "
+#~ "αναμεταδόσεων Osirusoft . Φαίνεται να περιλαμβάνει εξυπηρετητές που "
+#~ "χρησιμοποιούνται και από το abuse@uunet.net auto-replies."
 
-#~ msgid "Contact your administrator for help."
-#~ msgstr "Επικοινωνήστε με τον διαχειριστή του συστήματος για βοήθεια."
-
-#~ msgid "No Messages found"
-#~ msgstr "Δεν βρέθηκαν Μηνύματα"
-
-#~ msgid "Note Field Contains"
-#~ msgstr "Το Πεδίο Σημειώσεων Περιέχει"
-
-#~ msgid "Sun"
-#~ msgstr "Κυρ"
-
-#~ msgid "Mon"
-#~ msgstr "Δευ"
-
-#~ msgid "Tue"
-#~ msgstr "Τρι"
-
-#~ msgid "Wed"
-#~ msgstr "Τετ"
-
-#~ msgid "Thu"
-#~ msgstr "Πεμ"
-
-#~ msgid "Fri"
-#~ msgstr "Παρ"
-
-#~ msgid "Sat"
-#~ msgstr "Σαβ"
-
-#~ msgid "Jan"
-#~ msgstr "Ιαν"
-
-#~ msgid "Feb"
-#~ msgstr "Φεβ"
-
-#~ msgid "Mar"
-#~ msgstr "Μαρ"
-
-#~ msgid "Apr"
-#~ msgstr "Απρ"
-
-#~ msgid "Jun"
-#~ msgstr "Ιουν"
-
-#~ msgid "Jul"
-#~ msgstr "Ιουλ"
-
-#~ msgid "Aug"
-#~ msgstr "Αυγ"
-
-#~ msgid "Sep"
-#~ msgstr "Σεπ"
-
-#~ msgid "Oct"
-#~ msgstr "Οκτ"
-
-#~ msgid "Nov"
-#~ msgstr "Νοε"
-
-#~ msgid "Dec"
-#~ msgstr "Δεκ"
-
-#~ msgid "No To Address"
-#~ msgstr "Όχι Στη Διεύθυνση"
-
-#~ msgid "Found"
-#~ msgstr "Βρέθηκε"
-
-#~ msgid "messages"
-#~ msgstr "μηνύματα"
-
-#~ msgid "Error decoding mime structure.  Report this as a bug!"
+#~ msgid "FREE - Osirusoft Dialups - Osirusofts Dialup Spam Source list."
 #~ msgstr ""
-#~ "Σφάλμα στην αποκωδικοποίηση δομής mime. Να το αναφέρετε ως σφάλμα (bug)!"
+#~ "ΔΩΡΕΑΝ - Osirusoft Dialups - Η λίστα κακόβουλου ηλεκτρονικού ταχυδρομείου "
+#~ "dialup πρόσβασης Osirusoft."
 
-#~ msgid "l, F d Y"
-#~ msgstr "l, F d Y"
+#~ msgid ""
+#~ "FREE - Osirusoft Confirmed Spam Source - Sites that continually spam and "
+#~ "have been manually added after multiple nominations. Use with caution. "
+#~ "Seems to catch abuse auto-replies from some ISPs."
+#~ msgstr ""
+#~ "ΔΩΡΕΑΝ - Πηγή Επιβεβαιωμένης Κακόβουλης Αλληλογραφίας Osirusoft -  Κόμβοι "
+#~ "που συνεχώς στέλνουν κακόβουλη αλληλογραφία και έχουν προστεθεί με το "
+#~ "χέρι μετά από πολλαπλές συστάσεις. Χρησιμοποιήστε με προσοχή. Φαίνεται να "
+#~ "πιάνει κατάχρηση αυτόματης-απάντησης από μερικούς παροχείς πρόσβασης "
+#~ "(ISPs)."
 
-#~ msgid "Authenticated SMTP"
-#~ msgstr "SMTP με Έλεγχο Αυθεντικότητας"
+#~ msgid ""
+#~ "FREE - Osirusoft Smart Hosts - List of hosts that are secure but relay "
+#~ "for other mail servers that are not secure."
+#~ msgstr ""
+#~ "ΔΩΡΕΑΝ - Osirusoft Smart Hosts - Λίστες εξυπηρετητών που είναι ασφαλείς "
+#~ "αλλά αναδιανέμουν προς άλλους εξυπηρετητές ηλεκτρονικού ταχυδρομείου που "
+#~ "δεν είναι ασφαλείς."
+
+#~ msgid ""
+#~ "FREE - Osirusoft Spamware Developers - It is believed that these are IP "
+#~ "ranges of companies that are known to produce spam software. Seems to "
+#~ "catch abuse auto-replies from some ISPs."
+#~ msgstr ""
+#~ "ΔΩΡΕΑΝ - Osirusoft Spamware Developers - Πιστεύεται ότι αυτές είναι "
+#~ "περιοχές διευθύνσεων IP από εταιρείες που είναι γνωστές ότι παράγουν "
+#~ "κακόβουλο λογισμικό.  Φαίνεται να πιάνει κατάχρηση αυτόματης-απάντησης "
+#~ "από μερικούς παροχείς πρόσβασης (ISPs)."
+
+#~ msgid ""
+#~ "FREE - Osirusoft Unconfirmed OptIn Servers - List of listservers that opt "
+#~ "users in without confirmation."
+#~ msgstr ""
+#~ "ΔΩΡΕΑΝ - Osirusoft Unconfirmed OptIn Servers - Λίστα εξυπηρετητών με "
+#~ "λίστες ηλεκτρονικού ταχυδρομείου που επιτρέπουν πρόσβαση στους χρήστες "
+#~ "χωρίς επιβεβαίωση."
+
+#~ msgid ""
+#~ "FREE - Osirusoft Insecure formmail.cgi scripts - List of insecure "
+#~ "formmail.cgi scripts. (planned)."
+#~ msgstr ""
+#~ "ΔΩΡΕΑΝ - Osirusoft Μη-ασφαλή formmail.cgi scripts - Λίστα μη-ασφαλών  "
+#~ "formmail.cgi scripts. (προγραμματισμένο)."
+
+#~ msgid "FREE - Osirusoft Open Proxy Servers - List of Open Proxy Servers."
+#~ msgstr ""
+#~ "ΔΩΡΕΑΝ - Osirusoft Ανοιχτοί Proxy Εξυπηρετητές - Λίστα Ανοιχτών Proxy "
+#~ "Εξυπηρετητών."

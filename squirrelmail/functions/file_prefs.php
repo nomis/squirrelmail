@@ -131,7 +131,7 @@ function savePrefValues($data_dir, $username) {
         exit;
     }
     @unlink($filename . '.tmp');
-    chmod($filename, 0600);
+    @chmod($filename, 0600);
     sqsession_register($prefs_cache , 'prefs_cache');
 }
 
@@ -182,7 +182,10 @@ function checkForPrefs($data_dir, $username, $filename = '') {
     /* Then, check if the file exists. */
     if (!@file_exists($filename) ) {
         /* First, check the $data_dir for the default preference file. */
-        $default_pref = $data_dir . '/default_pref';
+        if(substr($data_dir,-1) != '/') {
+            $data_dir .= '/';
+        }
+        $default_pref = $data_dir . 'default_pref';
 
         /* If it is not there, check the internal data directory. */
         if (!@file_exists($default_pref)) {
@@ -233,7 +236,7 @@ function setSig($data_dir, $username, $number, $value) {
        exit;
     }
     @unlink($filename . '.tmp');
-    chmod($filename, 0600);
+    @chmod($filename, 0600);
 
 }
 

@@ -26,16 +26,6 @@ require_once(SM_PATH . 'functions/plugin.php');
 require_once(SM_PATH . 'functions/constants.php');
 require_once(SM_PATH . 'functions/page_header.php');
 
-// Remove slashes if PHP added them
-sqgetGlobalVar('REQUEST_METHOD', $REQUEST_METHOD, SQ_SERVER);
-if (get_magic_quotes_gpc()) {
-    if ($REQUEST_METHOD == 'POST') {
-        RemoveSlashes($_POST);
-    } else if ($REQUEST_METHOD == 'GET') {
-        RemoveSlashes($_GET);
-    }
-}
-
 /* Before starting the session, the base URI must be known. Assuming */
 /* that this file is in the src/ subdirectory (or something).        */
 if (!function_exists('sqm_baseuri')){
@@ -47,7 +37,7 @@ header('Pragma: no-cache');
 $location = get_location();
 
 session_set_cookie_params (0, $base_uri);
-session_start();
+sqsession_is_active();
 
 sqsession_unregister ('user_is_logged_in');
 sqsession_register ($base_uri, 'base_uri');

@@ -1,22 +1,22 @@
 <chapter>
    <title>
-      Daşniausiai uşduodami klausimai
+      DaÅ¾niausiai uÅ¾duodami klausimai
    </title>   
    <summary>
-      Kartais iğkyla klausimø, kuriuos jau uşdavë daug kas prieğ tai.
-      Èia pateikiama bent dalis atsakymø á tokius klausimus.
+      Kartais iÅ¡kyla klausimÅ³, kuriuos jau uÅ¾davÄ— daug kas prieÅ¡ tai.
+      ÄŒia pateikiama bent dalis atsakymÅ³ Ä¯ tokius klausimus.
    </summary>
 </chapter>
 
 <section>
    <title>
-      Ar galima átraukti kelis adresus iğ adresø knygos?
+      Ar galima Ä¯traukti kelis adresus iÅ¡ adresÅ³ knygos?
    </title>
    <description>
       <p>
-      Taip. Adresø knyga pateikia visø adresø, atitinkanèiø paieğkos kriterijus,
-      sàrağà. Esant 10 vardø gali bûti pasirinkta bet kokia <B>Kam:</B> ar 
-      <B>CC:</B> laukø kombinacija. Visi pasirinkti adresai bus sudëlioti á
+      Taip. AdresÅ³ knyga pateikia visÅ³ adresÅ³, atitinkanÄiÅ³ paieÅ¡kos kriterijus,
+      sÄ…raÅ¡Ä…. Esant 10 vardÅ³ gali bÅ«ti pasirinkta bet kokia <B>Kam:</B> ar 
+      <B>CC:</B> laukÅ³ kombinacija. Visi pasirinkti adresai bus sudÄ—lioti Ä¯
       atitinkamus laukus.
       </p>
    </description>
@@ -24,26 +24,26 @@
 
 <section>
    <title>
-      Ar galima átraukti á adresø knygà adresus iğ atëjusiø laiğkø?
+      Ar galima Ä¯traukti Ä¯ adresÅ³ knygÄ… adresus iÅ¡ atÄ—jusiÅ³ laiÅ¡kÅ³?
    </title>
    <description>
       <p>
-      Ne. Ğiuo metu to padaryti neámanoma. Taèiau jûs galite nusikopijuoti 
-      adresà á savo kompiuterio atmintá ir paskui ákelti já á adresø knygà.
-      Paprastai tai galima padaryti naudojant değiná palës klaviğà. Per daug 
-      nenuliûskite.  SquirrelMail yra toliau vystomas ir ği galimybë gali bûti
-      sukurta vëlesnëse versijose.
+      Ne. Å iuo metu to padaryti neÄ¯manoma. TaÄiau jÅ«s galite nusikopijuoti 
+      adresÄ… Ä¯ savo kompiuterio atmintÄ¯ ir paskui Ä¯kelti jÄ¯ Ä¯ adresÅ³ knygÄ….
+      Paprastai tai galima padaryti naudojant deÅ¡inÄ¯ palÄ—s klaviÅ¡Ä…. Per daug 
+      nenuliÅ«skite.  SquirrelMail yra toliau vystomas ir Å¡i galimybÄ— gali bÅ«ti
+      sukurta vÄ—lesnÄ—se versijose.
       </p>
    </description>
 </section>
 
 <section>
    <title>
-      Kas sukûrë SquirrelMail? 
+      Kas sukÅ«rÄ— SquirrelMail? 
    </title>
    <description>
       <p>
-      Prie to prisidëjo nemaşai şmoniø. Pilnà sàrağà galite gauti apsilankæ
+      Prie to prisidÄ—jo nemaÅ¾ai Å¾moniÅ³. PilnÄ… sÄ…raÅ¡Ä… galite gauti apsilankÄ™
       adresu <a href="http://www.squirrelmail.org" target=_top>www.squirrelmail.org</a>.
       </p>
    </description>
@@ -51,42 +51,42 @@
 
 <section>
    <title>
-      Kas yra www pağtas?
+      Kas yra www paÅ¡tas?
    </title>
    <description>
       <p>
-      SquirrelMail atveju jûs gaunate galimybæ per IMAP protokolà şiûrëti á savo pağto 
-      dëşës turiná. Ir jums nereikia narstyti kaşkieno kompiuterio, kai jûs tik norite
-      pasitikrinti pağtà.
+      SquirrelMail atveju jÅ«s gaunate galimybÄ™ per IMAP protokolÄ… Å¾iÅ«rÄ—ti Ä¯ savo paÅ¡to 
+      dÄ—Å¾Ä—s turinÄ¯. Ir jums nereikia narstyti kaÅ¾kieno kompiuterio, kai jÅ«s tik norite
+      pasitikrinti paÅ¡tÄ….
       </p>
    </description>
 </section>
 
 <section>
    <title>
-      Kur galima naudotis ğiuo www pağtu?
+      Kur galima naudotis Å¡iuo www paÅ¡tu?
    </title>
    <description>
       <p>
-      Bet kur, kur galite rasti Interneto ryğá ir www narğyklæ. Galimybë pasinaudoti 
-      mobiliu ryğiu (WAP/WML) ğiuo metu nëra numatyta bei neplanuojama.
+      Bet kur, kur galite rasti Interneto ryÅ¡Ä¯ ir www narÅ¡yklÄ™. GalimybÄ— pasinaudoti 
+      mobiliu ryÅ¡iu (WAP/WML) Å¡iuo metu nÄ—ra numatyta bei neplanuojama.
       </p>
    </description>
 </section>
 
 <section>
    <title>
-      Kodël turëèiau naudoti www pağtà vietoj áprastos pağto programos?
+      KodÄ—l turÄ—Äiau naudoti www paÅ¡tÄ… vietoj Ä¯prastos paÅ¡to programos?
    </title>
    <description>
       <p>
-      Labai abejotina, kad www pağtas savo galimybëmis sugebës pralenkti 
-      áprastà pağto programà. Taèiau kas şino, mes juk gyvename pakankamai 
-      kintanèiame pasaulyje?  Bet kuriuo atveju bûnant kur nors toli nuo 
-      savo kompiuterio kartais bûna  naudinga turëti galimybæ patikrinti,
-      ar niekas neatsiuntë kokios nors svarbios şinutës. Ir jums nereikia 
+      Labai abejotina, kad www paÅ¡tas savo galimybÄ—mis sugebÄ—s pralenkti 
+      Ä¯prastÄ… paÅ¡to programÄ…. TaÄiau kas Å¾ino, mes juk gyvename pakankamai 
+      kintanÄiame pasaulyje?  Bet kuriuo atveju bÅ«nant kur nors toli nuo 
+      savo kompiuterio kartais bÅ«na  naudinga turÄ—ti galimybÄ™ patikrinti,
+      ar niekas neatsiuntÄ— kokios nors svarbios Å¾inutÄ—s. Ir jums nereikia 
       nieko darkyti draugo kompiuteryje. SquirrelMail yra tik priedas prie 
-      áprastos programos.
+      Ä¯prastos programos.
       </p>
    </description>
 </section>
@@ -97,11 +97,11 @@
    </title>
    <description>
       <p>
-      SquirrelMail naudoja IMAP protokolà, informacijà apie já galima rasti
+      SquirrelMail naudoja IMAP protokolÄ…, informacijÄ… apie jÄ¯ galima rasti
       <A HREF="http://imap.org"/>http://imap.org</A>. Programa naudoja 
-      nuosavas IMAP funkcijas, o ne tas kurios átaisytos á PHP4. Taèiau tai
-      paprastai rûpi tik tiems, kurie árengia sistemà, bet patikëkite, jiems
-      tikrai patinka tokios galimybës.
+      nuosavas IMAP funkcijas, o ne tas kurios Ä¯taisytos Ä¯ PHP4. TaÄiau tai
+      paprastai rÅ«pi tik tiems, kurie Ä¯rengia sistemÄ…, bet patikÄ—kite, jiems
+      tikrai patinka tokios galimybÄ—s.
       </p>
    </description>
 </section>

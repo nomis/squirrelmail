@@ -62,6 +62,7 @@ class SquirrelOption {
     var $size;
     var $comment;
     var $script;
+    var $post_script;
 
     /* The name of the Save Function for this option. */
     var $save_function;
@@ -72,7 +73,7 @@ class SquirrelOption {
     var $possible_values;
 
     function SquirrelOption
-    ($name, $caption, $type, $refresh_level, $possible_values = '') {
+    ($name, $caption, $type, $refresh_level, $initial_value = '', $possible_values = '') {
         /* Set the basic stuff. */
         $this->name = $name;
         $this->caption = $caption;
@@ -82,9 +83,12 @@ class SquirrelOption {
         $this->size = SMOPT_SIZE_MEDIUM;
         $this->comment = '';
         $this->script = '';
+        $this->post_script = '';
 
         /* Check for a current value. */
-        if (isset($GLOBALS[$name])) {
+        if (!empty($initial_value)) {
+            $this->value = $initial_value;
+        } else if (isset($GLOBALS[$name])) {
             $this->value = $GLOBALS[$name];
         } else {
             $this->value = '';
@@ -126,6 +130,11 @@ class SquirrelOption {
     /* Set the script for this option. */
     function setScript($script) {
         $this->script = $script;
+    }
+
+    /* Set the "post script" for this option. */
+    function setPostScript($post_script) {
+        $this->post_script = $post_script;
     }
 
     /* Set the save function for this option. */
@@ -171,9 +180,9 @@ class SquirrelOption {
                        . '</font>';
         }
 
-        /* Add the script for this option. */
-        $result .= $this->script;
-
+        /* Add the "post script" for this option. */
+        $result .= $this->post_script;
+        
         /* Now, return the created widget. */
         return ($result);
     }
@@ -197,13 +206,13 @@ class SquirrelOption {
                 $width = 25;
         }
 
-        $result = "<input name=\"new_$this->name\" value=\"$this->value\" size=\"$width\">";
+        $result = "<input name=\"new_$this->name\" value=\"$this->value\" size=\"$width\" $this->script>";
         return ($result);
     }
 
     function createWidget_StrList() {
         /* Begin the select tag. */
-        $result = "<select name=\"new_$this->name\">";
+        $result = "<select name=\"new_$this->name\" $this->script>";
 
         /* Add each possible value to the select list. */
         foreach ($this->possible_values as $real_value => $disp_value) {
@@ -231,7 +240,7 @@ class SquirrelOption {
         $selected = array(strtolower($this->value));
 
         /* Begin the select tag. */
-        $result = "<select name=\"new_$this->name\">";
+        $result = "<select name=\"new_$this->name\" $this->script>";
 
         /* Add each possible value to the select list. */
         foreach ($this->possible_values as $real_value => $disp_value) {
@@ -269,20 +278,39 @@ class SquirrelOption {
             default: $rows = 5; $cols =  50;
         }
         $result = "<textarea name=\"new_$this->name\" rows=\"$rows\" "
-                . "cols=\"$cols\">$this->value</textarea>";
+                . "cols=\"$cols\" $this->script>$this->value</textarea>";
         return ($result);
     }
 
     function createWidget_Integer() {
 
-        return $this->createWidget_String();
-
+        global $javascript_on;
+ 
+        // add onChange javascript handler to a regular string widget
+        // which will strip out all non-numeric chars
+        if ($javascript_on)
+           return preg_replace('/>/', ' onChange="origVal=this.value; newVal=\'\'; '
+                    . 'for (i=0;i<origVal.length;i++) { if (origVal.charAt(i)>=\'0\' '
+                    . '&& origVal.charAt(i)<=\'9\') newVal += origVal.charAt(i); } '
+                    . 'this.value=newVal;">', $this->createWidget_String());
+        else
+           return $this->createWidget_String();
     }
 
     function createWidget_Float() {
         
-        return $this->createWidget_String();
-
+        global $javascript_on;
+ 
+        // add onChange javascript handler to a regular string widget
+        // which will strip out all non-numeric (period also OK) chars 
+        if ($javascript_on)
+           return preg_replace('/>/', ' onChange="origVal=this.value; newVal=\'\'; '
+                    . 'for (i=0;i<origVal.length;i++) { if ((origVal.charAt(i)>=\'0\' '
+                    . '&& origVal.charAt(i)<=\'9\') || origVal.charAt(i)==\'.\') '
+                    . 'newVal += origVal.charAt(i); } this.value=newVal;">'
+                , $this->createWidget_String());
+        else
+           return $this->createWidget_String();
     }
 
     function createWidget_Boolean() {
@@ -297,12 +325,12 @@ class SquirrelOption {
 
         /* Build the yes choice. */
         $yes_option = '<input type="radio" name="new_' . $this->name
-                    . '" value="' . SMPREF_YES . "\"$yes_chk>&nbsp;"
+                    . '" value="' . SMPREF_YES . "\"$yes_chk $this->script>&nbsp;"
                     . _("Yes");
 
         /* Build the no choice. */
         $no_option = '<input type="radio" name="new_' . $this->name
-                   . '" value="' . SMPREF_NO . "\"$no_chk>&nbsp;"
+                   . '" value="' . SMPREF_NO . "\"$no_chk $this->script>&nbsp;"
                    . _("No");
 
         /* Build and return the combined "boolean widget". */
@@ -312,7 +340,7 @@ class SquirrelOption {
 
     function createWidget_Hidden() {
         $result = '<input type="hidden" name="new_' . $this->name
-                . '" value="' . $this->value . '">';
+                . '" value="' . $this->value . '" ' . $this->script . '>';
         return ($result);
     }
 
@@ -380,6 +408,7 @@ function create_option_groups($optgrps, $optvals) {
                     $optset['caption'],
                     $optset['type'],
                     $optset['refresh'],
+                    (isset($optset['initial_value']) ? $optset['initial_value'] : ''),
                     $optset['posvals']
                 );
             } else {
@@ -388,7 +417,8 @@ function create_option_groups($optgrps, $optvals) {
                     $optset['name'],
                     $optset['caption'],
                     $optset['type'],
-                    $optset['refresh']
+                    $optset['refresh'],
+                    (isset($optset['initial_value']) ? $optset['initial_value'] : '')
                 );
             }
 
@@ -410,6 +440,11 @@ function create_option_groups($optgrps, $optvals) {
             /* If provided, set the script for this option. */
             if (isset($optset['script'])) {
                 $next_option->setScript($optset['script']);
+            }
+
+            /* If provided, set the "post script" for this option. */
+            if (isset($optset['post_script'])) {
+                $next_option->setPostScript($optset['post_script']);
             }
 
             /* Add this option to the option array. */

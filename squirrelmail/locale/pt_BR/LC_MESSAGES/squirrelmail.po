@@ -1,15 +1,19 @@
 # Portuguese (Brazil) Squirrelmail Translation
 # Copyright (c) 1999-2002 The Squirrelmail Development Team
-# Marcos Tadeu <marcos@v2r.com.br>, 200208.
+# Marcos Tadeu <marcos@v2r.com.br>, 2003/08.
+# Gleydson Mazioli da Silva <gleydson@debian.org>, 2003/06
+# Marcos Tadeu <marcos@v2r.com.br>, 2002/08.
 # Fabio Mengue <fabio@unicamp.br>, 2002.
 # Henrique Moura <henriquemoura@hotmail.com>, 2000.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: $Id$\n"
-"POT-Creation-Date: 2003-01-25 09:07+0100\n"
-"PO-Revision-Date: 2003-01-31 00:12-0300\n"
-"Last-Translator: Marcos Tadeu <marcos@v2r.com.br>\n"
+"Project-Id-Version: $Id: squirrelmail.po,v 1.12.2.4 2003/09/15 12:35:53 "
+"tokul Exp $\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-09-20 11:04+0300\n"
+"PO-Revision-Date: 2003-09-14 13:31-0300\n"
+"Last-Translator: Marcos Tadeu von Lutzow Vidal <marcos@v2r.com.br>\n"
 "Language-Team: Portuguese (Brazilian) <squirrelmail-i18n@lists.sourceforge."
 "net>\n"
 "MIME-Version: 1.0\n"
@@ -38,13 +42,13 @@ msgid "To"
 msgstr "Para"
 
 msgid "Cc"
-msgstr ""
+msgstr "CC"
 
 msgid "Bcc"
-msgstr ""
+msgstr "Bcc"
 
 msgid "Use Addresses"
-msgstr "Use Endereços"
+msgstr "Usar Endereços"
 
 msgid "Address Book Search"
 msgstr "Pesquisa no Livro de Endereços"
@@ -66,10 +70,10 @@ msgstr "Listar todos"
 
 #, c-format
 msgid "Unable to list addresses from %s"
-msgstr "Impossível listar endereço para %s"
+msgstr "Impossível listar endereços de %s"
 
 msgid "Your search failed with the following error(s)"
-msgstr "Sua pesquisa falhou retornando o seguinte erro(s)"
+msgstr "Sua pesquisa falhou retornando o(s) seguinte(s) erro(s)"
 
 msgid "No persons matching your search was found"
 msgstr "Não foram encontradas pessoas para a pesquisa solicitada."
@@ -89,18 +93,18 @@ msgstr "Deve ser único"
 msgid "E-mail address"
 msgstr "Endereço de E-mail"
 
-msgid "First name"
-msgstr "Primeiro Nome"
-
 msgid "Last name"
 msgstr "Sobrenome"
+
+msgid "First name"
+msgstr "Primeiro Nome"
 
 msgid "Additional info"
 msgstr "Informação adicional"
 
 msgid "No personal address book is defined. Contact administrator."
 msgstr ""
-"Nenhum livro de endereços pessoais está definido. Contate o administrador."
+"Nenhum livro de endereços pessoais está definido. Contacte o administrador."
 
 msgid "You can only edit one address at the time"
 msgstr "Você pode editar somente um endereço por vez"
@@ -118,14 +122,23 @@ msgid "Add address"
 msgstr "Adicionar endereço"
 
 msgid "Edit selected"
-msgstr "Editar selecionados"
+msgstr "Editar os selecionados"
 
 msgid "Delete selected"
-msgstr "Apagar selecionados"
+msgstr "Apagar os selecionados"
 
 #, c-format
 msgid "Add to %s"
 msgstr "Adicionar a %s"
+
+msgid "said"
+msgstr "disse"
+
+msgid "quote"
+msgstr "quote"
+
+msgid "who"
+msgstr "quem"
 
 msgid "Subject"
 msgstr "Assunto"
@@ -210,15 +223,6 @@ msgstr "Guardar como rascunho"
 
 msgid "You have not filled in the \"To:\" field."
 msgstr "Você não preencheu o campo \"Para:\"."
-
-msgid "said"
-msgstr "disse"
-
-msgid "quote"
-msgstr "quote"
-
-msgid "who"
-msgstr "quem"
 
 msgid "Draft folder"
 msgstr "Pasta de Rascunhos"
@@ -367,9 +371,6 @@ msgstr "Ver mensagem"
 msgid "Download this as a file"
 msgstr "Baixar como um arquivo"
 
-msgid "Not available"
-msgstr "Não disponível"
-
 msgid "INBOX"
 msgstr "Entrada"
 
@@ -378,6 +379,9 @@ msgstr "Esvaziar"
 
 msgid "Last Refresh"
 msgstr "Última Atualização"
+
+msgid "refresh unseen/total info"
+msgstr "Atualizar \"não lidas\"/total"
 
 msgid "Save folder tree"
 msgstr "Salvar a árvore de diretórios (pastas)"
@@ -430,11 +434,17 @@ msgstr "Assunto"
 msgid "Edit"
 msgstr "Editar"
 
+msgid "Up"
+msgstr "Cima"
+
+msgid "Down"
+msgstr "Baixo"
+
 msgid "No highlighting is defined"
 msgstr "Nenhum destaque foi definido"
 
 msgid "Identifying name"
-msgstr "Identificando nome"
+msgstr "Identificando o nome"
 
 msgid "Color"
 msgstr "Cor"
@@ -528,7 +538,7 @@ msgid "Checkbox"
 msgstr "Checkbox"
 
 msgid "Flags"
-msgstr "Bandeiras"
+msgstr "Opções"
 
 msgid "Size"
 msgstr "Tamanho"
@@ -558,13 +568,13 @@ msgid "Personal Information"
 msgstr "Informações Pessoais"
 
 msgid "Display Preferences"
-msgstr "Preferências de Apresentação"
+msgstr "Preferências de Exibição"
 
 msgid "Folder Preferences"
 msgstr "Preferências de Pastas"
 
 msgid "Successfully Saved Options"
-msgstr "Opções gravadas com sucesso!"
+msgstr "Opções salvas com sucesso!"
 
 msgid "Refresh Folder List"
 msgstr "Atualizar lista de pastas"
@@ -608,13 +618,13 @@ msgstr ""
 "cabeçalhos em qualquer ordem que você queira."
 
 msgid "Message not printable"
-msgstr "Mensagem não pode ser impressa"
-
-msgid "Printer Friendly"
-msgstr "Versão para Impressão"
+msgstr "A mensagem não pode ser impressa"
 
 msgid "CC"
 msgstr "CC"
+
+msgid "Printer Friendly"
+msgstr "Versão para Impressão"
 
 msgid "Print"
 msgstr "Imprimir"
@@ -650,8 +660,8 @@ msgstr "Programa"
 msgid "Read receipt"
 msgstr "Recibo de leitura"
 
-msgid "send"
-msgstr "enviar"
+msgid "sent"
+msgstr "enviado"
 
 msgid "requested"
 msgstr "pedida"
@@ -681,9 +691,6 @@ msgstr "Editar mensagem como nova"
 msgid "View Message"
 msgstr "Ver mensagem"
 
-msgid "Up"
-msgstr "Cima"
-
 msgid "Forward"
 msgstr "Encaminhar"
 
@@ -706,7 +713,7 @@ msgid "You must be logged in to access this page."
 msgstr "Você necessita de um usuário e senha válidos para acessar esta página!"
 
 msgid "Folder:"
-msgstr "Pastas:"
+msgstr "Pasta:"
 
 msgid "edit"
 msgstr "editar"
@@ -727,7 +734,7 @@ msgid "forget"
 msgstr "esquecer"
 
 msgid "Current Search"
-msgstr "Pesquisa Corrente"
+msgstr "Pesquisa Atual"
 
 msgid "All Folders"
 msgstr "Todas as Pastas"
@@ -748,10 +755,10 @@ msgid "Sign Out"
 msgstr "Desconectar"
 
 msgid "You have been successfully signed out."
-msgstr "Você se desligou do sistema com sucesso."
+msgstr "Você saiu com sucesso do sistema."
 
 msgid "Click here to log back in."
-msgstr "Clique aqui para efetuar novamente o login."
+msgstr "Clique aqui para fazer novamente o login."
 
 msgid "Viewing a Business Card"
 msgstr "Visualizando um Cartão de Negócios"
@@ -823,7 +830,7 @@ msgid "No such file or directory"
 msgstr "Arquivo ou diretório não encontrado"
 
 msgid "Open failed"
-msgstr "A abertura do arquivo falhou"
+msgstr "Falha na abertura do arquivo"
 
 msgid "Can not modify global address book"
 msgstr "Não é possível modificar o Livro de Endereços Global"
@@ -835,7 +842,7 @@ msgid "Write failed"
 msgstr "A gravação falhou"
 
 msgid "Unable to update"
-msgstr "Inapto para atualizar"
+msgstr "Não é possível atualizar"
 
 msgid "Could not lock datafile"
 msgstr "Não foi possível travar o arquivo de dados"
@@ -861,7 +868,7 @@ msgid "Invalid input data"
 msgstr "Entrada de dados inválida"
 
 msgid "Name is missing"
-msgstr "Falta o Nome"
+msgstr "Está faltando o nome"
 
 msgid "E-mail address is missing"
 msgstr "Falta Endereço de Email"
@@ -895,6 +902,27 @@ msgstr "Sexta"
 
 msgid "Saturday"
 msgstr "Sábado"
+
+msgid "Sun"
+msgstr "Dom"
+
+msgid "Mon"
+msgstr "Seg"
+
+msgid "Tue"
+msgstr "Ter"
+
+msgid "Wed"
+msgstr "Qua"
+
+msgid "Thu"
+msgstr "Qui"
+
+msgid "Fri"
+msgstr "Sex"
+
+msgid "Sat"
+msgstr "Sab"
 
 msgid "January"
 msgstr "Janeiro"
@@ -932,26 +960,62 @@ msgstr "Novembro"
 msgid "December"
 msgstr "Dezembro"
 
+msgid "Jan"
+msgstr "Jan"
+
+msgid "Feb"
+msgstr "Fev"
+
+msgid "Mar"
+msgstr "Mar"
+
+msgid "Apr"
+msgstr "Abr"
+
+msgid "Ma&#121;"
+msgstr "Mai"
+
+msgid "Jun"
+msgstr "Jun"
+
+msgid "Jul"
+msgstr "Jul"
+
+msgid "Aug"
+msgstr "Ago"
+
+msgid "Sep"
+msgstr "Set"
+
+msgid "Oct"
+msgstr "Out"
+
+msgid "Nov"
+msgstr "Nov"
+
+msgid "Dec"
+msgstr "Dez"
+
 msgid "D, F j, Y g:i a"
-msgstr ""
+msgstr "D, F j, Y g:i a"
 
 msgid "D, F j, Y G:i"
-msgstr ""
-
-msgid "g:i a"
-msgstr ""
-
-msgid "G:i"
-msgstr ""
-
-msgid "D, g:i a"
-msgstr ""
-
-msgid "D, G:i"
-msgstr ""
+msgstr "D, F j, Y G:i"
 
 msgid "M j, Y"
-msgstr ""
+msgstr "M j, Y"
+
+msgid "g:i a"
+msgstr "g:i a"
+
+msgid "G:i"
+msgstr "G:i"
+
+msgid "D, g:i a"
+msgstr "D, g:i a"
+
+msgid "D, G:i"
+msgstr "D, G:i"
 
 #, c-format
 msgid "Preference database error (%s). Exiting abnormally"
@@ -995,6 +1059,14 @@ msgstr ""
 "administrador para ajuda."
 
 #, c-format
+msgid ""
+"Preference file, %s, could not be copied from temporary file, %s. Contact "
+"your system administrator to resolve this issue."
+msgstr ""
+"Arquivo de preferências, %s, não pode ser copiado do arquivo temporário, %s. "
+"Entre em contato com seu administrador para ajuda."
+
+#, c-format
 msgid "Error opening %s"
 msgstr "Erro ao abrir %s"
 
@@ -1005,7 +1077,7 @@ msgid "Please contact your system administrator and report this error."
 msgstr "Entre em contato com seu administrador e avise este erro."
 
 msgid "Could not create initial preference file!"
-msgstr "Não foi possível criar um arquivo de preferência inicial!"
+msgstr "Não foi possível criar um arquivo inicial de preferências!"
 
 #, c-format
 msgid "%s should be writable by user %s"
@@ -1027,15 +1099,26 @@ msgstr ""
 "Arquivo de assinatura %s não pode ser escrito. Entre em contato com seu "
 "administrador para ajuda."
 
+#, c-format
+msgid ""
+"Signature file, %s, could not be copied from temporary file, %s. Contact "
+"your system administrator to resolve this issue."
+msgstr ""
+"Arquivo de assinatura, %s, não pôde ser copiado do arquivo temporário, %s. "
+"Entre em contato com seu administrador para ajuda."
+
 msgid ""
 "You need to have php4 installed with the multibyte string function enabled "
-"(using configure option --with-mbstring)."
+"(using configure option --enable-mbstring)."
 msgstr ""
 "Você precisa ter php4 instalado com a função \"multibyte string\" habilitada "
 "(use a opção de configuração --with-mbstring na compilação)."
 
 msgid "ERROR : No available imapstream."
 msgstr "ERRO: \"stream\" imap não disponível"
+
+msgid "ERROR : Connection dropped by imap-server."
+msgstr "ERRO: Conexão derrubada pelo servidor imap."
 
 msgid "ERROR : Could not complete request."
 msgstr "Erro: pedido não pode ser completado."
@@ -1052,13 +1135,19 @@ msgstr "Erro: Pedido errado ou mal formado."
 msgid "Server responded: "
 msgstr "Resposta do servidor: "
 
+msgid "ERROR : Imap server closed the connection."
+msgstr "ERRO: Servidor imap fechou a conexão."
+
+msgid "ERROR : Unknown imap response."
+msgstr "ERRO: Resposta imap desconhecida"
+
 #, c-format
 msgid "Error connecting to IMAP server: %s."
 msgstr "Erro ao conectar com o servidor IMAP: %s."
 
 #, c-format
 msgid "Bad request: %s"
-msgstr "Pedido ruim: %s"
+msgstr "Pedido incorreto: %s"
 
 #, c-format
 msgid "Unknown error: %s"
@@ -1080,20 +1169,25 @@ msgstr ""
 "Remova mensagens desnecessárias de sua pasta e inicie com sua pasta de "
 "lixeira."
 
-msgid "Unknown response from IMAP server: "
-msgstr "Resposta desconhecida do servidor IMAP: "
-
-msgid "Unknown message number in reply from server: "
-msgstr "Número de mensagem desconhecido na resposta do servidor: "
-
 msgid "(no subject)"
 msgstr "(sem assunto)"
 
 msgid "Unknown Sender"
 msgstr "Remetente Desconhecido"
 
-msgid "(unknown sender)"
-msgstr "(remetente desconhecido)"
+msgid "Unknown response from IMAP server: "
+msgstr "Resposta desconhecida do servidor IMAP: "
+
+msgid "The server couldn't find the message you requested."
+msgstr "O servidor não pôde achar a mensagem que você requisitou."
+
+msgid ""
+"Most probably your message list was out of date and the message has been "
+"moved away or deleted (perhaps by another program accessing the same "
+"mailbox)."
+msgstr ""
+"Provavelmente sua lista de mensagens esta antiga e a mensagem foimovida ou "
+"deletada (talvez por outro programa acessando a mesta caixa de correio)"
 
 msgid "Unknown date"
 msgstr "Data desconhecida"
@@ -1131,7 +1225,7 @@ msgid "Expunge"
 msgstr "Remover"
 
 msgid "mailbox"
-msgstr ""
+msgstr "caixa de correio"
 
 msgid "Read"
 msgstr "Lidas"
@@ -1140,7 +1234,7 @@ msgid "Unread"
 msgstr "Não lidas"
 
 msgid "Unthread View"
-msgstr "Visão sem agrupar por assunto"
+msgstr "Visão normal"
 
 msgid "Thread View"
 msgstr "Agrupar por assunto"
@@ -1156,17 +1250,17 @@ msgstr "Marcar Todas"
 
 #, c-format
 msgid "Viewing Messages: <B>%s</B> to <B>%s</B> (%s total)"
-msgstr "Visualizando mensagens: <B>%s</B> a <B>%s</B> (%s total)"
+msgstr "Visualizando as mensagens: <B>%s</B> a <B>%s</B> (%s total)"
 
 #, c-format
 msgid "Viewing Message: <B>%s</B> (1 total)"
-msgstr "Visualizando mensagem: <B>%s</B> (1 total)"
+msgstr "Visualizando a mensagem: <B>%s</B> (1 no total)"
 
 msgid "Paginate"
 msgstr "Paginar"
 
 msgid "Show All"
-msgstr "Mostre todos"
+msgstr "Mostrar todas"
 
 msgid "SquirrelMail could not decode the bodystructure of the message"
 msgstr "o Squirrelmail não pôde decodificar a estrutura do corpo da mensagem"
@@ -1202,14 +1296,14 @@ msgid "download"
 msgstr "baixar"
 
 msgid "sec_remove_eng.png"
-msgstr ""
+msgstr "sec_remove_eng.png"
 
 #, c-format
 msgid "Option Type '%s' Not Found"
 msgstr "Opção tipo '%s' não encontrada"
 
 msgid "Current Folder"
-msgstr "Pasta Corrente"
+msgstr "Pasta Atual"
 
 msgid "Compose"
 msgstr "Escrever"
@@ -1251,7 +1345,7 @@ msgid "Command not implemented"
 msgstr "Comando não implementado"
 
 msgid "Bad sequence of commands"
-msgstr "Seqüência ruim de comandos"
+msgstr "Seqüência incorreta de comandos"
 
 msgid "Command parameter not implemented"
 msgstr "Parâmetro de comando não implementado"
@@ -1263,7 +1357,7 @@ msgid "Authentication mechanism is too weak"
 msgstr "O mecanismo de auteticação é muito fraco"
 
 msgid "Authentication failed"
-msgstr "Autenticação falhou"
+msgstr "Falha na autenticação"
 
 msgid "Encryption required for requested authentication mechanism"
 msgstr "É necessário criptografia para o mecanismo de autenticação"
@@ -1281,7 +1375,7 @@ msgid "Requested action not taken: mailbox name not allowed"
 msgstr "Ação requerida não foi feita: Nome de mailbox não permitida"
 
 msgid "Transaction failed"
-msgstr "transação falhou"
+msgstr "Falha na transação"
 
 msgid "Unknown response"
 msgstr "Resposta desconhecida"
@@ -1299,7 +1393,7 @@ msgid "Custom Stylesheet"
 msgstr "Estilo de tela personalizado"
 
 msgid "Language"
-msgstr "Língua"
+msgstr "Idioma"
 
 msgid "Use Javascript"
 msgstr "Usar JavaScript"
@@ -1328,6 +1422,9 @@ msgstr "Permitir seletor de página"
 msgid "Maximum Number of Pages to Show"
 msgstr "Número max. de páginas para mostrar"
 
+msgid "Always Show Full Date"
+msgstr "Sempre mostrar data completa"
+
 msgid "Message Display and Composition"
 msgstr "Composição e disposição da mensagem"
 
@@ -1338,7 +1435,7 @@ msgid "Size of Editor Window"
 msgstr "Tamanho da janela de edição"
 
 msgid "Location of Buttons when Composing"
-msgstr "Localização dos botões quando escrevendo"
+msgstr "Localização dos botões durante a composição"
 
 msgid "Before headers"
 msgstr "Antes do cabeçalho"
@@ -1359,10 +1456,10 @@ msgid "HTML"
 msgstr "HTML"
 
 msgid "Show HTML Version by Default"
-msgstr "Prefiro ver a versão em HTML"
+msgstr "Ver a versão HTML como padrão"
 
 msgid "Enable Forward as Attachment"
-msgstr "Habilitar mensagem reencaminhada como anexo"
+msgstr "Habilitar mensagem encaminhada como anexo"
 
 msgid "Include CCs when Forwarding Messages"
 msgstr "Incluir endereços do campo CC quando reenviar mensagens"
@@ -1382,7 +1479,7 @@ msgstr ""
 "Impressão&quot;"
 
 msgid "Enable Mail Delivery Notification"
-msgstr "habilitar notificação de entrega de mensagem"
+msgstr "Habilitar notificação de entrega de mensagem"
 
 msgid "Compose Messages in New Window"
 msgstr "Escrever mensagem em &quot;nova janela&quot;"
@@ -1397,7 +1494,7 @@ msgid "Append Signature before Reply/Forward Text"
 msgstr "Coloque a assinatura antes do texto da mensagem original"
 
 msgid "Enable Sort by of Receive Date"
-msgstr "Habilitar ordenação pela data de recepção"
+msgstr "Habilitar a ordenação pela data de recepção"
 
 msgid "Enable Thread Sort by References Header"
 msgstr "Habilitar agrupamento por assunto baseado nas referências do cabeçalho"
@@ -1409,25 +1506,25 @@ msgid "Folder Path"
 msgstr "Caminho da pasta"
 
 msgid "Do not use Trash"
-msgstr "Não use Lixeira"
+msgstr "Não usar a Lixeira"
 
 msgid "Trash Folder"
 msgstr "Lixeira"
 
 msgid "Do not use Sent"
-msgstr "Não use Enviadas"
+msgstr "Não usar Enviadas"
 
 msgid "Sent Folder"
 msgstr "Pasta de Enviadas"
 
 msgid "Do not use Drafts"
-msgstr "Não use Rascunhos"
+msgstr "Não usar Rascunhos"
 
 msgid "Draft Folder"
 msgstr "Pasta de Rascunhos"
 
 msgid "Folder List Options"
-msgstr "Opções das listas de pastas"
+msgstr "Opções da lista de pastas"
 
 msgid "Location of Folder List"
 msgstr "Localização da lista de pastas"
@@ -1474,7 +1571,7 @@ msgstr "Somente não lidas"
 msgid "Unseen and Total"
 msgstr "Não lidas e Total"
 
-msgid "Enable Collapsable Folders"
+msgid "Enable Collapsible Folders"
 msgstr "Permitir pastas com sub-pastas"
 
 msgid "Enable Cumulative Unread Message Notification"
@@ -1511,16 +1608,16 @@ msgid "Long: "
 msgstr "Tamanho:"
 
 msgid "Indented: "
-msgstr "Indentado"
+msgstr "Indentado: "
 
 msgid "Delimited: "
-msgstr "Delimitado"
+msgstr "Delimitado: "
 
 msgid "Name and Address Options"
 msgstr "Opções de Nome e Endereços"
 
 msgid "Email Address"
-msgstr "E-Mail"
+msgstr "Endereço de E-Mail"
 
 msgid "Edit Advanced Identities"
 msgstr "Editar Identidade Avançada"
@@ -1538,7 +1635,7 @@ msgid "Error opening timezone config, contact administrator."
 msgstr "Erro ao abrir configuração de \"timezone\". Contacte o administrador."
 
 msgid "Timezone Options"
-msgstr "Opções de Timezone"
+msgstr "Opções de Fuso Horário"
 
 msgid "Your current timezone"
 msgstr "Seu &quot;timezone&quot;"
@@ -1553,7 +1650,7 @@ msgid "No Citation"
 msgstr "Sem citação"
 
 msgid "AUTHOR Said"
-msgstr "Autor Disse"
+msgstr "O autor Disse"
 
 msgid "Quote Who XML"
 msgstr "Disse XML"
@@ -1613,7 +1710,7 @@ msgid "Organization Title"
 msgstr "Título da Organização"
 
 msgid "Signout Page"
-msgstr "Página de Desconectar"
+msgstr "Página de saída"
 
 msgid "Provider Link URI"
 msgstr "URI do Link para o provedor"
@@ -1622,10 +1719,10 @@ msgid "Provider Name"
 msgstr "Nome do provedor"
 
 msgid "Default Language"
-msgstr "Língua"
+msgstr "Idioma Padrão"
 
 msgid "Top Frame"
-msgstr ""
+msgstr "Frame Superior"
 
 msgid "Server Settings"
 msgstr "Configuração do servidor POP"
@@ -1676,7 +1773,7 @@ msgid "Use Sendmail Binary"
 msgstr "Usar o sendmail binário"
 
 msgid "Sendmail Path"
-msgstr "Caminho completo do sendmail"
+msgstr "Caminho do sendmail"
 
 msgid "SMTP Server Address"
 msgstr "Endereço do servidor SMTP"
@@ -1709,10 +1806,10 @@ msgid "Show Folder Prefix Option"
 msgstr "Mostrar opção de prefixo de pastas"
 
 msgid "By default, move to trash"
-msgstr "Mova automaticamente para a Lixeira"
+msgstr "Mover automaticamente para a Lixeira"
 
 msgid "By default, move to sent"
-msgstr "Mova automaticamente para \"Enviadas\""
+msgstr "Mover automaticamente para \"Enviadas\""
 
 msgid "By default, save as draft"
 msgstr "Normalmente, salve como rascunho"
@@ -1748,7 +1845,7 @@ msgid "Auto delete folders"
 msgstr "Auto-apagar pastas"
 
 msgid "Enable /NoSelect folder fix"
-msgstr "Permitir /NoSelect como reparo em pastas"
+msgstr "Permitir reparo de pastas /NoSelect"
 
 msgid "General Options"
 msgstr "Opções genéricas"
@@ -1847,10 +1944,10 @@ msgid "Default theme"
 msgstr "Tema padrão"
 
 msgid "Use index number of theme"
-msgstr "Use número de índice de tema"
+msgstr "Usar o número de índice de tema"
 
 msgid "Configuration Administrator"
-msgstr "Configuração de administrador"
+msgstr "Configurações de Administrador"
 
 msgid "Theme Name"
 msgstr "Nome do Tema"
@@ -1859,7 +1956,7 @@ msgid "Theme Path"
 msgstr "Caminho do Tema"
 
 msgid "Plugins"
-msgstr ""
+msgstr "Plugins"
 
 msgid "Change Settings"
 msgstr "Alterar configurações"
@@ -1888,16 +1985,16 @@ msgid "Go"
 msgstr "Ir"
 
 msgid "l, F j Y"
-msgstr ""
+msgstr "l, F j Y"
 
 msgid "ADD"
-msgstr "Adicione"
+msgstr "Adicionar"
 
 msgid "EDIT"
-msgstr "Edite"
+msgstr "Editar"
 
 msgid "DEL"
-msgstr "Apague"
+msgstr "Apagar"
 
 msgid "Start time:"
 msgstr "Hora inicial:"
@@ -1951,16 +2048,16 @@ msgid "Month View"
 msgstr "Visão mensal"
 
 msgid "0 min."
-msgstr ""
+msgstr "0 min."
 
 msgid "15 min."
-msgstr ""
+msgstr "15 min."
 
-msgid "35 min."
-msgstr ""
+msgid "30 min."
+msgstr "30 min."
 
 msgid "45 min."
-msgstr ""
+msgstr "45 min."
 
 msgid "1 hr."
 msgstr "1 h."
@@ -2046,62 +2143,6 @@ msgstr "COMERCIAL - lista negra RBL+ de relays abertos"
 
 msgid "COMMERCIAL - RBL+ Dial-up entries."
 msgstr "COMERCIAL - lista negra RBL+ com acesso discado"
-
-msgid ""
-"FREE - Osirusoft Relays - Osirusofts list of verified open relays. Seems to "
-"include servers used by abuse@uunet.net auto-replies too."
-msgstr ""
-"FREE - Osirusoft Relays - lista Osirusofts de relays abertos verificados. "
-"Parece incluir servidores usados pelas respostas automáticas de abuse@uunet."
-"net"
-
-msgid "FREE - Osirusoft Dialups - Osirusofts Dialup Spam Source list."
-msgstr ""
-"FREE - Osirusoft Dialups - Lista de acessos discados originadores de SPAM da "
-"Osirusofts"
-
-msgid ""
-"FREE - Osirusoft Confirmed Spam Source - Sites that continually spam and "
-"have been manually added after multiple nominations. Use with caution. Seems "
-"to catch abuse auto-replies from some ISPs."
-msgstr ""
-"FREE - Fontes confrmadas da Osirusoft - Locais que continuamente enviam SPAM "
-"e foram adcionados manualmente, após múiltiplas acusações. Use com cautela. "
-"Parece travar respostas automáticas de alguns provedores."
-
-msgid ""
-"FREE - Osirusoft Smart Hosts - List of hosts that are secure but relay for "
-"other mail servers that are not secure."
-msgstr ""
-"FREE - Osirusoft Smart Hosts - Lista de máquinas que são seguras, mas que "
-"fazem relay para outras máquina não seguras."
-
-msgid ""
-"FREE - Osirusoft Spamware Developers - It is believed that these are IP "
-"ranges of companies that are known to produce spam software. Seems to catch "
-"abuse auto-replies from some ISPs."
-msgstr ""
-"FREE - Osirusoft Spamware Developers - Acredita-se que contém IPs de "
-"companhias que produzem software para SPAM. Parece travar respostas "
-"automáticas de alguns provedores."
-
-msgid ""
-"FREE - Osirusoft Unconfirmed OptIn Servers - List of listservers that opt "
-"users in without confirmation."
-msgstr ""
-"FREE - Osirusoft Unconfirmed OptIn Servers - Lista de servidores de listas "
-"de email que permetem a entrada de usuários sem confirmação."
-
-msgid ""
-"FREE - Osirusoft Insecure formmail.cgi scripts - List of insecure formmail."
-"cgi scripts. (planned)."
-msgstr ""
-"FREE - Osirusoft Insecure formmail.cgi scripts - Lista de servidores com cgi "
-"de formulários considerados inseguros. (planejado)."
-
-msgid "FREE - Osirusoft Open Proxy Servers - List of Open Proxy Servers."
-msgstr ""
-"FREE - Osirusoft Open Proxy Servers - Lista de servidores proxy abertos."
 
 msgid ""
 "FREE - ORDB was born when ORBS went off the air. It seems to have fewer "
@@ -2266,9 +2307,6 @@ msgstr "Cabeçalho"
 msgid "Contains:"
 msgstr "Contém:"
 
-msgid "Down"
-msgstr "Baixo"
-
 #, c-format
 msgid "If <b>%s</b> contains <b>%s</b> then move to <b>%s</b>"
 msgstr "Se <b>%s</b> conter <b>%s</b> então mova para <b>%s</b>"
@@ -2290,8 +2328,8 @@ msgid ""
 "SPAM filters allow you to select from various DNS based blacklists to detect "
 "junk email in your INBOX and move it to another folder (like Trash)."
 msgstr ""
-"Filtros de SPAM permitem que você selecione listas negras com servidores que "
-"enviam mensagens de propagranda para sua Caixa de Entrada e envie essas "
+"Os filtros de SPAM lhe permitem que selecione listas negras com servidores "
+"que enviam mensagens de propagranda para sua Caixa de Entrada e envie essas "
 "mensagens automaticamente para outra pasta (como a Lixeira)."
 
 msgid "Spam Filtering"
@@ -2299,7 +2337,7 @@ msgstr "Filtro de SPAM"
 
 msgid "WARNING! Tell your admin to set the SpamFilters_YourHop variable"
 msgstr ""
-"AVISO! Informe seu administrador para setar a variável SpamFilters_YourHop"
+"AVISO! Informe seu administrador para ajustar a variável SpamFilters_YourHop"
 
 msgid "Move spam to:"
 msgstr "Mova o SPAM para:"
@@ -2452,10 +2490,10 @@ msgid "POP3 pass:"
 msgstr "Senha do POP3:"
 
 msgid "No password submitted"
-msgstr "Nenhuma senha foi submetida"
+msgstr "Nenhuma senha enviada"
 
 msgid "authentication failed "
-msgstr "autenticação falhou"
+msgstr "falha na autenticação"
 
 msgid "POP3 apop:"
 msgstr "POP3 apop:"
@@ -2521,7 +2559,7 @@ msgid "Remote POP server Fetching Mail"
 msgstr "Buscando Email em servidor POP remoto"
 
 msgid "Select Server:"
-msgstr "Selecione Servidor:"
+msgstr "Selecionar o Servidor:"
 
 msgid "Password for"
 msgstr "Senha para "
@@ -2533,7 +2571,7 @@ msgid "Fetching from "
 msgstr "Buscando de "
 
 msgid "Oops, "
-msgstr "Epa, "
+msgstr "Oops, "
 
 msgid "Opening IMAP server"
 msgstr "Abrindo servidor IMAP"
@@ -2542,7 +2580,7 @@ msgid "Opening POP server"
 msgstr "Abrindo servidor POP"
 
 msgid "Login Failed:"
-msgstr "Login falhou:"
+msgstr "Falha no Login:"
 
 msgid "Login OK: No new messages"
 msgstr "Login OK: Nenhuma mensagem nova"
@@ -2575,13 +2613,13 @@ msgid "Server error...Disconnect"
 msgstr "Erro no servidor... Desconectado"
 
 msgid "Reconnect from dead connection"
-msgstr "Reconectando de uma conexão morta"
+msgstr "Reconectando de uma conexão perdida"
 
 msgid "Saving UIDL"
 msgstr "Armazenando UIDL"
 
 msgid "Refetching message "
-msgstr "buscando novamente mensagem "
+msgstr "Buscando novamente a mensagem "
 
 msgid "Error Appending Message!"
 msgstr "Erro na construção da mensagem!"
@@ -2593,7 +2631,7 @@ msgid "Logging out from IMAP"
 msgstr "Saindo do servidor IMAP"
 
 msgid "Message appended to mailbox"
-msgstr "Mensagem adicionada à lista de Email"
+msgstr "Mensagem adicionada à caixa de mensagens"
 
 msgid "Message "
 msgstr "Mensagem "
@@ -2602,7 +2640,7 @@ msgid " deleted from Remote Server!"
 msgstr " eliminado(s) do servidor remoto!"
 
 msgid "Delete failed:"
-msgstr "Falhou Apagar:"
+msgstr "Falha ao Deletar:"
 
 msgid "Remote POP server settings"
 msgstr "Configuração do servidor POP remoto"
@@ -2640,7 +2678,7 @@ msgid "Username:"
 msgstr "Username:"
 
 msgid "Store in Folder:"
-msgstr "Gusrdar na Pasta:"
+msgstr "Guardar na Pasta:"
 
 msgid "Leave Mail on Server"
 msgstr "Deixar as mensagens no servidor"
@@ -2655,7 +2693,7 @@ msgid "Modify Server"
 msgstr "Modificar Servidor"
 
 msgid "Server Name:"
-msgstr "Nome Servidor:"
+msgstr "Nome do Servidor:"
 
 msgid "Modify"
 msgstr "Modificar"
@@ -2664,7 +2702,7 @@ msgid "No-one server in use. Try to add."
 msgstr "Nenhum servidor está em uso. Tente adicionar."
 
 msgid "Fetching Servers"
-msgstr "Buscando Servidores"
+msgstr "Buscando os Servidores"
 
 msgid "Confirm Deletion of a Server"
 msgstr "Confirme a eliminação do servidor"
@@ -2678,9 +2716,6 @@ msgstr "Confirma a eliminação do servidor selecionado?"
 msgid "Confirm Delete"
 msgstr "Apagar?"
 
-msgid "Mofify a Server"
-msgstr "Modificar um servidor"
-
 msgid "Undefined Function"
 msgstr "Função não definida"
 
@@ -2688,10 +2723,10 @@ msgid "Hey! Wath do You are looking for?"
 msgstr "O que você está procurando?"
 
 msgid "Fetch"
-msgstr "Busca (pop3)"
+msgstr "Buscar"
 
 msgid "Warning, "
-msgstr "Atenção, "
+msgstr "Alerta, "
 
 msgid "Mail Fetch Result:"
 msgstr "Resultados da busca de Email:"
@@ -2708,9 +2743,6 @@ msgstr ""
 
 msgid "Message Details"
 msgstr "Detalhes da Mensagem"
-
-msgid "Message details"
-msgstr "Detalhes da mensagem"
 
 msgid "Close Window"
 msgstr "Fechar janela"
@@ -2776,15 +2808,11 @@ msgstr ""
 
 msgid ""
 "Select from the list of <b>server files</b> the media file to play when new "
-"mail arrives.  Selecting <b>local media</b> will play the file specified in "
-"the <b>local media file</b> box to play from the local computer.  If no file "
-"is specified, the system will use a default from the server."
+"mail arrives.  If no file is specified, \"(none)\", no sound will be used."
 msgstr ""
-"Selecione da lista de <b>arquivos do servidor</b> o tipo de arquivo de mídia "
-"para ser reproduzido quando uma nova mensagem chegar. Selecionando <b>mídias "
-"locais</b> irá reproduzir o arquivo especificado na caixa do <b>arquivo de "
-"mídias locais</b> do computador local. Se nenhum arquivo for especificado, o "
-"sistema irá utilizar um padrão do servidor."
+"Selecione da lista de <b>arquivos do servidor</b> o arquivo para ser "
+"reproduzido quando uma nova mensagem chegar. Se nenhum arquivo for "
+"especificado, nenhum som será usado."
 
 msgid "Enable Media Playing"
 msgstr "Permitir a reprodução de mídia"
@@ -2793,7 +2821,7 @@ msgid "Check all boxes, not just INBOX"
 msgstr "Verificar todas as pastas, não apenas a Caixa de Entrada"
 
 msgid "Count only messages that are RECENT"
-msgstr "Contar apenas mensagens que são RECENTES"
+msgstr "Contar apenas mensagens RECENTES"
 
 msgid "Change title on supported browsers."
 msgstr "Altere o título em navegadores que suportem a opção."
@@ -2807,17 +2835,14 @@ msgstr "Mostre janela popup quando nova mensagem chegar"
 msgid "Select server file:"
 msgstr "Selecione o arquivo no servidor:"
 
-msgid "(local media)"
-msgstr "(mídia local)"
+msgid "(none)"
+msgstr "(nenhum)"
 
 msgid "Try"
 msgstr "Tente"
 
-msgid "Local Media File:"
-msgstr "Arquivo de mídia local"
-
 msgid "Current File:"
-msgstr "Arquivo corrente:"
+msgstr "Arquivo atual:"
 
 msgid "New Mail"
 msgstr "Nova mensagem"
@@ -2852,6 +2877,9 @@ msgstr "%s nova(s) mensagem(ens)"
 msgid "Test Sound"
 msgstr "Som de teste"
 
+msgid "No sound specified"
+msgstr "Nenhum som especificado"
+
 msgid "Loading the sound..."
 msgstr "Carregando o som..."
 
@@ -2874,7 +2902,7 @@ msgid "Base Sent Folder"
 msgstr "Pasta de Enviadas"
 
 msgid "Report as Spam"
-msgstr "Denuncie como SPAM"
+msgstr "Denunciar como SPAM"
 
 msgid "SpamCop - Spam Reporting"
 msgstr "SpamCop - Denúncia de Spam"
@@ -2885,7 +2913,7 @@ msgid ""
 "fast, really smart, and easy to use."
 msgstr ""
 "Ajude lutando na batalha contra emails não solicitados. O sistema SpamCople "
-"a mensagem e determina corretamente os endereços para onde enviar queixas.É "
+"a mensagem e determina corretamente os endereços para onde enviar queixas. É "
 "rápido, realmente esperto e fácil de usar."
 
 msgid "SpellChecker Options"
@@ -2905,7 +2933,7 @@ msgid "Back to &quot;SpellChecker Options&quot; page"
 msgstr "Voltar para a página de &quot;Opções do Corretor Ortográfico&quot;"
 
 msgid "ATTENTION:"
-msgstr "Atenção:"
+msgstr "ATENÇÃO:"
 
 msgid ""
 "SquirrelSpell was unable to decrypt your personal dictionary. This is most "
@@ -2966,7 +2994,7 @@ msgid "Spellcheck completed. Commit changes?"
 msgstr "Verificação ortográfica completada. Aplicar as modificações?"
 
 msgid "No changes were made."
-msgstr "Nenhuma mudança pedida."
+msgstr "Nenhuma mudança foi feita."
 
 msgid "Now saving your personal dictionary... Please wait."
 msgstr "Salvando seu dicionário pessoal... Aguarde."
@@ -3003,32 +3031,32 @@ msgid "Change ALL occurances of this word"
 msgstr "Altere Todas as ocorrências desta palavra"
 
 msgid "Change All"
-msgstr "Altere Todas"
+msgstr "Alterar Todas"
 
 msgid "Ignore this word"
-msgstr "Ignore essa palavra"
+msgstr "Ignorar essa palavra"
 
 msgid "Ignore"
-msgstr "Ignore"
+msgstr "Ignorar"
 
 msgid "Ignore ALL occurances this word"
-msgstr "Ignore todas as ocorrências desta palavra"
+msgstr "Ignorar todas as ocorrências desta palavra"
 
 msgid "Ignore All"
-msgstr "Ignore todas"
+msgstr "Ignorar todas"
 
 msgid "Add this word to your personal dictionary"
-msgstr "Adicionar essa palavra ao seu dicionário pessoal"
+msgstr "Adicionar essa palavra ao dicionário pessoal"
 
 msgid "Add to Dic"
 msgstr "Adic ao Dicion"
 
 msgid "Close and Commit"
-msgstr "Fechar e aplicar"
+msgstr "Fechar e salvar"
 
 msgid "The spellcheck is not finished. Really close and commit changes?"
 msgstr ""
-"O corretor ortográfico ainda não processou o documento todo. Deseja fechar e "
+"O corretor ortográfico ainda não processou todo o documento. Deseja fechar e "
 "aplicar as alterações?"
 
 msgid "Close and Cancel"
@@ -3036,7 +3064,7 @@ msgstr "Fechar e Cancelar"
 
 msgid "The spellcheck is not finished. Really close and discard changes?"
 msgstr ""
-"O corretor ortográfico ainda não processou o documento todo. Deseja fechar e "
+"O corretor ortográfico ainda não processou todo o documento. Deseja fechar e "
 "descartar as mudanças?"
 
 msgid "No errors found"
@@ -3057,7 +3085,7 @@ msgstr ""
 "verificação ortográfica."
 
 msgid "Close this Window"
-msgstr "Fechar janela"
+msgstr "Fechar esta janela"
 
 msgid ""
 "Your personal dictionary was re-encrypted successfully. Now return to the "
@@ -3080,7 +3108,7 @@ msgstr ""
 "para reiniciar o processo de verificação ortográfica."
 
 msgid "Dictionary re-encrypted"
-msgstr "Dicionário criptografado novamente"
+msgstr "Dicionário novamente criptografado"
 
 msgid ""
 "Your personal dictionary has been <strong>encrypted</strong> and is now "
@@ -3121,7 +3149,7 @@ msgid "Edit your Personal Dictionary"
 msgstr "Editar seu dicionário pessoal"
 
 msgid "Please make your selection first."
-msgstr "Por favor, faça sua escolha primeiro."
+msgstr "Por favor, faça primeiro sua escolha."
 
 msgid ""
 "This will encrypt your personal dictionary and store it in an encrypted "
@@ -3214,7 +3242,7 @@ msgid "No changes requested."
 msgstr "Nenhuma mudança pedida."
 
 msgid "Please wait, communicating with the server..."
-msgstr "Aguarde, comunicando com o servidor..."
+msgstr "Aguarde, se comunicando com o servidor..."
 
 msgid ""
 "Please choose which dictionary you would like to use to spellcheck this "
@@ -3262,7 +3290,7 @@ msgid "Please choose which options you wish to set up:"
 msgstr "Por favor, escolha as opções que deseja configurar:"
 
 msgid "Edit your personal dictionary"
-msgstr "Edite seu dicionário pessoal"
+msgstr "Editar seu dicionário pessoal"
 
 msgid "Set up international dictionaries"
 msgstr "Configurando dicionários internacionais"
@@ -3285,26 +3313,31 @@ msgstr "Opções de Tradução salvas"
 msgid "Your server options are as follows:"
 msgstr "Suas opções do servidor são essas:"
 
-msgid ""
-"13 language pairs, maximum of 1000 characters translated, powered by Systran"
-msgstr "13 pares de línguas, máximo de 1000 caracteres, powered by Systran"
+msgid "Maximum of 1000 characters translated, powered by Systran"
+msgstr "Máximo de 1000 caracteres traduzidos, powered by Systran"
 
-msgid ""
-"10 language pairs, maximum of 25 kilobytes translated, powered by Systran"
-msgstr "10 pares de línguas, máximo de 25KB traduzidos, powered by Systran"
+#, c-format
+msgid "Number of supported language pairs: %s"
+msgstr "Número de pares de idiomas suportados: %s"
 
-msgid "12 language pairs, no known limits, powered by Systran"
-msgstr "12 pares de línguas, sem limites, powered by Systran"
+msgid "No known limits, powered by Systran"
+msgstr "Sem limites, powered by Systran"
 
-msgid ""
-"767 language pairs, no known limits, powered by Translation Experts's "
-"InterTran"
-msgstr "767 pares de línguas, sem limites, powered by Translation Experts's "
+msgid "No known limits, powered by Translation Experts's InterTran"
+msgstr "Sem limites, powered by Translation Experts's InterTran"
 
-msgid ""
-"8 language pairs, no known limits, powered by GPLTrans (free, open source)"
-msgstr ""
-"8 pares de línguas, sem limites, powered by GPLTrans (gratuito, fonte aberta)"
+#, c-format
+msgid "Number of supported languages: %s"
+msgstr "Número de idiomas suportados: %s"
+
+msgid "No known limits, powered by GPLTrans (free, open source)"
+msgstr "Sem limites, powered by GPLTrans (gratuito, fonte aberta)"
+
+msgid "Hellenic translations, no known limits, powered by Systran"
+msgstr "Tradução do \"Hellenic\", sem limites, powered by Systran"
+
+msgid "Russian translations, maximum of 500 characters translated"
+msgstr "Tradução do Russo, máximo de 500 caracteres, powered by Systran"
 
 msgid ""
 "You also decide if you want the translation box displayed, and where it will "
@@ -3357,6 +3390,9 @@ msgstr "%s para %s"
 msgid "English"
 msgstr "Inglês"
 
+msgid "Chinese"
+msgstr "Chinês"
+
 msgid "French"
 msgstr "Francês"
 
@@ -3365,6 +3401,12 @@ msgstr "Alemão"
 
 msgid "Italian"
 msgstr "Italiano"
+
+msgid "Japanese"
+msgstr "Japonês"
+
+msgid "Korean"
+msgstr "Koreano"
 
 msgid "Portuguese"
 msgstr "Português"
@@ -3411,9 +3453,6 @@ msgstr "Húngaro"
 msgid "Icelandic"
 msgstr "Islandês"
 
-msgid "Japanese"
-msgstr "Japonês"
-
 msgid "Latin American Spanish"
 msgstr "Espanhol Latino Americano"
 
@@ -3447,11 +3486,107 @@ msgstr "Indonésio"
 msgid "Latin"
 msgstr "Latin"
 
+msgid "to English"
+msgstr "Para o Inglês"
+
+msgid "from English"
+msgstr "do Inglês"
+
+msgid "Interface language"
+msgstr "Idioma da interface"
+
+msgid "Translation direction"
+msgstr "Direção de Tradução"
+
 msgid "Delivery error report"
 msgstr "Relatório de erro de envio"
 
 msgid "Undelivered Message Headers"
 msgstr "Cabeçalho da mensagem não enviada"
+
+#~ msgid ""
+#~ "FREE - Osirusoft Relays - Osirusofts list of verified open relays. Seems "
+#~ "to include servers used by abuse@uunet.net auto-replies too."
+#~ msgstr ""
+#~ "FREE - Osirusoft Relays - lista Osirusofts de relays abertos verificados. "
+#~ "Parece incluir servidores usados pelas respostas automáticas de "
+#~ "abuse@uunet.net"
+
+#~ msgid "FREE - Osirusoft Dialups - Osirusofts Dialup Spam Source list."
+#~ msgstr ""
+#~ "FREE - Osirusoft Dialups - Lista de acessos discados originadores de SPAM "
+#~ "da Osirusofts"
+
+#~ msgid ""
+#~ "FREE - Osirusoft Confirmed Spam Source - Sites that continually spam and "
+#~ "have been manually added after multiple nominations. Use with caution. "
+#~ "Seems to catch abuse auto-replies from some ISPs."
+#~ msgstr ""
+#~ "FREE - Fontes confrmadas da Osirusoft - Locais que continuamente enviam "
+#~ "SPAM e foram adcionados manualmente, após múiltiplas acusações. Use com "
+#~ "cautela. Parece travar respostas automáticas de alguns provedores."
+
+#~ msgid ""
+#~ "FREE - Osirusoft Smart Hosts - List of hosts that are secure but relay "
+#~ "for other mail servers that are not secure."
+#~ msgstr ""
+#~ "FREE - Osirusoft Smart Hosts - Lista de máquinas que são seguras, mas que "
+#~ "fazem relay para outras máquina não seguras."
+
+#~ msgid ""
+#~ "FREE - Osirusoft Spamware Developers - It is believed that these are IP "
+#~ "ranges of companies that are known to produce spam software. Seems to "
+#~ "catch abuse auto-replies from some ISPs."
+#~ msgstr ""
+#~ "FREE - Osirusoft Spamware Developers - Acredita-se que contém IPs de "
+#~ "companhias que produzem software para SPAM. Parece travar respostas "
+#~ "automáticas de alguns provedores."
+
+#~ msgid ""
+#~ "FREE - Osirusoft Unconfirmed OptIn Servers - List of listservers that opt "
+#~ "users in without confirmation."
+#~ msgstr ""
+#~ "FREE - Osirusoft Unconfirmed OptIn Servers - Lista de servidores de "
+#~ "listas de email que permitem a entrada de usuários sem confirmação."
+
+#~ msgid ""
+#~ "FREE - Osirusoft Insecure formmail.cgi scripts - List of insecure "
+#~ "formmail.cgi scripts. (planned)."
+#~ msgstr ""
+#~ "FREE - Osirusoft Insecure formmail.cgi scripts - Lista de servidores com "
+#~ "cgi de formulários considerados inseguros. (planejado)."
+
+#~ msgid "FREE - Osirusoft Open Proxy Servers - List of Open Proxy Servers."
+#~ msgstr ""
+#~ "FREE - Osirusoft Open Proxy Servers - Lista de servidores proxy abertos."
+
+#~ msgid "Not available"
+#~ msgstr "Não disponível"
+
+#~ msgid "Unknown message number in reply from server: "
+#~ msgstr "Número de mensagem desconhecido na resposta do servidor: "
+
+#~ msgid "(unknown sender)"
+#~ msgstr "(remetente desconhecido)"
+
+#~ msgid "35 min."
+#~ msgstr "35 min."
+
+#~ msgid "Mofify a Server"
+#~ msgstr "Modificar um servidor"
+
+#~ msgid "Message details"
+#~ msgstr "Detalhes da mensagem"
+
+#~ msgid "(local media)"
+#~ msgstr "(mídia local)"
+
+#~ msgid "Local Media File:"
+#~ msgstr "Arquivo de mídia local"
+
+#~ msgid ""
+#~ "10 language pairs, maximum of 25 kilobytes translated, powered by Systran"
+#~ msgstr "10 pares de idiomas, máximo de 25KB traduzidos, powered by Systran"
 
 #~ msgid "Enable Subtle Printer Friendly Link"
 #~ msgstr "Habilitar o link para &quot;Versão para Impressão&quot;"
@@ -3526,7 +3661,7 @@ msgstr "Cabeçalho da mensagem não enviada"
 #~ msgstr "NOOP falhou. Servidor não segue a RFC 1939"
 
 #~ msgid "Notify:"
-#~ msgstr "Notifique:"
+#~ msgstr "Notificação:"
 
 #~ msgid "Don't Email Me"
 #~ msgstr "Não me envie email"

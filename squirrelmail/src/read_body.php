@@ -165,7 +165,7 @@ function SendMDN ( $mailbox, $passed_id, $sender, $message, $imapConnection) {
     }
     $rfc822_header->content_type = $content_type;
     $rfc822_header->to[] = $header->dnt;
-    $rfc822_header->subject = _("Read:") . ' ' . decodeHeader($header->subject);
+    $rfc822_header->subject = _("Read:") . ' ' . encodeHeader($header->subject);
 
 
     $reply_to = '';
@@ -202,8 +202,8 @@ function SendMDN ( $mailbox, $passed_id, $sender, $message, $imapConnection) {
     $now = getLongDateString( time() );
     set_my_charset();
     $body = _("Your message") . "\r\n\r\n" .
-            "\t" . _("To:") . ' ' . decodeHeader($to) . "\r\n" .
-            "\t" . _("Subject:") . ' ' . decodeHeader($header->subject) . "\r\n" .
+            "\t" . _("To:") . ' ' . decodeHeader($to,false,false) . "\r\n" .
+            "\t" . _("Subject:") . ' ' . decodeHeader($header->subject,false,false) . "\r\n" .
             "\t" . _("Sent:") . ' ' . $senton . "\r\n" .
             "\r\n" .
             sprintf( _("Was displayed on %s"), $now );
@@ -421,7 +421,7 @@ function formatEnvheader($mailbox, $passed_id, $passed_ent_id, $message,
         if ($mdn_user_support) {
             if ($header->dnt) {
                 if ($message->is_mdnsent) {
-                    $env[_("Read receipt")] = _("send");
+                    $env[_("Read receipt")] = _("sent");
                 } else {
                     $env[_("Read receipt")] = _("requested"); 
                     if (!(handleAsSent($mailbox) || 
@@ -505,10 +505,11 @@ function formatMenubar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
         $s .= '<a href="' . $delete_url . '">' . _("Delete") . '</a>';
     }
 
-    $comp_uri = $base_uri . 'src/compose.php' .
-                            '?passed_id=' . $passed_id .
-                            '&amp;mailbox=' . $urlMailbox .
-                            (isset($passed_ent_id)?'&amp;passed_ent_id='.$passed_ent_id:'');
+    $comp_uri = 'src/compose.php' .
+                '?passed_id=' . $passed_id .
+                '&amp;mailbox=' . $urlMailbox .
+                '&amp;startMessage=' . $startMessage .
+                (isset($passed_ent_id)?'&amp;passed_ent_id='.$passed_ent_id:'');
 
     if ($compose_new_win == '1') {
         $link_open  = '<a href="javascript:void(0)" onclick="comp_in_new(\'';
@@ -518,15 +519,15 @@ function formatMenubar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
         $link_close = '">';
     }
     if (($mailbox == $draft_folder) && ($save_as_draft)) {
-        $comp_alt_uri = $comp_uri . '&amp;action=draft';
+        $comp_alt_uri = $comp_uri . '&amp;smaction=draft';
         $comp_alt_string = _("Resume Draft");
     } else if (handleAsSent($mailbox)) {
-        $comp_alt_uri = $comp_uri . '&amp;action=edit_as_new';
+        $comp_alt_uri = $comp_uri . '&amp;smaction=edit_as_new';
         $comp_alt_string = _("Edit Message as New");
     }
     if (isset($comp_alt_uri)) {
         $s .= $topbar_delimiter;
-        $s .= $link_open . $comp_alt_uri . $link_close . $comp_alt_string . '</a>';
+	$s .= makeComposeLink($comp_alt_uri, $comp_alt_string);
     }
 
     $s .= '</small></td><td align="center" width="33%"><small>';
@@ -593,22 +594,22 @@ function formatMenubar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
 
     $s .= '</small></td>' . "\n" . 
           html_tag( 'td', '', 'right', '', 'width="33%" nowrap' ) . '<small>';
-    $comp_action_uri = $comp_uri . '&amp;action=forward';
-    $s .= $link_open . $comp_action_uri . $link_close . _("Forward") . '</a>';
+    $comp_action_uri = $comp_uri . '&amp;smaction=forward';
+    $s .= makeComposeLink($comp_action_uri, _("Forward"));
 
     if ($enable_forward_as_attachment) {
-        $comp_action_uri = $comp_uri . '&amp;action=forward_as_attachment';
+        $comp_action_uri = $comp_uri . '&amp;smaction=forward_as_attachment';
         $s .= $topbar_delimiter;
-        $s .= $link_open . $comp_action_uri . $link_close . _("Forward as Attachment") . '</a>';
+	$s .= makeComposeLink($comp_action_uri, _("Forward as Attachment"));
     }
 
-    $comp_action_uri = $comp_uri . '&amp;action=reply';
+    $comp_action_uri = $comp_uri . '&amp;smaction=reply';
     $s .= $topbar_delimiter;
-    $s .= $link_open . $comp_action_uri . $link_close . _("Reply") . '</a>';
+    $s .= makeComposeLink($comp_action_uri, _("Reply"));
 
-    $comp_action_uri = $comp_uri . '&amp;action=reply_all';
+    $comp_action_uri = $comp_uri . '&amp;smaction=reply_all';
     $s .= $topbar_delimiter;
-    $s .= $link_open . $comp_action_uri . $link_close . _("Reply All") . '</a>';
+    $s .= makeComposeLink($comp_action_uri, _("Reply All"));
     $s .= '</small></td></tr></table>';
     do_hook("read_body_menu_top");
     echo $s;

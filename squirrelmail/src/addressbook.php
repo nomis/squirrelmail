@@ -118,7 +118,7 @@ if(sqgetGlobalVar('REQUEST_METHOD', $req_method, SQ_SERVER) && $req_method == 'P
     /**************************************************
      * Add new address                                *
      **************************************************/
-    if (!empty($addaddr['nickname'])) {
+    if (isset($addaddr)) {
         foreach( $addaddr as $k => $adr ) {
             $addaddr[$k] = strip_tags( $adr );
         }
@@ -233,7 +233,7 @@ if(sqgetGlobalVar('REQUEST_METHOD', $req_method, SQ_SERVER) && $req_method == 'P
                              echo html_tag( 'table',
                                 html_tag( 'tr',
                                    html_tag( 'td',
-                                      "\n". '<br><strong><font color="' . $color[2] .
+                                      "\n". '<strong><font color="' . $color[2] .
                                       '">' . _("ERROR") . ': ' . $abook->error . '</font></strong>' ."\n",
                                       'center' )
                                    ),
@@ -245,10 +245,10 @@ if(sqgetGlobalVar('REQUEST_METHOD', $req_method, SQ_SERVER) && $req_method == 'P
                                  html_tag( 'table',
                                      html_tag( 'tr',
                                          html_tag( 'td',
-                                                    "\n". '<br><strong>' . _("Update address") . '</strong>' ."\n",
+                                                    "\n". '<strong>' . _("Update address") . '</strong>' ."\n",
                                          'center', $color[0] )
                                      ),
-                                 'center', '', 'width="100%"' ) .
+                                 'center', '', 'width="100%"' );
                             address_form("editaddr", _("Update address"), $newdata);
                             echo '<INPUT TYPE=hidden NAME=oldnick VALUE="' .
                                  htmlspecialchars($oldnick) . "\">\n" .
@@ -386,15 +386,11 @@ if ($showaddrlist) {
             html_tag( 'td', '', 'left', '', 'valign="top" width="1%" nowrap' ) . '&nbsp;';
                 }
             $email = $abook->full_address($row);
-            if ($compose_new_win == '1') {
-                echo '<a href="javascript:void(0)" onclick=comp_in_new(false,"compose.php?send_to='.rawurlencode($email).'")>';
-            }
-            else {
-                echo '<A HREF="compose.php?send_to=' . rawurlencode($email).'">';
-            }
-            echo htmlspecialchars($row['email']) . '</A>&nbsp;</td>'."\n".
-            html_tag( 'td', '&nbsp;' . htmlspecialchars($row['label']) . '&nbsp;', 'left', '', 'valign="top" width="1%"' ) .
-            "</tr>\n";
+            echo makeComposeLink('src/compose.php?send_to=' . rawurlencode($email),
+		                 htmlspecialchars($row['email'])) .
+		 '&nbsp;</td>'."\n".
+                 html_tag( 'td', '&nbsp;' . htmlspecialchars($row['label']) . '&nbsp;', 'left', '', 'valign="top" width="1%"' ) .
+                "</tr>\n";
             $line++;
         }
     
