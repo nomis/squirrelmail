@@ -170,6 +170,8 @@
                   $filename = "untitled-".$message->header->entity_id;
       
               $localfilename = GenerateRandomString(32, '', 7);
+	      while (isset($attachments[$localfilename]))
+	          $localfilename = GenerateRandomString(32, '', 7);
       
               // Write File Info
               $fp = fopen ($attachment_dir.$localfilename.".info", "w");
@@ -376,6 +378,8 @@
       
       is_logged_in();
       $localfilename = GenerateRandomString(32, '', 7);
+      while (isset($attachments[$localfilename]))
+          $localfilename = GenerateRandomString(32, '', 7);
       
       if (!@rename($HTTP_POST_FILES['attachfile']['tmp_name'], $attachment_dir.$localfilename)) {
          if (!@copy($HTTP_POST_FILES['attachfile']['tmp_name'], $attachment_dir.$localfilename)) {
