@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: squirrelmail\n"
+"Project-Id-Version: 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-04 21:00+0300\n"
-"PO-Revision-Date: 2004-10-16 17:07-0400\n"
+"POT-Creation-Date: 2004-12-28 13:33+0200\n"
+"PO-Revision-Date: 2004-12-29 21:05+0100\n"
 "Last-Translator: Gregory Mokhin <mok@kde.ru>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "MIME-Version: 1.0\n"
@@ -17,21 +17,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid "Address Book"
 msgstr "Адресная книга"
-
-msgid "All"
-msgstr "Все"
-
-msgid "To"
-msgstr "Кому"
-
-msgid "Cc"
-msgstr "Копия"
 
 msgid "Name"
 msgstr "Имя"
@@ -45,14 +33,17 @@ msgstr "Комментарий"
 msgid "Source"
 msgstr "Исходный формат"
 
+msgid "To"
+msgstr "Кому"
+
+msgid "Cc"
+msgstr "Копия"
+
 msgid "Bcc"
 msgstr "BCC"
 
-msgid "Use Addresses"
-msgstr "Использовать адреса"
-
-msgid "Address Book Search"
-msgstr "Поиск в адресной книге"
+msgid "No persons matching your search were found"
+msgstr "По заданным условиям поиска ничего не найдено"
 
 msgid "Search for"
 msgstr "Искать"
@@ -69,6 +60,9 @@ msgstr "Поиск"
 msgid "List all"
 msgstr "Показать все"
 
+msgid "Close"
+msgstr "Закрыть"
+
 #, c-format
 msgid "Unable to list addresses from %s"
 msgstr "Ошибка доступа к адресам в %s"
@@ -76,14 +70,17 @@ msgstr "Ошибка доступа к адресам в %s"
 msgid "Your search failed with the following error(s)"
 msgstr "Поиск не завершен по следующим причинам"
 
-msgid "No persons matching your search were found"
-msgstr "По заданным условиям поиска ничего не найдено"
+msgid "All"
+msgstr "Все"
+
+msgid "Use Addresses"
+msgstr "Использовать адреса"
+
+msgid "Address Book Search"
+msgstr "Поиск в адресной книге"
 
 msgid "Return"
 msgstr "Вернуться"
-
-msgid "Close"
-msgstr "Закрыть"
 
 msgid "Nickname"
 msgstr "Псевдоним"
@@ -102,6 +99,9 @@ msgstr "Имя"
 
 msgid "Additional info"
 msgstr "Комментарий"
+
+msgid "Add to:"
+msgstr "Добавить в:"
 
 msgid "No personal address book is defined. Contact administrator."
 msgstr "Персональная адресная книга не найдена. Свяжитесь с администратором."
@@ -219,28 +219,6 @@ msgstr "Ошибка: Папка для черновиков %s не сущес�
 msgid "Server replied: "
 msgstr "Ответ сервера: "
 
-msgid "Illegal folder name. Please select a different name."
-msgstr "Недопустимое имя папки. Укажите другое имя."
-
-msgid "Click here to go back"
-msgstr "Нажмите здесь, чтобы вернуться назад"
-
-msgid "You have not selected a folder to delete. Please do so."
-msgstr "Сначала выберите папку для удаления."
-
-msgid "Delete Folder"
-msgstr "Удалить папку"
-
-#, c-format
-msgid "Are you sure you want to delete %s?"
-msgstr "Удалить %s?"
-
-msgid "Yes"
-msgstr "Да"
-
-msgid "No"
-msgstr "Нет"
-
 msgid "Folders"
 msgstr "Папки"
 
@@ -292,6 +270,9 @@ msgstr "Переименовать"
 msgid "No folders found"
 msgstr "Папок не найдено"
 
+msgid "Delete Folder"
+msgstr "Удалить папку"
+
 msgid "Delete"
 msgstr "Удалить"
 
@@ -309,6 +290,25 @@ msgstr "При попытке подписаться не найдено пап�
 
 msgid "Subscribe to:"
 msgstr "Подписаться на:"
+
+msgid "Illegal folder name. Please select a different name."
+msgstr "Недопустимое имя папки. Укажите другое имя."
+
+msgid "Click here to go back"
+msgstr "Нажмите здесь, чтобы вернуться назад"
+
+msgid "You have not selected a folder to delete. Please do so."
+msgstr "Сначала выберите папку для удаления."
+
+#, c-format
+msgid "Are you sure you want to delete %s?"
+msgstr "Удалить %s?"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "No"
+msgstr "Нет"
 
 msgid "You have not selected a folder to rename. Please do so."
 msgstr "Сначала выберите папку для переименования."
@@ -332,7 +332,8 @@ msgstr "Справка"
 msgid ""
 "The help has not been translated to %s. It will be displayed in English "
 "instead."
-msgstr "Справка не была переведена на %s. Она будет доступна лишь по-английски."
+msgstr ""
+"Справка не была переведена на %s. Она будет доступна лишь по-английски."
 
 msgid "Some or all of the help documents are not present!"
 msgstr "Некоторые из файлов справки не найдены."
@@ -400,11 +401,62 @@ msgstr "Пароль:"
 msgid "No messages were selected."
 msgstr "Нет выделенных сообщений."
 
-msgid "Options"
-msgstr "Настройка"
+msgid "Personal Information"
+msgstr "Личные сведения"
+
+msgid "Display Preferences"
+msgstr "Внешний вид"
 
 msgid "Message Highlighting"
 msgstr "Подсветка сообщений"
+
+msgid "Folder Preferences"
+msgstr "Папки"
+
+msgid "Index Order"
+msgstr "Порядок индексации"
+
+msgid "Options"
+msgstr "Настройка"
+
+msgid "Successfully Saved Options"
+msgstr "Параметры были сохранены"
+
+msgid "Refresh Folder List"
+msgstr "обновить список папок"
+
+msgid "Refresh Page"
+msgstr "Обновить страницу"
+
+msgid ""
+"This contains personal information about yourself such as your name, your "
+"email address, etc."
+msgstr "Укажите сведения о себе: имя, фамилию, адрес электронной почты и т. д."
+
+msgid ""
+"You can change the way that SquirrelMail looks and displays information to "
+"you, such as the colors, the language, and other settings."
+msgstr ""
+"Здесь можно настроить, как SquirrelMail выглядит в вашем браузере - изменить "
+"цвета, язык и прочие параметры отображения."
+
+msgid ""
+"Based upon given criteria, incoming messages can have different background "
+"colors in the message list. This helps to easily distinguish who the "
+"messages are from, especially for mailing lists."
+msgstr ""
+"Сообщения в вашем ящике могут подсвечиваться разными цветами согласно "
+"выбранным условиям. Это позволяет с легкостью отличать важные сообщения от "
+"прочих, особенно при наличии списков рассылки."
+
+msgid ""
+"These settings change the way your folders are displayed and manipulated."
+msgstr "Здесь можно настроить параметры различных папок."
+
+msgid ""
+"The order of the message index can be rearranged and changed to contain the "
+"headers in any order you want."
+msgstr "Здесь можно настроить расположение заголовков в таблице сообщений."
 
 msgid "New"
 msgstr "Новое правило"
@@ -518,9 +570,6 @@ msgstr "Использовать по умолчанию"
 msgid "Move Up"
 msgstr "Переместить выше"
 
-msgid "Index Order"
-msgstr "Порядок индексации"
-
 msgid "Checkbox"
 msgstr "Маркер"
 
@@ -550,53 +599,6 @@ msgstr "удалить"
 
 msgid "Return to options page"
 msgstr "Вернуться к настройке"
-
-msgid "Personal Information"
-msgstr "Личные сведения"
-
-msgid "Display Preferences"
-msgstr "Внешний вид"
-
-msgid "Folder Preferences"
-msgstr "Папки"
-
-msgid "Successfully Saved Options"
-msgstr "Параметры были сохранены"
-
-msgid "Refresh Folder List"
-msgstr "обновить список папок"
-
-msgid "Refresh Page"
-msgstr "Обновить страницу"
-
-msgid ""
-"This contains personal information about yourself such as your name, your "
-"email address, etc."
-msgstr "Укажите сведения о себе: имя, фамилию, адрес электронной почты и т. д."
-
-msgid ""
-"You can change the way that SquirrelMail looks and displays information to "
-"you, such as the colors, the language, and other settings."
-msgstr ""
-"Здесь можно настроить, как SquirrelMail выглядит в вашем браузере - изменить "
-"цвета, язык и прочие параметры отображения."
-
-msgid ""
-"Based upon given criteria, incoming messages can have different background "
-"colors in the message list. This helps to easily distinguish who the "
-"messages are from, especially for mailing lists."
-msgstr ""
-"Сообщения в вашем ящике могут подсвечиваться разными цветами согласно "
-"выбранным условиям. Это позволяет с легкостью отличать важные сообщения от "
-"прочих, особенно при наличии списков рассылки."
-
-msgid "These settings change the way your folders are displayed and manipulated."
-msgstr "Здесь можно настроить параметры различных папок."
-
-msgid ""
-"The order of the message index can be rearranged and changed to contain the "
-"headers in any order you want."
-msgstr "Здесь можно настроить расположение заголовков в таблице сообщений."
 
 msgid "Message not printable"
 msgstr "Непечатаемое сообщение"
@@ -803,7 +805,8 @@ msgstr "Просмотр всех заголовков сообщения"
 msgid "Viewing a text attachment"
 msgstr "Просмотр текстового вложения"
 
-msgid "Could not include PEAR database functions required for the database backend."
+msgid ""
+"Could not include PEAR database functions required for the database backend."
 msgstr "Не удалось подключить функции PEAR для работы с сервером баз данных."
 
 #, c-format
@@ -831,20 +834,14 @@ msgstr "Пользователь '%s' уже существует"
 msgid "User '%s' does not exist"
 msgstr "Пользователь '%s' не существует"
 
-msgid "Global address book"
-msgstr "Общая адресная книга"
+msgid "Not a file name"
+msgstr "Указано не имя файла"
 
 msgid "No such file or directory"
 msgstr "Файл или каталог не существуют"
 
 msgid "Open failed"
 msgstr "Ошибка при чтении"
-
-msgid "Can not modify global address book"
-msgstr "Записи в общей адресной книге не могут быть изменены"
-
-msgid "Not a file name"
-msgstr "Указано не имя файла"
 
 msgid "Write failed"
 msgstr "Ошибка при записи"
@@ -864,6 +861,9 @@ msgstr "Ошибка при инициализации базы данных а�
 #, c-format
 msgid "Error opening file %s"
 msgstr "Ошибка при открытии файла %s"
+
+msgid "Global address book"
+msgstr "Общая адресная книга"
 
 msgid "Error initializing global addressbook."
 msgstr "Ошибка при инициализации общей адресной книги."
@@ -887,8 +887,8 @@ msgstr "Псевдоним содержит недопустимые симво�
 msgid "View"
 msgstr "Просмотреть"
 
-msgid "Business Card"
-msgstr "Визитка"
+msgid "View Business Card"
+msgstr "Просмотр визитки"
 
 msgid "Sunday"
 msgstr "Воскресенье"
@@ -1048,7 +1048,8 @@ msgstr ""
 msgid ""
 "Preference file, %s, could not be opened. Contact your system administrator "
 "to resolve this issue."
-msgstr "Не удаётся открыть файл параметров %s. Свяжитесь с системным администратором."
+msgstr ""
+"Не удаётся открыть файл параметров %s. Свяжитесь с системным администратором."
 
 #, c-format
 msgid ""
@@ -1087,13 +1088,15 @@ msgstr "Подпись слишком велика."
 msgid ""
 "Signature file, %s, could not be opened. Contact your system administrator "
 "to resolve this issue."
-msgstr "Не удаётся открыть файл подписи %s. Свяжитесь с системным администратором."
+msgstr ""
+"Не удаётся открыть файл подписи %s. Свяжитесь с системным администратором."
 
 #, c-format
 msgid ""
 "Signature file, %s, could not be written. Contact your system administrator "
 "to resolve this issue."
-msgstr "Не удаётся записать в файл подписи %s. Свяжитесь с системным администратором."
+msgstr ""
+"Не удаётся записать в файл подписи %s. Свяжитесь с системным администратором."
 
 #, c-format
 msgid ""
@@ -1142,7 +1145,8 @@ msgid "Error connecting to IMAP server: %s."
 msgstr "Ошибка при соединении с сервером IMAP: %s."
 
 msgid "The IMAP server is reporting that plain text logins are disabled."
-msgstr "Сервер IMAP сообщает, что идентификация с незашифрованными данными запрещена."
+msgstr ""
+"Сервер IMAP сообщает, что идентификация с незашифрованными данными запрещена."
 
 msgid "Using CRAM-MD5 or DIGEST-MD5 authentication instead may work."
 msgstr "Попробуйте указать механизм идентификации CRAM-MD5 или DIGEST-MD5."
@@ -1306,13 +1310,13 @@ msgstr "Внешняя ссылка будет открыта в новом ок
 
 #, c-format
 msgid "Option Type '%s' Not Found"
-msgstr "Опция '%s' не найдена"
+msgstr "Параметр '%s' не найден"
 
 msgid "Current Folder"
 msgstr "Текущая папка"
 
 msgid "Compose"
-msgstr "Письмо"
+msgstr "Новое"
 
 #, c-format
 msgid "Error creating directory %s."
@@ -1478,7 +1482,7 @@ msgid "Enable Mailer Display"
 msgstr "Показывать почтовую программу"
 
 msgid "Display Attached Images with Message"
-msgstr "Показывать изображения, вложенные в письмо"
+msgstr "Показывать вложенные изображения"
 
 msgid "Enable Printer Friendly Clean Display"
 msgstr "Показывать в виде, пригодном для печати"
@@ -1505,7 +1509,7 @@ msgid "To: field"
 msgstr "В поле Кому:"
 
 msgid "Focus in body"
-msgstr "В теле письма"
+msgstr "В теле сообщения"
 
 msgid "Select body"
 msgstr "Выбрать тело"
@@ -1574,7 +1578,7 @@ msgid "Auto Refresh Folder List"
 msgstr "Автоматически обновлять список"
 
 msgid "Enable Unread Message Notification"
-msgstr "Уведомления о непросмотренных письмах"
+msgstr "Уведомления о непросмотренных сообщениях"
 
 msgid "No Notification"
 msgstr "Не сообщать"
@@ -1583,7 +1587,7 @@ msgid "Only INBOX"
 msgstr "Только поступающие в папку INBOX"
 
 msgid "Unread Message Notification Type"
-msgstr "Вид сообщения о непрочитанных письмах"
+msgstr "Вид сообщения о непрочитанных сообщениях"
 
 msgid "Only Unseen"
 msgstr "Только непрочитанные"
@@ -1676,7 +1680,8 @@ msgid "Same as server"
 msgstr "Как на сервере"
 
 msgid "Error opening timezone config, contact administrator."
-msgstr "Ошибка при определении временной зоны. Свяжитесь с системным администратором."
+msgstr ""
+"Ошибка при определении временной зоны. Свяжитесь с системным администратором."
 
 msgid "Timezone Options"
 msgstr "Временные пояса"
@@ -1697,7 +1702,7 @@ msgid "AUTHOR Said"
 msgstr "АВТОР пишет"
 
 msgid "On DATE, AUTHOR Said"
-msgstr "В письме от DATE, AUTHOR пишет"
+msgstr "DATE, AUTHOR пишет"
 
 msgid "Quote Who XML"
 msgstr "Цитировать в XML-стиле"
@@ -1765,9 +1770,6 @@ msgstr "Адрес провайдера"
 msgid "Provider Name"
 msgstr "Имя провайдера"
 
-msgid "Default Language"
-msgstr "Язык по умолчанию"
-
 msgid "Top Frame"
 msgstr "Рабочий фрейм"
 
@@ -1797,6 +1799,12 @@ msgstr "Microsoft Exchange"
 
 msgid "Courier IMAP server"
 msgstr "Courier-IMAP"
+
+msgid "Mac OS X Mailserver"
+msgstr "Mac OS X Mailserver"
+
+msgid "hMailServer IMAP server"
+msgstr "Сервер IMAP hMailServer"
 
 msgid "Not one of the above servers"
 msgstr "Другой сервер"
@@ -1894,9 +1902,6 @@ msgstr "Тип непрочитанных сообщений по умолчан
 msgid "Auto Create Special Folders"
 msgstr "Автоматически создавать специальные папки"
 
-msgid "Default Javascript Addressbook"
-msgstr "Использовать адресную книгу с Javascript по умолчанию"
-
 msgid "Auto delete folders"
 msgstr "Автоматически удалять папки"
 
@@ -1905,9 +1910,6 @@ msgstr "Исправлять ошибку /NoSelect"
 
 msgid "General Options"
 msgstr "Общие"
-
-msgid "Default Charset"
-msgstr "Кодировка по умолчанию"
 
 msgid "Data Directory"
 msgstr "Каталог с настройками пользователей"
@@ -1937,7 +1939,7 @@ msgid "Allow use of priority"
 msgstr "Разрешить использование срочных сообщений"
 
 msgid "Hide SM attributions"
-msgstr "Не добавлять SM-атрибуты к сообщениям"
+msgstr "Не добавлять атрибуты SquiirelMail к сообщениям"
 
 msgid "Enable use of delivery receipts"
 msgstr "Разрешить использование уведомлений"
@@ -1990,6 +1992,42 @@ msgstr "Поле ключа в 'preferences'"
 msgid "Preferences value field"
 msgstr "Поле значения в 'preferences'"
 
+msgid "Global address book DSN"
+msgstr "DSN общей адресной книги"
+
+msgid "Global address book table"
+msgstr "Таблица общей адресной книги"
+
+msgid "Allow writing into global address book"
+msgstr "Разрешить запись в общую адресную книгу"
+
+msgid "Allow listing of global address book"
+msgstr "Разрешить просмотр общей адресной книги"
+
+msgid "Language settings"
+msgstr "Параметры языка"
+
+msgid "Default Language"
+msgstr "Язык по умолчанию"
+
+msgid "Default Charset"
+msgstr "Кодировка по умолчанию"
+
+msgid "Enable lossy encoding"
+msgstr "Включить кодирование с потерями символов"
+
+msgid "Address Books"
+msgstr "Адресные книги"
+
+msgid "Default Javascript Addressbook"
+msgstr "Использовать адресную книгу с Javascript по умолчанию"
+
+msgid "Global address book file"
+msgstr "Файл общей адресной книги"
+
+msgid "Allow writing into global address book file"
+msgstr "Разрешить запись в файл общей адресной книги"
+
 msgid "Themes"
 msgstr "Темы"
 
@@ -2024,7 +2062,7 @@ msgid "Theme Name"
 msgstr "Имя темы"
 
 msgid "Theme Path"
-msgstr "Нахождение темы"
+msgstr "Расположение темы"
 
 msgid "Plugins"
 msgstr "Модули"
@@ -2048,9 +2086,7 @@ msgstr "Администрирование"
 msgid ""
 "This module allows administrators to manage SquirrelMail main configuration "
 "remotely."
-msgstr ""
-"Этот модуль позволяет администраторам изменять параметры SquirrelMail в "
-"удаленном режиме."
+msgstr "Этот модуль позволяет администраторам изменять параметры SquirrelMail."
 
 msgid "Submit a Bug Report"
 msgstr "Отправить сообщение об ошибке"
@@ -2058,7 +2094,7 @@ msgstr "Отправить сообщение об ошибке"
 msgid ""
 "Before you send your bug report, please make sure to check this checklist "
 "for any common problems."
-msgstr "Перед отправкой сообщения об ошибке прочитайте следующие сведения."
+msgstr "Перед отправкой сообщения об ошибке прочитайте следующую информацию."
 
 #, c-format
 msgid ""
@@ -2084,7 +2120,7 @@ msgstr ""
 "Проверьте, возникает ли эта ошибка регулярно. Если она возникает от случая к "
 "случаю, запишите, в какой ситуации она возникла. Если она всегда возникает "
 "при просмотре конкретного сообщения, сохраните это сообщение, чтобы передать "
-"его в группу разработчиков при необходимости."
+"его разработчикам, если в этом возникнет необходимость."
 
 #, c-format
 msgid ""
@@ -2139,15 +2175,15 @@ msgstr "Отправка сообщения об ошибках:"
 msgid "Show button in toolbar"
 msgstr "Показывать кнопку в меню"
 
-#, c-format
-msgid "Could not write calendar file %s"
-msgstr "Ошибка при записи файла календаря %s"
-
 msgid "TODAY"
 msgstr "СЕГОДНЯ"
 
 msgid "Go"
 msgstr "Дальше"
+
+#, c-format
+msgid "Could not write calendar file %s"
+msgstr "Ошибка при записи файла календаря %s"
 
 msgid "l, F j Y"
 msgstr "l, F j Y"
@@ -2258,13 +2294,13 @@ msgid "Delete & Prev"
 msgstr "Удалить и назад"
 
 msgid "Delete & Next"
-msgstr "Удалить и вперед"
+msgstr "Удалить и далее"
 
 msgid "Move to:"
 msgstr "Переместить в:"
 
 msgid "Delete/Move/Next Buttons:"
-msgstr "Кнопки Удалить/Переместить/Вперед"
+msgstr "Кнопки Удалить/Переместить/Далее"
 
 msgid "Display at top"
 msgstr "Показывать вверху"
@@ -2329,7 +2365,8 @@ msgstr ""
 "спрашивая разрешения."
 
 msgid "FREE - Five-Ten-sg.com - Other misc. servers."
-msgstr "БЕСПЛАТНО - Five-Ten-sg.com - прочие сервера, имеющие отношение к спаму."
+msgstr ""
+"БЕСПЛАТНО - Five-Ten-sg.com - прочие сервера, имеющие отношение к спаму."
 
 msgid "FREE - Five-Ten-sg.com - Single Stage servers."
 msgstr "БЕСПЛАТНО - Five-Ten-sg.com - серверы, отсылающие спам напрямую."
@@ -2374,7 +2411,8 @@ msgid "FREE - ahbl.org SPAM Source - List of Direct SPAM Sources."
 msgstr "БЕСПЛАТНО - ahbl.com SPAM Source - список рассыльщиков спама."
 
 msgid "FREE - ahbl.org SPAM ISPs - List of SPAM-friendly ISPs."
-msgstr "БЕСПЛАТНО - ahbl.com SPAM ISP - список провайдеров, поддерживающих спам."
+msgstr ""
+"БЕСПЛАТНО - ahbl.com SPAM ISP - список провайдеров, поддерживающих спам."
 
 msgid ""
 "FREE - Leadmon DUL - Another list of Dial-up or otherwise dynamically "
@@ -2429,18 +2467,22 @@ msgstr ""
 "и пересыльщиков спама."
 
 msgid "FREE, for now - Not Just Another Blacklist - Dial-up IPs."
-msgstr "БЕСПЛАТНО - Not Just Another Blacklist - Диалап-адреса, рассылающие спам."
+msgstr ""
+"БЕСПЛАТНО - Not Just Another Blacklist - Диалап-адреса, рассылающие спам."
 
 msgid "FREE - Distributed Sender Boycott List - Confirmed Relays"
 msgstr "БЕСПЛАТНО - Distributed Sender Boycott List - пересыльщики"
 
 msgid "FREE - Distributed Sender Boycott List - Confirmed Multi-stage Relays"
-msgstr "БЕСПЛАТНО - Distributed Sender Boycott List - многостадийные пересыльщики"
+msgstr ""
+"БЕСПЛАТНО - Distributed Sender Boycott List - многостадийные пересыльщики"
 
 msgid "FREE - Distributed Sender Boycott List - UN-Confirmed Relays"
-msgstr "БЕСПЛАТНО - Distributed Sender Boycott List - неподтвержденные пересыльщики"
+msgstr ""
+"БЕСПЛАТНО - Distributed Sender Boycott List - неподтвержденные пересыльщики"
 
-msgid "WARNING! Header filters should be of the format &quot;Header: value&quot;"
+msgid ""
+"WARNING! Header filters should be of the format &quot;Header: value&quot;"
 msgstr ""
 "Предупреждение: фильтры заголовков должны иметь формат &quot;Заголовок: "
 "значение&quot;"
@@ -2483,8 +2525,9 @@ msgid ""
 "Filtering enables messages with different criteria to be automatically "
 "filtered into different folders for easier organization."
 msgstr ""
-"Фильтры сообщений служат для обеспечения удобной работы с сообщениями. Сообщения, "
-"совпадающие с теми или иными условиями, будут автоматически перемещаться в соответствующие папки."
+"Фильтры сообщений служат для обеспечения удобной работы с сообщениями. "
+"Сообщения, совпадающие с теми или иными условиями, будут автоматически "
+"перемещаться в соответствующие папки."
 
 msgid "SPAM Filters"
 msgstr "СПАМ-фильтры"
@@ -2573,6 +2616,9 @@ msgstr "Fortunes:"
 
 msgid "Show fortunes at top of mailbox"
 msgstr "Показывать fortunes вверху почтового ящика"
+
+msgid "Plugin is disabled."
+msgstr "Модуль выключен."
 
 msgid "IMAP server information"
 msgstr "Сведения о сервере IMAP"
@@ -2816,8 +2862,8 @@ msgid ""
 "server can be undone by a hacker reading the source to this file."
 msgstr ""
 "Если сохранить пароль на сервере, то имейте в виду, что он будет сохранен в "
-"слабо зашифрованном виде (впрочем, при использовании POP ваш пароль и "
-"так не зашифрован, когда он путешествует по сети). Ключ, используемый для "
+"слабо зашифрованном виде (впрочем, при использовании POP ваш пароль и так не "
+"зашифрован, когда он путешествует по сети). Ключ, используемый для "
 "сохранения вашего пароля, может быть легко подобран любым хакером."
 
 msgid "If you leave password empty, it will be required when you fetch mail."
@@ -2930,6 +2976,20 @@ msgstr "Сохранить сообщение"
 msgid "View Message details"
 msgstr "Просмотреть сведения о сообщении"
 
+msgid "New Mail"
+msgstr "Новая почта"
+
+msgid "SquirrelMail Notice:"
+msgstr "Сообщение от SquirrelMail:"
+
+#, c-format
+msgid "You have %s new message"
+msgstr "%s новое сообщение"
+
+#, c-format
+msgid "You have %s new messages"
+msgstr "Новых сообщений: %s"
+
 msgid "New Mail Notification"
 msgstr "Оповещение о новых сообщениях"
 
@@ -3000,9 +3060,8 @@ msgid ""
 "Select from the list of %s the media file to play when new mail arrives. If "
 "no file is specified, %s, no sound will be used."
 msgstr ""
-"Выберите из списка \"%s\", каким звуком оповещать о "
-"приходе новой почте. Если ни один файл не выбран (опция \"%s\"), звук не будет "
-"проигрываться."
+"Выберите из списка \"%s\", каким звуком оповещать о приходе новой почте. "
+"Если ни один файл не выбран (опция \"%s\"), звук не будет проигрываться."
 
 msgid "Select server file"
 msgstr "Выбрать файл на сервере"
@@ -3019,23 +3078,6 @@ msgstr "Тест"
 msgid "Current File:"
 msgstr "Выбран файл:"
 
-msgid "New Mail"
-msgstr "Новая почта"
-
-msgid "SquirrelMail Notice:"
-msgstr "Сообщение от SquirrelMail:"
-
-#, c-format
-msgid "You have %s new message"
-msgid_plural "You have %s new messages"
-msgstr[0] "%s новое сообщение"
-msgstr[1] "%s новых сообщения"
-msgstr[2] "%s новых сообщений"
-
-#, c-format
-msgid "You have %s new messages"
-msgstr "Новых сообщений: %s"
-
 msgid "NewMail Options"
 msgstr "Настройка оповещений"
 
@@ -3044,19 +3086,13 @@ msgid ""
 "when new mail arrives."
 msgstr "Здесь можно настроить тип извещений о приходе новых сообщений."
 
-msgid "New Mail Notification options saved"
-msgstr "Параметры извещений сохранены"
-
 #, c-format
 msgid "%s New Messages"
 msgstr "Новых сообщений: %s"
 
 #, c-format
 msgid "%s New Message"
-msgid_plural "%s New Messages"
-msgstr[0] "%s новое сообщение"
-msgstr[1] "%s новых сообщения"
-msgstr[2] "%s новых сообщений"
+msgstr "%s новое сообщение"
 
 msgid "Test Sound"
 msgstr "Проверить звук"
@@ -3200,11 +3236,11 @@ msgid ""
 "Open it up, click on the appropriate link at the top, and a new browser "
 "window will open."
 msgstr ""
-"При нажатии этой кнопки письмо будет переслано в SpamCop и удалено (если это "
-"указано). Вернитесь в папку Входящие. Скорее всего, там уже будет письмо от "
-"службы SpamCop, которое было отправлено на зарегистрированный адрес (если "
-"это адрес пересылки, проверьте, что он работает). Откройте письмо и щелкните "
-"на ссылке вверху письма. Откроется новое окно браузера."
+"При нажатии этой кнопки сообщение будет переслано в SpamCop и удалено (если "
+"это указано). Вернитесь в папку Входящие. Скорее всего, там уже будет "
+"сообщение от службы SpamCop, которое было отправлено на зарегистрированный "
+"адрес (если это адрес пересылки, проверьте, что он работает). Откройте "
+"сообщение и щелкните на ссылке вверху письма. Откроется новое окно браузера."
 
 msgid ""
 "Currently, the quick reporting just forwards the request to the thorough "
@@ -3342,7 +3378,8 @@ msgstr "Далее"
 msgid "You must make a choice"
 msgstr "Пожалуйста, сделайте выбор"
 
-msgid "You can either delete your dictionary or type in the old password. Not both."
+msgid ""
+"You can either delete your dictionary or type in the old password. Not both."
 msgstr ""
 "Можно удалить старый словарь или ввести пароль для расшифровки, но не и то, "
 "и другое одновременно."
@@ -3442,6 +3479,19 @@ msgstr "Проверка правописания не закончена. За�
 msgid "No errors found"
 msgstr "Ошибок не найдено"
 
+msgid ""
+"Your personal dictionary has been encrypted and is now stored in an "
+"encrypted format."
+msgstr "Личный словарь был зашифрован и теперь хранится в закодированном виде."
+
+msgid ""
+"Your personal dictionary has been decrypted and is now stored as plain text."
+msgstr ""
+"Личный словарь был расшифрован и теперь хранится в незашифрованном виде."
+
+msgid "Personal Dictionary Crypto Settings"
+msgstr "Параметры защиты личного словаря"
+
 msgid "Your personal dictionary was erased."
 msgstr "Личный словарь был удален."
 
@@ -3478,17 +3528,6 @@ msgstr ""
 
 msgid "Dictionary re-encrypted"
 msgstr "Словарь защищен"
-
-msgid ""
-"Your personal dictionary has been encrypted and is now stored in an "
-"encrypted format."
-msgstr "Личный словарь был зашифрован и теперь хранится в закодированном виде."
-
-msgid "Your personal dictionary has been decrypted and is now stored as plain text."
-msgstr "Личный словарь был расшифрован и теперь хранится в незашифрованном виде."
-
-msgid "Personal Dictionary Crypto Settings"
-msgstr "Параметры защиты личного словаря"
 
 msgid "Personal Dictionary"
 msgstr "Личный словарь"
@@ -3551,7 +3590,8 @@ msgstr ""
 "обнаружит эту ситуацию и предложит ввести старый пароль, чтобы расшифровать "
 "словарь и вновь его зашифровать с помощью нового пароля."
 
-msgid "Please decrypt my personal dictionary and store it in a clear-text format."
+msgid ""
+"Please decrypt my personal dictionary and store it in a clear-text format."
 msgstr "Расшифровать личный словарь и хранить его в незашифрованном виде."
 
 msgid "Change crypto settings"
@@ -3586,7 +3626,8 @@ msgstr ""
 "придется начать заново. В случае если вы смените пароль, но будете помнить "
 "старый, то можно будет перекодировать словарь с новым паролем."
 
-msgid "Please encrypt my personal dictionary and store it in an encrypted format."
+msgid ""
+"Please encrypt my personal dictionary and store it in an encrypted format."
 msgstr "Защитить словарь и хранить его в зашифрованном виде."
 
 #, c-format
@@ -3667,8 +3708,8 @@ msgstr "Сохраненные параметры переводчика"
 msgid "Your server options are as follows:"
 msgstr "Параметры серверов:"
 
-msgid "Maximum of 1000 characters translated, powered by Systran"
-msgstr "Максимум 1000 символов, система Systran"
+msgid "Maximum of 150 words translated, powered by Systran"
+msgstr "Максимум 150 слов, система Systran"
 
 #, c-format
 msgid "Number of supported language pairs: %s"
@@ -3683,9 +3724,6 @@ msgstr "Без ограничений, система Translation Experts' Inter
 #, c-format
 msgid "Number of supported languages: %s"
 msgstr "Число поддерживаемых языков: %s"
-
-msgid "No known limits, powered by GPLTrans (free, open source)"
-msgstr "Без ограничений, система GPLTrans (открытый код)"
 
 msgid "Hellenic translations, no known limits, powered by Systran"
 msgstr "Греческие переводы, без ограничений, система Systran"
@@ -3719,35 +3757,39 @@ msgstr "справа"
 msgid "Translate inside the SquirrelMail frames"
 msgstr "Переводить внутри интерфейса SquirrelMail"
 
-msgid "When composing:"
-msgstr "При написании:"
-
-msgid "Not yet functional, currently does nothing"
-msgstr "Еще не внедрено, в данный момент не работает."
-
 msgid "Translation Options"
 msgstr "Параметры перевода"
 
 msgid ""
 "Which translator should be used when you get messages in a different "
 "language?"
-msgstr "Какой переводчик использовать, когда приходит сообщение на другом языке?"
+msgstr ""
+"Какой переводчик использовать, когда приходит сообщение на другом языке?"
 
 #, c-format
 msgid "%s to %s"
 msgstr "%s на %s"
 
+msgid "Chinese, Simplified"
+msgstr "Китайский (КНР)"
+
 msgid "English"
 msgstr "Английский"
 
-msgid "Chinese"
-msgstr "Китайский"
+msgid "Chinese, Traditional"
+msgstr "Китайский (Тайвань)"
+
+msgid "Dutch"
+msgstr "Голландский"
 
 msgid "French"
 msgstr "Французский"
 
 msgid "German"
 msgstr "Немецкий"
+
+msgid "Greek"
+msgstr "Греческий"
 
 msgid "Italian"
 msgstr "Итальянский"
@@ -3761,11 +3803,11 @@ msgstr "Корейский"
 msgid "Portuguese"
 msgstr "Португальский"
 
-msgid "Spanish"
-msgstr "Испанский"
-
 msgid "Russian"
 msgstr "Русский"
+
+msgid "Spanish"
+msgstr "Испанский"
 
 msgid "Translate"
 msgstr "Перевести"
@@ -3785,23 +3827,20 @@ msgstr "Чешский"
 msgid "Danish"
 msgstr "Датский"
 
-msgid "Dutch"
-msgstr "Голландский"
-
-msgid "European Spanish"
-msgstr "Испанский (Европа)"
+msgid "Filipino (Tagalog)"
+msgstr "Филиппинский"
 
 msgid "Finnish"
 msgstr "Финский"
-
-msgid "Greek"
-msgstr "Греческий"
 
 msgid "Hungarian"
 msgstr "Венгерский"
 
 msgid "Icelandic"
 msgstr "Исландский"
+
+msgid "Latin"
+msgstr "Латинский"
 
 msgid "Latin American Spanish"
 msgstr "Испанский (Лат. Америка)"
@@ -3833,9 +3872,6 @@ msgstr "Уэльский"
 msgid "Indonesian"
 msgstr "Индонезийский"
 
-msgid "Latin"
-msgstr "Латинский"
-
 msgid "to English"
 msgstr "на английский"
 
@@ -3848,533 +3884,6 @@ msgstr "Язык интерфейса"
 msgid "Translation direction"
 msgstr "Направление перевода"
 
-msgid "Add to:"
-msgstr "Добавить в:"
-
-msgid "sort by nickname"
-msgstr "сортировать по псевдонимам"
-
-msgid "sort by name"
-msgstr "сортировать по имени"
-
-msgid "sort by email"
-msgstr "сортировать по адресу"
-
-msgid "sort by info"
-msgstr "сортировать по данным"
-
-msgid "Add to address book"
-msgstr "Добавить в адресную книгу"
-
-msgid "Purge"
-msgstr "Очистить"
-
-msgid "Error(s) happened while saving your options"
-msgstr "Ошибка при сохранении параметров"
-
-msgid "Some of your preference changes are not applied."
-msgstr "Некоторые из внесенных изменений не вступили в силу."
-
-msgid "As Attachment"
-msgstr "вложением"
-
-msgid "Bypass Trash"
-msgstr "не в Корзину"
-
-msgid "Please enter something to search for"
-msgstr "Введите строку для поиска"
-
-msgid "There must be at least one criteria to search for"
-msgstr "Следует указать хотя бы один критерий поиска"
-
-msgid "Error in criteria argument"
-msgstr "Ошибка в аргументах критерия"
-
-msgid "(Illegal date)"
-msgstr "(недопустимая дата)"
-
-msgid "(Wrong date)"
-msgstr "(неверная дата)"
-
-msgid "In"
-msgstr "Искать в&nbsp; "
-
-msgid "(Missing argument)"
-msgstr "(отсутствует аргумент)"
-
-msgid "(Spurious argument)"
-msgstr "(избыточный аргумент)"
-
-msgid "Fold"
-msgstr "Свернуть"
-
-msgid "Unfold"
-msgstr "Развернуть"
-
-msgid "Saved Searches"
-msgstr "Хронология поиска"
-
-msgid "Missing"
-msgstr "Отсутствует"
-
-msgid "and&nbsp;subfolders:"
-msgstr "и&nbsp;подпапках:"
-
-msgid "Exclude Criteria:"
-msgstr "Исключающие критерии:"
-
-msgid "Search Criteria"
-msgstr "Критерии поиска"
-
-msgid "Add New Criteria"
-msgstr "Добавить критерии"
-
-msgid "Remove Excluded Criteria"
-msgstr "Удалить исключающие"
-
-msgid "Remove All Criteria"
-msgstr "Удалить все критерии"
-
-msgid "Not"
-msgstr "НЕ"
-
-msgid "Answered"
-msgstr "Отвеченные"
-
-msgid "Before"
-msgstr "До"
-
-msgid "Message Body"
-msgstr "Тело сообщений"
-
-msgid "Deleted"
-msgstr "Удаленные"
-
-msgid "Draft"
-msgstr "Черновики"
-
-msgid "Flagged"
-msgstr "Отмеченные"
-
-msgid "Sent By"
-msgstr "Отправленные"
-
-msgid "Header Field"
-msgstr "Заголовок"
-
-msgid "Keyword"
-msgstr "Ключевое слово"
-
-msgid "Larger Than"
-msgstr "Больше чем"
-
-msgid "Old"
-msgstr "Устаревшие"
-
-msgid "On"
-msgstr "Дата"
-
-msgid "Recent"
-msgstr "Недавние"
-
-msgid "Seen"
-msgstr "Просмотренные"
-
-msgid "Sent Before"
-msgstr "Отправленные до"
-
-msgid "Sent On"
-msgstr "Отправленные тогда-то"
-
-msgid "Sent Since"
-msgstr "Отправленные после"
-
-msgid "Since"
-msgstr "После"
-
-msgid "Smaller Than"
-msgstr "Меньше чем"
-
-msgid "Subject Contains"
-msgstr "Тема содержит"
-
-msgid "Header and Body"
-msgstr "Заголовок и тело"
-
-msgid "Sent To"
-msgstr "Отправленные кому"
-
-msgid "And In"
-msgstr "и в"
-
-msgid "Or In"
-msgstr "или в"
-
-msgid "And"
-msgstr "И"
-
-msgid "Or"
-msgstr "ИЛИ"
-
-msgid "Standard search"
-msgstr "Простой поиск"
-
-msgid "Advanced search"
-msgstr "Расширенный поиск"
-
-msgid "Folder List"
-msgstr "Список папок"
-
-msgid "Click here to change the sorting of the address list"
-msgstr "Нажмите здесь, чтобы изменить порядок сортировки адресов"
-
-msgid "Possible reason : "
-msgstr "Возможная причина: "
-
-msgid "ERROR : Bad function call."
-msgstr "ОШИБКА: Неверный вызов функции."
-
-msgid "Reason:"
-msgstr "Причина:"
-
-msgid "Server responded:"
-msgstr "Ответ сервера:"
-
-msgid ""
-"TLS is enabled, but this version of PHP does not support TLS sockets, or is "
-"missing the openssl extension."
-msgstr ""
-"TLS включен, но либо данная версия PHP не поддерживает сокеты TLS, либо не "
-"включен модуль openssl."
-
-msgid "Unknown recipient"
-msgstr "Неизвестный адресат"
-
-msgid "Unflag"
-msgstr "Снять отметку"
-
-msgid "Flag"
-msgstr "Отметить"
-
-msgid "Click here to change the sorting of the message list"
-msgstr "Нажмите здесь, чтобы изменить порядок сортировки сообщений"
-
-msgid "Message Flags Icon Theme"
-msgstr "Тема значков отметок сообщений"
-
-msgid "Show Flag / Unflag Buttons"
-msgstr "Показать кнопки отметки / снятия"
-
-msgid "Length of From/To Field (0 for full)"
-msgstr "Длина полей От и Кому (0 - без ограничений)"
-
-msgid "Length of Subject Field (0 for full)"
-msgstr "Длина поля Тема (0 - без ограничений)"
-
-msgid "Show recipient name if the message is from your default identity"
-msgstr "Показывать получателя, если письмо отправляется из профиля по умолчанию"
-
-msgid "Prefix for Original Message when Replying"
-msgstr "Стиль цитирования при ответе"
-
-msgid "Strip signature when replying"
-msgstr "Удалять подпись в ответах"
-
-msgid "Show 'Delete & Prev/Next' Links"
-msgstr "Показать ссылки 'Удалить и Далее / Назад'"
-
-msgid "Save Replies with Original Message"
-msgstr "Сохранять ответы вместе с исходным сообщением"
-
-msgid "XP"
-msgstr "XP"
-
-msgid "Hide SquirrelMail Header"
-msgstr "Скрыть заголовок SquirrelMail"
-
-msgid "Search functions"
-msgstr "Возможности поиска"
-
-msgid "Only basic search"
-msgstr "Только простой поиск"
-
-msgid "Only advanced search"
-msgstr "Только расширенный поиск"
-
-msgid "Both search functions"
-msgstr "Оба вида поиска"
-
-msgid "Global address book DSN"
-msgstr "DSN общей адресной книги"
-
-msgid "Global address book table"
-msgstr "Таблица общей адресной книги"
-
-msgid "Allow writing into global address book"
-msgstr "Разрешить запись в общую адресную книгу"
-
-msgid "Allow listing of global address book"
-msgstr "Разрешить просмотр общей адресной книги"
-
-msgid "Language settings"
-msgstr "Параметры языка"
-
-msgid "Show alternative language names"
-msgstr "Показывать альтернативные названия языков"
-
-msgid "Available languages"
-msgstr "Доступные языки"
-
-msgid "Enable aggressive decoding"
-msgstr "Включить быстрое декодирование"
-
-msgid "Enable lossy encoding"
-msgstr "Включить кодирование с потерями"
-
-msgid "Tweaks"
-msgstr "Специальные возможности"
-
-msgid "Use advanced tree folder listing"
-msgstr "Использовать новый вид списка папок"
-
-msgid "Use old folder listing functions"
-msgstr "Использовать старые функции просмотра папок"
-
-msgid "Use icons"
-msgstr "Использовать значки"
-
-msgid "Use php recode functions"
-msgstr "Использовать функцию recode PHP"
-
-msgid "Use php iconv functions"
-msgstr "Использовать функцию iconv PHP"
-
-msgid "Search Mailing List Archives"
-msgstr "Поиск в архивах рассылок"
-
-msgid "Search SourceForge Bugtracker"
-msgstr "Поиск в SourceForge Bugtracker"
-
-msgid "Search for words:"
-msgstr "Искать слова:"
-
-msgid "Written by:"
-msgstr "Написано:"
-
-msgid "Email addresses only"
-msgstr "Только эл. адреса"
-
-msgid "Mailing list:"
-msgstr "Список рассылки:"
-
-msgid "SquirrelMail users list"
-msgstr "Рассылка пользователей SquirrelMail"
-
-msgid "SquirrelMail plugins list"
-msgstr "Рассылка модулей SquirrelMail"
-
-msgid "SquirrelMail developers list"
-msgstr "Рассылка разработчиков SquirrelMail"
-
-msgid "SquirrelMail internationalization list"
-msgstr "Рассылка локализации SquirrelMail"
-
-msgid "Sort by:"
-msgstr "Сортировать по:"
-
-msgid "Relevance"
-msgstr "Значимости"
-
-msgid "Search Archives"
-msgstr "Поиск в архивах"
-
-msgid "Reset Form"
-msgstr "Сбросить форму"
-
-msgid "Summary keyword:"
-msgstr "Ключевое слово:"
-
-msgid "Sort By:"
-msgstr "Сортировать по:"
-
-msgid "ID"
-msgstr "Номеру"
-
-msgid "Summary"
-msgstr "Краткому содержанию"
-
-msgid "Open Date"
-msgstr "Дате открытия"
-
-msgid "Close Date"
-msgstr "Дате закрытия"
-
-msgid "Submitter"
-msgstr "Автору"
-
-msgid "Assignee"
-msgstr "Ответственному"
-
-msgid "Order:"
-msgstr "Порядок:"
-
-msgid "Ascending"
-msgstr "По возрастанию"
-
-msgid "Descending"
-msgstr "По убыванию"
-
-msgid "Search Bugtracker"
-msgstr "Поиск в Bugtracker"
-
-msgid "Show system specs"
-msgstr "Показать сведения о системе"
-
-msgid "You must type in a new password."
-msgstr "Введите новый пароль."
-
-msgid "You must also type in your new password in the verify box."
-msgstr "Введите новый пароль в поле повтора пароля."
-
-msgid "Your new password does not match the verify password."
-msgstr "Пароли не совпадают."
-
-msgid "You must type in your current password."
-msgstr "Введите текущий пароль."
-
-msgid "Your current password is not correct."
-msgstr "Текущий пароль введен неверно."
-
-#, c-format
-msgid "Your new password should be %s to %s characters long."
-msgstr "Новый пароль содержать от %s до %s символов."
-
-msgid "Your new password contains invalid characters."
-msgstr "Новый пароль содержит недопустимые символы."
-
-msgid "Change Password"
-msgstr "Изменить пароль"
-
-msgid "Current Password:"
-msgstr "Текущий пароль:"
-
-msgid "New Password:"
-msgstr "Новый пароль:"
-
-msgid "Verify New Password:"
-msgstr "Новый пароль (повторно):"
-
-msgid "Use this to change your email password."
-msgstr "Здесь можно изменить пароль электронной почты."
-
-msgid "Curl module NOT available! Unable to change password!"
-msgstr "Модуль curl не найден. Изменение пароля невозможно."
-
-msgid "Cannot change password! (Is user 'Self Configurable User' ?) (401)"
-msgstr "Не удается изменить пароль. Проверьте, разрешено ли это. (401)"
-
-msgid "Cannot change password!"
-msgstr "Пароль не был изменен."
-
-msgid "Cannot connect to Database Server, please try later!"
-msgstr "Не удалось соединиться с сервером базы данных. Попробуйте еще раз."
-
-msgid "Database not found on server"
-msgstr "Не найдена база данных сервера"
-
-msgid "SQL call failed, try again later."
-msgstr "Ошибка запроса SQL. Попробуйте еще раз."
-
-msgid "Duplicate login entries detected, cannot change password!"
-msgstr "Пароль не был изменен. Найдены совпадающие имена пользователей."
-
-msgid "Password change was not successful!"
-msgstr "Пароль успешно изменен."
-
-msgid "Closing Connection"
-msgstr "Закрытие соединения"
-
-msgid "Connecting to Password Server"
-msgstr "Подключение к серверу паролей"
-
-#, c-format
-msgid "%s is not found."
-msgstr "%s не найден."
-
-msgid "Plugin is disabled."
-msgstr "Модуль выключен."
-
-msgid "Server Capability response:"
-msgstr "Возможности сервера:"
-
-msgid ""
-"Select the IMAP commands you would like to run. Most commands require a "
-"selected mailbox so the select command is already setup. You can clear all "
-"the commands and test your own IMAP command strings. The commands are "
-"executed in order. The default values are simple IMAP commands using your "
-"default_charset and folder_prefix from SquirrelMail when needed."
-msgstr ""
-"Выберите команды IMAP, которые требуется запустить. Для большинства команд "
-"требуется выбранный почтовый ящик, поэтому команда select уже указана. Можно "
-"очистить поле ввода и ввести свои команды IMAP. Команды будут выполняться в "
-"указанном порядке. Команды по умолчанию - это стандартные команды IMAP, "
-"использующие кодировку по умолчанию и префикс папок SquirrelMail, где это "
-"необходимо."
-
-msgid ""
-"NOTE: These commands are live, any changes made will effect your current "
-"email account."
-msgstr "Предупреждение: Эти команды будут выполняться именно с вашим почтовым ящиком."
-
-msgid "Select"
-msgstr "Select"
-
-msgid "Test Name"
-msgstr "Имя теста"
-
-msgid "IMAP command string"
-msgstr "Команда IMAP"
-
-msgid "Request:"
-msgstr "Запрос:"
-
-msgid "No POP3 servers configured yet."
-msgstr "Серверы POP3 не настроены."
-
-msgid "Click here to go to the options page."
-msgstr "Нажмите здесь, чтобы перейти на страницу параметров."
-
-#, c-format
-msgid "Login OK: Inbox contains %s message"
-msgid_plural "Login OK: Inbox contains %s messages"
-msgstr[0] "Вход на сервер. Всего сообщений: %s"
-msgstr[1] "Вход на сервер. Всего сообщений: %s"
-msgstr[2] "Вход на сервер. Всего сообщений: %s"
-
-msgid "Spam Service Type:"
-msgstr "Тип службы борьбы со спамом:"
-
-msgid "Free reporting"
-msgstr "Бесплатно"
-
-msgid "Member services"
-msgstr "Требуется регистрация"
-
-msgid "Save Service Type"
-msgstr "Сохранить тип службы"
-
-msgid "SpamCop reporting"
-msgstr "Отчет SpamCop"
-
-msgid "Filipino (Tagalog)"
-msgstr "Филиппинский"
-
-msgid "Simplified Chinese"
-msgstr "Китайский (КНР)"
-
-msgid "Traditional Chinese"
-msgstr "Китайский (Тайвань)"
-
 msgid "Delivery error report"
 msgstr "Сообщение об ошибке при доставке"
 
@@ -4383,4 +3892,3 @@ msgstr "Заголовки недоставленного сообщения"
 
 msgid "This image has been removed for security reasons"
 msgstr "Изображение не показано во избежание нарушений безопасности."
-
