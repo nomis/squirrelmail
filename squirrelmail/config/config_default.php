@@ -369,6 +369,12 @@ $theme[30]['NAME'] = 'Random (Changes every login)';
 $theme[31]['PATH'] = '../themes/midnight.php';
 $theme[31]['NAME'] = 'Midnight';
 
+$theme[32]['PATH'] = '../themes/alien_glow.php';
+$theme[32]['NAME'] = 'Alien Glow';
+
+$theme[33]['PATH'] = '../themes/dark_green.php';
+$theme[33]['NAME'] = 'Dark Green';
+
 /**
  * LDAP server(s)
  *   Array of arrays with LDAP server parameters. See
@@ -482,8 +488,17 @@ $allow_thread_sort = false;
  * Your IMAP server must support the SORT extension for this
  * to work.
  */
+
 global $allow_server_sort;
 $allow_server_sort = false;
+
+/**
+ * This enables the no select fix for Cyrus when subfolders
+ * exist but parent folders do not
+ */
+
+global $noselect_fix_enable;
+$noselect_fix_enable = false;
 
 /**
  * Make sure there are no characters after the PHP closing

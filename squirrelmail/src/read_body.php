@@ -261,7 +261,6 @@ function SendMDN ( $recipient , $sender) {
 function ToggleMDNflag ( $set ) {
     global $imapConnection, $passed_id, $mailbox;
     sqimap_mailbox_select($imapConnection, $mailbox);
-    
     $sg =  $set?'+':'-';
     $cmd = 'STORE ' . $passed_id . ' ' . $sg . 'FLAGS ($MDNSent)';
     $read = sqimap_run_command ($imapConnection, $cmd, true, $response, 
@@ -275,7 +274,7 @@ function ClearAttachments() {
 
 	$rem_attachments = array();
         foreach ($attachments as $info) {
-	    if ($info->session == -1) {
+	    if ($info['session'] == -1) {
         	$attached_file = "$hashed_attachment_dir/$info[localfilename]";
         	if (file_exists($attached_file)) {
             	    unlink($attached_file);
@@ -694,7 +693,7 @@ if (($mailbox == $draft_folder) && ($save_as_draft)) {
                 "identity=$identity&amp;send_to=$url_to_string&amp;".
 		"send_to_cc=$url_cc_string&amp;send_to_bcc=$url_bcc_string&amp;".
 		"subject=$url_subj&amp;mailprio=$priority_level&amp;".
-		"draft_id=$passed_id&amp;ent_num=$ent_num&amp;passed_id=$passed_id";
+		"draft_id=$passed_id&amp;ent_num=$ent_num";
     
     if ($compose_new_win == '1') {
         echo "<a href=\"javascript:void(0)\" onclick=\"comp_in_new(false,'$comp_uri')\"";
@@ -837,9 +836,11 @@ echo       '<TR>' .
              '<TD BGCOLOR="' . $color[0] . '" ALIGN="RIGHT">' .
     _("From:") .
              '</TD><TD BGCOLOR="' . $color[0] . '">' .
-                "<B>$from_name</B>&nbsp;\n" .
-             '</TD>' .
+                "<B>$from_name</B>&nbsp;\n";
+                do_hook("read_body_after_from");
+echo             '</TD>' .
           '</TR>';
+
 /** date **/
 echo       '<TR>' . "\n" .
              '<TD BGCOLOR="' . $color[0] . '" ALIGN="RIGHT">' . "\n" .
@@ -920,7 +921,6 @@ if ($default_use_mdn) {
 
         $read = sqimap_run_command ($imapConnection, "FETCH $passed_id FLAGS", true,
                                 $response, $readmessage);
-
         $MDN_flag_present = preg_match( '/.*\$MDNSent/i', $read[0]);
 
         if (trim($MDN_to) &&
@@ -987,8 +987,7 @@ if ($default_use_mdn) {
                     "               if (window.confirm(\"" .
                     _("The message sender has requested a response to indicate that you have read this message. Would you like to send a receipt?") .
                     "\")) {  \n" .
-                    "                       window.location=($url); \n" .
-                    '                       window.location.reload()' . "\n" .
+		    '                       window.open('.$url.',"right");' . "\n". 
                     '               }' . "\n" .
                     '// -->' . "\n" .
                     '</script>' . "\n";
@@ -1022,6 +1021,7 @@ if ($default_use_mdn) {
                 if ( SendMDN( $MDN_to, $final_recipient ) > 0 && $supportMDN ) {
                     ToggleMDNflag( true);
                 }
+		ClearAttachments();
             }
             $sendreceipt = 'removeMDN';
             $url = "\"read_body.php?mailbox=$mailbox&amp;passed_id=$passed_id&amp;startMessage=$startMessage&amp;show_more=$show_more&amp;sendreceipt=$sendreceipt\"";
