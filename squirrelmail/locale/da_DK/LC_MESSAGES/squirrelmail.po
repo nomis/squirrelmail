@@ -1,975 +1,740 @@
-# Danish Translation for SquirrelMail
-# Copyright (c) 1999-2002 The Squirrelmail Development Team
-# Claus Rasmussen <claus@webclaus.com>, 2000.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: $Id$\n"
-"POT-Creation-Date: 2001-12-27 09:35+0100\n"
-"PO-Revision-Date: 2001-01-20\n"
-"Last-Translator: Claus Rasmussen <claus@webclaus.com>\n"
-"Language-Team: Danish <squirrelmail-i18n@lists.sourceforge.net>\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2002-12-07 18:05+0100\n"
+"PO-Revision-Date: 2002-11-13 14:12+0100\n"
+"Last-Translator: Kent B. Hansen <kent@squirrelmail.dk>\n"
+"Language-Team: Danish\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
-"Content-Transfer-Encoding: 8BIT\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.6\n"
 
-#: squirrelmail/src/addrbook_popup.php:22
 msgid "Address Book"
 msgstr "Adressebog"
 
-#: squirrelmail/src/addrbook_search.php:97
-#: squirrelmail/src/addrbook_search_html.php:65
-#: squirrelmail/src/addressbook.php:283 squirrelmail/src/vcard.php:107
+msgid "All"
+msgstr "Alle"
+
 msgid "Name"
 msgstr "Navn"
 
-#: squirrelmail/src/addrbook_search.php:98
-#: squirrelmail/src/addrbook_search_html.php:66
-#: squirrelmail/src/addressbook.php:284
 msgid "E-mail"
-msgstr "Epost"
+msgstr "E-mail"
 
-#: squirrelmail/src/addrbook_search.php:99
-#: squirrelmail/src/addrbook_search_html.php:67
-#: squirrelmail/src/addressbook.php:285
 msgid "Info"
 msgstr "Information"
 
-#: squirrelmail/src/addrbook_search.php:102
-#: squirrelmail/src/addrbook_search_html.php:70
 msgid "Source"
 msgstr "Kilde"
 
-#: squirrelmail/src/addrbook_search_html.php:97
+msgid "To"
+msgstr "Til"
+
+msgid "Cc"
+msgstr "Cc"
+
+msgid "Bcc"
+msgstr "Bcc"
+
 msgid "Use Addresses"
 msgstr "Brug adresser"
 
-#: squirrelmail/src/addrbook_search_html.php:116
 msgid "Address Book Search"
 msgstr "Søg i adressebog"
 
-#: squirrelmail/src/addrbook_search.php:172
-#: squirrelmail/src/addrbook_search_html.php:125
 msgid "Search for"
 msgstr "Søg efter"
 
-#: squirrelmail/src/addrbook_search.php:178
-#: squirrelmail/src/addrbook_search_html.php:135
 msgid "in"
 msgstr "i"
 
-#: squirrelmail/src/addrbook_search.php:179
-#: squirrelmail/src/addrbook_search_html.php:138
 msgid "All address books"
 msgstr "Alle adressebøger"
 
-#: squirrelmail/functions/page_header.php:89
-#: squirrelmail/src/addrbook_search.php:189
-#: squirrelmail/src/addrbook_search_html.php:149
-#: squirrelmail/src/search.php:32 squirrelmail/src/search.php:79
 msgid "Search"
 msgstr "Søg"
 
-#: squirrelmail/src/addrbook_search.php:190
-#: squirrelmail/src/addrbook_search_html.php:150
 msgid "List all"
 msgstr "Vis alle"
 
-#: squirrelmail/src/addrbook_search.php:212
-#: squirrelmail/src/addrbook_search_html.php:175
 #, c-format
 msgid "Unable to list addresses from %s"
 msgstr "Kunne ikke vise adresserne fra %s"
 
-#: squirrelmail/src/addrbook_search.php:235
-#: squirrelmail/src/addrbook_search_html.php:200
 msgid "Your search failed with the following error(s)"
 msgstr "Din søgning mislykkedes og gav denne fejlmelding"
 
-#: squirrelmail/src/addrbook_search.php:158
-#: squirrelmail/src/addrbook_search.php:242
-#: squirrelmail/src/addrbook_search_html.php:205
 msgid "No persons matching your search was found"
-msgstr "Ingen personer matchede din søgning"
+msgstr "Ingen personer matchede dine kriterier"
 
-#: squirrelmail/src/addrbook_search_html.php:218
 msgid "Return"
 msgstr "Tilbage"
 
-#: squirrelmail/src/addrbook_search.php:193
-msgid "Close window"
-msgstr "Luk vindue"
+msgid "Close"
+msgstr "Luk"
 
-#: squirrelmail/src/addressbook.php:38 squirrelmail/src/addressbook.php:283
 msgid "Nickname"
 msgstr "Kaldenavn"
 
-#: squirrelmail/src/addressbook.php:39
 msgid "Must be unique"
-msgstr "Skal være unikt i adressebogen"
+msgstr "Skal være unikt"
 
-#: squirrelmail/src/addressbook.php:40
 msgid "E-mail address"
-msgstr "Email-adresse"
+msgstr "E-mailadresse"
 
-#: squirrelmail/src/addressbook.php:41
 msgid "First name"
 msgstr "Fornavn"
 
-#: squirrelmail/src/addressbook.php:42
 msgid "Last name"
 msgstr "Efternavn"
 
-#: squirrelmail/src/addressbook.php:43
 msgid "Additional info"
 msgstr "Andre informationer"
 
-#: squirrelmail/src/addressbook.php:57
 msgid "No personal address book is defined. Contact administrator."
-msgstr "Du har ikke nogen personlig adressbog - kontakt administratoren"
+msgstr "Du har ikke nogen personlig adressebog. Kontakt systemadministratoren."
 
-#: squirrelmail/src/addressbook.php:153
 msgid "You can only edit one address at the time"
 msgstr "Du kan kun rette i én adresse ad gangen"
 
-#: squirrelmail/src/addressbook.php:167 squirrelmail/src/addressbook.php:169
-#: squirrelmail/src/addressbook.php:199 squirrelmail/src/addressbook.php:201
 msgid "Update address"
 msgstr "Opdatér adresse"
 
-#: squirrelmail/functions/display_messages.php:20
-#: squirrelmail/functions/display_messages.php:71
-#: squirrelmail/functions/display_messages.php:87
-#: squirrelmail/src/addressbook.php:190 squirrelmail/src/addressbook.php:238
 msgid "ERROR"
 msgstr "FEJL"
 
-#: squirrelmail/src/addressbook.php:213
 msgid "Unknown error"
 msgstr "Ukendt fejl"
 
-#: squirrelmail/src/addressbook.php:257 squirrelmail/src/addressbook.php:338
 msgid "Add address"
 msgstr "Tilføj adresse"
 
-#: squirrelmail/src/addressbook.php:268 squirrelmail/src/addressbook.php:321
 msgid "Edit selected"
-msgstr "Ret den valgte (kun én)"
+msgstr "Ret den valgte"
 
-#: squirrelmail/src/addressbook.php:270 squirrelmail/src/addressbook.php:323
 msgid "Delete selected"
-msgstr "Slet de valgte"
+msgstr "Slet de(n) valgte"
 
-#: squirrelmail/src/addressbook.php:335
 #, c-format
 msgid "Add to %s"
 msgstr "Føj til %s"
 
-#: squirrelmail/src/compose.php:44
 msgid "Draft Email Saved"
-msgstr ""
+msgstr "Kladde gemt"
 
-#: squirrelmail/src/compose.php:136 squirrelmail/src/compose.php:177
-#: squirrelmail/src/compose.php:188
 msgid "Could not move/copy file. File not attached"
-msgstr "Kunne ikke flytte/kopiere filen - den blev ikke vedhæftet"
+msgstr "Kunne ikke flytte/kopiere filen. Filen er ikke vedhæftet"
 
-#: squirrelmail/src/compose.php:312
 msgid "Original Message"
-msgstr "Oprindelig epost"
+msgstr "Oprindelig e-mail"
 
-#: squirrelmail/functions/mailbox_display.php:563
-#: squirrelmail/plugins/filters/options.php:97
-#: squirrelmail/src/compose.php:313 squirrelmail/src/download.php:137
-#: squirrelmail/src/download.php:143
-#: squirrelmail/src/options_highlight.php:333
-#: squirrelmail/src/options_order.php:57
-#: squirrelmail/src/printer_friendly_bottom.php:97
-#: squirrelmail/src/search.php:71
 msgid "Subject"
 msgstr "Emne"
 
-#: squirrelmail/functions/mailbox_display.php:549
-#: squirrelmail/plugins/filters/options.php:85
-#: squirrelmail/src/compose.php:314 squirrelmail/src/download.php:138
-#: squirrelmail/src/download.php:145
-#: squirrelmail/src/options_highlight.php:321
-#: squirrelmail/src/options_order.php:55
-#: squirrelmail/src/printer_friendly_bottom.php:91
-#: squirrelmail/src/search.php:72
 msgid "From"
 msgstr "Fra"
 
-#: squirrelmail/functions/mailbox_display.php:557
-#: squirrelmail/src/compose.php:315 squirrelmail/src/download.php:140
-#: squirrelmail/src/download.php:149 squirrelmail/src/options_order.php:56
-#: squirrelmail/src/printer_friendly_bottom.php:96
 msgid "Date"
 msgstr "Dato"
 
-#: squirrelmail/functions/mailbox_display.php:547
-#: squirrelmail/plugins/filters/options.php:88
-#: squirrelmail/src/compose.php:317 squirrelmail/src/download.php:139
-#: squirrelmail/src/download.php:147
-#: squirrelmail/src/options_highlight.php:324
-#: squirrelmail/src/printer_friendly_bottom.php:92
-#: squirrelmail/src/search.php:74
-msgid "To"
-msgstr "Til"
+msgid "Draft Saved"
+msgstr "Kladde gemt"
 
-#: squirrelmail/src/compose.php:472 squirrelmail/src/read_body.php:543
+msgid "Your Message has been sent"
+msgstr "Din e-mail er sendt"
+
 msgid "From:"
 msgstr "Fra:"
 
-#: squirrelmail/src/compose.php:499 squirrelmail/src/read_body.php:560
 msgid "To:"
 msgstr "Til:"
 
-#: squirrelmail/src/compose.php:507
 msgid "CC:"
 msgstr "Kopi til:"
 
-#: squirrelmail/src/compose.php:515
 msgid "BCC:"
 msgstr "Blind kopi til:"
 
-#: squirrelmail/src/compose.php:522 squirrelmail/src/read_body.php:518
 msgid "Subject:"
 msgstr "Emne:"
 
-#: squirrelmail/src/compose.php:572 squirrelmail/src/compose.php:635
 msgid "Send"
 msgstr "Send"
 
-#: squirrelmail/src/compose.php:578
 msgid "Attach:"
-msgstr "Vedhæft"
+msgstr "Vedhæft:"
 
-#: squirrelmail/src/compose.php:583 squirrelmail/src/options_order.php:143
 msgid "Add"
 msgstr "Tilføj"
 
-#: squirrelmail/src/compose.php:599
 msgid "Delete selected attachments"
-msgstr "Slet de valgte vedhæftede filer"
+msgstr "Slet de(n) valgte vedhæftede filer"
 
-#: squirrelmail/functions/page_header.php:83 squirrelmail/src/compose.php:624
-#: squirrelmail/src/compose.php:628 squirrelmail/src/compose.php:633
-msgid "Addresses"
-msgstr "Adressebog"
-
-#: squirrelmail/src/compose.php:638
-#, fuzzy
-msgid "Save Draft"
-msgstr "Gem / Opdatér"
-
-#: squirrelmail/src/compose.php:644 squirrelmail/src/read_body.php:590
 msgid "Priority"
-msgstr ""
+msgstr "Prioritet"
 
-#: squirrelmail/src/compose.php:645 squirrelmail/src/read_body.php:425
-#, fuzzy
 msgid "High"
-msgstr "Til højre"
+msgstr "Høj"
 
-#: squirrelmail/src/compose.php:646 squirrelmail/src/read_body.php:428
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
-#: squirrelmail/src/compose.php:647 squirrelmail/src/read_body.php:432
 msgid "Low"
-msgstr ""
+msgstr "Lav"
 
-#: squirrelmail/src/compose.php:669
+msgid "Receipt"
+msgstr "Kvittering"
+
+msgid "On read"
+msgstr "Ved læsning"
+
+msgid "On Delivery"
+msgstr "Ved aflevering"
+
+msgid "Signature"
+msgstr "Signatur"
+
+msgid "Addresses"
+msgstr "Adresser"
+
+msgid "Save Draft"
+msgstr "Gem kladde"
+
 msgid "You have not filled in the \"To:\" field."
-msgstr "Du har ikke udfyldt \"Til:\"-feltet."
+msgstr "Du har ikke udfyldt \"Til:\" feltet."
 
-#: squirrelmail/src/compose.php:753
 msgid "said"
 msgstr "sagde"
 
-#: squirrelmail/src/compose.php:756
 msgid "quote"
-msgstr "citér"
+msgstr "citat"
 
-#: squirrelmail/src/compose.php:756
 msgid "who"
 msgstr "hvem"
 
-#: squirrelmail/src/download.php:49
 msgid "Viewing a text attachment"
 msgstr "Viser vedhæftet tekst"
 
-#: squirrelmail/src/download.php:52 squirrelmail/src/download.php:54
-#: squirrelmail/src/image.php:47 squirrelmail/src/image.php:51
-#: squirrelmail/src/read_body.php:178 squirrelmail/src/vcard.php:51
-#: squirrelmail/src/vcard.php:55
 msgid "View message"
-msgstr "Vis epost"
+msgstr "Vis meddelelse"
 
-#: squirrelmail/functions/mime.php:620 squirrelmail/src/download.php:59
-#: squirrelmail/src/image.php:60 squirrelmail/src/vcard.php:212
 msgid "Download this as a file"
 msgstr "Download som en fil"
 
-#: squirrelmail/src/folders_create.php:41
-msgid "Illegal folder name.  Please select a different name."
-msgstr "Ulovligt mappenavn - vælg vensligst et andet navn."
+msgid "Viewing a message attachment"
+msgstr "Viser vedhæftet fil"
 
-#: squirrelmail/src/folders_create.php:41
+msgid "Date:"
+msgstr "Dato:"
+
+msgid "Cc:"
+msgstr "Cc:"
+
+msgid "Bcc:"
+msgstr "Bcc:"
+
+msgid "more"
+msgstr "mere"
+
+msgid "less"
+msgstr "mindre"
+
+msgid "Illegal folder name.  Please select a different name."
+msgstr "Ulovligt mappenavn. Vælg venligst et andet navn."
+
 msgid "Click here to go back"
 msgstr "Klik her for at gå tilbage"
 
-#: squirrelmail/functions/page_header.php:85 squirrelmail/src/folders.php:45
-#: squirrelmail/src/left_main.php:259
+msgid "You have not selected a folder to delete. Please do so."
+msgstr "Du har ikke valgt hvilken mappe, som skal slettes."
+
 msgid "Folders"
 msgstr "Mapper"
 
-#: squirrelmail/src/folders.php:58
 msgid "Subscribed successfully!"
 msgstr "Mappen er gjort aktiv!"
 
-#: squirrelmail/src/folders.php:60
 msgid "Unsubscribed successfully!"
 msgstr "Mappen er gjort passiv!"
 
-#: squirrelmail/src/folders.php:62
 msgid "Deleted folder successfully!"
 msgstr "Mappen er slettet!"
 
-#: squirrelmail/src/folders.php:64
 msgid "Created folder successfully!"
 msgstr "Mappen er oprettet!"
 
-#: squirrelmail/src/folders.php:66
 msgid "Renamed successfully!"
 msgstr "Mappen er omdøbt!"
 
-#: squirrelmail/src/folders.php:69 squirrelmail/src/left_main.php:298
 msgid "refresh folder list"
 msgstr "opdatér mappeliste"
 
-#: squirrelmail/src/folders.php:82
 msgid "Create Folder"
-msgstr "Opret Mappe"
+msgstr "Opret mappe"
 
-#: squirrelmail/src/folders.php:87
 msgid "as a subfolder of"
-msgstr "som en undermappe af"
+msgstr "som en undermappe til"
 
-#: squirrelmail/src/folders.php:91 squirrelmail/src/folders.php:93
-#, fuzzy
 msgid "None"
-msgstr "Færdig"
+msgstr "Ingen"
 
-#: squirrelmail/src/folders.php:114
 msgid "Let this folder contain subfolders"
 msgstr "Lad denne mappe indeholde undermapper"
 
-#: squirrelmail/src/folders.php:117
 msgid "Create"
 msgstr "Opret"
 
-#: squirrelmail/src/folders.php:124
 msgid "Rename a Folder"
-msgstr "Omdøb en Mappe"
+msgstr "Omdøb en mappe"
 
-#: squirrelmail/src/folders.php:145
+msgid "Select a folder"
+msgstr "Vælg en mappe"
+
 msgid "Rename"
 msgstr "Omdøb"
 
-#: squirrelmail/src/folders.php:149 squirrelmail/src/folders.php:206
 msgid "No folders found"
 msgstr "Ingen mapper fundet"
 
-#: squirrelmail/src/folders.php:157
 msgid "Delete Folder"
-msgstr "Slet Mappe"
+msgstr "Slet mappe"
 
-#: squirrelmail/functions/mailbox_display.php:520
-#: squirrelmail/plugins/filters/options.php:154
-#: squirrelmail/plugins/mail_fetch/options.php:168
-#: squirrelmail/plugins/mail_fetch/options.php:175
-#: squirrelmail/src/folders.php:202 squirrelmail/src/options_highlight.php:75
-#: squirrelmail/src/options_identities.php:320
-#: squirrelmail/src/read_body.php:460
 msgid "Delete"
 msgstr "Slet"
 
-#: squirrelmail/src/folders.php:213 squirrelmail/src/folders.php:232
 msgid "Unsubscribe"
 msgstr "Gør passiv"
 
-#: squirrelmail/src/folders.php:213 squirrelmail/src/folders.php:273
 msgid "Subscribe"
 msgstr "Gør aktiv"
 
-#: squirrelmail/src/folders.php:236
 msgid "No folders were found to unsubscribe from!"
 msgstr "Ingen mapper at gøre passive"
 
-#: squirrelmail/src/folders.php:276
 msgid "No folders were found to subscribe to!"
 msgstr "Ingen mapper at gøre aktive"
 
-#: squirrelmail/src/folders_rename_getname.php:53
+msgid "You have not selected a folder to rename. Please do so."
+msgstr "Du har ikke valgt hvilken mappe, som skal omdøbes."
+
 msgid "Rename a folder"
 msgstr "Omdøb en mappe"
 
-#: squirrelmail/src/folders_rename_getname.php:57
 msgid "New name:"
 msgstr "Nyt navn:"
 
-#: squirrelmail/functions/options.php:404
-#: squirrelmail/plugins/filters/options.php:138
-#: squirrelmail/plugins/newmail/newmail_opt.php:133
-#: squirrelmail/plugins/translate/options.php:163
-#: squirrelmail/src/folders_rename_getname.php:63
-#: squirrelmail/src/options_highlight.php:346
 msgid "Submit"
-msgstr "Opdatér"
+msgstr "Gem"
 
-#: squirrelmail/functions/page_header.php:91 squirrelmail/src/help.php:97
+msgid "ERROR: Help files are not in the right format!"
+msgstr "FEJL: Hjælpefilerne er ikke i det rigtige format!"
+
 msgid "Help"
 msgstr "Hjælp"
 
-#: squirrelmail/src/help.php:131
 #, c-format
 msgid ""
 "The help has not been translated to %s.  It will be displayed in English "
 "instead."
-msgstr ""
-"Hjælpe-siderne er ikke oversat til dansk, så de bliver vist på engelsk."
+msgstr "Hjælpesiderne er ikke oversat til %s, så de bliver vist på engelsk."
 
-#: squirrelmail/src/help.php:137
 msgid "Some or all of the help documents are not present!"
-msgstr "Nogle eller alle hjælpe-sider mangler!"
+msgstr "Nogle eller alle hjælpesider mangler!"
 
-#: squirrelmail/src/help.php:163 squirrelmail/src/help.php:182
 msgid "Table of Contents"
 msgstr "Oversigt"
 
-#: squirrelmail/functions/mailbox_display.php:712
-#: squirrelmail/functions/mailbox_display.php:715
-#: squirrelmail/functions/mailbox_display.php:718
-#: squirrelmail/src/help.php:180 squirrelmail/src/help.php:181
-#: squirrelmail/src/read_body.php:482 squirrelmail/src/read_body.php:484
 msgid "Previous"
 msgstr "Forrige"
 
-#: squirrelmail/functions/mailbox_display.php:713
-#: squirrelmail/functions/mailbox_display.php:716
-#: squirrelmail/functions/mailbox_display.php:719
-#: squirrelmail/src/help.php:183 squirrelmail/src/help.php:184
-#: squirrelmail/src/read_body.php:488 squirrelmail/src/read_body.php:490
 msgid "Next"
 msgstr "Næste"
 
-#: squirrelmail/src/help.php:204
 msgid "Top"
 msgstr "Top"
 
-#: squirrelmail/src/image.php:42
-#, fuzzy
 msgid "Viewing an image attachment"
-msgstr "Viser vedhæftet tekst"
+msgstr "Viser vedhæftet billede"
 
-#: squirrelmail/src/left_main.php:115
-#, fuzzy
-msgid "empty"
-msgstr "Svar"
+msgid "INBOX"
+msgstr "Indbakke"
 
-#: squirrelmail/src/left_main.php:292
+# Missing:
+msgid "purge"
+msgstr "tøm"
+
 msgid "Last Refresh"
-msgstr ""
+msgstr "Sidste opdatering"
 
-#: squirrelmail/src/login.php:105 squirrelmail/src/login.php:157
 msgid "Login"
-msgstr "Log ind"
+msgstr "Login"
 
-#: squirrelmail/src/login.php:128
+#, c-format
+msgid "%s Logo"
+msgstr "%s Logo"
+
 #, c-format
 msgid "SquirrelMail version %s"
 msgstr "SquirrelMail version %s"
 
-#: squirrelmail/src/login.php:129
 msgid "By the SquirrelMail Development Team"
-msgstr "Af SquirrelMail-teamet"
+msgstr "Af SquirrelMail-udviklingsteamet"
 
-#: squirrelmail/src/login.php:135
 #, c-format
 msgid "%s Login"
 msgstr "%s Login"
 
-#: squirrelmail/src/login.php:139
 msgid "Name:"
-msgstr "Navn:"
+msgstr "Kontonavn:"
 
-#: squirrelmail/plugins/mail_fetch/options.php:126
-#: squirrelmail/plugins/mail_fetch/options.php:207
-#: squirrelmail/src/login.php:145
 msgid "Password:"
-msgstr "Pasord:"
+msgstr "Adgangskode:"
 
-#: squirrelmail/src/move_messages.php:93
-#: squirrelmail/src/move_messages.php:128
-#: squirrelmail/src/move_messages.php:157
+msgid "<No subject>"
+msgstr "<intet emne>"
+
 msgid "No messages were selected."
-msgstr "Ingen beskeder valgt"
+msgstr "Ingen beskeder valgt."
 
-#: squirrelmail/src/options_display.php:32
 msgid "General Display Options"
-msgstr ""
+msgstr "Generelle formatteringsindstillinger"
 
-#: squirrelmail/src/options_display.php:44
 msgid "Theme"
-msgstr "Farve-tema"
+msgstr "Tema"
 
-#: squirrelmail/src/options_display.php:59
-#, fuzzy
 msgid "Default"
-msgstr "Brug som standard"
+msgstr "Standard"
 
-#: squirrelmail/src/options_display.php:62
+msgid "Custom Stylesheet"
+msgstr "Brugerdefineret stylesheet"
+
 msgid "Language"
 msgstr "Sprog"
 
-#: squirrelmail/src/options_display.php:71
-#, fuzzy
 msgid "Use Javascript"
-msgstr "JavaScript"
+msgstr "Brug JavaScript"
 
-#: squirrelmail/src/options_display.php:74
 msgid "Autodetect"
-msgstr ""
+msgstr "Autodetektér"
 
-#: squirrelmail/src/options_display.php:75
 msgid "Always"
-msgstr ""
+msgstr "Altid"
 
-#: squirrelmail/src/options_display.php:76
-#: squirrelmail/src/options_folder.php:122
 msgid "Never"
 msgstr "Aldrig"
 
-#: squirrelmail/src/options_display.php:94
 msgid "Mailbox Display Options"
-msgstr ""
+msgstr "Mailboks formatteringsindstillinger"
 
-#: squirrelmail/src/options_display.php:99
 msgid "Number of Messages to Index"
 msgstr "Antal beskeder i oversigten"
 
-#: squirrelmail/src/options_display.php:107
-#, fuzzy
 msgid "Enable Alternating Row Colors"
 msgstr "Variér baggrundsfarven på hveranden række"
 
-#: squirrelmail/src/options_display.php:114
-#, fuzzy
 msgid "Enable Page Selector"
-msgstr "Side-v&aelig;lger"
+msgstr "Aktivér opdeling i sider"
 
-#: squirrelmail/src/options_display.php:121
-#, fuzzy
 msgid "Maximum Number of Pages to Show"
-msgstr "Antal beskeder i oversigten"
+msgstr "Det maksimale antal sider som vises"
 
-#: squirrelmail/src/options_display.php:128
 msgid "Message Display and Composition"
-msgstr ""
+msgstr "Beskedformattering og -opbygning"
 
-#: squirrelmail/src/options_display.php:133
-#, fuzzy
 msgid "Wrap Incoming Text At"
 msgstr "Ombryd modtagede beskeder ved"
 
-#: squirrelmail/src/options_display.php:141
-#, fuzzy
 msgid "Size of Editor Window"
-msgstr "Størrelse på \"skrive-vinduet\""
+msgstr "Størrelse på skrivevinduet"
 
-#: squirrelmail/src/options_display.php:149
-#, fuzzy
 msgid "Location of Buttons when Composing"
 msgstr "Placering af knapper når du skriver"
 
-#: squirrelmail/src/options_display.php:152
 msgid "Before headers"
-msgstr "Helt øverst"
+msgstr "Over adressefelterne"
 
-#: squirrelmail/src/options_display.php:153
 msgid "Between headers and message body"
-msgstr "Mellem adressefelterne og selve eposten"
+msgstr "Mellem adressefelterne og selve beskeden"
 
-#: squirrelmail/src/options_display.php:154
 msgid "After message body"
-msgstr "I bunden"
+msgstr "Under beskeden"
 
-#: squirrelmail/src/options_display.php:159
-#, fuzzy
 msgid "Addressbook Display Format"
-msgstr "Du kan ikke skrive i adressebogen"
+msgstr "Adressebog formatteringsindstilling"
 
-#: squirrelmail/src/options_display.php:162
-#, fuzzy
 msgid "Javascript"
 msgstr "JavaScript"
 
-#: squirrelmail/src/options_display.php:163
 msgid "HTML"
 msgstr "HTML"
 
-#: squirrelmail/src/options_display.php:168
-#, fuzzy
 msgid "Show HTML Version by Default"
-msgstr "Vis HTML-versionen som udgangspunkt"
+msgstr "Vis HTML-versionen som standard"
 
-#: squirrelmail/src/options_display.php:175
 msgid "Include Me in CC when I Reply All"
-msgstr ""
+msgstr "Inkludér mig i Kopi-til når jeg svarer til alle"
 
-#: squirrelmail/src/options_display.php:182
+msgid "Include CCs when forwarding messages"
+msgstr "Inkludér Kopi-til i videresendte beskeder"
+
 msgid "Enable Mailer Display"
-msgstr ""
+msgstr "Aktivér besked display"
 
-#: squirrelmail/src/options_display.php:189
 msgid "Display Attached Images with Message"
-msgstr ""
+msgstr "Vis vedhæftede billeder i beskeden"
 
-#: squirrelmail/src/options_display.php:196
 msgid "Enable Subtle Printer Friendly Link"
-msgstr ""
+msgstr "Aktivér printervenlige links"
 
-#: squirrelmail/src/options_display.php:203
 msgid "Enable Printer Friendly Clean Display"
-msgstr ""
+msgstr "Aktivér printervenlig formatering"
 
-#: squirrelmail/src/options_folder.php:40
+msgid "Enable request/confirm reading"
+msgstr "Aktivér forespørg/bekræft læsning"
+
+msgid "Always compose in a new window"
+msgstr "Skriv altid i et nyt vindue"
+
+msgid "Width of compose window"
+msgstr "Bredde på skrivevinduet"
+
+msgid "Height of compose window"
+msgstr "Højde på skrivevinduet"
+
+msgid "Append signature before reply/forward text"
+msgstr "Tilføj signatur før svaret/den videresendte tekst"
+
+msgid "Use receive date for sort"
+msgstr "Sortér efter modtagelsesdato"
+
+msgid "Use References header for thread sort"
+msgstr "Brug reference-headeren for at sortere i tråde"
+
 msgid "Special Folder Options"
-msgstr "Særlige mappe-indstillinger"
+msgstr "Specialmappe-indstillinger"
 
-#: squirrelmail/src/options_folder.php:47
 msgid "Folder Path"
-msgstr "Sti til mail-mappe"
+msgstr "Sti til mapper"
 
-#: squirrelmail/src/options_folder.php:63
 msgid "Do not use Trash"
-msgstr "Brug ikke papirkurv"
+msgstr "Brug ikke papirkurven"
 
-#: squirrelmail/src/options_folder.php:67
-#, fuzzy
 msgid "Trash Folder"
-msgstr "Brug denne mappe som papirkurv:"
+msgstr "Papirkurv"
 
-#: squirrelmail/src/options_folder.php:74
 msgid "Do not use Sent"
 msgstr "Gem ikke sendt post"
 
-#: squirrelmail/src/options_folder.php:78
-#, fuzzy
 msgid "Sent Folder"
-msgstr "\"Sendt\"-mappe"
+msgstr "Sendt"
 
-#: squirrelmail/src/options_folder.php:85
-#, fuzzy
 msgid "Do not use Drafts"
-msgstr "Brug ikke papirkurv"
+msgstr "Brug ikke kladder"
 
-#: squirrelmail/src/options_folder.php:89
-#, fuzzy
 msgid "Draft Folder"
-msgstr "Opret Mappe"
+msgstr "Kladder"
 
-#: squirrelmail/src/options_folder.php:97
-#, fuzzy
 msgid "Folder List Options"
-msgstr "Særlige mappe-indstillinger"
+msgstr "Mappeliste-indstillinger"
 
-#: squirrelmail/src/options_folder.php:102
-#, fuzzy
 msgid "Location of Folder List"
-msgstr "Placering af mappe-listen"
+msgstr "Placering af mappelisten"
 
-#: squirrelmail/src/options_folder.php:105
 msgid "Left"
 msgstr "Til venstre"
 
-#: squirrelmail/src/options_folder.php:106
 msgid "Right"
 msgstr "Til højre"
 
-#: squirrelmail/src/options_folder.php:111
 msgid "pixels"
-msgstr ""
+msgstr "billedpunkter"
 
-#: squirrelmail/src/options_folder.php:115
-#, fuzzy
 msgid "Width of Folder List"
-msgstr "Bredde på mappe-listen"
+msgstr "Bredde på mappelisten"
 
-#: squirrelmail/src/options_folder.php:121
 msgid "Minutes"
 msgstr "Minutter"
 
-#: squirrelmail/src/options_folder.php:125
-#, fuzzy
 msgid "Seconds"
-msgstr "Send"
+msgstr "Sekunder"
 
-#: squirrelmail/src/options_folder.php:127
 msgid "Minute"
 msgstr "Minut"
 
-#: squirrelmail/src/options_folder.php:134
-#, fuzzy
 msgid "Auto Refresh Folder List"
-msgstr "Opdatér mappeliste"
+msgstr "Opdatér automatisk mappelisten"
 
-#: squirrelmail/src/options_folder.php:142
-#, fuzzy
 msgid "Enable Unread Message Notification"
-msgstr "Gør opmærksom på ulæste beskeder?"
+msgstr "Gør opmærksom på ulæste beskeder"
 
-#: squirrelmail/src/options_folder.php:145
-#, fuzzy
 msgid "No Notification"
 msgstr "Nej"
 
-#: squirrelmail/src/options_folder.php:146
 msgid "Only INBOX"
-msgstr "Kun i INBOX"
+msgstr "Kun i indbakken"
 
-#: squirrelmail/src/options_folder.php:147
 msgid "All Folders"
 msgstr "I alle mapper"
 
-#: squirrelmail/src/options_folder.php:152
-#, fuzzy
 msgid "Unread Message Notification Type"
-msgstr "Hvordan?"
+msgstr "Hvordan"
 
-#: squirrelmail/src/options_folder.php:155
-#, fuzzy
 msgid "Only Unseen"
 msgstr "Vis antal ulæste"
 
-#: squirrelmail/src/options_folder.php:156
 msgid "Unseen and Total"
 msgstr "Vis antal ulæste og samlet antal"
 
-#: squirrelmail/src/options_folder.php:161
-#, fuzzy
 msgid "Enable Collapsable Folders"
 msgstr "Aktivér sammenklappelige mapper"
 
-#: squirrelmail/src/options_folder.php:168
 msgid "Show Clock on Folders Panel"
-msgstr ""
+msgstr "Vis klokken i mappelisten"
 
-#: squirrelmail/src/options_folder.php:176
 msgid "No Clock"
-msgstr ""
+msgstr "Intet ur"
 
-#: squirrelmail/src/options_folder.php:181
 msgid "Hour Format"
-msgstr ""
+msgstr "Formatering"
 
-#: squirrelmail/src/options_folder.php:184
 msgid "12-hour clock"
-msgstr ""
+msgstr "12-timers ur"
 
-#: squirrelmail/src/options_folder.php:185
 msgid "24-hour clock"
-msgstr ""
+msgstr "24-timers ur"
 
-#: squirrelmail/functions/page_header.php:87
-#: squirrelmail/plugins/filters/options.php:62
-#: squirrelmail/plugins/newmail/newmail_opt.php:34
-#: squirrelmail/plugins/translate/options.php:97
-#: squirrelmail/src/options.php:164 squirrelmail/src/options_highlight.php:61
-#: squirrelmail/src/options_identities.php:58
-#: squirrelmail/src/options_order.php:48
+msgid "Memory Search"
+msgstr "Hukommelsessøgning"
+
+msgid "Disabled"
+msgstr "Deaktiveret"
+
 msgid "Options"
 msgstr "Indstillinger"
 
-#: squirrelmail/src/options.php:112 squirrelmail/src/options.php:263
-#: squirrelmail/src/options_highlight.php:61
 msgid "Message Highlighting"
-msgstr "Særlige markeringer"
+msgstr "Beskedfremhævning"
 
-#: squirrelmail/plugins/filters/options.php:64
-#: squirrelmail/src/options_highlight.php:65
 msgid "New"
 msgstr "Ny"
 
-#: squirrelmail/plugins/filters/options.php:65
-#: squirrelmail/plugins/filters/spamoptions.php:149
-#: squirrelmail/plugins/mail_fetch/fetch.php:225
-#: squirrelmail/src/options_highlight.php:66
 msgid "Done"
 msgstr "Færdig"
 
-#: squirrelmail/plugins/filters/options.php:152
-#: squirrelmail/plugins/filters/spamoptions.php:148
-#: squirrelmail/src/options_highlight.php:73
 msgid "Edit"
 msgstr "Ret"
 
-#: squirrelmail/src/options_highlight.php:86
 msgid "No highlighting is defined"
-msgstr "Ingen markering er valgt"
+msgstr "Ingen fremhævning er valgt"
 
-#: squirrelmail/src/options_highlight.php:258
 msgid "Identifying name"
-msgstr "Betegnelse for denne markering (bare til oversigten)"
+msgstr "Betegnelse for denne markering"
 
-#: squirrelmail/src/options_highlight.php:272
 msgid "Color"
-msgstr "Baggrundsfarve"
+msgstr "Farve"
 
-#: squirrelmail/src/options_highlight.php:276
 msgid "Dark Blue"
 msgstr "Mørk blå"
 
-#: squirrelmail/src/options_highlight.php:277
 msgid "Dark Green"
 msgstr "Mørk grøn"
 
-#: squirrelmail/src/options_highlight.php:278
 msgid "Dark Yellow"
 msgstr "Mørk gul"
 
-#: squirrelmail/src/options_highlight.php:279
 msgid "Dark Cyan"
-msgstr "Mørk cyan"
+msgstr "Mørk blågrøn"
 
-#: squirrelmail/src/options_highlight.php:280
 msgid "Dark Magenta"
 msgstr "Mørk magenta"
 
-#: squirrelmail/src/options_highlight.php:281
 msgid "Light Blue"
 msgstr "Lys blå"
 
-#: squirrelmail/src/options_highlight.php:282
 msgid "Light Green"
 msgstr "Lys grøn"
 
-#: squirrelmail/src/options_highlight.php:283
 msgid "Light Yellow"
 msgstr "Lys gul"
 
-#: squirrelmail/src/options_highlight.php:284
 msgid "Light Cyan"
-msgstr "Lys cyan"
+msgstr "Lys blågrøn"
 
-#: squirrelmail/src/options_highlight.php:285
 msgid "Light Magenta"
 msgstr "Lys magenta"
 
-#: squirrelmail/src/options_highlight.php:286
 msgid "Dark Gray"
 msgstr "Mørk grå"
 
-#: squirrelmail/src/options_highlight.php:287
 msgid "Medium Gray"
-msgstr "Medium grå"
+msgstr "Grå"
 
-#: squirrelmail/src/options_highlight.php:288
 msgid "Light Gray"
 msgstr "Lys grå"
 
-#: squirrelmail/src/options_highlight.php:289
 msgid "White"
 msgstr "Hvid"
 
-#: squirrelmail/src/options_highlight.php:291
 msgid "Other:"
-msgstr "Anden farve"
+msgstr "Anden:"
 
-#: squirrelmail/src/options_highlight.php:293
 msgid "Ex: 63aa7f"
-msgstr "F.eks. 66ccff"
+msgstr "F.eks.: 63aa7f "
 
-#: squirrelmail/plugins/filters/options.php:91
-#: squirrelmail/src/options_highlight.php:327 squirrelmail/src/search.php:73
-msgid "Cc"
-msgstr "Kopi"
-
-#: squirrelmail/plugins/filters/options.php:94
-#: squirrelmail/src/options_highlight.php:330
 msgid "To or Cc"
-msgstr ""
+msgstr "Til eller Cc"
 
-#: squirrelmail/src/options_highlight.php:335
-#, fuzzy
 msgid "Matches"
 msgstr "Kriterie"
 
-#: squirrelmail/src/options_identities.php:58
 msgid "Advanced Identities"
-msgstr "Avancerede Identiteter"
+msgstr "Avancerede identiteter"
 
-#: squirrelmail/src/options_identities.php:69
 msgid "Default Identity"
-msgstr "Standard Identitet"
+msgstr "Standard identitet"
 
-#: squirrelmail/src/options_identities.php:80
 #, c-format
 msgid "Alternate Identity %d"
-msgstr "Alternativ Identitet %d"
+msgstr "Alternativ identitet %d"
 
-#: squirrelmail/src/options_identities.php:90
 msgid "Add a New Identity"
-msgstr "Tilf&oslash;j ny identitet"
+msgstr "Tilføj ny identitet"
 
-#: squirrelmail/src/options_identities.php:306
-#: squirrelmail/src/options_personal.php:49
 msgid "Full Name"
-msgstr "Fuldt Navn"
+msgstr "Fuldt navn"
 
-#: squirrelmail/src/options_identities.php:307
 msgid "E-Mail Address"
-msgstr "Epost-adresse"
+msgstr "E-mailadresse"
 
-#: squirrelmail/src/options_identities.php:308
-#: squirrelmail/src/options_personal.php:65
 msgid "Reply To"
 msgstr "Svar til"
 
-#: squirrelmail/src/options_identities.php:315
 msgid "Save / Update"
-msgstr "Gem / Opdatér"
+msgstr "Gem / Opdater"
 
-#: squirrelmail/src/options_identities.php:318
 msgid "Make Default"
 msgstr "Brug som standard"
 
-#: squirrelmail/src/options_identities.php:324
-#, fuzzy
 msgid "Move Up"
-msgstr "Flyt"
+msgstr "Flyt op"
 
-#: squirrelmail/src/options.php:124 squirrelmail/src/options.php:279
-#: squirrelmail/src/options_order.php:48
 msgid "Index Order"
-msgstr "Opstilling i mapper"
+msgstr "Indekssortering"
 
-#: squirrelmail/src/options_order.php:54
 msgid "Checkbox"
-msgstr "Checkboks"
+msgstr "Afkrydsningsboks"
 
-#: squirrelmail/src/options_order.php:58
 msgid "Flags"
 msgstr "Markeringer"
 
-#: squirrelmail/functions/mailbox_display.php:569
-#: squirrelmail/src/options_order.php:59
 msgid "Size"
 msgstr "Størrelse"
 
-#: squirrelmail/src/options_order.php:102
 msgid ""
 "The index order is the order that the columns are arranged in the message "
 "index.  You can add, remove, and move columns around to customize them to "
@@ -977,1031 +742,1049 @@ msgid ""
 msgstr ""
 "Her bestemmer du hvordan dine oversigter skal opstilles. Du kan slette, "
 "tilføje eller omarrangere kolonnerne.Ved at klikke \"op\", kommer en kolonne "
-"et trin op på listen og modsvarende for \"ned\""
+"et trin op på listen og modsvarende for \"ned\"."
 
-#: squirrelmail/src/options_order.php:111
 msgid "up"
 msgstr "op"
 
-#: squirrelmail/src/options_order.php:113
 msgid "down"
 msgstr "ned"
 
-#: squirrelmail/src/options_order.php:118
 msgid "remove"
 msgstr "slet"
 
-#: squirrelmail/src/options_order.php:147
 msgid "Return to options page"
 msgstr "Tilbage til oversigten over indstillinger"
 
-#: squirrelmail/src/options_personal.php:41
 msgid "Name and Address Options"
-msgstr ""
+msgstr "Navn- og adresseindstillinger"
 
-#: squirrelmail/src/options_personal.php:57
-#, fuzzy
 msgid "Email Address"
-msgstr "Epost-adresse"
+msgstr "E-mailadresse"
 
-#: squirrelmail/src/options_personal.php:72
 msgid "Edit Advanced Identities"
-msgstr "Redigér Avancerede Identiteter"
+msgstr "Redigér avancerede identiteter"
 
-#: squirrelmail/src/options_personal.php:74
 msgid "(discards changes made on this form so far)"
-msgstr "(drop ændringer lavet indtil nu)"
+msgstr "(drop ændringer lavet her indtil nu)"
 
-#: squirrelmail/src/options_personal.php:77
 msgid "Multiple Identities"
-msgstr "Flere Identiteter"
+msgstr "Flere identiteter"
 
-#: squirrelmail/src/options_personal.php:84
-#, fuzzy
+msgid "Same as server"
+msgstr "Samme som serveren"
+
+msgid "Timezone Options"
+msgstr "Tidszoneindstillinger"
+
+msgid "Your current timezone"
+msgstr "Din tidszone"
+
 msgid "Reply Citation Options"
-msgstr "Svar i citat-stil"
+msgstr "Citationsindstillinger"
 
-#: squirrelmail/src/options_personal.php:89
 msgid "Reply Citation Style"
-msgstr "Svar i citat-stil"
+msgstr "Citationsstil"
 
-#: squirrelmail/src/options_personal.php:92
-#, fuzzy
 msgid "No Citation"
-msgstr "Nej"
+msgstr "Ingen citation"
 
-#: squirrelmail/src/options_personal.php:93
 msgid "AUTHOR Said"
-msgstr "AUTHOR Sagde"
+msgstr "Forfatteren sagde"
 
-#: squirrelmail/src/options_personal.php:94
 msgid "Quote Who XML"
-msgstr "Citér Hvem XML"
+msgstr "Citer hvem XML"
 
-#: squirrelmail/src/options_personal.php:95
 msgid "User-Defined"
-msgstr "Bruger-defineret"
+msgstr "Brugerdefineret"
 
-#: squirrelmail/src/options_personal.php:100
-#, fuzzy
 msgid "User-Defined Citation Start"
-msgstr "Bruger-defineret svar-funktion"
+msgstr "Begyndelsen på brugerdefineret citation"
 
-#: squirrelmail/src/options_personal.php:108
-#, fuzzy
 msgid "User-Defined Citation End"
-msgstr "Bruger-defineret svar-funktion"
+msgstr "Afslutningen af brugerdefineret citation"
 
-#: squirrelmail/src/options_personal.php:115
-#, fuzzy
 msgid "Signature Options"
-msgstr "Signatur"
+msgstr "Signaturindstillinger"
 
-#: squirrelmail/src/options_personal.php:120
-#, fuzzy
 msgid "Use Signature"
 msgstr "Brug signatur"
 
-#: squirrelmail/src/options_personal.php:127
-#, fuzzy
 msgid "Prefix Signature with '-- ' Line"
-msgstr "S&aelig;t '--' forand signaturen ?"
+msgstr "Sæt '-- ' foran signaturen"
 
-#: squirrelmail/src/options_personal.php:134
-msgid "Signature"
-msgstr "Signatur"
-
-#: squirrelmail/src/options.php:100 squirrelmail/src/options.php:247
 msgid "Personal Information"
-msgstr "Personlig Information"
+msgstr "Personlig information"
 
-#: squirrelmail/src/options.php:106 squirrelmail/src/options.php:255
 msgid "Display Preferences"
-msgstr "Generelle Indstillinger"
+msgstr "Formateringsindstillinger"
 
-#: squirrelmail/src/options.php:118 squirrelmail/src/options.php:271
 msgid "Folder Preferences"
-msgstr "Mappe-indstillinger"
+msgstr "Mappeindstillinger"
 
-#: squirrelmail/src/options.php:231
-#, fuzzy
 msgid "Successfully Saved Options"
-msgstr "Din personlige information er gemt!"
+msgstr "Indstillingerne er gemt"
 
-#: squirrelmail/src/options.php:235
 msgid "Refresh Folder List"
 msgstr "Opdatér mappeliste"
 
-#: squirrelmail/src/options.php:237
 msgid "Refresh Page"
 msgstr "Opdatér siden"
 
-#: squirrelmail/src/options.php:249
 msgid ""
 "This contains personal information about yourself such as your name, your "
 "email address, etc."
 msgstr ""
-"Her er dine personlige oplysninger, som dit navn, din epost-adresse m.v."
+"Her er dine personlige oplysninger, såsom dit navn, din e-mail-adresse m.v."
 
-#: squirrelmail/src/options.php:257
 msgid ""
 "You can change the way that SquirrelMail looks and displays information to "
 "you, such as the colors, the language, and other settings."
 msgstr "Her kan du indstille farver, sprog og andre generelle ting."
 
-#: squirrelmail/src/options.php:265
 msgid ""
 "Based upon given criteria, incoming messages can have different background "
 "colors in the message list.  This helps to easily distinguish who the "
 "messages are from, especially for mailing lists."
 msgstr ""
-"Du kan vælge en bestemt baggrundsfarve til bestemte typer epost, så de "
-"træder ud af mængden."
+"Her kan du vælge en bestemt baggrundsfarve til bestemte typer e-mails, så de "
+"træder ud fra mængden."
 
-#: squirrelmail/src/options.php:273
 msgid ""
 "These settings change the way your folders are displayed and manipulated."
-msgstr "Her bestemmer du, hvordan mapperne skal vises i mappe-oversigten."
+msgstr "Her bestemmer du, hvordan mapperne skal vises i mappelisten."
 
-#: squirrelmail/src/options.php:281
-#, fuzzy
 msgid ""
 "The order of the message index can be rearranged and changed to contain the "
 "headers in any order you want."
 msgstr ""
 "Her kan du bestemme, hvordan dine beskeder skal vises - om afsender skal stå "
-"til venstre for dato o.s.v."
+"til venstre for dato osv."
 
-#: squirrelmail/src/printer_friendly_bottom.php:86
-#: squirrelmail/src/printer_friendly_main.php:31
-#: squirrelmail/src/printer_friendly_top.php:37
+msgid "Message not printable"
+msgstr "Beskeden kan ikke udskrives"
+
 msgid "Printer Friendly"
-msgstr ""
+msgstr "Printervenlig"
 
-#: squirrelmail/src/printer_friendly_bottom.php:94
-#, fuzzy
 msgid "CC"
-msgstr "Kopi til:"
+msgstr "Kopi til"
 
-#: squirrelmail/src/printer_friendly_top.php:52
 msgid "Print"
-msgstr ""
+msgstr "Udskriv"
 
-#: squirrelmail/src/printer_friendly_top.php:53
-#, fuzzy
 msgid "Close Window"
 msgstr "Luk vindue"
 
-#: squirrelmail/src/read_body.php:118
 msgid "View Printable Version"
-msgstr ""
+msgstr "Vis printervenlig version"
 
-#: squirrelmail/src/read_body.php:171
-#, fuzzy
+msgid "Your message"
+msgstr "Din besked"
+
+msgid "Sent:"
+msgstr "Sendt:"
+
+#, c-format
+msgid "Was displayed on %s"
+msgstr "Var vist %s"
+
+msgid "Read:"
+msgstr "Læs:"
+
 msgid "Viewing Full Header"
-msgstr "Viser hele \"headeren\""
+msgstr "Viser hele headeren"
 
-#: squirrelmail/src/read_body.php:306
-msgid "more"
-msgstr "vis mere"
-
-#: squirrelmail/src/read_body.php:307
-msgid "less"
-msgstr "reducér"
-
-#: squirrelmail/src/read_body.php:453
 msgid "Message List"
 msgstr "Oversigt"
 
-#: squirrelmail/src/read_body.php:464
 msgid "Resume Draft"
-msgstr ""
+msgstr "Fortsæt på kladde"
 
-#: squirrelmail/src/read_body.php:499
+msgid "Edit Message as New"
+msgstr "Ret beskeden som en ny"
+
 msgid "Forward"
 msgstr "Videresend"
 
-#: squirrelmail/src/read_body.php:502
 msgid "Reply"
 msgstr "Svar"
 
-#: squirrelmail/src/read_body.php:505
 msgid "Reply All"
-msgstr "Svar alle"
+msgstr "Svar til alle"
 
-#: squirrelmail/src/read_body.php:526 squirrelmail/src/read_body.php:528
-#, fuzzy
 msgid "View Full Header"
-msgstr "Vis hele \"headeren\""
+msgstr "Vis hele headeren"
 
-#: squirrelmail/src/read_body.php:551
-msgid "Date:"
-msgstr "Dato:"
-
-#: squirrelmail/src/read_body.php:607
 msgid "Mailer"
+msgstr "Mailprogram"
+
+msgid "Read receipt"
+msgstr "Læs kvittering"
+
+msgid "send"
+msgstr "send"
+
+msgid "requested"
+msgstr "anmodet"
+
+msgid "Send read receipt now"
+msgstr "Send kvittering nu"
+
+msgid ""
+"The message sender has requested a response to indicate that you have read "
+"this message. Would you like to send a receipt?"
 msgstr ""
+"Afsenderen har anmodet om en kvittering for at du har læst denne besked. Vil "
+"du sende en kvittering?"
 
-#: squirrelmail/functions/auth.php:44 squirrelmail/src/redirect.php:95
-#: squirrelmail/src/redirect.php:99
-#, fuzzy
 msgid "You must be logged in to access this page."
-msgstr "For at se denne side skal du have et gyldigt brugernavn og password"
+msgstr "Du skal være logget ind for at kunne se denne side."
 
-#: squirrelmail/functions/auth.php:45 squirrelmail/src/redirect.php:100
-msgid "Go to the login page"
-msgstr "G&aring; til login-siden"
-
-#: squirrelmail/src/redirect.php:120 squirrelmail/src/redirect.php:124
 msgid "There was an error contacting the mail server."
-msgstr "Der opstod en fejl under samtalen med mail-serveren"
+msgstr "Der opstod en fejl under kommunikationen med mailserveren"
 
-#: squirrelmail/src/redirect.php:125
 msgid "Contact your administrator for help."
-msgstr "Kontakt din system-administrator for hj&aelig;lp."
+msgstr "Kontakt din systemadministrator for hjælp."
 
-#: squirrelmail/src/search.php:69
+msgid "edit"
+msgstr "ret"
+
+msgid "search"
+msgstr "søg"
+
+msgid "delete"
+msgstr "slet"
+
+msgid "Recent Searches"
+msgstr "Forrige søgninger"
+
+msgid "save"
+msgstr "gem"
+
+msgid "forget"
+msgstr "glem"
+
+msgid "Current Search"
+msgstr "Aktuel søgning"
+
 msgid "Body"
 msgstr "Besked"
 
-#: squirrelmail/src/search.php:70
 msgid "Everywhere"
 msgstr "Overalt"
 
-#: squirrelmail/functions/page_header.php:75 squirrelmail/src/signout.php:83
+msgid "Search Results"
+msgstr "Søgeresultat"
+
+msgid "No Messages found"
+msgstr "Ingen beskeder fundet"
+
 msgid "Sign Out"
 msgstr "Log ud"
 
-#: squirrelmail/src/signout.php:89
 msgid "You have been successfully signed out."
 msgstr "Du er logget ud."
 
-#: squirrelmail/src/signout.php:91
 msgid "Click here to log back in."
 msgstr "Klik her for at logge ind igen."
 
-#: squirrelmail/src/vcard.php:46
-#, fuzzy
 msgid "Viewing a Business Card"
-msgstr "Viser epost"
+msgstr "Viser visitkort"
 
-#: squirrelmail/src/vcard.php:108 squirrelmail/src/vcard.php:169
-#, fuzzy
 msgid "Title"
 msgstr "Titel"
 
-#: squirrelmail/src/vcard.php:109
-#, fuzzy
 msgid "Email"
-msgstr "Epost"
+msgstr "E-mail"
 
-#: squirrelmail/src/vcard.php:110 squirrelmail/src/vcard.php:163
-#, fuzzy
 msgid "Web Page"
-msgstr "Opdatér siden"
+msgstr "Hjemmeside"
 
-#: squirrelmail/src/vcard.php:111 squirrelmail/src/vcard.php:172
 msgid "Organization / Department"
-msgstr ""
+msgstr "Organisation / Afdeling"
 
-#: squirrelmail/src/vcard.php:112 squirrelmail/src/vcard.php:166
-#, fuzzy
 msgid "Address"
-msgstr "Adressebog"
+msgstr "Adresse"
 
-#: squirrelmail/src/vcard.php:113 squirrelmail/src/vcard.php:179
 msgid "Work Phone"
-msgstr ""
+msgstr "Arbejdstelefon"
 
-#: squirrelmail/src/vcard.php:114 squirrelmail/src/vcard.php:182
 msgid "Home Phone"
-msgstr ""
+msgstr "Hjemmetelefon"
 
-#: squirrelmail/src/vcard.php:115 squirrelmail/src/vcard.php:185
 msgid "Cellular Phone"
-msgstr ""
+msgstr "Mobiltelefon"
 
-#: squirrelmail/src/vcard.php:116 squirrelmail/src/vcard.php:188
 msgid "Fax"
-msgstr ""
+msgstr "Fax"
 
-#: squirrelmail/src/vcard.php:117 squirrelmail/src/vcard.php:191
-#, fuzzy
 msgid "Note"
-msgstr "Færdig"
+msgstr "Notits"
 
-#: squirrelmail/src/vcard.php:149
-#, fuzzy
 msgid "Add to Addressbook"
-msgstr "Tilføj adresse"
+msgstr "Tilføj til adressebogen"
 
-#: squirrelmail/src/vcard.php:176
+msgid "Note Field Contains"
+msgstr "Notitsfeltet indeholder"
+
 msgid "Title & Org. / Dept."
-msgstr ""
+msgstr "Titel og organisation / afd."
 
-#: squirrelmail/functions/abook_database.php:50
-#: squirrelmail/functions/abook_local_file.php:53
-#: squirrelmail/functions/addressbook.php:152
 msgid "Personal address book"
-msgstr "Adressebog"
+msgstr "Personlig adressebog"
 
-#: squirrelmail/functions/abook_database.php:96
-#: squirrelmail/functions/abook_database.php:136
-#: squirrelmail/functions/abook_database.php:171
-#: squirrelmail/functions/abook_database.php:201
-#: squirrelmail/functions/abook_database.php:253
-#: squirrelmail/functions/abook_database.php:286
-#: squirrelmail/functions/abook_database.php:327
 #, c-format
 msgid "Database error: %s"
-msgstr "Database-fejl: %s"
+msgstr "Databasefejl: %s"
 
-#: squirrelmail/functions/abook_database.php:221
-#: squirrelmail/functions/abook_database.php:260
-#: squirrelmail/functions/abook_database.php:293
-#: squirrelmail/functions/abook_local_file.php:247
-#: squirrelmail/functions/abook_local_file.php:267
-#: squirrelmail/functions/abook_local_file.php:290
-#: squirrelmail/functions/abook_local_file.php:319
-#: squirrelmail/functions/addressbook.php:348
-#: squirrelmail/functions/addressbook.php:383
-#: squirrelmail/functions/addressbook.php:436
 msgid "Addressbook is read-only"
 msgstr "Du kan ikke skrive i adressebogen"
 
-#: squirrelmail/functions/abook_database.php:231
-#: squirrelmail/functions/abook_local_file.php:252
 #, c-format
 msgid "User '%s' already exist"
 msgstr "Brugernavnet '%s' er allerede i brug"
 
-#: squirrelmail/functions/abook_database.php:303
-#: squirrelmail/functions/abook_local_file.php:324
 #, c-format
 msgid "User '%s' does not exist"
 msgstr "Brugernavnet '%s' eksisterer ikke"
 
-#: squirrelmail/functions/abook_global_file.php:51
-#, fuzzy
 msgid "Global address book"
-msgstr "Alle adressebøger"
+msgstr "Global adressebog"
 
-#: squirrelmail/functions/abook_global_file.php:71
-#: squirrelmail/functions/abook_local_file.php:94
 msgid "No such file or directory"
-msgstr "Filen eller biblioteket eksisterer ikke"
+msgstr "Filen eller mappen eksisterer ikke"
 
-#: squirrelmail/functions/abook_global_file.php:81
-#: squirrelmail/functions/abook_local_file.php:114
-#: squirrelmail/functions/abook_local_file.php:150
 msgid "Open failed"
 msgstr "Kunne ikke åbne filen"
 
-#: squirrelmail/functions/abook_global_file.php:178
-#: squirrelmail/functions/abook_global_file.php:184
-#: squirrelmail/functions/abook_global_file.php:190
 msgid "Can not modify global address book"
-msgstr "Can ikke &aelig;ndre den globale adressbog"
+msgstr "Kan ikke ændre i den globale adressebog"
 
-#: squirrelmail/functions/abook_local_file.php:61
 msgid "Not a file name"
-msgstr "Ikke et fil-navn"
+msgstr "Ikke et filnavn"
 
-#: squirrelmail/functions/abook_local_file.php:271
-#: squirrelmail/functions/abook_local_file.php:295
-#: squirrelmail/functions/abook_local_file.php:330
+msgid "Write failed"
+msgstr "Kunne ikke skrive"
+
+msgid "Unable to update"
+msgstr "Kunne ikke opdatere"
+
 msgid "Could not lock datafile"
-msgstr "Kunne ikke låse filen fast"
+msgstr "Kunne ikke låse filen"
 
-#: squirrelmail/functions/abook_local_file.php:283
 msgid "Write to addressbook failed"
 msgstr "Kunne ikke skrive i adressebogen"
 
-#: squirrelmail/functions/addressbook.php:70
-#, fuzzy
 msgid "Error initializing addressbook database."
-msgstr "Kunne ikke komme i kontakt med LDAP-serveren, %s"
+msgstr "Kunne ikke komme i kontakt med adressebogsdatabasen."
 
-#: squirrelmail/functions/addressbook.php:79
 #, c-format
 msgid "Error opening file %s"
 msgstr "Kunne ikke åbne filen %s"
 
-#: squirrelmail/functions/addressbook.php:89
-#, fuzzy
 msgid "Error initializing global addressbook."
-msgstr "Kunne ikke komme i kontakt med LDAP-serveren, %s"
+msgstr "Kunne ikke åbne den globale adressebog"
 
-#: squirrelmail/functions/addressbook.php:105
 #, c-format
 msgid "Error initializing LDAP server %s:"
-msgstr "Kunne ikke komme i kontakt med LDAP-serveren, %s"
+msgstr "Kunne ikke komme i kontakt med LDAP-serveren %s:"
 
-#: squirrelmail/functions/addressbook.php:326
-#: squirrelmail/functions/addressbook.php:413
 msgid "Invalid input data"
-msgstr "Ugyldige input"
+msgstr "Ugyldig input"
 
-#: squirrelmail/functions/addressbook.php:330
-#: squirrelmail/functions/addressbook.php:417
 msgid "Name is missing"
 msgstr "Navnet mangler"
 
-#: squirrelmail/functions/addressbook.php:334
-#: squirrelmail/functions/addressbook.php:421
 msgid "E-mail address is missing"
-msgstr "Email-adresse mangler"
+msgstr "E-mailadressen mangler"
 
-#: squirrelmail/functions/addressbook.php:342
-#: squirrelmail/functions/addressbook.php:426
-#, fuzzy
 msgid "Nickname contains illegal characters"
 msgstr "Kaldenavnet indeholder ulovlige tegn"
 
-#: squirrelmail/functions/attachment_common.php:116
-#: squirrelmail/functions/attachment_common.php:140
-#: squirrelmail/functions/attachment_common.php:164
 msgid "view"
-msgstr ""
+msgstr "vis"
 
-#: squirrelmail/functions/attachment_common.php:180
 msgid "Business Card"
-msgstr ""
+msgstr "Visitkort"
 
-#: squirrelmail/functions/date.php:91
 msgid "Sunday"
-msgstr "S&oslash;ndag"
+msgstr "Søndag"
 
-#: squirrelmail/functions/date.php:94
 msgid "Monday"
 msgstr "Mandag"
 
-#: squirrelmail/functions/date.php:97
 msgid "Tuesday"
-msgstr "Tirsdat"
+msgstr "Tirsdag"
 
-#: squirrelmail/functions/date.php:100
 msgid "Wednesday"
 msgstr "Onsdag"
 
-#: squirrelmail/functions/date.php:103
 msgid "Thursday"
 msgstr "Torsdag"
 
-#: squirrelmail/functions/date.php:106
 msgid "Friday"
 msgstr "Fredag"
 
-#: squirrelmail/functions/date.php:109
 msgid "Saturday"
-msgstr "L&oslash;rdag"
+msgstr "Lørdag"
 
-#: squirrelmail/functions/date.php:120
+msgid "Sun"
+msgstr "Søn"
+
+msgid "Mon"
+msgstr "Man"
+
+msgid "Tue"
+msgstr "Tirs"
+
+msgid "Wed"
+msgstr "Ons"
+
+msgid "Thu"
+msgstr "Tors"
+
+msgid "Fri"
+msgstr "Fre"
+
+msgid "Sat"
+msgstr "Lør"
+
 msgid "January"
 msgstr "Januar"
 
-#: squirrelmail/functions/date.php:123
 msgid "February"
 msgstr "Februar"
 
-#: squirrelmail/functions/date.php:126
-#, fuzzy
 msgid "March"
 msgstr "Marts"
 
-#: squirrelmail/functions/date.php:129
 msgid "April"
 msgstr "April"
 
-#: squirrelmail/functions/date.php:132
 msgid "May"
 msgstr "Maj"
 
-#: squirrelmail/functions/date.php:135
 msgid "June"
 msgstr "Juni"
 
-#: squirrelmail/functions/date.php:138
 msgid "July"
 msgstr "Juli"
 
-#: squirrelmail/functions/date.php:141
 msgid "August"
 msgstr "August"
 
-#: squirrelmail/functions/date.php:144
 msgid "September"
 msgstr "September"
 
-#: squirrelmail/functions/date.php:147
-#, fuzzy
 msgid "October"
 msgstr "Oktober"
 
-#: squirrelmail/functions/date.php:150
 msgid "November"
 msgstr "November"
 
-#: squirrelmail/functions/date.php:153
 msgid "December"
 msgstr "December"
 
-#: squirrelmail/functions/date.php:178
+msgid "Jan"
+msgstr "Jan"
+
+msgid "Feb"
+msgstr "Feb"
+
+msgid "Mar"
+msgstr "Mar"
+
+msgid "Apr"
+msgstr "Apr"
+
+msgid "Jun"
+msgstr "Jun"
+
+msgid "Jul"
+msgstr "Jul"
+
+msgid "Aug"
+msgstr "Aug"
+
+msgid "Sep"
+msgstr "Sep"
+
+msgid "Oct"
+msgstr "Okt"
+
+msgid "Nov"
+msgstr "Nov"
+
+msgid "Dec"
+msgstr "Dec"
+
 msgid "D, F j, Y g:i a"
-msgstr "l j/n, Y H:i"
+msgstr "l, j/n Y, h:i"
 
-#: squirrelmail/functions/date.php:180
-#, fuzzy
 msgid "D, F j, Y G:i"
-msgstr "l j/n, Y H:i"
+msgstr "l, j/n Y, H:i"
 
-#: squirrelmail/functions/date.php:202
 msgid "g:i a"
+msgstr "h:i"
+
+msgid "G:i"
 msgstr "H:i"
 
-#: squirrelmail/functions/date.php:204
-msgid "G:i"
-msgstr ""
-
-#: squirrelmail/functions/date.php:209
 msgid "D, g:i a"
-msgstr "l, H:i"
+msgstr "l, h:i"
 
-#: squirrelmail/functions/date.php:211
-#, fuzzy
 msgid "D, G:i"
 msgstr "l, H:i"
 
-#: squirrelmail/functions/date.php:215
 msgid "M j, Y"
-msgstr "j/n, Y"
+msgstr "j/n Y"
 
-#: squirrelmail/functions/db_prefs.php:83
-#: squirrelmail/functions/db_prefs.php:86
-#: squirrelmail/functions/db_prefs.php:205
-#, fuzzy, c-format
-msgid "Preference database error (%s). Exiting abnormally"
-msgstr "Kunne ikke &aelig;ndre indstillingerne - %s."
-
-#: squirrelmail/functions/display_messages.php:23
-#: squirrelmail/functions/imap_general.php:206
-msgid "Unknown user or password incorrect."
-msgstr "Brugernavn eller password var forkert"
-
-#: squirrelmail/functions/display_messages.php:25
-msgid "Click here to try again"
-msgstr "Klik her for at logge ind igen."
-
-#: squirrelmail/functions/display_messages.php:39
 #, c-format
-msgid "Welcome to %s's WebMail system"
-msgstr "Velkommen til WebMail hos %s"
+msgid "Preference database error (%s). Exiting abnormally"
+msgstr "Kunne ikke gemme indstillingerne i databasen (%s)."
 
-#: squirrelmail/functions/display_messages.php:51
-#, fuzzy, c-format
-msgid "Running SquirrelMail version %s (c) 1999-2001."
-msgstr "SquirrelMail version %s (c) 1999-2001"
+msgid "Unknown user or password incorrect."
+msgstr "Kontonavn eller adgangskode forkert."
 
-#: squirrelmail/functions/display_messages.php:76
+msgid "Click here to try again"
+msgstr "Klik her for at prøve igen"
+
 #, c-format
 msgid "Click here to return to %s"
-msgstr "Klik her for at gå tilbage"
+msgstr "Klik her for at gå tilbage til %s"
 
-#: squirrelmail/functions/imap_general.php:119
-#: squirrelmail/functions/imap_messages.php:132
-#: squirrelmail/functions/imap_messages.php:140
-#: squirrelmail/functions/imap_messages.php:159
-#: squirrelmail/functions/imap_messages.php:168
-#: squirrelmail/functions/imap_messages.php:280
-#: squirrelmail/plugins/filters/filters.php:89
-msgid "ERROR : Could not complete request."
-msgstr "FEJL: Kunne ikke fuldføre handlingen."
+msgid "Go to the login page"
+msgstr "Gå til login-siden"
 
-#: squirrelmail/functions/imap_general.php:121
-#: squirrelmail/plugins/filters/filters.php:91
-msgid "Reason Given: "
-msgstr "Årsag: "
-
-#: squirrelmail/functions/imap_general.php:128
-#: squirrelmail/plugins/filters/filters.php:98
-msgid "ERROR : Bad or malformed request."
-msgstr "FEJL: Ugyldig forespørgsel til mailserveren"
-
-#: squirrelmail/functions/imap_general.php:130
-#: squirrelmail/plugins/filters/filters.php:100
-msgid "Server responded: "
-msgstr "Serveren sagde: "
-
-#: squirrelmail/functions/imap_general.php:166
-#, c-format
-msgid "Error connecting to IMAP server: %s."
-msgstr "Kunne ikke få forbindelse til IMAP-serveren, %s."
-
-#: squirrelmail/functions/imap_general.php:183
-#, c-format
-msgid "Bad request: %s"
-msgstr "Ugyldig forespørgsel: %s"
-
-#: squirrelmail/functions/imap_general.php:185
-#, c-format
-msgid "Unknown error: %s"
-msgstr "Ukendt fejl"
-
-#: squirrelmail/functions/imap_general.php:187
-msgid "Read data:"
-msgstr "Læs data:"
-
-#: squirrelmail/functions/imap_messages.php:134
-#: squirrelmail/functions/imap_messages.php:161
-#: squirrelmail/functions/imap_messages.php:282
-msgid "Unknown response from IMAP server: "
-msgstr "Ukendt svar fra mail-serveren"
-
-#: squirrelmail/functions/imap_messages.php:142
-msgid "Unknown message number in reply from server: "
-msgstr "Ukendt besked fra mail-serveren: "
-
-#: squirrelmail/functions/imap_messages.php:170
-msgid "Unknown messagenumber in reply from server: "
-msgstr "Ukendt besked fra mail-serveren: "
-
-#: squirrelmail/functions/imap_messages.php:179
-#: squirrelmail/functions/imap_messages.php:208
-#: squirrelmail/functions/imap_messages.php:452
-#: squirrelmail/functions/imap_messages.php:502
-#: squirrelmail/functions/mailbox_display.php:867
-msgid "(no subject)"
-msgstr "(intet emne)"
-
-#: squirrelmail/functions/imap_messages.php:180
-msgid "Unknown Sender"
-msgstr "Ukendt Afsender"
-
-#: squirrelmail/functions/imap_messages.php:233
-#, fuzzy
-msgid "No To Address"
-msgstr "Adressebog"
-
-#: squirrelmail/functions/imap_messages.php:505
-msgid "(unknown sender)"
-msgstr "(ukendt afsender)"
-
-#: squirrelmail/functions/imap_search.php:62
-#, fuzzy
-msgid "No Messages Found"
-msgstr "Antal beskeder i oversigten"
-
-#: squirrelmail/functions/imap_search.php:150
-msgid "Found"
-msgstr "Fandt"
-
-#: squirrelmail/functions/imap_search.php:150
-msgid "messages"
-msgstr "beskeder"
-
-#: squirrelmail/functions/mailbox_display.php:409
-msgid "THIS FOLDER IS EMPTY"
-msgstr "Denne folder er tom"
-
-#: squirrelmail/functions/mailbox_display.php:493
-#, fuzzy
-msgid "Move Selected To:"
-msgstr "Flyt valgte til:"
-
-#: squirrelmail/functions/mailbox_display.php:496
-msgid "Transform Selected Messages"
-msgstr "Formattér de valgte beskedder"
-
-#: squirrelmail/functions/mailbox_display.php:512
-msgid "Move"
-msgstr "Flyt"
-
-#: squirrelmail/functions/mailbox_display.php:516
-msgid "Expunge"
-msgstr "Ryd op"
-
-#: squirrelmail/functions/mailbox_display.php:516
-msgid "mailbox"
-msgstr "postkasse"
-
-#: squirrelmail/functions/mailbox_display.php:518
-msgid "Read"
-msgstr "L&aelig;st"
-
-#: squirrelmail/functions/mailbox_display.php:519
-msgid "Unread"
-msgstr "Ul&aelig;st"
-
-#: squirrelmail/functions/mailbox_display.php:614
-msgid "Toggle All"
-msgstr "Ændr alle"
-
-#: squirrelmail/functions/mailbox_display.php:632
-msgid "Unselect All"
-msgstr "Ophæv alle markeringer"
-
-#: squirrelmail/functions/mailbox_display.php:634
-msgid "Select All"
-msgstr "Markér alle"
-
-#: squirrelmail/functions/mailbox_display.php:651
-#, c-format
-msgid "Viewing Messages: <B>%s</B> to <B>%s</B> (%s total)"
-msgstr ""
-
-#: squirrelmail/functions/mailbox_display.php:653
-#, c-format
-msgid "Viewing Message: <B>%s</B> (1 total)"
-msgstr ""
-
-#: squirrelmail/functions/mailbox_display.php:841
-msgid "Show All"
-msgstr ""
-
-#: squirrelmail/functions/mime.php:647
-#, fuzzy
-msgid "Attachments"
-msgstr "Vedhæft"
-
-#: squirrelmail/functions/mime.php:686
-#, fuzzy
-msgid "download"
-msgstr "ned"
-
-#: squirrelmail/functions/mime.php:955
-msgid "Title:"
-msgstr "Titel"
-
-#: squirrelmail/functions/options.php:167
-#, c-format
-msgid "Option Type '%s' Not Found"
-msgstr ""
-
-#: squirrelmail/functions/options.php:253
-msgid "Yes"
-msgstr "Ja"
-
-#: squirrelmail/functions/options.php:258
-msgid "No"
-msgstr "Nej"
-
-#: squirrelmail/functions/page_header.php:72
-msgid "Current Folder"
-msgstr "Du er i denne mappe"
-
-#: squirrelmail/functions/page_header.php:81
-msgid "Compose"
-msgstr "Skriv ny"
-
-#: squirrelmail/functions/prefs.php:45
 #, c-format
 msgid ""
 "Preference file, %s, does not exist. Log out, and log back in to create a "
 "default preference file."
 msgstr ""
-"Du har ikke nogle indstillinger. Log ud, log ind igen og opret dine "
-"indstillinger."
+"Filen med indstillingerne, %s, eksisterer ikke. Log ud, og log ind igen for "
+"at oprette en standardfil."
 
-#: squirrelmail/functions/prefs.php:167 squirrelmail/functions/prefs.php:172
-msgid "Error opening "
-msgstr "Kunne ikke åbne "
-
-#: squirrelmail/functions/prefs.php:168
-msgid "Default preference file not found!"
+#, c-format
+msgid ""
+"Preference file, %s, could not be opened. Contact your system administrator "
+"to resolve this issue."
 msgstr ""
+"Filen med de gemte indstillinger (%s) kunne ikke åbnes. Kontakt "
+"systemadministratoren."
 
-#: squirrelmail/functions/prefs.php:169 squirrelmail/functions/prefs.php:174
-#: squirrelmail/functions/prefs.php:268
-#, fuzzy
+#, c-format
+msgid ""
+"Preference file, %s, could not be written. Contact your system administrator "
+"to resolve this issue."
+msgstr ""
+"Filen med indstillinger (%s) kunne ikke gemmes. Kontakt "
+"systemadministratoren."
+
+#, c-format
+msgid "Error opening %s"
+msgstr "Fejl ved åbning af %s"
+
+msgid "Default preference file not found or not readable!"
+msgstr "Kunne ikke finde eller læse filen med standardindstillinger!"
+
 msgid "Please contact your system administrator and report this error."
-msgstr "Kontakt din system-administrator for hj&aelig;lp."
+msgstr "Rapportér denne fejl til systemadministratoren."
 
-#: squirrelmail/functions/prefs.php:173
 msgid "Could not create initial preference file!"
-msgstr ""
+msgstr "Kunne ikke oprette filen med standardindstillingerne!"
 
-#: squirrelmail/functions/prefs.php:266
-#, fuzzy, c-format
+#, c-format
+msgid "%s should be writable by user %s"
+msgstr "%s skal kunne opdateres af brugeren %s"
+
+#, c-format
+msgid ""
+"Signature file, %s, could not be opened. Contact your system administrator "
+"to resolve this issue."
+msgstr "Signaturfilen (%s) kunne ikke åbnes. Kontakt systemadministratoren."
+
+#, c-format
+msgid ""
+"Signature file, %s, could not be written. Contact your system administrator "
+"to resolve this issue."
+msgstr "Signaturfilen (%s) kunne ikke gemmes. Kontakt systemadministratoren."
+
+msgid "ERROR : Could not complete request."
+msgstr "FEJL : Kunne ikke fuldføre handlingen."
+
+msgid "Query:"
+msgstr "Forespørgsel:"
+
+msgid "Reason Given: "
+msgstr "Årsag:"
+
+msgid "ERROR : Bad or malformed request."
+msgstr "FEJL : Ugyldig forespørgsel."
+
+msgid "Server responded: "
+msgstr "Serveren svarede: "
+
+#, c-format
+msgid "Error connecting to IMAP server: %s."
+msgstr "Kunne ikke få forbindelse til IMAP-serveren: %s."
+
+#, c-format
+msgid "Bad request: %s"
+msgstr "Ugyldig forespørgsel: %s"
+
+#, c-format
+msgid "Unknown error: %s"
+msgstr "Ukendt fejl: %s"
+
+msgid "Read data:"
+msgstr "Læste data:"
+
+msgid "Unknown response from IMAP server: "
+msgstr "Ukendt svar fra IMAP-serveren: "
+
+msgid "Unknown message number in reply from server: "
+msgstr "Ukendt beskednummer i svar fra serveren: "
+
+msgid "(no subject)"
+msgstr "(intet emne)"
+
+msgid "Unknown Sender"
+msgstr "Ukendt afsender"
+
+msgid "No To Address"
+msgstr "Ingen til-adresse"
+
+msgid "(unknown sender)"
+msgstr "(ukendt afsender)"
+
+msgid "No Messages Found"
+msgstr "Ingen beskeder fundet"
+
+msgid "Folder:"
+msgstr "Mappe:"
+
+msgid "Found"
+msgstr "Fandt"
+
+msgid "messages"
+msgstr "beskeder"
+
+msgid "A"
+msgstr "B"
+
+msgid ""
+"Server-side sorting is not supported by your IMAP server.<br>Please report "
+"this to the system administrator"
+msgstr ""
+"Serversortering er ikke supporteret af din IMAP-server.<br>Vær venlig at "
+"rapportere dette til systemadministratoren."
+
+msgid "THIS FOLDER IS EMPTY"
+msgstr "Denne mappe er tom"
+
+msgid "Move Selected To:"
+msgstr "Flyt valgte til:"
+
+msgid "Transform Selected Messages"
+msgstr "Formattér de valgte beskeder"
+
+msgid "Move"
+msgstr "Flyt"
+
+msgid "Expunge"
+msgstr "Ryd op"
+
+msgid "mailbox"
+msgstr "postkasse"
+
+msgid "Read"
+msgstr "Læst"
+
+msgid "Unread"
+msgstr "Ulæst"
+
+msgid "Unthread View"
+msgstr "Vis uden tråde"
+
+msgid "Thread View"
+msgstr "Vis med tråde"
+
+msgid "Toggle All"
+msgstr "Skift alle markeringer"
+
+msgid "Unselect All"
+msgstr "Ophæv alle markeringer"
+
+msgid "Select All"
+msgstr "Markér alle"
+
+#, c-format
+msgid "Viewing Messages: <B>%s</B> to <B>%s</B> (%s total)"
+msgstr "Viser beskederne: <B>%s</B> til <B>%s</B> (i alt %s)"
+
+#, c-format
+msgid "Viewing Message: <B>%s</B> (1 total)"
+msgstr "Viser beskeden: <B>%s</B> (i alt 1)"
+
+msgid "Paginate"
+msgstr "Opdel i sider"
+
+msgid "Show All"
+msgstr "Vis alle"
+
+msgid "Error decoding mime structure.  Report this as a bug!"
+msgstr ""
+"Fejl under dekodningen af mime-strukturen. Rapportér venligst dette til "
+"udviklingsteamet."
+
+msgid ""
+"Body retrieval error. The reason for this is most probably that the message "
+"is malformed."
+msgstr ""
+"Kunne ikke hente beskedens tekst. Årsagen er formodentlig at beskeden ikke "
+"er formatteret korrekt."
+
+msgid "Command:"
+msgstr "Kommando:"
+
+msgid "Response:"
+msgstr "Svar:"
+
+msgid "Message:"
+msgstr "Besked:"
+
+msgid "FETCH line:"
+msgstr "FETCH linien:"
+
+msgid "Hide Unsafe Images"
+msgstr "Skjul usikre billeder"
+
+msgid "View Unsafe Images"
+msgstr "Vis usikre billeder"
+
+msgid "Attachments"
+msgstr "Vedhæftede filer"
+
+msgid "download"
+msgstr "hent"
+
+msgid "sec_remove_eng.png"
+msgstr "sec_remove_da_DK.png"
+
+#, c-format
+msgid "Option Type '%s' Not Found"
+msgstr "Indstillingstype '%s' kunne ikke findes"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "No"
+msgstr "Nej"
+
+msgid "Current Folder"
+msgstr "Aktuel mappe"
+
+msgid "Compose"
+msgstr "Skriv ny"
+
+#, c-format
 msgid "Error creating directory %s."
-msgstr "Kunne ikke åbne filen %s"
+msgstr "Kunne ikke oprette mappen %s."
 
-#: squirrelmail/functions/prefs.php:267
 msgid "Could not create hashed directory structure!"
-msgstr ""
+msgstr "Kunne ikke oprette mappestruktur!"
 
-#: squirrelmail/plugins/filters/filters.php:360
 msgid ""
 "COMMERCIAL - This list contains servers that are verified spam senders. It "
 "is a pretty reliable list to scan spam from."
 msgstr ""
+"KOMMERCIEL - Denne serverliste indeholder verificerede spamsendere. Det er "
+"derfor en meget sikker liste at skanne spam fra."
 
-#: squirrelmail/plugins/filters/filters.php:368
 msgid ""
 "COMMERCIAL - Servers that are configured (or misconfigured) to allow spam to "
 "be relayed through their system will be banned with this.  Another good one "
 "to use."
 msgstr ""
+"KOMMERCIEL - Servere der er konfigureret (eller fejlkonfigureret) til at "
+"tillade trediepart at afsende spam via systemet, vil blive stoppet af denne. "
+"Også et godt valg."
 
-#: squirrelmail/plugins/filters/filters.php:376
 msgid ""
 "COMMERCIAL - Dial-up users are often filtered out since they should use "
 "their ISP's mail servers to send mail.  Spammers typically get a dial-up "
 "account and send spam directly from there."
 msgstr ""
+"KOMMERCIEL - Dial-up brugere filtreres ofte fra, da de burde bruge deres "
+"udbyderes mailservere til at afsende mail. Spammere bruger typisk en dial-up "
+"forbindelse til at sende spam direkte."
 
-#: squirrelmail/plugins/filters/filters.php:384
 msgid "COMMERCIAL - RBL+ Blackhole entries."
-msgstr ""
+msgstr "KOMMERCIEL - RBL+ Blackhole poster."
 
-#: squirrelmail/plugins/filters/filters.php:392
 msgid "COMMERCIAL - RBL+ OpenRelay entries."
-msgstr ""
+msgstr "KOMMERCIEL - RBL+ OpenRelay poster."
 
-#: squirrelmail/plugins/filters/filters.php:400
 msgid "COMMERCIAL - RBL+ Dial-up entries."
-msgstr ""
+msgstr "KOMMERCIEL - RBL+ Dial-up poster."
 
-#: squirrelmail/plugins/filters/filters.php:408
 msgid ""
 "FREE - Osirusoft Relays - Osirusofts list of verified open relays. Seems to "
 "include servers used by abuse@uunet.net auto-replies too."
 msgstr ""
+"GRATIS - Osirusoft Relays - Osirusofts liste over verificerede åbne "
+"mailservere. Denne liste ser også ud til at indeholde servere som "
+"abuse@uunet.net's autosvar."
 
-#: squirrelmail/plugins/filters/filters.php:416
 msgid "FREE - Osirusoft Dialups - Osirusofts Dialup Spam Source list."
-msgstr ""
+msgstr "GRATIS - Osirusoft Dial-ups - Osirusofts dial-up spammer liste."
 
-#: squirrelmail/plugins/filters/filters.php:424
 msgid ""
 "FREE - Osirusoft Confirmed Spam Source - Sites that continually spam and "
 "have been manually added after multiple nominations. Use with caution. Seems "
 "to catch abuse auto-replies from some ISPs."
 msgstr ""
+"GRATIS - Osirusoft Confirmed Spam Source - Lokationer som gentagne gange har "
+"udsendt spam, og som manuelt er tilføjet efter flere nomineringer. Brug med "
+"varsomhed, da den ser ud til også at filtrere autosvar fra flere "
+"internetudbydere."
 
-#: squirrelmail/plugins/filters/filters.php:432
 msgid ""
 "FREE - Osirusoft Smart Hosts - List of hosts that are secure but relay for "
 "other mail servers that are not secure."
 msgstr ""
+"GRATIS - Osirusoft Smart Hosts - Liste over servere som er sikre, men som "
+"videresender mail fra servere som er åbne."
 
-#: squirrelmail/plugins/filters/filters.php:440
 msgid ""
 "FREE - Osirusoft Spamware Developers - It is believed that these are IP "
 "ranges of companies that are known to produce spam software. Seems to catch "
 "abuse auto-replies from some ISPs."
 msgstr ""
+"GRATIS - Osirusoft Spamware Developers - IP-adresser på firmaer som "
+"producerer spam-software. Ser også ud til at filtrere autosvar fra nogle "
+"internetudbydere."
 
-#: squirrelmail/plugins/filters/filters.php:448
 msgid ""
 "FREE - Osirusoft Unconfirmed OptIn Servers - List of listservers that opt "
 "users in without confirmation."
 msgstr ""
+"GRATIS - Osirusoft Unconfirmed OptIn Servers - Liste over list-servere som "
+"godkender brugere uden at bekræfte brugerens identitet."
 
-#: squirrelmail/plugins/filters/filters.php:456
+msgid ""
+"FREE - Osirusoft Insecure formmail.cgi scripts - List of insecure formmail."
+"cgi scripts. (planned)."
+msgstr ""
+"GRATIS - Osirusoft Insecure formmail.cgi scripts - Liste over usikre "
+"formmail.cgi scripts (planlagt)."
+
+msgid "FREE - Osirusoft Open Proxy Servers - List of Open Proxy Servers."
+msgstr "GRATIS - Osirusoft Open Proxy Servers - Liste over åbne proxyservere."
+
 msgid ""
 "FREE - ORDB was born when ORBS went off the air. It seems to have fewer "
 "false positives than ORBS did though."
 msgstr ""
+"GRATIS - ORDB blev skabt, da ORBS blev nedlagt. Det ser dog ud til at den "
+"har færre forkerte positive end ORBS havde."
 
-#: squirrelmail/plugins/filters/filters.php:464
-msgid "FREE - Another ORBS replacement (just the INPUTS database used here)."
-msgstr ""
-
-#: squirrelmail/plugins/filters/filters.php:472
-msgid "FREE - Another ORBS replacement (just the OUTPUTS database used here)."
-msgstr ""
-
-#: squirrelmail/plugins/filters/filters.php:480
 msgid "FREE - Five-Ten-sg.com - Direct SPAM sources."
-msgstr ""
+msgstr "GRATIS - Five-Ten-sg.com - Direkte spamkilder."
 
-#: squirrelmail/plugins/filters/filters.php:488
 msgid "FREE - Five-Ten-sg.com - Dial-up lists - includes some DSL IPs."
 msgstr ""
+"GRATIS - Five-Ten-sg.com - Dial-up lister - Inkluderer nogle DSL "
+"internetudbydere."
 
-#: squirrelmail/plugins/filters/filters.php:496
 msgid "FREE - Five-Ten-sg.com - Bulk mailers that do not use confirmed opt-in."
 msgstr ""
+"GRATIS - Five-Ten-sg.com - Masse-mailere som ikke bruger bekræftede "
+"godkendelser."
 
-#: squirrelmail/plugins/filters/filters.php:504
 msgid "FREE - Five-Ten-sg.com - Other misc. servers."
-msgstr ""
+msgstr "GRATIS - Five-Ten-sg.com - Diverse andre servere."
 
-#: squirrelmail/plugins/filters/filters.php:512
 msgid "FREE - Five-Ten-sg.com - Single Stage servers."
-msgstr ""
+msgstr "GRATIS - Five-Ten-sg.com - Enkelttrin servere."
 
-#: squirrelmail/plugins/filters/filters.php:520
 msgid "FREE - Five-Ten-sg.com - SPAM Support servers."
-msgstr ""
+msgstr "GRATIS - Five-Ten-sg.com - Servere som støtter spammere."
 
-#: squirrelmail/plugins/filters/filters.php:528
 msgid "FREE - Five-Ten-sg.com - Web Form IPs."
-msgstr ""
+msgstr "GRATIS - Five_ten-sg.com - Webformular internetudbydere."
 
-#: squirrelmail/plugins/filters/filters.php:536
 msgid ""
 "FREE - Dorkslayers appears to include only really bad open relays outside "
 "the US to avoid being sued. Interestingly enough, their website recommends "
 "you NOT use their service."
 msgstr ""
+"GRATIS - Dorkslayers ser ud til, for at undgå retsforfølgelse, udelukkende "
+"at indeholde grelle åbne servere odenfor USA. Pudsigt nok anbefaler deres "
+"hjemmeside, at man IKKE bruger deres service."
 
-#: squirrelmail/plugins/filters/filters.php:544
-msgid ""
-"FREE - ORBL is another ORBS spinoff formed after ORBS shut down. May be "
-"SLOOOOOOW!"
-msgstr ""
+msgid "FREE - SPAMhaus - A list of well-known SPAM sources."
+msgstr "GRATIS - SPAMhaus - En liste over velkendte spamkilder."
 
-#: squirrelmail/plugins/filters/filters.php:552
-msgid "FREE - orbz.gst-group.co.uk - Inputs only."
-msgstr ""
-
-#: squirrelmail/plugins/filters/filters.php:560
-msgid "FREE - orbz.gst-group.co.uk - Outputs only."
-msgstr ""
-
-#: squirrelmail/plugins/filters/filters.php:568
-msgid ""
-"FREE - orbz.gst-group.co.uk - mailservers that refuse or bounce email "
-"addressed to postmaster@<theirdomain>."
-msgstr ""
-
-#: squirrelmail/plugins/filters/filters.php:576
 #, c-format
 msgid ""
 "FREE, for now - SPAMCOP - An interesting solution that lists servers that "
 "have a very high spam to legit email ratio (85% or more)."
 msgstr ""
+"GRATIS, indtil videre - SPAMCOP - En interessant løsning, som indeholder "
+"servere som har et meget højt spam/ikke spam forhold (85% eller mere)."
 
-#: squirrelmail/plugins/filters/options.php:62
-#, fuzzy
+msgid "FREE - dev.null.dk - I don't have any detailed info on this list."
+msgstr ""
+"GRATIS - dev.null.dk - Jeg har ingen detaljerede oplysninger om denne liste."
+
+msgid "FREE - visi.com - Relay Stop List. Very conservative OpenRelay List."
+msgstr ""
+"GRATIS - visi.com - Relay Stop List. En meget konservativ list over åbne "
+"servere."
+
+msgid "FREE - 2mbit.com Open Relays - Another list of Open Relays."
+msgstr "GRATIS - 2mbit.com Open Relays - Endnu en liste over åbne servere."
+
+msgid "FREE - 2mbit.com SPAM Source - List of Direct SPAM Sources."
+msgstr "GRATIS - 2mbit.com SPAM Source - En liste over direkte spamkilder."
+
+msgid "FREE - 2mbit.com SPAM ISPs - List of SPAM-friendly ISPs."
+msgstr ""
+"GRATIS - 2mbit.com SPAM ISPs - En liste over spamvenlige internetudbydere."
+
+msgid ""
+"FREE - Leadmon DUL - Another list of Dial-up or otherwise dynamically "
+"assigned IPs."
+msgstr ""
+"GRATIS - Leadmon DUL - Endnu en liste over dial-up, eller på anden måde "
+"dynamisk tildelte, ip-adresser."
+
+msgid ""
+"FREE - Leadmon SPAM Source - List of IPs Leadmon.net has received SPAM "
+"directly from."
+msgstr ""
+"GRATIS - Leadmon SPAM SOurce - En liste over internetudbydere hvorfra "
+"Leadmon direkte har modtaget spam."
+
+msgid ""
+"FREE - Leadmon Bulk Mailers - Bulk mailers that do not require confirmed opt-"
+"in or that have allowed known spammers to become clients and abuse their "
+"services."
+msgstr ""
+"GRATIS - Leadmon Bulk Mailers - Masse-mailere som ikke kræver bekræftet "
+"tilmelding, eller som har tilladt velkendte spammere at tilmelde sig og "
+"misbruge deres service."
+
+msgid ""
+"FREE - Leadmon Open Relays - Single Stage Open Relays that are not listed on "
+"other active RBLs."
+msgstr ""
+"GRATIS - Leadmon Open Relays - Enkelttrins åbne servere, som ikke er opført "
+"på andre aktive RBL'er."
+
+msgid ""
+"FREE - Leadmon Multi-stage - Multi-Stage Open Relays that are not listed on "
+"other active RBLs and that have sent SPAM to Leadmon.net."
+msgstr ""
+"GRATIS - Leadmon Multi Stage - Flertrins åbne servere, som ikke er opført på "
+"andre aktive RBL'er. og som har sendt spam til Leadmon.net."
+
+msgid ""
+"FREE - Leadmon SpamBlock - Sites on this listing have sent Leadmon.net "
+"direct SPAM from IPs in netblocks where the entire block has no DNS "
+"mappings. It's a list of BLOCKS of IPs being used by people who have SPAMmed "
+"Leadmon.net."
+msgstr ""
+"GRATIS - Leadmon SpamBlock - Liste over lokationer som har sendt spam "
+"direkte til Leadmon.net, og hvis IP-adresse ligger i et adresserum hvor hele "
+"adresserummet ikke har nogen DNS-post. Det er en liste over IP-adresserum, "
+"brugt af folk som har sendt spam til Leadmon.net."
+
+msgid ""
+"FREE, for now - Not Just Another Blacklist - Both Open Relays and Direct "
+"SPAM Sources."
+msgstr ""
+"GRATIS, indtil videre - Not Just Another Blacklist - Indeholder både åbne "
+"servere samt direkte spamkilder."
+
+msgid "FREE, for now - Not Just Another Blacklist - Dial-up IPs."
+msgstr ""
+"GRATIS, indtil videre - Not Just Another Blacklist - Dial-up ip-adresser."
+
+msgid "Saved Scan type"
+msgstr "Skanningstype gemt"
+
 msgid "Message Filtering"
-msgstr "Særlige markeringer"
+msgstr "Beskedfiltrering"
 
-#: squirrelmail/plugins/filters/options.php:78
-#, fuzzy
+msgid "What to Scan:"
+msgstr "Hvad skal skannes:"
+
+msgid "All messages"
+msgstr "Alle beskeder"
+
+msgid "Only unread messages"
+msgstr "Kun ulæste beskeder"
+
+msgid "Save"
+msgstr "Gem"
+
 msgid "Match:"
-msgstr "Kriterie"
+msgstr "Kriterie:"
 
-#: squirrelmail/plugins/filters/options.php:104
+msgid "Header"
+msgstr "Header"
+
 msgid "Contains:"
-msgstr ""
+msgstr "Indeholder:"
 
-#: squirrelmail/plugins/filters/options.php:116
-#, fuzzy
 msgid "Move to:"
-msgstr "Flyt"
+msgstr "Flyt til:"
 
-#: squirrelmail/plugins/filters/options.php:158
-#, fuzzy
 msgid "Down"
-msgstr "Færdig"
+msgstr "Ned"
 
-#: squirrelmail/plugins/filters/options.php:164
 msgid "Up"
-msgstr ""
+msgstr "Op"
 
-#: squirrelmail/plugins/filters/options.php:167
 #, c-format
 msgid "If <b>%s</b> contains <b>%s</b> then move to <b>%s</b>"
-msgstr ""
+msgstr "Hvis <b>%s</b> indeholder <b>%s</b>, så flyt til <b>%s</b>"
 
-#: squirrelmail/plugins/filters/setup.php:78
-#, fuzzy
 msgid "Message Filters"
-msgstr "Oversigt"
+msgstr "Beskedfiltre"
 
-#: squirrelmail/plugins/filters/setup.php:80
 msgid ""
 "Filtering enables messages with different criteria to be automatically "
 "filtered into different folders for easier organization."
 msgstr ""
+"Filtrering tillader at beskeder med forskellige kriterier automatisk "
+"sorteres i forskellige mapper."
 
-#: squirrelmail/plugins/filters/setup.php:86
-#, fuzzy
 msgid "SPAM Filters"
-msgstr "I alle mapper"
+msgstr "Spamfiltre"
 
-#: squirrelmail/plugins/filters/setup.php:88
 msgid ""
 "SPAM filters allow you to select from various DNS based blacklists to detect "
 "junk email in your INBOX and move it to another folder (like Trash)."
 msgstr ""
+"Spamfiltre lader dig vælge mellem forskellige DNS-baserede blacklister til "
+"at identificere spammails, samt flytte beskederne til en anden mappe (såsom "
+"skraldespanden)."
 
-#: squirrelmail/plugins/filters/spamoptions.php:53
 msgid "Spam Filtering"
-msgstr ""
+msgstr "Spamfiltrering"
 
-#: squirrelmail/plugins/filters/spamoptions.php:57
 msgid "WARNING! Tell your admin to set the SpamFilters_YourHop variable"
 msgstr ""
+"ADVARSEL! Bed din systemadministrator om at sætte SpamFilters_YourHop "
+"variablen"
 
-#: squirrelmail/plugins/filters/spamoptions.php:77
-#, fuzzy
 msgid "Move spam to:"
-msgstr "Flyt valgte til:"
+msgstr "Flyt spam til:"
 
-#: squirrelmail/plugins/filters/spamoptions.php:94
 msgid ""
 "Moving spam directly to the trash may not be a good idea at first, since "
 "messages from friends and mailing lists might accidentally be marked as "
@@ -2009,22 +1792,11 @@ msgid ""
 "periodically, so that you don't have an excessively large mailbox hanging "
 "around."
 msgstr ""
+"Det er ikke nogen god ide at flytte spam direkte til skraldesanden i første "
+"omgang, da beskeder fra venner eller diverse mailinglister ved et uheld kan "
+"blive fejltaget for at være spam. Den mappe du vælger bør du rydde op i med "
+"jævne mellemrum, så den ikke optager for meget plads."
 
-#: squirrelmail/plugins/filters/spamoptions.php:97
-msgid "What to Scan:"
-msgstr ""
-
-#: squirrelmail/plugins/filters/spamoptions.php:102
-#, fuzzy
-msgid "All messages"
-msgstr "beskeder"
-
-#: squirrelmail/plugins/filters/spamoptions.php:106
-#, fuzzy
-msgid "Only unread messages"
-msgstr "markerede beskeder"
-
-#: squirrelmail/plugins/filters/spamoptions.php:112
 msgid ""
 "The more messages you scan, the longer it takes.  I would suggest that you "
 "scan only new messages.  If you make a change to your filters, I would set "
@@ -2032,67 +1804,54 @@ msgid ""
 "scan only new messages.  That way, your new spam filters will be applied and "
 "you'll scan even the spam you read with the new filters."
 msgstr ""
+"Jo flere beskeder du skanner, jo længere tid tager det. Jeg vil anbefale at "
+"du kun skanner nye beskeder. Hvis du ændrer dine filtre, så sæt den til at "
+"skanne alle beskeder, gå til din indbakke og kom så tilbage hertil og sæt "
+"den til kun at skanne nye beskeder. På den måde vil dine nye filtre også "
+"skanne de beskeder du allerede har liggende i din indbakke."
 
-#: squirrelmail/plugins/filters/spamoptions.php:138
-msgid "Save"
-msgstr ""
-
-#: squirrelmail/plugins/filters/spamoptions.php:150
 #, c-format
 msgid "Spam is sent to <b>%s</b>"
-msgstr ""
+msgstr "Spam sendt til <b>%s</b>"
 
-#: squirrelmail/plugins/filters/spamoptions.php:150
 msgid "[<i>not set yet</i>]"
-msgstr ""
+msgstr "[<i>endnu ikke sat</i>]"
 
-#: squirrelmail/plugins/filters/spamoptions.php:152
 #, c-format
 msgid "Spam scan is limited to <b>%s</b>"
-msgstr ""
+msgstr "Spamskanning er begrænset til <b>%s</b>"
 
-#: squirrelmail/plugins/filters/spamoptions.php:152
-#, fuzzy
 msgid "New Messages Only"
-msgstr "Vis epost"
+msgstr "Kun nye beskeder"
 
-#: squirrelmail/plugins/filters/spamoptions.php:152
-#, fuzzy
 msgid "All Messages"
-msgstr "beskeder"
+msgstr "Alle beskeder"
 
-#: squirrelmail/plugins/filters/spamoptions.php:162
 msgid "ON"
-msgstr ""
+msgstr "Aktiveret"
 
-#: squirrelmail/plugins/filters/spamoptions.php:164
 msgid "OFF"
-msgstr ""
+msgstr "Deaktiveret"
 
-#: squirrelmail/plugins/squirrelspell/setup.php:46
-#, fuzzy
 msgid "SpellChecker Options"
-msgstr "Særlige mappe-indstillinger"
+msgstr "Stavekontrolindstillinger"
 
-#: squirrelmail/plugins/squirrelspell/setup.php:48
 msgid ""
 "Here you may set up how your personal dictionary is stored, edit it, or "
 "choose which languages should be available to you when spell-checking."
 msgstr ""
+"Her kan du indstille hvordan din personlige ordbog gemmes, ændre i den eller "
+"vælge hvilke sprog som skal være tilgængelige, når du bruger stavekontrollen."
 
-#: squirrelmail/plugins/squirrelspell/setup.php:64
 msgid "Check Spelling"
-msgstr ""
+msgstr "Kør stavekontrol"
 
-#: squirrelmail/plugins/squirrelspell/sqspell_functions.php:35
 msgid "Back to &quot;SpellChecker Options&quot; page"
-msgstr ""
+msgstr "Tilbage til stavekontrolindstillingerne"
 
-#: squirrelmail/plugins/squirrelspell/sqspell_functions.php:210
 msgid "ATTENTION:"
-msgstr ""
+msgstr "OBS:"
 
-#: squirrelmail/plugins/squirrelspell/sqspell_functions.php:211
 msgid ""
 "SquirrelSpell was unable to decrypt your personal dictionary. This is most "
 "likely due to the fact that you have changed your mailbox password. In order "
@@ -2103,218 +1862,215 @@ msgid ""
 "anew. This is also true if you don't remember your old password -- without "
 "it, the encrypted data is no longer accessible."
 msgstr ""
+"SquirrelSpell kunne ikke dekryptere din personlige ordbog. Dette skyldes "
+"formodentlig af du har ændret din adgangskode. For at fortsætte bedes du "
+"angive din gamle adgangskode, så SquirrelSpell kan dekryptere din ordbog. "
+"Ordbogen vil derefter blive krypteret med din nuværende adgangskode.<br>Hvis "
+"din ordbog ikke er krypteret, er dataene blevet beskadiget, og kan ikke "
+"længere læses. Du må så slette din ordbog og oprette en ny. Det samme må "
+"gøres hvis du ikke længere kan huske din gamle adgangskode - uden denne er "
+"de krypterede data ikke tilgængelige."
 
-#: squirrelmail/plugins/squirrelspell/sqspell_functions.php:217
 msgid "Delete my dictionary and start a new one"
-msgstr ""
+msgstr "Slet min ordbog og opret en ny"
 
-#: squirrelmail/plugins/squirrelspell/sqspell_functions.php:218
 msgid "Decrypt my dictionary with my old password:"
-msgstr ""
+msgstr "Dekryptér min ordbog med min gamle adgangskode:"
 
-#: squirrelmail/plugins/squirrelspell/sqspell_functions.php:221
 msgid "Proceed"
-msgstr ""
+msgstr "Fortsæt"
 
-#: squirrelmail/plugins/squirrelspell/sqspell_functions.php:227
-#: squirrelmail/plugins/squirrelspell/sqspell_functions.php:229
+msgid "You must make a choice"
+msgstr "Du skal foretage et valg"
+
+msgid ""
+"You can either delete your dictionary or type in the old password. Not both."
+msgstr ""
+"Du kan enten slette din ordbog eller angive din gamle adgangskode. Ikke "
+"begge dele."
+
+msgid "This will delete your personal dictionary file. Proceed?"
+msgstr "Er du sikker på, at du ønsker at slette din personlige ordbog?"
+
 msgid "Error Decrypting Dictionary"
-msgstr ""
+msgstr "Fejl under dekryptering af ordbogen"
 
-#: squirrelmail/plugins/squirrelspell/sqspell_interface.php:43
-#: squirrelmail/plugins/squirrelspell/sqspell_options.php:41
-msgid "SECURITY BREACH ON DECK 5! CMDR TUVOK AND SECURITY TEAM REQUESTED."
-msgstr ""
+msgid "Cute."
+msgstr "Sødt."
 
-#: squirrelmail/plugins/squirrelspell/modules/crypto_badkey.mod.php:24
+#, c-format
+msgid "I tried to execute '%s', but it returned:"
+msgstr "Jeg forsøgte at udføre: '%s', men den svarede:"
+
+msgid "SquirrelSpell is misconfigured."
+msgstr "SquirrelSpell er ikke konfigureret korrekt."
+
+msgid "SquirrelSpell Results"
+msgstr "SquirrelSpell resultater"
+
+msgid "Spellcheck completed. Commit changes?"
+msgstr "Stavekontrollen er fuldført. Skal ændringerne gemmes?"
+
+msgid "No changes were made."
+msgstr "Ingen ændringer."
+
+msgid "Now saving your personal dictionary... Please wait."
+msgstr "Din personlige ordbog gemmes... Vent venligst."
+
+#, c-format
+msgid "Found %s errors"
+msgstr "%s fejl fundet"
+
+msgid "Line with an error:"
+msgstr "Linie med fejl:"
+
+msgid "Error:"
+msgstr "Fejl:"
+
+msgid "Suggestions:"
+msgstr "Forslag:"
+
+msgid "Suggestions"
+msgstr "Forslag"
+
+msgid "Change to:"
+msgstr "Erstat med:"
+
+msgid "Occurs times:"
+msgstr "Antal forekomster:"
+
+msgid "Change this word"
+msgstr "Erstat dette ord"
+
+msgid "Change"
+msgstr "Erstat"
+
+msgid "Change ALL occurances of this word"
+msgstr "Erstat alle forekomster af dette ord"
+
+msgid "Change All"
+msgstr "Erstat alle"
+
+msgid "Ignore this word"
+msgstr "Ignorér dette ord"
+
+msgid "Ignore"
+msgstr "Ignorér"
+
+msgid "Ignore ALL occurances this word"
+msgstr "Ignorér alle forekomster af dette ord"
+
+msgid "Ignore All"
+msgstr "Ignorér alle"
+
+msgid "Add this word to your personal dictionary"
+msgstr "Tilføj dette ord til din personlige ordbog"
+
+msgid "Add to Dic"
+msgstr "Tilføj ordbog"
+
+msgid "Close and Commit"
+msgstr "Gem og luk"
+
+msgid "The spellcheck is not finished. Really close and commit changes?"
+msgstr ""
+"Stavekontrollen er ikke færdig. Er du sikker på, at du vil gemme ændringerne "
+"og lukke?"
+
+msgid "Close and Cancel"
+msgstr "Afbryde og lukke"
+
+msgid "The spellcheck is not finished. Really close and discard changes?"
+msgstr ""
+"Stavekontrollen er ikke færdig. Er du sikker på, at du vil fortryde "
+"ændringerne og lukke?"
+
+msgid "No errors found"
+msgstr "Ingen fejl fundet"
+
 msgid "Your personal dictionary was erased."
-msgstr ""
+msgstr "Din personlige ordbog er slettet."
 
-#: squirrelmail/plugins/squirrelspell/modules/crypto_badkey.mod.php:25
-#: squirrelmail/plugins/squirrelspell/modules/crypto_badkey.mod.php:32
 msgid "Dictionary Erased"
+msgstr "Ordbog slettet"
+
+msgid ""
+"Your personal dictionary was erased. Please close this window and click "
+"\"Check Spelling\" button again to start your spellcheck over."
 msgstr ""
+"Din personlige ordbog er slettet. Vær venlig at lukke dette vindue, og klik "
+"på \"Kør stavekontrol\" for at køre stavekontrollen igen."
 
-#: squirrelmail/plugins/squirrelspell/modules/crypto_badkey.mod.php:30
-#: squirrelmail/plugins/squirrelspell/modules/crypto_badkey.mod.php:57
-#, fuzzy
 msgid "Close this Window"
-msgstr "Luk vindue"
+msgstr "Luk dette vindue"
 
-#: squirrelmail/plugins/squirrelspell/modules/crypto_badkey.mod.php:48
 msgid ""
 "Your personal dictionary was re-encrypted successfully. Now return to the "
 "&quot;SpellChecker options&quot; menu and make your selection again."
 msgstr ""
+"Din personlige ordbog blev krypteret korrekt. Returner til menuen &qout;"
+"Stavekontrolindstillinger&qout; og foretag dit valg igen."
 
-#: squirrelmail/plugins/squirrelspell/modules/crypto_badkey.mod.php:51
 msgid "Successful Re-encryption"
-msgstr ""
+msgstr "Krypteret korrekt"
 
-#: squirrelmail/plugins/squirrelspell/modules/crypto_badkey.mod.php:54
 msgid ""
 "Your personal dictionary was re-encrypted successfully. Please close this "
 "window and click \"Check Spelling\" button again to start your spellcheck "
 "over."
 msgstr ""
+"Din personlige ordbog er krypteret korrekt. Vær venlig at lukke dette  "
+"vindue, og klik på \"Kør stavekontrol\" for at køre stavekontrollen igen."
 
-#: squirrelmail/plugins/squirrelspell/modules/crypto_badkey.mod.php:59
 msgid "Dictionary re-encrypted"
-msgstr ""
+msgstr "Ordbog krypteret"
 
-#: squirrelmail/plugins/squirrelspell/modules/crypto.mod.php:25
 msgid ""
 "Your personal dictionary has been <strong>encrypted</strong> and is now "
 "stored in an <strong>encrypted format</strong>."
-msgstr ""
+msgstr "Din personlige ordbog er krypteret og gemt."
 
-#: squirrelmail/plugins/squirrelspell/modules/crypto.mod.php:36
 msgid ""
 "Your personal dictionary has been <strong>decrypted</strong> and is now "
 "stored as <strong>clear text</strong>."
-msgstr ""
+msgstr "Din personlige ordbog er dekrypteret og gemt."
 
-#: squirrelmail/plugins/squirrelspell/modules/crypto.mod.php:44
-#: squirrelmail/plugins/squirrelspell/modules/enc_setup.mod.php:45
 msgid "Personal Dictionary Crypto Settings"
-msgstr ""
+msgstr "Personlig ordbog krypteringsindstillinger"
 
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:121
-msgid "SquirrelSpell Results"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:170
-#, c-format
-msgid "Found %s errors"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:183
-msgid "Line with an error:"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:192
-msgid "Error:"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:200
-msgid "Suggestions:"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:206
-msgid "Suggestions"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:214
-msgid "Change to:"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:223
-msgid "Occurs times:"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:239
-msgid "Change this word"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:240
-msgid "Change"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:242
-msgid "Change ALL occurances of this word"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:243
-#, fuzzy
-msgid "Change All"
-msgstr "Ændr alle"
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:245
-msgid "Ignore this word"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:246
-#, fuzzy
-msgid "Ignore"
-msgstr "vis mere"
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:248
-msgid "Ignore ALL occurances this word"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:249
-#, fuzzy
-msgid "Ignore All"
-msgstr "Ændr alle"
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:251
-msgid "Add this word to your personal dictionary"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:252
-#, fuzzy
-msgid "Add to Dic"
-msgstr "Føj til %s"
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:264
-#, fuzzy
-msgid "Close and Commit"
-msgstr "Luk vindue"
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:266
-msgid "The spellcheck is not finished. Really close and commit changes?"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:269
-msgid "Close and Cancel"
-msgstr ""
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:271
-msgid "The spellcheck is not finished. Really close and discard changes?"
-msgstr ""
-
-#: squirrelmail/plugins/newmail/testsound.php:33
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:285
-#: squirrelmail/plugins/squirrelspell/modules/forget_me_not.mod.php:50
-#, fuzzy
-msgid "Close"
-msgstr "Skriv ny"
-
-#: squirrelmail/plugins/squirrelspell/modules/check_me.mod.php:286
-#, fuzzy
-msgid "No errors found"
-msgstr "Ingen mapper fundet"
-
-#: squirrelmail/plugins/squirrelspell/modules/edit_dic.mod.php:21
-#: squirrelmail/plugins/squirrelspell/modules/forget_me.mod.php:56
-#, fuzzy
 msgid "Personal Dictionary"
-msgstr "Personlig Information"
+msgstr "Personlig ordbog"
 
-#: squirrelmail/plugins/squirrelspell/modules/edit_dic.mod.php:21
-#: squirrelmail/plugins/squirrelspell/modules/edit_dic.mod.php:61
 msgid "No words in your personal dictionary."
-msgstr ""
+msgstr "Der er ingen ord i din personlige ordbog"
 
-#: squirrelmail/plugins/squirrelspell/modules/edit_dic.mod.php:24
 msgid "Please check any words you wish to delete from your dictionary."
-msgstr ""
+msgstr "Marker de ord, som du ønsker at slette fra din ordbog."
 
-#: squirrelmail/plugins/squirrelspell/modules/edit_dic.mod.php:35
 #, c-format
 msgid "%s dictionary"
-msgstr ""
+msgstr "%s ordbog"
 
-#: squirrelmail/plugins/squirrelspell/modules/edit_dic.mod.php:54
-#, fuzzy
 msgid "Delete checked words"
-msgstr "Slet de valgte"
+msgstr "Slet markerede ord"
 
-#: squirrelmail/plugins/squirrelspell/modules/edit_dic.mod.php:65
 msgid "Edit your Personal Dictionary"
-msgstr ""
+msgstr "Ret i din personlige ordbog"
 
-#: squirrelmail/plugins/squirrelspell/modules/enc_setup.mod.php:22
+msgid "Please make your selection first."
+msgstr "Vær venlig at foretage et valg."
+
+msgid ""
+"This will encrypt your personal dictionary and store it in an encrypted "
+"format. Proceed?"
+msgstr ""
+"Dette vil kryptere og gemme din personlige ordbog. Skal der fortsættes?"
+
+msgid ""
+"This will decrypt your personal dictionary and store it in a clear-text "
+"format. Proceed?"
+msgstr "Dette vil gemme din ordbog i klar tekst. Skal der fortsættes?"
+
 msgid ""
 "<p>Your personal dictionary is <strong>currently encrypted</strong>. This "
 "helps protect your privacy in case the web-mail system gets compromized and "
@@ -2326,18 +2082,21 @@ msgid ""
 "mailbox password, SquirrelSpell will recognize it and prompt you for your "
 "old password in order to re-encrypt the dictionary with a new key.</p>"
 msgstr ""
+"<p>Din personlige ordbog er <strong>krypteret</strong>. Dette beskytter dine "
+"data i tilfælde af at webmail-systemet bliver kompromitteret, og forhindrer "
+"at ordbogen bliver stjålet. Ordbogen er krypteret med adgangskoden til din "
+"mailkonto.</p> <p><strong>OBS:</strong> Hvis du mister din adgangskode, kan "
+"du ikke benytte din personlige ordbog, da den ikke kan dekrypteres uden. "
+"Hvis du ændrer din adgangskode, vil SquirrelSpell spørge efter den nye "
+"adgangskode, og kryptere ordbogen med denne.</p>"
 
-#: squirrelmail/plugins/squirrelspell/modules/enc_setup.mod.php:26
 msgid ""
 "Please decrypt my personal dictionary and store it in a clear-text format."
-msgstr ""
+msgstr "Dekryptér min personlige ordbog og gem den i klar tekst."
 
-#: squirrelmail/plugins/squirrelspell/modules/enc_setup.mod.php:29
-#: squirrelmail/plugins/squirrelspell/modules/enc_setup.mod.php:42
 msgid "Change crypto settings"
-msgstr ""
+msgstr "Skift krypteringsindstillinger"
 
-#: squirrelmail/plugins/squirrelspell/modules/enc_setup.mod.php:35
 msgid ""
 "<p>Your personal dictionary is <strong>currently not encrypted</strong>. You "
 "may wish to encrypt your personal dictionary to protect your privacy in case "
@@ -2353,495 +2112,303 @@ msgid ""
 "you will be able to enter the old key to re-encrypt the dictionary with the "
 "new value.</p>"
 msgstr ""
+"<p>Din personlige ordbog er <strong>ikke krypteret</strong>. Du kan kryptere "
+"ordbogen, så dine data er beskyttede hvis webmail-systemet bliver "
+"kompromitteret og din ordbog bliver stjålet. Hvis ordbogen er krypteret, vil "
+"indholdet være ulæseligt uden at man kender nøglen (som er adgangskoden til "
+"din konto).</p> <p><strong>OBS:</strong> Hvis du beslutter dig for at "
+"kryptere din ordbog, så skal du være opmærksom på, at den krypteres med din "
+"adgangskode. Hvis du glemmer adgangskoden, og administratoren må give din en "
+"ny, vil din personlige ordbog forblive ulæselig, og du må oprette en ny. "
+"Hvis du selv, eller administratoren, ændrer din adgangskode, og du stadig "
+"kender den gamle kode, kan du bruge denne til at kryptere ordbogen med den "
+"nye adgangskode.</p>"
 
-#: squirrelmail/plugins/squirrelspell/modules/enc_setup.mod.php:39
 msgid ""
 "Please encrypt my personal dictionary and store it in an encrypted format."
-msgstr ""
+msgstr "Kryptér min personlige ordbog, og gem den som krypteret tekst."
 
-#: squirrelmail/plugins/squirrelspell/modules/forget_me.mod.php:22
 #, c-format
 msgid "Deleting the following entries from <strong>%s</strong> dictionary:"
-msgstr ""
+msgstr "Slet følgende poster fra <strong>%s</strong> ordbog:"
 
-#: squirrelmail/plugins/squirrelspell/modules/forget_me.mod.php:52
-#, fuzzy
 msgid "All done!"
-msgstr "I alle mapper"
+msgstr "Færdig!"
 
-#: squirrelmail/plugins/squirrelspell/modules/forget_me.mod.php:53
-#: squirrelmail/plugins/squirrelspell/modules/forget_me_not.mod.php:51
 msgid "Personal Dictionary Updated"
-msgstr ""
+msgstr "Den personlige ordbog er opdateret"
 
-#: squirrelmail/plugins/squirrelspell/modules/forget_me.mod.php:56
-#, fuzzy
 msgid "No changes requested."
-msgstr "Ingen beskeder valgt"
+msgstr "Ingen ændringer."
 
-#: squirrelmail/plugins/squirrelspell/modules/init.mod.php:25
 msgid "Please wait, communicating with the server..."
-msgstr ""
+msgstr "Vent venligst, der kommunikeres med serveren..."
 
-#: squirrelmail/plugins/squirrelspell/modules/init.mod.php:32
 msgid ""
 "Please choose which dictionary you would like to use to spellcheck this "
 "message:"
-msgstr ""
+msgstr "Vælg hvilken ordbog du ønsker at benytte til stavekontrollen:"
 
-#: squirrelmail/plugins/squirrelspell/modules/init.mod.php:44
 msgid "Go"
-msgstr ""
+msgstr "Begynd"
 
-#: squirrelmail/plugins/squirrelspell/modules/init.mod.php:48
 msgid "SquirrelSpell Initiating"
-msgstr ""
+msgstr "SquirrelSpell starter"
 
-#: squirrelmail/plugins/squirrelspell/modules/lang_change.mod.php:56
 #, c-format
 msgid ""
 "Settings adjusted to: <strong>%s</strong> with <strong>%s</strong> as "
 "default dictionary."
 msgstr ""
+"Indstillingerne er ændret til: <strong>%s</strong> med <strong>%s</strong> "
+"som standard ordbog."
 
-#: squirrelmail/plugins/squirrelspell/modules/lang_change.mod.php:61
 #, c-format
 msgid "Using <strong>%s</strong> dictionary (system default) for spellcheck."
-msgstr ""
+msgstr "Bruger <strong>%s</strong> ordbog (systemstandard) til stavekontrol."
 
-#: squirrelmail/plugins/squirrelspell/modules/lang_change.mod.php:69
 msgid "International Dictionaries Preferences Updated"
-msgstr ""
+msgstr "Internationale ordbogsindstillinger er opdateret"
 
-#: squirrelmail/plugins/squirrelspell/modules/lang_setup.mod.php:19
 msgid ""
 "Please check any available international dictionaries which you would like "
 "to use when spellchecking:"
 msgstr ""
+"Marker de tilgængelige internationale ordbøger, som du ønsker at bruge når "
+"du stavekontrollerer:"
 
-#: squirrelmail/plugins/squirrelspell/modules/lang_setup.mod.php:26
 msgid "Make this dictionary my default selection:"
-msgstr ""
+msgstr "Brug denne ordbog som standard:"
 
-#: squirrelmail/plugins/squirrelspell/modules/lang_setup.mod.php:41
 msgid "Make these changes"
-msgstr ""
+msgstr "Udfør disse ændringer"
 
-#: squirrelmail/plugins/squirrelspell/modules/lang_setup.mod.php:42
 msgid "Add International Dictionaries"
-msgstr ""
+msgstr "Tilføj international ordbog"
 
-#: squirrelmail/plugins/squirrelspell/modules/options_main.mod.php:18
 msgid "Please choose which options you wish to set up:"
-msgstr ""
+msgstr "Vælg de indstillinger som du ønsker at ændre:"
 
-#: squirrelmail/plugins/squirrelspell/modules/options_main.mod.php:22
 msgid "Edit your personal dictionary"
-msgstr ""
+msgstr "Ret din personlige ordbog"
 
-#: squirrelmail/plugins/squirrelspell/modules/options_main.mod.php:27
 msgid "Set up international dictionaries"
-msgstr ""
+msgstr "Indstil international ordbog"
 
-#: squirrelmail/plugins/squirrelspell/modules/options_main.mod.php:35
-#: squirrelmail/plugins/squirrelspell/modules/options_main.mod.php:39
 msgid "Encrypt or decrypt your personal dictionary"
-msgstr ""
+msgstr "Kryptér eller dekryptér din personlige ordbog"
 
-#: squirrelmail/plugins/squirrelspell/modules/options_main.mod.php:39
 msgid "not available"
-msgstr ""
+msgstr "ikke tilgængelig"
 
-#: squirrelmail/plugins/squirrelspell/modules/options_main.mod.php:43
 msgid "SquirrelSpell Options Menu"
-msgstr ""
+msgstr "SquirrelSpell indstillingsmenu"
 
-#: squirrelmail/plugins/translate/options.php:97
 msgid "Translator"
-msgstr ""
+msgstr "Oversætter"
 
-#: squirrelmail/plugins/translate/options.php:100
+msgid "Saved Translation Options"
+msgstr "Gemte oversættelsesindstillinger"
+
 msgid "Your server options are as follows:"
-msgstr ""
+msgstr "Dine serverindstillinger er som følger:"
 
-#: squirrelmail/plugins/translate/options.php:105
 msgid ""
 "13 language pairs, maximum of 1000 characters translated, powered by Systran"
-msgstr ""
+msgstr "13 sprogpar, maksimum 1000 tegn oversat, drevet af Systran"
 
-#: squirrelmail/plugins/translate/options.php:108
 msgid ""
 "10 language pairs, maximum of 25 kilobytes translated, powered by Systran"
-msgstr ""
+msgstr "10 sprogpar, maksimum 25 kilobytes oversat, drevet af Systran"
 
-#: squirrelmail/plugins/translate/options.php:111
 msgid "12 language pairs, no known limits, powered by Systran"
-msgstr ""
+msgstr "12 sprogpar, ingen kendte grænser, drevet af Systran"
 
-#: squirrelmail/plugins/translate/options.php:114
 msgid ""
 "767 language pairs, no known limits, powered by Translation Experts's "
 "InterTran"
 msgstr ""
+"767 sprogpar, ingen kendte grænser, drevet af Translation Expert's InterTran"
 
-#: squirrelmail/plugins/translate/options.php:117
 msgid ""
 "8 language pairs, no known limits, powered by GPLTrans (free, open source)"
 msgstr ""
+"8 sprogpar, ingen kendte grænser, drevet af GPLTrans (gratis, åben source)"
 
-#: squirrelmail/plugins/translate/options.php:123
 msgid ""
 "You also decide if you want the translation box displayed, and where it will "
 "be located."
 msgstr ""
+"Du bestemmer om du ønsker oversættelsesboksen vist, og hvor den skal "
+"placeres."
 
-#: squirrelmail/plugins/translate/options.php:127
 msgid "Select your translator:"
-msgstr ""
+msgstr "Vælg din oversætter"
 
-#: squirrelmail/plugins/translate/options.php:139
 msgid "When reading:"
-msgstr ""
+msgstr "Under læsning:"
 
-#: squirrelmail/plugins/translate/options.php:144
 msgid "Show translation box"
-msgstr ""
+msgstr "Vis oversættelsesboks"
 
-#: squirrelmail/plugins/translate/options.php:146
 msgid "to the left"
-msgstr ""
+msgstr "til venstre"
 
-#: squirrelmail/plugins/translate/options.php:147
 msgid "in the center"
-msgstr ""
+msgstr "i midten"
 
-#: squirrelmail/plugins/translate/options.php:148
 msgid "to the right"
-msgstr ""
+msgstr "til højre"
 
-#: squirrelmail/plugins/translate/options.php:153
 msgid "Translate inside the SquirrelMail frames"
-msgstr ""
+msgstr "Oversæt i SquirrelMails rammer"
 
-#: squirrelmail/plugins/translate/options.php:156
 msgid "When composing:"
-msgstr ""
+msgstr "Ved skrivning:"
 
-#: squirrelmail/plugins/translate/options.php:160
 msgid "Not yet functional, currently does nothing"
-msgstr ""
+msgstr "Endnu ikke funktionsdygtig"
 
-#: squirrelmail/plugins/translate/setup.php:104
 msgid "Translation Options"
-msgstr ""
+msgstr "Oversættelsesindstillinger"
 
-#: squirrelmail/plugins/translate/setup.php:106
 msgid ""
 "Which translator should be used when you get messages in a different "
 "language?"
 msgstr ""
+"Hvilken oversætter skal benyttes når du modtager beskeder på et andet sprog?"
 
-#: squirrelmail/plugins/translate/setup.php:230
-#: squirrelmail/plugins/translate/setup.php:234
-#: squirrelmail/plugins/translate/setup.php:238
-#: squirrelmail/plugins/translate/setup.php:242
-#: squirrelmail/plugins/translate/setup.php:246
-#: squirrelmail/plugins/translate/setup.php:250
-#: squirrelmail/plugins/translate/setup.php:254
-#: squirrelmail/plugins/translate/setup.php:258
-#: squirrelmail/plugins/translate/setup.php:262
-#: squirrelmail/plugins/translate/setup.php:266
-#: squirrelmail/plugins/translate/setup.php:270
-#: squirrelmail/plugins/translate/setup.php:274
-#: squirrelmail/plugins/translate/setup.php:278
-#: squirrelmail/plugins/translate/setup.php:293
-#: squirrelmail/plugins/translate/setup.php:297
-#: squirrelmail/plugins/translate/setup.php:301
-#: squirrelmail/plugins/translate/setup.php:305
-#: squirrelmail/plugins/translate/setup.php:309
-#: squirrelmail/plugins/translate/setup.php:313
-#: squirrelmail/plugins/translate/setup.php:317
-#: squirrelmail/plugins/translate/setup.php:321
-#: squirrelmail/plugins/translate/setup.php:325
-#: squirrelmail/plugins/translate/setup.php:329
-#: squirrelmail/plugins/translate/setup.php:404
-#: squirrelmail/plugins/translate/setup.php:437
-#: squirrelmail/plugins/translate/setup.php:441
-#: squirrelmail/plugins/translate/setup.php:445
-#: squirrelmail/plugins/translate/setup.php:449
-#: squirrelmail/plugins/translate/setup.php:453
-#: squirrelmail/plugins/translate/setup.php:457
-#: squirrelmail/plugins/translate/setup.php:461
-#: squirrelmail/plugins/translate/setup.php:465
-#: squirrelmail/plugins/translate/setup.php:469
-#: squirrelmail/plugins/translate/setup.php:473
-#: squirrelmail/plugins/translate/setup.php:477
-#: squirrelmail/plugins/translate/setup.php:481
-#, fuzzy, c-format
+#, c-format
 msgid "%s to %s"
-msgstr "Føj til %s"
+msgstr "%s til %s"
 
-#: squirrelmail/plugins/translate/setup.php:231
-#: squirrelmail/plugins/translate/setup.php:235
-#: squirrelmail/plugins/translate/setup.php:239
-#: squirrelmail/plugins/translate/setup.php:243
-#: squirrelmail/plugins/translate/setup.php:247
-#: squirrelmail/plugins/translate/setup.php:252
-#: squirrelmail/plugins/translate/setup.php:256
-#: squirrelmail/plugins/translate/setup.php:260
-#: squirrelmail/plugins/translate/setup.php:264
-#: squirrelmail/plugins/translate/setup.php:268
-#: squirrelmail/plugins/translate/setup.php:280
-#: squirrelmail/plugins/translate/setup.php:294
-#: squirrelmail/plugins/translate/setup.php:298
-#: squirrelmail/plugins/translate/setup.php:302
-#: squirrelmail/plugins/translate/setup.php:306
-#: squirrelmail/plugins/translate/setup.php:310
-#: squirrelmail/plugins/translate/setup.php:315
-#: squirrelmail/plugins/translate/setup.php:319
-#: squirrelmail/plugins/translate/setup.php:323
-#: squirrelmail/plugins/translate/setup.php:327
-#: squirrelmail/plugins/translate/setup.php:331
-#: squirrelmail/plugins/translate/setup.php:352
-#: squirrelmail/plugins/translate/setup.php:382
-#: squirrelmail/plugins/translate/setup.php:438
-#: squirrelmail/plugins/translate/setup.php:442
-#: squirrelmail/plugins/translate/setup.php:446
-#: squirrelmail/plugins/translate/setup.php:450
-#: squirrelmail/plugins/translate/setup.php:454
-#: squirrelmail/plugins/translate/setup.php:459
-#: squirrelmail/plugins/translate/setup.php:471
-#: squirrelmail/plugins/translate/setup.php:475
-#: squirrelmail/plugins/translate/setup.php:479
-#: squirrelmail/plugins/translate/setup.php:483
 msgid "English"
-msgstr ""
+msgstr "Engelsk"
 
-#: squirrelmail/plugins/translate/setup.php:232
-#: squirrelmail/plugins/translate/setup.php:251
-#: squirrelmail/plugins/translate/setup.php:272
-#: squirrelmail/plugins/translate/setup.php:275
-#: squirrelmail/plugins/translate/setup.php:299
-#: squirrelmail/plugins/translate/setup.php:318
-#: squirrelmail/plugins/translate/setup.php:355
-#: squirrelmail/plugins/translate/setup.php:385
-#: squirrelmail/plugins/translate/setup.php:417
-#: squirrelmail/plugins/translate/setup.php:439
-#: squirrelmail/plugins/translate/setup.php:458
-#: squirrelmail/plugins/translate/setup.php:462
-#: squirrelmail/plugins/translate/setup.php:467
 msgid "French"
-msgstr ""
+msgstr "Fransk"
 
-#: squirrelmail/plugins/translate/setup.php:236
-#: squirrelmail/plugins/translate/setup.php:255
-#: squirrelmail/plugins/translate/setup.php:271
-#: squirrelmail/plugins/translate/setup.php:276
-#: squirrelmail/plugins/translate/setup.php:303
-#: squirrelmail/plugins/translate/setup.php:322
-#: squirrelmail/plugins/translate/setup.php:356
-#: squirrelmail/plugins/translate/setup.php:386
-#: squirrelmail/plugins/translate/setup.php:418
-#: squirrelmail/plugins/translate/setup.php:443
-#: squirrelmail/plugins/translate/setup.php:463
-#: squirrelmail/plugins/translate/setup.php:466
-#: squirrelmail/plugins/translate/setup.php:470
 msgid "German"
-msgstr ""
+msgstr "Tysk"
 
-#: squirrelmail/plugins/translate/setup.php:240
-#: squirrelmail/plugins/translate/setup.php:259
-#: squirrelmail/plugins/translate/setup.php:307
-#: squirrelmail/plugins/translate/setup.php:326
-#: squirrelmail/plugins/translate/setup.php:360
-#: squirrelmail/plugins/translate/setup.php:390
-#: squirrelmail/plugins/translate/setup.php:420
-#: squirrelmail/plugins/translate/setup.php:447
-#: squirrelmail/plugins/translate/setup.php:474
 msgid "Italian"
-msgstr ""
+msgstr "Italiensk"
 
-#: squirrelmail/plugins/translate/setup.php:244
-#: squirrelmail/plugins/translate/setup.php:263
-#: squirrelmail/plugins/translate/setup.php:311
-#: squirrelmail/plugins/translate/setup.php:330
-#: squirrelmail/plugins/translate/setup.php:365
-#: squirrelmail/plugins/translate/setup.php:395
-#: squirrelmail/plugins/translate/setup.php:422
-#: squirrelmail/plugins/translate/setup.php:451
-#: squirrelmail/plugins/translate/setup.php:478
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugisisk"
 
-#: squirrelmail/plugins/translate/setup.php:248
-#: squirrelmail/plugins/translate/setup.php:267
-#: squirrelmail/plugins/translate/setup.php:295
-#: squirrelmail/plugins/translate/setup.php:314
-#: squirrelmail/plugins/translate/setup.php:370
-#: squirrelmail/plugins/translate/setup.php:400
-#: squirrelmail/plugins/translate/setup.php:423
-#: squirrelmail/plugins/translate/setup.php:455
-#: squirrelmail/plugins/translate/setup.php:482
 msgid "Spanish"
-msgstr ""
+msgstr "Spansk"
 
-#: squirrelmail/plugins/translate/setup.php:279
-#: squirrelmail/plugins/translate/setup.php:367
-#: squirrelmail/plugins/translate/setup.php:397
 msgid "Russian"
-msgstr ""
+msgstr "Russisk"
 
-#: squirrelmail/plugins/translate/setup.php:282
-#: squirrelmail/plugins/translate/setup.php:334
-#: squirrelmail/plugins/translate/setup.php:405
-#: squirrelmail/plugins/translate/setup.php:426
-#: squirrelmail/plugins/translate/setup.php:485
 msgid "Translate"
-msgstr ""
+msgstr "Oversæt"
 
-#: squirrelmail/plugins/translate/setup.php:346
-#: squirrelmail/plugins/translate/setup.php:376
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brasiliansk portugisisk"
 
-#: squirrelmail/plugins/translate/setup.php:347
-#: squirrelmail/plugins/translate/setup.php:377
 msgid "Bulgarian"
-msgstr ""
+msgstr "Bulgarsk"
 
-#: squirrelmail/plugins/translate/setup.php:348
-#: squirrelmail/plugins/translate/setup.php:378
 msgid "Croatian"
-msgstr ""
+msgstr "Kroatisk"
 
-#: squirrelmail/plugins/translate/setup.php:349
-#: squirrelmail/plugins/translate/setup.php:379
 msgid "Czech"
-msgstr ""
+msgstr "Tjekkisk"
 
-#: squirrelmail/plugins/translate/setup.php:350
-#: squirrelmail/plugins/translate/setup.php:380
 msgid "Danish"
-msgstr ""
+msgstr "Dansk"
 
-#: squirrelmail/plugins/translate/setup.php:351
-#: squirrelmail/plugins/translate/setup.php:381
-#: squirrelmail/plugins/translate/setup.php:416
 msgid "Dutch"
-msgstr ""
+msgstr "Hollandsk"
 
-#: squirrelmail/plugins/translate/setup.php:353
-#: squirrelmail/plugins/translate/setup.php:383
 msgid "European Spanish"
-msgstr ""
+msgstr "Europæisk spansk"
 
-#: squirrelmail/plugins/translate/setup.php:354
-#: squirrelmail/plugins/translate/setup.php:384
 msgid "Finnish"
-msgstr ""
+msgstr "Finsk"
 
-#: squirrelmail/plugins/translate/setup.php:357
-#: squirrelmail/plugins/translate/setup.php:387
 msgid "Greek"
-msgstr ""
+msgstr "Græsk"
 
-#: squirrelmail/plugins/translate/setup.php:358
-#: squirrelmail/plugins/translate/setup.php:388
 msgid "Hungarian"
-msgstr ""
+msgstr "Ungarsk"
 
-#: squirrelmail/plugins/translate/setup.php:359
-#: squirrelmail/plugins/translate/setup.php:389
 msgid "Icelandic"
-msgstr ""
+msgstr "Islandsk"
 
-#: squirrelmail/plugins/translate/setup.php:361
-#: squirrelmail/plugins/translate/setup.php:391
 msgid "Japanese"
-msgstr ""
+msgstr "Japansk"
 
-#: squirrelmail/plugins/translate/setup.php:362
-#: squirrelmail/plugins/translate/setup.php:392
 msgid "Latin American Spanish"
-msgstr ""
+msgstr "Latinamerikansk spansk"
 
-#: squirrelmail/plugins/translate/setup.php:363
-#: squirrelmail/plugins/translate/setup.php:393
 msgid "Norwegian"
-msgstr ""
+msgstr "Norsk"
 
-#: squirrelmail/plugins/translate/setup.php:364
-#: squirrelmail/plugins/translate/setup.php:394
 msgid "Polish"
-msgstr ""
+msgstr "Polsk"
 
-#: squirrelmail/plugins/translate/setup.php:366
-#: squirrelmail/plugins/translate/setup.php:396
 msgid "Romanian"
-msgstr ""
+msgstr "Rumænsk"
 
-#: squirrelmail/plugins/translate/setup.php:368
-#: squirrelmail/plugins/translate/setup.php:398
 msgid "Serbian"
-msgstr ""
+msgstr "Serbisk"
 
-#: squirrelmail/plugins/translate/setup.php:369
-#: squirrelmail/plugins/translate/setup.php:399
 msgid "Slovenian"
-msgstr ""
+msgstr "Slovensk"
 
-#: squirrelmail/plugins/translate/setup.php:371
-#: squirrelmail/plugins/translate/setup.php:401
 msgid "Swedish"
-msgstr ""
+msgstr "Svensk"
 
-#: squirrelmail/plugins/translate/setup.php:372
-#: squirrelmail/plugins/translate/setup.php:402
 msgid "Welsh"
-msgstr ""
+msgstr "Walisisk"
 
-#: squirrelmail/plugins/translate/setup.php:419
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonesisk"
 
-#: squirrelmail/plugins/translate/setup.php:421
-#, fuzzy
 msgid "Latin"
-msgstr "Log ind"
+msgstr "Latin"
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:34
-#, fuzzy
 msgid "New Mail Notification"
-msgstr "Nej"
+msgstr "Besked ved ny mail"
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:37
 msgid ""
 "Select <b>Enable Media Playing</b> to turn on playing a media file when "
 "unseen mail is in your folders. When enabled, you can specify the media file "
 "to play in the provided file box."
 msgstr ""
+"Vælg <b>Aktivér medieafspiller</b> for at afspille en mediefil når der er "
+"ulæst post i dine mapper. Når den er valgt, kan du specificere filen i den "
+"filboks som er til rådighed."
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:39
 msgid ""
 "The <b>Check all boxes, not just INBOX</b> option will check ALL of your "
 "folders for unseen mail, not just the inbox for notification."
 msgstr ""
+"Valgmuligheden <b>Kontrollér alle mapper, ikke kun indbakken</b> vil "
+"kontrollere alle dine mapper for ulæste beskeder, ikke kun din indbakke."
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:41
 msgid ""
 "Selecting the <b>Show popup</b> option will enable the showing of a popup "
 "window when unseen mail is in your folders (requires JavaScript)."
 msgstr ""
+"Hvis <b>Vis popop</b> vælges, vil den åbne et nyt vindue, når der er ulæst "
+"post i dine mapper (kræver JavaScript)"
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:43
 msgid ""
 "Use the <b>Check RECENT</b> to only check for messages that are recent. "
 "Recent messages are those that have just recently showed up and have not "
 "been \"viewed\" or checked yet.  This can prevent being continuously annoyed "
 "by sounds or popups for unseen mail."
 msgstr ""
+"Brug <b>Kontrollér kun nye</b> for kun at kontrollere nye beskeder. Nye "
+"beskeder er dem, som lige er kommet, og som endnu ikke er \"vist\" eller "
+"læst. Dette kan forhindre at du konstant forstyrres af lyde eller popop-"
+"vinduer om ulæst post."
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:45
 msgid ""
 "Selecting the <b>Change title</b> option will change the title in some "
 "browsers to let you know when you have new mail (requires JavaScript, and "
@@ -2849,665 +2416,916 @@ msgid ""
 "always tell you if you have new mail, even if you have <b>Check RECENT</b> "
 "enabled."
 msgstr ""
+"Når <b>Skift titel</b> bruges, vil teksten i browserens titel vise når der "
+"er nye beskeder (kræver JavaScript, og virker kun i Internet Explorer). "
+"Dette vil altid vise når der er ulæst post, også selvom du har valgt "
+"<b>kontroller kun nye</b>."
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:47
 msgid ""
 "Select from the list of <b>server files</b> the media file to play when new "
 "mail arrives.  Selecting <b>local media</b> will play the file specified in "
 "the <b>local media file</b> box to play from the local computer.  If no file "
 "is specified, the system will use a default from the server."
 msgstr ""
+"Vælg den mediefil fra listen <b>server filer</b> som skal afspilles når der "
+"kommer ny post. Hvis du vælger <b>lokal fil</b>, vil den afspille filen, som "
+"er specificeret i boksen <b>lokal mediefil</b>, fra din egen computer. Hvis "
+"der ikke er specificeret nogen fil, vil systemet bruge en standardfil fra "
+"serveren."
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:57
 msgid "Enable Media Playing"
-msgstr ""
+msgstr "Aktivér medieafspiller"
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:65
 msgid "Check all boxes, not just INBOX"
-msgstr ""
+msgstr "Kontrollér alle mapper, ikke kun indbakken"
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:73
 msgid "Count only messages that are RECENT"
-msgstr ""
+msgstr "Kontrollér kun nye beskeder"
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:81
 msgid "Change title on supported browsers."
-msgstr ""
+msgstr "Skift titel på supporterede browsere"
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:81
-#: squirrelmail/plugins/newmail/newmail_opt.php:89
 msgid "requires JavaScript to work"
-msgstr ""
+msgstr "kræver JavaScript for at fungere"
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:89
 msgid "Show popup window on new mail"
-msgstr ""
+msgstr "Vis popop-vindue ved nye beskeder"
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:92
 msgid "Select server file:"
-msgstr ""
+msgstr "Vælg serverfil:"
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:94
 msgid "(local media)"
-msgstr ""
+msgstr "(lokal fil)"
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:111
 msgid "Try"
-msgstr ""
+msgstr "Afprøv"
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:119
 msgid "Local Media File:"
-msgstr ""
+msgstr "Lokal fil:"
 
-#: squirrelmail/plugins/newmail/newmail_opt.php:125
-#, fuzzy
 msgid "Current File:"
-msgstr "Du er i denne mappe"
+msgstr "Aktuel fil:"
 
-#: squirrelmail/plugins/newmail/newmail.php:20
 msgid "New Mail"
-msgstr ""
+msgstr "Ny post"
 
-#: squirrelmail/plugins/newmail/newmail.php:27
-#, fuzzy
 msgid "SquirrelMail Notice:"
-msgstr "SquirrelMail version %s"
+msgstr "SquirrelMail besked:"
 
-#: squirrelmail/plugins/newmail/newmail.php:31
 msgid "You have new mail!"
-msgstr ""
+msgstr "Du har modtaget ny post!"
 
-#: squirrelmail/plugins/newmail/setup.php:78
-#, fuzzy
 msgid "NewMail Options"
-msgstr "Indstillinger"
+msgstr "NyMail indstillinger"
 
-#: squirrelmail/plugins/newmail/setup.php:80
 msgid ""
 "This configures settings for playing sounds and/or showing popup windows "
 "when new mail arrives."
 msgstr ""
+"Indstillinger for afspilning af lyde og/eller visning af popop-vinduer når "
+"der kommer ny post."
 
-#: squirrelmail/plugins/newmail/setup.php:129
 msgid "New Mail Notification options saved"
-msgstr ""
+msgstr "Indstillingerne for besked ved ny post er gemt"
 
-#: squirrelmail/plugins/newmail/setup.php:202
-#, fuzzy, c-format
+#, c-format
 msgid "%s New Messages"
-msgstr "Vis epost"
+msgstr "%s nye beskeder"
 
-#: squirrelmail/plugins/newmail/setup.php:206
-#, fuzzy, c-format
+#, c-format
 msgid "%s New Message"
-msgstr "Vis epost"
+msgstr "%s ny besked"
 
-#: squirrelmail/plugins/newmail/testsound.php:24
 msgid "Test Sound"
-msgstr ""
+msgstr "Afprøv lyd"
 
-#: squirrelmail/plugins/newmail/testsound.php:30
 msgid "Loading the sound..."
-msgstr ""
+msgstr "Henter lydfilen..."
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:82
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:90
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:102
 msgid "POP3 connect:"
-msgstr ""
+msgstr "POP3 tilslutning:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:82
 msgid "No server specified"
-msgstr ""
+msgstr "Ingen server er angivet"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:90
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:102
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:141
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:276
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:330
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:341
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:389
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:422
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:455
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:554
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:577
-#, fuzzy
 msgid "Error "
-msgstr "Kunne ikke åbne "
+msgstr "Fejl "
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:110
-msgid "POP3: premature NOOP OK, NOT an RFC 1939 Compliant server"
-msgstr ""
-
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:120
 msgid "POP3 noop:"
-msgstr ""
+msgstr "POP3 noop:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:120
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:186
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:235
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:260
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:302
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:376
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:415
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:445
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:479
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:542
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:610
-#, fuzzy
 msgid "No connection to server"
-msgstr "Kunne ikke få forbindelse til IMAP-serveren, %s."
+msgstr "Ingen forbindelse til serveren"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:133
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:136
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:141
 msgid "POP3 user:"
-msgstr ""
+msgstr "POP3 konto:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:133
 msgid "no login ID submitted"
-msgstr ""
+msgstr "intet login ID angivet"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:136
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:156
 msgid "connection not established"
-msgstr ""
+msgstr "forbindelse ikke etableret"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:153
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:156
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:161
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:170
 msgid "POP3 pass:"
-msgstr ""
+msgstr "POP3 adgangskode:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:153
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:195
 msgid "No password submitted"
-msgstr ""
+msgstr "Ingen adgangskode angivet"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:161
 msgid "authentication failed "
-msgstr ""
+msgstr "kontrol af adgangskode fejlede "
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:170
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:219
-msgid "NOOP failed. Server not RFC 1939 compliant"
-msgstr ""
-
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:186
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:192
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:195
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:200
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:210
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:219
 msgid "POP3 apop:"
-msgstr ""
+msgstr "POP3 apop:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:192
 msgid "No login ID submitted"
-msgstr ""
+msgstr "intet login ID angivet"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:200
 msgid "No server banner"
-msgstr ""
+msgstr "Ingen serveroverskrift"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:200
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:210
 msgid "abort"
-msgstr ""
+msgstr "afbryd"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:210
 msgid "apop authentication failed"
-msgstr ""
+msgstr "apop: kontrol af adgangskode fejlede"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:235
 msgid "POP3 login:"
-msgstr ""
+msgstr "POP3 login:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:260
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:276
 msgid "POP3 top:"
-msgstr ""
+msgstr "POP3 top:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:302
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:330
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:341
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:353
 msgid "POP3 pop_list:"
-msgstr ""
+msgstr "POP3 pop_liste:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:353
 msgid "Premature end of list"
-msgstr ""
+msgstr "Listen afbrudt for tidligt"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:376
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:389
 msgid "POP3 get:"
-msgstr ""
+msgstr "POP3 hent:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:415
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:422
 msgid "POP3 last:"
-msgstr ""
+msgstr "POP3 sidst:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:445
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:455
 msgid "POP3 reset:"
-msgstr ""
+msgstr "POP3 reset:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:479
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:485
 msgid "POP3 send_cmd:"
-msgstr ""
+msgstr "POP3 send_kommando:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:485
 msgid "Empty command string"
-msgstr ""
+msgstr "Tom kommandostring"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:505
 msgid "POP3 quit:"
-msgstr ""
+msgstr "POP3 afbryd:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:505
-#, fuzzy
 msgid "connection does not exist"
-msgstr "Brugernavnet '%s' eksisterer ikke"
+msgstr "forbindelse eksisterer ikke"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:542
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:554
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:577
 msgid "POP3 uidl:"
-msgstr ""
+msgstr "POP3 uidl:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:610
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:615
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:621
 msgid "POP3 delete:"
-msgstr ""
+msgstr "POP3 slet:"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:615
 msgid "No msg number submitted"
-msgstr ""
+msgstr "Ingen beskednumre sendt"
 
-#: squirrelmail/plugins/mail_fetch/class.POP3.php:621
-#, fuzzy
 msgid "Command failed "
-msgstr "Kunne ikke åbne filen"
+msgstr "Kommando fejlede "
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:54
 msgid "Remote POP server Fetching Mail"
-msgstr ""
+msgstr "Henter post på fjern POP-server"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:63
 msgid "Select Server:"
-msgstr ""
+msgstr "Vælg server:"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:65
-msgid "All"
-msgstr ""
-
-#: squirrelmail/plugins/mail_fetch/fetch.php:78
-#, fuzzy
 msgid "Password for"
-msgstr "Pasord:"
+msgstr "Adgangskode til"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:85
 msgid "Fetch Mail"
-msgstr ""
+msgstr "Hent mail"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:117
 msgid "Fetching from "
-msgstr ""
+msgstr "Henter fra "
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:124
-#: squirrelmail/plugins/mail_fetch/fetch.php:184
 msgid "Oops, "
-msgstr ""
+msgstr "Ups, "
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:128
 msgid "Opening IMAP server"
-msgstr ""
+msgstr "Åbner IMAP-server"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:131
 msgid "Opening POP server"
-msgstr ""
+msgstr "Åbner POP-server"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:134
-#: squirrelmail/plugins/mail_fetch/setup.php:123
 msgid "Login Failed:"
-msgstr ""
+msgstr "Login fejlede:"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:151
 msgid "Login OK: No new messages"
-msgstr ""
+msgstr "Login OK: Ingen nye beskeder"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:156
 msgid "Login OK: Inbox EMPTY"
-msgstr ""
+msgstr "Login OK: Indbakken er tom"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:161
 msgid "Login OK: Inbox contains ["
-msgstr ""
+msgstr "Login OK: Indbakken indeholder ["
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:161
-#, fuzzy
 msgid "] messages"
-msgstr "beskeder"
+msgstr "] beskeder"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:164
 msgid "Fetching UIDL..."
-msgstr ""
+msgstr "Henter UIDL..."
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:169
-#: squirrelmail/plugins/mail_fetch/setup.php:154
 msgid "Server does not support UIDL."
-msgstr ""
+msgstr "Serveren supporterer ikke UIDL."
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:172
 msgid "Leaving Mail on Server..."
-msgstr ""
+msgstr "Efterlader post på serveren..."
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:174
 msgid "Deleting messages from server..."
-msgstr ""
+msgstr "Sletter post på serveren..."
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:178
-#, fuzzy
 msgid "Fetching message "
-msgstr "Viser epost"
+msgstr "Henter besked "
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:201
 msgid "Message appended to mailbox"
-msgstr ""
+msgstr "Besked tilføjet mailboksen"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:205
-#, fuzzy
 msgid "Message "
-msgstr "Oversigt"
+msgstr "Besked"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:205
 msgid " deleted from Remote Server!"
-msgstr ""
+msgstr " slettet fra den fjerne server!"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:207
-#, fuzzy
 msgid "Delete failed:"
-msgstr "Slet de valgte"
+msgstr "Slet fejlede:"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:212
-#: squirrelmail/plugins/mail_fetch/setup.php:185
-#, fuzzy
 msgid "Error Appending Message!"
-msgstr "Kunne ikke åbne "
+msgstr "Fejl under tilføjning af besked!"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:216
 msgid "Closing POP"
-msgstr ""
+msgstr "Lukker POP"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:218
 msgid "Logging out from IMAP"
-msgstr ""
+msgstr "Logger af IMAP"
 
-#: squirrelmail/plugins/mail_fetch/fetch.php:221
 msgid "Saving UIDL"
-msgstr ""
+msgstr "Gemmer UIDL"
 
-#: squirrelmail/plugins/mail_fetch/options.php:105
 msgid "Remote POP server settings"
-msgstr ""
+msgstr "Indstillinger for den fjern POP-server"
 
-#: squirrelmail/plugins/mail_fetch/options.php:107
 msgid ""
 "You should be aware that the encryption used to store your password is not "
 "perfectly secure.  However, if you are using pop, there is inherently no "
 "encryption anyway. Additionally, the encryption that we do to save it on the "
 "server can be undone by a hacker reading the source to this file."
 msgstr ""
+"Du skal være opmærksom på, at krypteringen som bruges til at gemme din "
+"adgangskode ikke er 100% sikker. Men pop-trafik er alligevel ikke krypteret. "
+"Endvidere kan krypteringen brydes, hvis en hacker læser sourcekoden til "
+"denne fil."
 
-#: squirrelmail/plugins/mail_fetch/options.php:109
 msgid "If you leave password empty, it will be required when you fetch mail."
 msgstr ""
+"Hvis du lader adgangskoden stå tom, vil den spørge efter adgangskoden, når "
+"du henter post."
 
-#: squirrelmail/plugins/mail_fetch/options.php:113
 msgid "Encrypt passwords (informative only)"
-msgstr ""
+msgstr "Kryptér adgangskoder (kun til information)"
 
-#: squirrelmail/plugins/mail_fetch/options.php:119
-#: squirrelmail/plugins/mail_fetch/options.php:151
 msgid "Add Server"
-msgstr ""
+msgstr "Tilføj server"
 
-#: squirrelmail/plugins/mail_fetch/options.php:123
-#: squirrelmail/plugins/mail_fetch/options.php:201
-#, fuzzy
 msgid "Server:"
-msgstr "Aldrig"
+msgstr "Server:"
 
-#: squirrelmail/plugins/mail_fetch/options.php:124
-#: squirrelmail/plugins/mail_fetch/options.php:203
+#, fuzzy
+msgid "Port:"
+msgstr "Prioritet:"
+
 msgid "Alias:"
-msgstr ""
+msgstr "Kaldenavn:"
 
-#: squirrelmail/plugins/mail_fetch/options.php:125
-#: squirrelmail/plugins/mail_fetch/options.php:205
-#, fuzzy
 msgid "Username:"
-msgstr "Nyt navn:"
+msgstr "Konto:"
 
-#: squirrelmail/plugins/mail_fetch/options.php:127
-#: squirrelmail/plugins/mail_fetch/options.php:209
-#, fuzzy
 msgid "Store in Folder:"
-msgstr "\"Sendt\"-mappe"
+msgstr "Gem i mappen:"
 
-#: squirrelmail/plugins/mail_fetch/options.php:148
-#: squirrelmail/plugins/mail_fetch/options.php:233
 msgid "Leave Mail on Server"
-msgstr ""
+msgstr "Efterlad post på serveren"
 
-#: squirrelmail/plugins/mail_fetch/options.php:149
-#: squirrelmail/plugins/mail_fetch/options.php:235
 msgid "Check mail during login"
-msgstr ""
+msgstr "Hent mail ved login"
 
-#: squirrelmail/plugins/mail_fetch/options.php:150
-#: squirrelmail/plugins/mail_fetch/options.php:237
 msgid "Check mail during folder refresh"
-msgstr ""
+msgstr "Hent mail ved mappeopdatering"
 
-#: squirrelmail/plugins/mail_fetch/options.php:157
-#: squirrelmail/plugins/mail_fetch/options.php:238
 msgid "Modify Server"
-msgstr ""
+msgstr "Ret server"
 
-#: squirrelmail/plugins/mail_fetch/options.php:161
-#, fuzzy
 msgid "Server Name:"
-msgstr "Serveren sagde: "
+msgstr "Servernavn:"
 
-#: squirrelmail/plugins/mail_fetch/options.php:167
-#: squirrelmail/plugins/mail_fetch/options.php:190
-#, fuzzy
 msgid "Modify"
-msgstr "Mandag"
+msgstr "Ret"
 
-#: squirrelmail/plugins/mail_fetch/options.php:171
 msgid "No-one server in use. Try to add."
-msgstr ""
+msgstr "Ingen servere i brug. Tilføj en."
 
-#: squirrelmail/plugins/mail_fetch/options.php:177
-#: squirrelmail/plugins/mail_fetch/options.php:192
-#: squirrelmail/plugins/mail_fetch/options.php:243
 msgid "Fetching Servers"
-msgstr ""
+msgstr "Henter servere"
 
-#: squirrelmail/plugins/mail_fetch/options.php:181
 msgid "Confirm Deletion of a Server"
-msgstr ""
+msgstr "Bekræft sletning af server"
 
-#: squirrelmail/plugins/mail_fetch/options.php:185
 msgid "Selected Server:"
-msgstr ""
+msgstr "Valgt server"
 
-#: squirrelmail/plugins/mail_fetch/options.php:186
 msgid "Confirm delete of selected server?"
-msgstr ""
+msgstr "Bekræft sletning af valgte server?"
 
-#: squirrelmail/plugins/mail_fetch/options.php:187
-#, fuzzy
 msgid "Confirm Delete"
-msgstr "Slet"
+msgstr "Bekræft sletning"
 
-#: squirrelmail/plugins/mail_fetch/options.php:196
 msgid "Mofify a Server"
-msgstr ""
+msgstr "Ret en server"
 
-#: squirrelmail/plugins/mail_fetch/options.php:246
 msgid "Undefined Function"
-msgstr ""
+msgstr "Udefineret funktion"
 
-#: squirrelmail/plugins/mail_fetch/options.php:248
 msgid "Hey! Wath do You are looking for?"
-msgstr ""
+msgstr "Hej! Hvad leder du efter?"
 
-#: squirrelmail/plugins/mail_fetch/setup.php:30
 msgid "Fetch"
-msgstr ""
+msgstr "Hent"
 
-#: squirrelmail/plugins/mail_fetch/setup.php:115
-#: squirrelmail/plugins/mail_fetch/setup.php:162
 msgid "Warning, "
-msgstr ""
+msgstr "Advarsel, "
 
-#: squirrelmail/plugins/mail_fetch/setup.php:198
 msgid "Mail Fetch Result:"
-msgstr ""
+msgstr "Resultat af afhentning:"
 
-#: squirrelmail/plugins/mail_fetch/setup.php:223
 msgid "Simple POP3 Fetch Mail"
-msgstr ""
+msgstr "Simpel POP3 posthenter"
 
-#: squirrelmail/plugins/mail_fetch/setup.php:225
 msgid ""
 "This configures settings for downloading email from a pop3 mailbox to your "
 "account on this server."
 msgstr ""
+"Her konfigureres indstillinger for at hente e-mails fra en pop3 konto til "
+"din konto på denne server."
 
-#: squirrelmail/plugins/bug_report/setup.php:65
 msgid "Bug Reports:"
-msgstr ""
+msgstr "Fejlrapporter:"
 
-#: squirrelmail/plugins/bug_report/setup.php:70
 msgid "Show button in toolbar"
-msgstr ""
+msgstr "Vis knap i værktøjslinien"
 
-#: squirrelmail/plugins/sent_subfolders/setup.php:94
-#, fuzzy
 msgid "Sent Subfolders Options"
-msgstr "Særlige mappe-indstillinger"
+msgstr "Indstillinger for Sendt-mappe"
 
-#: squirrelmail/plugins/sent_subfolders/setup.php:99
-#, fuzzy
 msgid "Use Sent Subfolders"
-msgstr "\"Sendt\"-mappe"
+msgstr "Brug Sendt-mappe"
 
-#: squirrelmail/plugins/sent_subfolders/setup.php:102
-msgid "Disabled"
-msgstr ""
-
-#: squirrelmail/plugins/sent_subfolders/setup.php:103
-#, fuzzy
 msgid "Monthly"
-msgstr "Mandag"
+msgstr "Månedlig"
 
-#: squirrelmail/plugins/sent_subfolders/setup.php:104
 msgid "Quarterly"
-msgstr ""
+msgstr "Kvartalsvis"
 
-#: squirrelmail/plugins/sent_subfolders/setup.php:105
 msgid "Yearly"
-msgstr ""
+msgstr "Årlig"
 
-#: squirrelmail/plugins/sent_subfolders/setup.php:120
-#, fuzzy
 msgid "Base Sent Folder"
-msgstr "\"Sendt\"-mappe"
+msgstr "Basis Sendt-mappe"
 
-#~ msgid "purge"
-#~ msgstr "Ryd op"
+msgid "TODAY"
+msgstr "I DAG"
 
-#~ msgid "Use Javascript or HTML addressbook?"
-#~ msgstr "Adressebog i JavaScript eller HTML?"
+msgid "l, F j Y"
+msgstr "l, j/n Y, H:i"
 
-#~ msgid "Auto refresh folder list"
-#~ msgstr "Opdatér mappelisten automatisk hver"
+msgid "ADD"
+msgstr "TILFØJ"
 
-#~ msgid "Yes, show me the HTML version of a mail message, if it is available."
-#~ msgstr "Ja, vis mig HTML-versionen af en epost, hvis der er en."
+msgid "EDIT"
+msgstr "RET"
 
-#~ msgid "Include Self"
-#~ msgstr "Inkluder sig selv"
+msgid "DEL"
+msgstr "SLET"
 
-#~ msgid "Don't remove me from the CC addresses when I use \"Reply All\""
-#~ msgstr "Fjern mig ikke fra CC-feltet n&aring;r jeg 'svarer alle'"
+msgid "Start time:"
+msgstr "Starttidspunkt:"
 
-#~ msgid "Show page selector"
-#~ msgstr "Vis side-v&aelig;lger"
+msgid "Length:"
+msgstr "Længde:"
 
-#~ msgid "Don't use Trash"
-#~ msgstr "Brug ikke papirkurv"
+msgid "Priority:"
+msgstr "Prioritet:"
 
-#~ msgid "Don't use Sent"
-#~ msgstr "Gem ikke sendt post"
+msgid "Title:"
+msgstr "Titel:"
 
-#, fuzzy
-#~ msgid "Collapseable folders"
-#~ msgstr "Opret Mappe"
+msgid "Set Event"
+msgstr "Tilføj hændelse"
 
-#~ msgid "Author's Name"
-#~ msgstr "Forfatterens navn"
+msgid "Event Has been added!"
+msgstr "Hændelsen er tilføjet!"
 
-#~ msgid "Use a signature?"
-#~ msgstr "Brug signatur?"
+msgid "Time:"
+msgstr "Klokken:"
 
-#~ msgid "Successfully saved display preferences!"
-#~ msgstr "Dine generelle indstillinger er gemt!"
+msgid "Day View"
+msgstr "Vis dag"
 
-#~ msgid "Successfully saved folder preferences!"
-#~ msgstr "Dine mappe-indstillinger er gemt!"
+msgid "Do you really want to delete this event?"
+msgstr "Er du sikker på, at du vil slette denne hændelse?"
 
-#~ msgid "(only Cc/Bcc)"
-#~ msgstr "(kun CC/BCC)"
+msgid "Event deleted!"
+msgstr "Hændelsen er slettet!"
 
-#~ msgid "Viewing messages"
-#~ msgstr "Viser epost nr."
+msgid "Nothing to delete!"
+msgstr "Intet at slette!"
 
-#~ msgid "to"
-#~ msgstr "til"
+msgid "Update Event"
+msgstr "Opdatér hændelse"
 
-#~ msgid "total"
-#~ msgstr "ialt"
+msgid "Do you really want to change this event from:"
+msgstr "Er du sikker på, at du vil ændre denne hændelse fra:"
 
-#~ msgid "You must login first."
-#~ msgstr "Du skal først logge ind"
+msgid "to:"
+msgstr "til:"
 
-#~ msgid "Folders created successfully!"
-#~ msgstr "Mapperne er oprettet!"
+msgid "l, F d Y"
+msgstr "l, j/n Y, H:i"
+
+msgid "Event updated!"
+msgstr "Hændelsen er opdateret!"
+
+msgid "Month View"
+msgstr "Vis måned"
+
+msgid "0 min."
+msgstr "0 min."
+
+msgid "15 min."
+msgstr "15 min."
+
+msgid "35 min."
+msgstr "35 min."
+
+msgid "45 min."
+msgstr "45 min."
+
+msgid "1 hr."
+msgstr "1 t."
+
+msgid "1.5 hr."
+msgstr "1,5 t."
+
+msgid "2 hr."
+msgstr "2 t."
+
+msgid "2.5 hr."
+msgstr "2,5 t."
+
+msgid "3 hr."
+msgstr "3 t."
+
+msgid "3.5 hr."
+msgstr "3,5 t."
+
+msgid "4 hr."
+msgstr "4 t."
+
+msgid "5 hr."
+msgstr "5 t."
+
+msgid "6 hr."
+msgstr "6 t."
+
+msgid "Calendar"
+msgstr "Kalender"
+
+msgid "Mailinglist"
+msgstr "Postliste"
+
+#, c-format
+msgid ""
+"This will send a message to %s requesting help for this list. You will "
+"receive an emailed response at the address below."
+msgstr ""
+"Dette vil sende en besked til %s for at spørge efter hjælp til denne liste. "
+"Du vil modtage en e-mail på adressen herunder."
+
+#, c-format
+msgid ""
+"This will send a message to %s requesting that you will be subscribed to "
+"this list. You will be subscribed with the address below."
+msgstr ""
+"Dette vil sende en besked til %s for at abonnere på denne liste. Du vil "
+"modtage beskeder på adressen herunder."
+
+#, c-format
+msgid ""
+"This will send a message to %s requesting that you will be unsubscribed from "
+"this list. It will try to unsubscribe the adress below."
+msgstr ""
+"Dette vil sende en besked til %s for at opsige abonnementet på denne liste. "
+"Det er adressen derunder, som vil blive afmeldt."
+
+msgid "Send Mail"
+msgstr "Send e-mail"
+
+msgid "Post to List"
+msgstr "Skriv til listen"
+
+msgid "Reply to List"
+msgstr "Svar til listen"
+
+msgid "List Archives"
+msgstr "Listearkiver"
+
+msgid "Contact Listowner"
+msgstr "Kontakt liste-ejeren"
+
+msgid "Mailing List:"
+msgstr "Postliste:"
+
+msgid "Delete & Prev"
+msgstr "Slet & forrige"
+
+msgid "Delete & Next"
+msgstr "Slet & næste"
+
+msgid "Delete/Move/Next Buttons:"
+msgstr "Slet/Flyt/Næste knapper:"
+
+msgid "Display at top"
+msgstr "Vis øverst"
+
+msgid "with move option"
+msgstr "med flyttemulighed"
+
+msgid "Display at bottom"
+msgstr "Vis nederst"
+
+msgid "Config File Version"
+msgstr "Konfigurationfilens version"
+
+msgid "Squirrelmail Version"
+msgstr "SquirrelMail version"
+
+msgid "PHP Version"
+msgstr "PHP version"
+
+msgid "Organization Preferences"
+msgstr "Organisationsindstillinger"
+
+msgid "Organization Name"
+msgstr "Organisationsnavn"
+
+msgid "Organization Logo"
+msgstr "Organisationslogo"
+
+msgid "Organization Logo Width"
+msgstr "Bredde af organisationslogo"
+
+msgid "Organization Logo Height"
+msgstr "Højde på organisationslogo"
+
+msgid "Organization Title"
+msgstr "Organisationstitel"
+
+msgid "Signout Page"
+msgstr "Logaf-side"
+
+msgid "Default Language"
+msgstr "Standardsprog"
+
+msgid "Top Frame"
+msgstr "Topramme"
+
+msgid "Server Settings"
+msgstr "Serverindstillinger"
+
+msgid "Mail Domain"
+msgstr "Postdomæne"
+
+msgid "IMAP Server Address"
+msgstr "IMAP-serveradresse"
+
+msgid "IMAP Server Port"
+msgstr "IMAP-serverport"
+
+msgid "IMAP Server Type"
+msgstr "IMAP-servertype"
+
+msgid "Cyrus IMAP server"
+msgstr "Cyrus IMAP-server"
+
+msgid "University of Washington's IMAP server"
+msgstr "University of Washingtons IMAP-server"
+
+msgid "Microsoft Exchange IMAP server"
+msgstr "Microsoft Exchange IMAP-server"
+
+msgid "Courier IMAP server"
+msgstr "Courier IMAP-server"
+
+msgid "Not one of the above servers"
+msgstr "Ingen af de ovenstående servere"
+
+msgid "IMAP Folder Delimiter"
+msgstr "IMAP-mappeafgrænser"
+
+msgid "Use \"detect\" to auto-detect."
+msgstr "Brug \"detect\" for automatisk detektion."
+
+msgid "Use Sendmail"
+msgstr "Brug Sendmail"
+
+msgid "Sendmail Path"
+msgstr "Sendmail sti"
+
+msgid "SMTP Server Address"
+msgstr "SMTP-serveradresse"
+
+msgid "SMTP Server Port"
+msgstr "SMTP-serverport"
+
+msgid "Authenticated SMTP"
+msgstr "Stadfæstet SMTP"
+
+msgid "Invert Time"
+msgstr "Spejlvend klokken"
+
+msgid "Use Confirmation Flags"
+msgstr "Brug bekræftelsesflag"
+
+msgid "Folders Defaults"
+msgstr "Mappestandarder"
+
+msgid "Default Folder Prefix"
+msgstr "Standard mappepræfix"
+
+msgid "Show Folder Prefix Option"
+msgstr "Vis mappepræfix indstilling"
+
+msgid "By default, move to trash"
+msgstr "Flyt til skraldespanden som standard"
+
+msgid "By default, move to sent"
+msgstr "Flyt til sendt som standard"
+
+msgid "By default, save as draft"
+msgstr "Gem som kladde som standard"
+
+msgid "List Special Folders First"
+msgstr "Vis specialmapper først"
+
+msgid "Show Special Folders Color"
+msgstr "Alternativ farve på specialmapper"
+
+msgid "Auto Expunge"
+msgstr "Automatisk oprydning"
+
+msgid "Default Sub. of INBOX"
+msgstr "Standard undermappe af indbakke"
+
+msgid "Show 'Contain Sub.' Option"
+msgstr "Vis 'Indeholder undermapper' indstillingen"
+
+msgid "Default Unseen Notify"
+msgstr "Gør opmærksom på ulæste beskeder"
+
+msgid "Default Unseen Type"
+msgstr "Standard for ulæste beskeder"
+
+msgid "Auto Create Special Folders"
+msgstr "Opret specialmapper automatisk"
+
+msgid "Default Javascript Adrressbook"
+msgstr "Standard JavaScript adressebog"
+
+msgid "Auto delete folders"
+msgstr "Slet mapper automatisk"
+
+msgid "General Options"
+msgstr "Generelle indstillinger"
+
+msgid "Default Charset"
+msgstr "Standard tegnsæt"
+
+msgid "Data Directory"
+msgstr "Datamappe"
+
+msgid "Temp Directory"
+msgstr "Temporær mappe"
+
+msgid "Hash Level"
+msgstr "Hashniveau"
+
+msgid "Hash Disabled"
+msgstr "Hash deaktiveret"
+
+msgid "Moderate"
+msgstr "Moderat"
+
+msgid "Medium"
+msgstr "Mellem"
+
+msgid "Default Left Size"
+msgstr "Standardstørrelse på mappepanel"
+
+msgid "Usernames in Lowercase"
+msgstr "Kontonavne med små bogstaver"
+
+msgid "Allow use of priority"
+msgstr "Tillad brug af prioritet"
+
+msgid "Hide SM attributions"
+msgstr "Skjul SM attributter"
+
+msgid "Enable use of delivery receipts"
+msgstr "Aktivér brug af kvitteringer"
+
+msgid "Allow editing of identities"
+msgstr "Tillad redigering af identiteter"
+
+msgid "Allow editing of full name"
+msgstr "Tillad redigering af det fulde navn"
+
+msgid "Message of the Day"
+msgstr "Dagens meddelelse"
+
+msgid "Database"
+msgstr "Database"
+
+msgid "Address book DSN"
+msgstr "DSN for adressebog"
+
+msgid "Address book table"
+msgstr "Adressebogstabel"
+
+msgid "Preferences DSN"
+msgstr "DSN for indstillinger"
+
+msgid "Preferences table"
+msgstr "Indstillingstabel"
+
+msgid "Preferences username field"
+msgstr "Indstillinger kontonavnsfelt"
+
+msgid "Preferences key field"
+msgstr "Indstillinger nøglefelt"
+
+msgid "Preferences value field"
+msgstr "Indstillinger værdifelt"
+
+msgid "Themes"
+msgstr "Temaer"
+
+msgid "Style Sheet URL (css)"
+msgstr "Stilark URL (css)"
+
+msgid "Configuration Administrator"
+msgstr "Konfigurationsadministrator"
+
+msgid "Theme Name"
+msgstr "Temanavn"
+
+msgid "Theme Path"
+msgstr "Temasti"
+
+msgid "Plugins"
+msgstr "Indstiksmoduler"
+
+msgid "Change Settings"
+msgstr "Gem indstillingerne"
+
+msgid "Config file can't be opened. Please check config.php."
+msgstr ""
+"Konfigurationsfilen kan ikke åbnes. Vær venlig at kontrollere config.php."
+
+msgid "Administration"
+msgstr "Administration"
+
+msgid ""
+"This module allows administrators to manage SquirrelMail main configuration "
+"remotely."
+msgstr "Dette modul tillader administratorer at fjernkonfigurere SquirrelMail."
+
+msgid "Delivery error report"
+msgstr "Fejlrapport for aflevering"
+
+msgid "Undelivered Message Headers"
+msgstr "Headere fra ikke afleverede beskeder"
+
+#~ msgid "Submit message"
+#~ msgstr "Send besked"
+
+#~ msgid "POP3: premature NOOP OK, NOT an RFC 1939 Compliant server"
+#~ msgstr "POP3: for tidlig NOOP OK, serveren overholder Ikke RFC-1939"
+
+#~ msgid "NOOP failed. Server not RFC 1939 compliant"
+#~ msgstr "NOOP fejlede, serveren overholder ikke RFC-1939"
+
+#~ msgid "Subscription Unsuccessful - Folder does not exist."
+#~ msgstr "Kunne ikke gøres aktiv - mappen eksisterer ikke."
+
+#~ msgid "Subscribe to:"
+#~ msgstr "Aktivér:"
+
+#~ msgid "Save folder tree"
+#~ msgstr "Gem mappetræ"
+
+#~ msgid "Enable Forward as Attachment"
+#~ msgstr "Aktivér videresending som vedhæftet fil"
+
+#~ msgid "Enable Mail Delivery Notification"
+#~ msgstr "Gør opmærksom på ulæste beskeder"
+
+#~ msgid "Enable Sort by of Receive Date"
+#~ msgstr "Aktivér sortering efter modtagelsesdatoen"
+
+#~ msgid "Enable Thread Sort by References Header"
+#~ msgstr "Aktivér sortering i tråde"
+
+#~ msgid "subject"
+#~ msgstr "emne"
+
+#~ msgid "Unknown sender"
+#~ msgstr "Ukendt afsender"
+
+#~ msgid "Search results"
+#~ msgstr "Søgeresultat"
+
+#~ msgid "View Message"
+#~ msgstr "Vis meddelelse"
+
+#~ msgid "Forward as Attachment"
+#~ msgstr "Videresend som vedhæftet fil"
 
 #~ msgid ""
-#~ "In order for SquirrelMail to provide the full set of options you need to "
-#~ "create the special folders listed below.  Just click the check box and "
-#~ "hit the create button."
+#~ "You need to have php4 installed with the multibyte string function "
+#~ "enabled (using configure option --with-mbstring)."
 #~ msgstr ""
-#~ "For at SquirrelMail kan give din de maksimale muligheder, skal du oprette "
-#~ "disse mapper. Du opretter dem ved at klikke i checkboksen og trykke på "
-#~ "knappen."
+#~ "Du skal have php4 installeret med \"multibyte string\" funktionen "
+#~ "aktiveret. (brug konfigurationsparameteren --with-mbstring)."
 
-#~ msgid "Create Sent"
-#~ msgstr "Opret \"Sendt\""
+#~ msgid ""
+#~ "Thread sorting is not supported by your IMAP server.<br>Please report "
+#~ "this to the system administrator."
+#~ msgstr ""
+#~ "Trådsortering er ikke supporteret af din IMAP-server.<br>Vær venlig at "
+#~ "rapportere dette til systemadministratoren."
 
-#~ msgid "Create Trash"
-#~ msgstr "Opret Papirkurv"
+#~ msgid "FREE - Distributed Sender Boycott List - Confirmed Relays"
+#~ msgstr "GRATIS - Distributed Sender Boycott List - Bekræftede åbne servere"
 
-#~ msgid "Addressbook %s is read-only"
-#~ msgstr "Du kan kun læse i adressebogen, %s"
+#~ msgid ""
+#~ "FREE - Distributed Sender Boycott List - Confirmed Multi-stage Relays"
+#~ msgstr ""
+#~ "GRATIS - Distributed Sender Boycott List - Bekræftede flertrins åbne "
+#~ "servere"
+
+#~ msgid "FREE - Distributed Sender Boycott List - UN-Confirmed Relays"
+#~ msgstr ""
+#~ "GRATIS - Distributed Sender Boycott List - Ikke-bekræftede åbne servere"
+
+#~ msgid "Server error...Disconnect"
+#~ msgstr "Serverfejl...Afbryder"
+
+#~ msgid "Re-connect from dead connectoin"
+#~ msgstr "Gentilslut død forbindelse"
+
+#~ msgid "Re-fetching message "
+#~ msgstr "Genhenter besked "
+
+#~ msgid "Take Address"
+#~ msgstr "Tag adresse"
+
+#~ msgid "Address Book Take"
+#~ msgstr "Tag adressebog"
+
+#~ msgid "Left aligned"
+#~ msgstr "Venstrejusteret"
+
+#~ msgid "Centered"
+#~ msgstr "Centreret"
+
+#~ msgid "Right aligned"
+#~ msgstr "Højrejusteret"
+
+#~ msgid "on the Read screen"
+#~ msgstr "på læseskærmen"
+
+#~ msgid "Hide the box"
+#~ msgstr "Skjul boksen"
+
+#~ msgid "Try to verify addresses"
+#~ msgstr "Forsøg at verificere adresser"

@@ -168,6 +168,33 @@ $search_all = 'none';
 $perbox_count = array ();
 $recent_count = getPref($data_dir, $username, 'search_memory', 0);
 
+/* get globals we may need */
+
+$key = $_COOKIE['key'];
+$username = $_SESSION['username'];
+$onetimepad = $_SESSION['onetimepad'];
+$delimiter = $_SESSION['delimiter'];
+
+if (isset($_GET['mailbox'])) {
+    $mailbox = strip_tags($_GET['mailbox']);
+}
+if (isset($_GET['submit'])) {
+    $submit = strip_tags($_GET['submit']);
+}
+if (isset($_GET['what'])) {
+    $what = $_GET['what'];
+}
+if (isset($_GET['where'])) {
+    $where = strip_tags($_GET['where']);
+}
+if (isset($_GET['checkall'])) {
+    $checkall = strip_tags($_GET['checkall']);
+}
+if (isset($_GET['count'])) {
+    $count = strip_tags($_GET['count']);
+}
+/* end of get globals */
+
 /*  get mailbox names  */
 $imapConnection = sqimap_login($username, $key, $imapServerAddress, $imapPort, 0);
 $boxes = sqimap_mailbox_list($imapConnection);
@@ -200,7 +227,7 @@ if ( !isset( $submit ) ) {
     }
 }
 elseif ($submit == 'forget') {
-    forget_recent($count, $username, $data_dir);
+    forget_recent(($count-1), $username, $data_dir);
 }
 elseif ($submit == 'save') {
     save_recent($count, $username, $data_dir);
@@ -236,9 +263,9 @@ if ($saved_count > 0) {
         } else {
             echo "<TR BGCOLOR=\"$color[4]\">";
         }
-        echo "<TD WIDTH=\"35%\">".$saved_attributes['saved_folder'][$i]."</TD>"
-        . "<TD ALIGN=LEFT>".$saved_attributes['saved_what'][$i]."</TD>"
-        . "<TD ALIGN=CENTER>".$saved_attributes['saved_where'][$i]."</TD>"
+        echo "<TD WIDTH=\"35%\">".htmlentities($saved_attributes['saved_folder'][$i])."</TD>"
+        . "<TD ALIGN=LEFT>".htmlentities($saved_attributes['saved_what'][$i])."</TD>"
+        . "<TD ALIGN=CENTER>".htmlentities($saved_attributes['saved_where'][$i])."</TD>"
         . '<TD ALIGN=RIGHT>'
         .   '<A HREF=search.php'
         .     '?mailbox=' . urlencode($saved_attributes['saved_folder'][$i])
@@ -280,9 +307,9 @@ if ($recent_count > 0) {
             }
             if (isset($attributes['search_what'][$i]) &&
                 !empty($attributes['search_what'][$i])) {
-            echo "<TD WIDTH=35%>".$attributes['search_folder'][$i]."</TD>"
-               . "<TD ALIGN=LEFT>".$attributes['search_what'][$i]."</TD>"
-               . "<TD ALIGN=CENTER>".$attributes['search_where'][$i]."</TD>"
+            echo "<TD WIDTH=35%>".htmlentities($attributes['search_folder'][$i])."</TD>"
+               . "<TD ALIGN=LEFT>".htmlentities($attributes['search_what'][$i])."</TD>"
+               . "<TD ALIGN=CENTER>".htmlentities($attributes['search_where'][$i])."</TD>"
                . '<TD ALIGN=RIGHT>'
                .   "<A HREF=search.php?count=$i&amp;submit=save>"
                .     _("save")
@@ -313,7 +340,8 @@ echo '<B>' . _("Current Search") . '</B>'
 for ($i = 0; $i < count($boxes); $i++) {
     if (!in_array('noselect', $boxes[$i]['flags'])) {
         $box = $boxes[$i]['unformatted'];
-        $box2 = imap_utf7_decode_local(str_replace(' ', '&nbsp;', $boxes[$i]['unformatted-disp']));
+        $box2 = str_replace(' ', '&nbsp;',
+            imap_utf7_decode_local($boxes[$i]['unformatted-disp']));
         if( $box2 == 'INBOX' ) {
             $box2 = _("INBOX");
         }
@@ -329,7 +357,7 @@ for ($i = 0; $i < count($boxes); $i++) {
         if ($mailbox == "All Folders") {
             echo "SELECTED";
         }
-        echo ">All folders</OPTION>\n";
+        echo '>' . _("All folders") . "</OPTION>\n";
 echo '         </SELECT>'.
      "       </TD>\n".
      "        <TD ALIGN=\"CENTER\">\n";
@@ -362,8 +390,7 @@ echo "         </SELECT>\n" .
      "       </TD>\n".
      "     </TR>\n".
      "</FORM>\n".
-     "   </TABLE>\n".
-     "</TD></TR></TABLE>\n";
+     "   </TABLE>\n";
 
 
 do_hook('search_after_form');
@@ -384,7 +411,7 @@ if ($search_all == 'all') {
     $boxcount = count($boxes);
     echo '<BR><CENTER><B>' .
          _("Search Results") .
-         "</B><CENTER><BR>\n";
+         "</B></CENTER><BR>\n";
     for ($x=0;$x<$boxcount;$x++) {
         if (!in_array('noselect', $boxes[$x]['flags'])) {
             $mailbox = $boxes[$x]['unformatted'];

@@ -28,10 +28,32 @@ function sqm_baseuri(){
     if (isset($base_uri)){
         return $base_uri;
     }
-    $dirs = array("|src/.*|", "|plugins/.*|", "|functions/.*|");
-    $repl = array("", "", "");
+    $dirs = array('|src/.*|', '|plugins/.*|', '|functions/.*|');
+    $repl = array('', '', '');
     $base_uri = preg_replace($dirs, $repl, $PHP_SELF);
     return $base_uri;
+}
+
+/**
+ * Find out the top REAL path of the squirrelmail installation.
+ *
+ * @return  the real installation directory of squirrelmail.
+ */
+
+function sqm_topdir(){
+    $topdir = '';
+    /**
+     * $levels is just to avoid a potential infinite loop in case
+     * things are REALLY broken. Shouldn't really ever happen.
+     */
+    $levels = 0;
+    while (!(is_dir($topdir . 'functions') && is_dir($topdir. 'src')
+           && file_exists($topdir . 'functions') && file_exists($topdir . 'src'))
+           && $levels < 10) {
+        $topdir .= '../';
+        $levels++;
+    }
+    return $topdir;
 }
 
 function error_username_password_incorrect() {
@@ -92,13 +114,14 @@ function plain_error_message($message, $color) {
 function logout_error( $errString, $errTitle = '' ) {
 
     GLOBAL $frame_top, $org_logo, $org_name, $org_logo_width, $org_logo_height,
-           $hide_sm_attributions, $version, $DOCUMENT_ROOT,
-           $squirrelmail_language;
+           $hide_sm_attributions, $version, $squirrelmail_language;
+
     $base_uri = sqm_baseuri();
-    include_once($DOCUMENT_ROOT . $base_uri . 'functions/page_header.php' );
+    $topdir = sqm_topdir();
+    include_once( "$topdir/functions/page_header.php" );
     if ( !isset( $org_logo ) ) {
         // Don't know yet why, but in some accesses $org_logo is not set.
-        include( $DOCUMENT_ROOT . $base_uri . 'config/config.php' );
+        include( "$topdir/config/config.php" );
     }
     /* Display width and height like good little people */
     $width_and_height = '';
@@ -135,7 +158,7 @@ function logout_error( $errString, $errTitle = '' ) {
         $errTitle = $errString;
     }
     set_up_language($squirrelmail_language, true);
-    displayHtmlHeader( $errTitle );
+    displayHtmlHeader( $errTitle , '', FALSE);
     
     echo "<BODY TEXT=\"$color[8]\" BGCOLOR=\"$color[4]\" LINK=\"$color[7]\" VLINK=\"$color[7]\" ALINK=\"$color[7]\">\n\n" .
          '<CENTER>'.

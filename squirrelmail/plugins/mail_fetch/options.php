@@ -15,22 +15,73 @@
     require_once('../src/validate.php');
     require_once('../functions/imap.php');
     require_once('../src/load_prefs.php');
+ 
+    /* globals */
+    $username = $_SESSION['username'];
+    $key = $_COOKIE['key'];
+    $onetimepad = $_SESSION['onetimepad'];
+    $delimiter = $_SESSION['delimiter'];
+    
+    if(isset($_POST['mf_cypher'])) {
+        $mf_cypher = $_POST['mf_cypher'];
+    }
+    else {
+        $mf_cyper = '';
+    }
+    if(isset($_POST['mf_sn'])) {
+        $mf_sn = $_POST['mf_sn'];
+    }
+    if(isset($_POST['mf_server'])) {
+        $mf_server = $_POST['mf_server'];
+    }
+    if(isset($_POST['mf_port'])) {
+        $mf_port = $_POST['mf_port'];
+    }
+    if(isset($_POST['mf_alias'])) {
+        $mf_alias = $_POST['mf_alias'];
+    }
+    if(isset($_POST['mf_user'])) {
+        $mf_user = $_POST['mf_user'];
+    }
+    if(isset($_POST['mf_pass'])) {
+        $mf_pass = $_POST['mf_pass'];
+    }
+    if(isset($_POST['mf_subfolder'])) {
+        $mf_subfolder = $_POST['mf_subfolder'];
+    }
+    if(isset($_POST['mf_login'])) {
+        $mf_login = $_POST['mf_login'];
+    }
+    if(isset($_POST['mf_fref'])) {
+        $mf_fref = $_POST['mf_fref'];
+    }
+    if(isset($_POST['submit_mailfetch'])) {
+        $submit_mailfetch = $_POST['submit_mailfetch'];
+    }
+    if(isset($_POST['mf_lmos'])) {
+        $mf_lmos = $_POST['mf_lmos'];
+    }
+    /* end globals */
 
     displayPageHeader( $color, 'None' );
 
     //if dosen't select any option
-    if (!isset($mf_action))
+    if (!isset($_POST['mf_action'])) {
         $mf_action = 'config';
+    } else {
+        $mf_action = $_POST['mf_action'];
+    }
 
     switch( $mf_action ) {
     case 'add':
         if ($mf_sn<1) $mf_sn=0;
         if (!isset($mf_server)) return;
         setPref($data_dir,$username,"mailfetch_server_$mf_sn", (isset($mf_server)?$mf_server:""));
+		setPref($data_dir,$username,"mailfetch_port_$mf_sn", (isset($mf_port)?$mf_port:110));
         setPref($data_dir,$username,"mailfetch_alias_$mf_sn", (isset($mf_alias)?$mf_alias:""));
         setPref($data_dir,$username,"mailfetch_user_$mf_sn",(isset($mf_user)?$mf_user:""));
         setPref($data_dir,$username,"mailfetch_pass_$mf_sn",(isset($mf_pass)?encrypt( $mf_pass )    :""));
-        if( $mf_cypher <> 'on' ) SetPref($data_dir,$username,"mailfetch_cypher",    'on');
+        if( isset($mf_cypher) && $mf_cypher <> 'on' ) SetPref($data_dir,$username,"mailfetch_cypher",    'on');
         setPref($data_dir,$username,"mailfetch_lmos_$mf_sn",(isset($mf_lmos)?$mf_lmos:""));
         setPref($data_dir,$username,"mailfetch_login_$mf_sn",(isset($mf_login)?$mf_login:""));
         setPref($data_dir,$username,"mailfetch_fref_$mf_sn",(isset($mf_fref)?$mf_fref:""));
@@ -43,6 +94,7 @@
         //modify    a server
         if (!isset($mf_server)) return;
         setPref($data_dir,$username,"mailfetch_server_$mf_sn", (isset($mf_server)?$mf_server:""));
+		setPref($data_dir,$username,"mailfetch_port_$mf_sn", (isset($mf_port)?$mf_port:110));
         setPref($data_dir,$username,"mailfetch_alias_$mf_sn", (isset($mf_alias)?$mf_alias:""));
         setPref($data_dir,$username,"mailfetch_user_$mf_sn",(isset($mf_user)?$mf_user:""));
         setPref($data_dir,$username,"mailfetch_pass_$mf_sn",(isset($mf_pass)?encrypt( $mf_pass )    :""));
@@ -67,6 +119,7 @@
             for ($i=$mf_sn;$i<$mailfetch_server_number;$i++) {
                 $tmp=$i+1;
                 setPref($data_dir,$username,"mailfetch_server_$mf_sn", getPref($data_dir, $username, "mailfetch_server_$tmp"));
+				setPref($data_dir,$username,"mailfetch_port_$mf_sn", getPref($data_dir, $username, "mailfetch_port_$tmp"));
                 setPref($data_dir,$username,"mailfetch_alias_$mf_sn", getPref($data_dir, $username, "mailfetch_alias_$tmp"));
                 setPref($data_dir,$username,"mailfetch_user_$mf_sn", getPref($data_dir, $username, "mailfetch_user_$tmp"));
                 setPref($data_dir,$username,"mailfetch_pass_$mf_sn",(isset($mf_pass)?encrypt( $mf_pass ) :""));
@@ -89,6 +142,7 @@
     }
     for ($i=0;$i<$mailfetch_server_number;$i++) {
         $mailfetch_server_[$i] = getPref($data_dir, $username, "mailfetch_server_$i");
+		$mailfetch_port_[$i] = getPref($data_dir , $username, "mailfetch_port_$i");
         $mailfetch_alias_[$i] = getPref($data_dir, $username, "mailfetch_alias_$i");
         $mailfetch_user_[$i] = getPref($data_dir, $username, "mailfetch_user_$i");
         $mailfetch_pass_[$i] = getPref($data_dir, $username, "mailfetch_pass_$i");
@@ -121,6 +175,7 @@
             "<INPUT TYPE=\"hidden\" NAME=\"mf_sn\" VALUE=\"$mailfetch_server_number\">" .
             '<INPUT TYPE="hidden" NAME="mf_action" VALUE="add"><table>' .
             '<tr><th align=right>' . _("Server:") . '</th><td><input type=text name=mf_server value="" size=40></td></tr>' .
+			'<tr><th align=right>' . _("Port:") . '</th><td><input type=text name=mf_port value="110" size=20></td></tr>' .
             '<tr><th align=right>' . _("Alias:") . '</th><td><input type=text name=mf_alias value="" size=20></td></tr>' .
             '<tr><th align=right>' . _("Username:") . '</th><td><input type=text name=mf_user value="" size=20></td></tr>' .
             '<tr><th align=right>' . _("Password:") . '</th><td><input type=password name=mf_pass value="" size=20></td></tr>' .
@@ -156,7 +211,8 @@
             echo '<b>' . _("Server Name:") . '</b> <SELECT NAME="mf_sn">';
             for ($i=0;$i<$mailfetch_server_number;$i++) {
                 echo "<OPTION VALUE=\"$i\">" .
-                    (($mailfetch_alias_[$i]=='')?$mailfetch_server_[$i]:$mailfetch_alias_[$i]) . "</OPTION>>";
+                     htmlspecialchars((($mailfetch_alias_[$i]=='')?$mailfetch_server_[$i]:$mailfetch_alias_[$i])) . 
+                     "</OPTION>>";
             }
             echo '</SELECT>'.
                  '&nbsp;&nbsp;<INPUT TYPE=submit name=mf_action value="' . _("Modify") . '">'.
@@ -177,7 +233,7 @@
             "<TR><TD BGCOLOR=\"$color[0]\" ALIGN=CENTER>" .
             "<INPUT TYPE=\"hidden\" NAME=\"mf_sn\" VALUE=\"$mf_sn\">" .
             '<INPUT TYPE="hidden" NAME="mf_action" VALUE="confirm_delete">' .
-            '<br>' . _("Selected Server:") . "<b>$mailfetch_server_[$mf_sn]</b><br>" .
+            '<br>' . _("Selected Server:") . "<b>" . htmlspecialchars($mailfetch_server_[$mf_sn]) . "</b><br>" .
             _("Confirm delete of selected server?") . '<br><br>' .
             '<input type=submit name=submit_mailfetch value="' . _("Confirm Delete") . '">' .
             '<br></form></TD></TR></TABLE>';
@@ -194,9 +250,11 @@
             '<INPUT TYPE="hidden" NAME="mf_action" VALUE="confirm_modify">' .
             '<table>' .
             '<tr><th align=right>' . _("Server:") . '</th>' .
-            "<td><input type=text name=mf_server value=\"$mailfetch_server_[$mf_sn]\" size=40></td></tr>" .
+            "<td><input type=text name=mf_server value=\"" . htmlspecialchars($mailfetch_server_[$mf_sn]) . "\" size=40></td></tr>" .
+			'<tr><td align=right>' . _("Port:") . '</th>' .
+			'<td><input type=text name=mf_port value="' . $mailfetch_port_[$mf_sn] . '" size=40></td><tr>' .
             '<tr><th align=right>' . _("Alias:") . '</th>' .
-            "<td><input type=text name=mf_alias value=\"$mailfetch_alias_[$mf_sn]\" size=40></td></tr>" .
+            "<td><input type=text name=mf_alias value=\"" . htmlspecialchars($mailfetch_alias_[$mf_sn]) . "\" size=40></td></tr>" .
             '<tr><th align=right>' . _("Username:") . '</th>' .
             "<td><input type=text name=mf_user value=\"$mailfetch_user_[$mf_sn]\" size=20></td></tr>" .
             '<tr><th align=right>' . _("Password:") . '</th>' .

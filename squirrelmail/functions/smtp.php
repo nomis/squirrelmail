@@ -110,7 +110,7 @@ function expandRcptAddrs ($array) {
 
 /* Attach the files that are due to be attached
  */
-function attachFiles ($fp, $session, $rn="\r\n") {
+function attachFiles ($fp, $session, $rn="\r\n", $checkdot = false) {
     global $attachments, $attachment_dir, $username;
 
     $length = 0;
@@ -137,7 +137,6 @@ function attachFiles ($fp, $session, $rn="\r\n") {
                     $header .= "Content-Type: $filetype$rn";
                 }
 
-                
                 /* Use 'rb' for NT systems -- read binary
                  * Unix doesn't care -- everything's binary!  :-)
                  */
@@ -152,24 +151,47 @@ function attachFiles ($fp, $session, $rn="\r\n") {
 					    fputs ($fp, $header);
 					}
                     $length += strlen($header);
+
+                    if ($checkdot) {
+                        $checkdot_begin=true;
+                    } 
+                    else {
+                        $checkdot_begin=false;
+                    }
+
                     while ($tmp = fgets($file, 4096)) {
                         $tmp = str_replace("\r\n", "\n", $tmp);
                         $tmp = str_replace("\r", "\n", $tmp);
+
+                        if ($tmp{0} == '.' && $checkdot_begin) {
+                            $tmp = '.' . $tmp;
+                        }
+                        if ($checkdot) {
+                            $tmp = str_replace("\n.","\n..",$tmp);
+                        }
                         if ($rn == "\r\n"){
                             $tmp = str_replace("\n", "\r\n", $tmp);
                         }
-                        /**
-                         * Check if the last line has newline ($rn) in it
-                         * and append if it doesn't.
-                         */
-                        if ($fp && feof($fp) && !strstr($tmp, "$rn")){
-                            $tmp .= $rn;
+                        $tmp_length = strlen($tmp);
+                        if ($tmp{$tmp_length-1} == "\n" && $checkdot) {
+                            $checkdot_begin = true;
+                        } 
+                        else {
+                            $checkdot_begin = false;
                         }
                         if ($fp) {
                             fputs($fp, $tmp);
                         }
                         $length += strlen($tmp);
                     }
+
+                    if (substr($tmp, strlen($tmp) - strlen($rn), strlen($rn)) != $rn) {
+                        if ($fp) {
+                            fputs($fp, $rn);
+                        }
+                    $length += strlen($rn);
+                    }
+                    
                 } else {
                     $header .= "Content-Transfer-Encoding: base64" 
                         . "$rn" . "$rn";
@@ -250,10 +272,23 @@ function timezone () {
 
 /* Print all the needed RFC822 headers */
 function write822Header ($fp, $t, $c, $b, $subject, $more_headers, $session, $rn="\r\n") {
-    global $REMOTE_ADDR, $SERVER_NAME, $REMOTE_PORT;
     global $data_dir, $username, $popuser, $domain, $version, $useSendmail;
-    global $default_charset, $HTTP_VIA, $HTTP_X_FORWARDED_FOR;
-    global $REMOTE_HOST, $identity;
+    global $default_charset, $identity, $_SERVER;
+
+    /* get those globals */
+    $REMOTE_ADDR = $_SERVER['REMOTE_ADDR'];
+    $SERVER_NAME = $_SERVER['SERVER_NAME'];
+    $REMOTE_PORT = $_SERVER['REMOTE_PORT'];
+
+    if(isset($_SERVER['REMOTE_HOST'])) {
+        $REMOTE_HOST = $_SERVER['REMOTE_HOST'];
+    }
+    if(isset($_SERVER['HTTP_VIA'])) {
+        $HTTP_VIA = $_SERVER['HTTP_VIA'];
+    }
+    if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $HTTP_X_FORWARDED_FOR = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
 
     /* Storing the header to make sure the header is the same
      * everytime the header is printed.
@@ -304,7 +339,7 @@ function write822Header ($fp, $t, $c, $b, $subject, $more_headers, $session, $rn
         }
 
         if (isset($HTTP_VIA) || isset ($HTTP_X_FORWARDED_FOR)) {
-            if ($HTTP_X_FORWARDED_FOR == '') {
+            if (!isset($HTTP_X_FORWARDED_FOR) || $HTTP_X_FORWARDED_FOR == '') {
                 $HTTP_X_FORWARDED_FOR = 'unknown';
             }
             $received_from .= " (proxying for $HTTP_X_FORWARDED_FOR)";
@@ -399,7 +434,7 @@ function write822Header ($fp, $t, $c, $b, $subject, $more_headers, $session, $rn
 
 /* Send the body
  */
-function writeBody ($fp, $passedBody, $session, $rn="\r\n") {
+function writeBody ($fp, $passedBody, $session, $rn="\r\n", $checkdot = false) {
     global $default_charset;
 
     $attachmentlength = 0;
@@ -418,7 +453,7 @@ function writeBody ($fp, $passedBody, $session, $rn="\r\n") {
         $body .= $passedBody . $rn . $rn;
         if ($fp) fputs ($fp, $body);
         
-        $attachmentlength = attachFiles($fp, $session, $rn);
+        $attachmentlength = attachFiles($fp, $session, $rn, $checkdot);
         
         if (!isset($postbody)) { 
             $postbody = ""; 
@@ -461,7 +496,7 @@ function sendSendmail($t, $c, $b, $subject, $body, $more_headers, $session) {
     
     $headerlength = write822Header ($fp, $t, $c, $b, $subject, 
                                     $more_headers, $session, "\n");
-    $bodylength = writeBody($fp, $body, $session, "\n");
+    $bodylength = writeBody($fp, $body, $session, "\n", true);
     
     pclose($fp);
 
@@ -482,7 +517,7 @@ function smtpReadData($smtpConnection) {
 function sendSMTP($t, $c, $b, $subject, $body, $more_headers, $session) {
     global $username, $popuser, $domain, $version, $smtpServerAddress, 
         $smtpPort, $data_dir, $color, $use_authenticated_smtp, $identity, 
-        $key, $onetimepad;
+        $key, $onetimepad, $compose_new_win;
     
     $to = expandRcptAddrs(parseAddrs($t));
     $cc = expandRcptAddrs(parseAddrs($c));
@@ -534,10 +569,19 @@ function sendSMTP($t, $c, $b, $subject, $body, $more_headers, $session) {
     
     $smtpConnection = fsockopen($smtpServerAddress, $smtpPort, 
                                 $errorNumber, $errorString);
-    if (!$smtpConnection) {
-        echo 'Error connecting to SMTP Server.<br>';
-        echo "$errorNumber : $errorString<br>";
-        exit;
+	if (!$smtpConnection) {
+	    include_once('../functions/page_header.php');
+        if ($compose_new_win == '1') {
+            compose_Header($color, 'None');
+        }
+        else {
+            displayPageHeader($color, 'None');
+        }
+        include_once('../functions/display_messages.php');
+        $msg = "\nError connecting to SMTP Server.<br>";
+		$msg = $msg . "\n$errorNumber : $errorString<br><br>";
+        plain_error_message($msg, $color);
+		return(0);
     }
     $tmp = fgets($smtpConnection, 1024);
     if (errorCheck($tmp, $smtpConnection)!=5) {
@@ -618,7 +662,7 @@ function sendSMTP($t, $c, $b, $subject, $body, $more_headers, $session) {
     /* Send the message */
     $headerlength = write822Header ($smtpConnection, $t, $c, $b, 
                                     $subject, $more_headers, $session);
-    $bodylength = writeBody($smtpConnection, $body, $session);
+    $bodylength = writeBody($smtpConnection, $body, $session, "\r\n", true);
     
     fputs($smtpConnection, ".\r\n"); /* end the DATA part */
     $tmp = fgets($smtpConnection, 1024);
@@ -750,13 +794,21 @@ function calculate_references($refs, $inreplyto, $old_reply_to) {
     $refer = "";
     for ($i=1;$i<count($refs[0]);$i++) {
         if (!empty($refs[0][$i])) {
-            if (preg_match("/^References:(.+)$/", $refs[0][$i], $regs)) {
+            if (preg_match("/^References:(.+)$/UAi", $refs[0][$i], $regs)) {
                 $refer = trim($regs[1]);
             }
             else {   
                 $refer .= ' ' . trim($refs[0][$i]);
             }
         }
+    }
+    $refer_a = explode(' ', $refer);
+    $refer = '';
+    foreach ($refer_a as $ref) {
+       $ref = trim($ref);
+       if (strlen($ref) > 0 && $ref{0} == '<' && $ref{(strlen($ref)-1)} == '>') {
+          $refer .= $ref . ' ';
+       }
     }
     $refer = trim($refer);
     if (strlen($refer) > 2) {
@@ -838,13 +890,6 @@ function sendMessage($t, $c, $b, $subject, $body, $reply_id, $MDN,
         $more_headers = array_merge($more_headers, createReceiptHeaders($requestRecipt));
     }
 
-    /* In order to remove the problem of users not able to create
-     * messages with "." on a blank line, RFC821 has made provision
-     * in section 4.5.2 (Transparency).
-     */
-    $body = ereg_replace("\n\\.", "\n..", $body);
-    $body = ereg_replace("^\\.", "..", $body);
-
     /* this is to catch all plain \n instances and
      * replace them with \r\n.  All newlines were converted
      * into just \n inside the compose.php file.
@@ -857,17 +902,42 @@ function sendMessage($t, $c, $b, $subject, $body, $reply_id, $MDN,
     }
 
     if ($useSendmail) {
-        $length = sendSendmail($t, $c, $b, $subject, $body, $more_headers, 
-                               $session);
+
+        /* In order to remove the problem of users not able to create
+         * messages with "." on a blank line, RFC821 has made provision
+         * in section 4.5.2 (Transparency).
+         */
+
+        $body_sendmail = $body;
+        if (($body_sendmail{0} == '.')) {
+            $body_sendmail = '.' . $body_sendmail;
+        }
+        $body_sendmail = str_replace("\n.","\n..",$body_sendmail);
+        $length = sendSendmail($t, $c, $b, $subject, $body_sendmail, 
+                               $more_headers, $session);
         $body = ereg_replace("\n", "\r\n", $body);
     } else {
         $body = ereg_replace("\n", "\r\n", $body);
-        $length = sendSMTP($t, $c, $b, $subject, $body, $more_headers, 
+
+        /* In order to remove the problem of users not able to create
+         * messages with "." on a blank line, RFC821 has made provision
+         * in section 4.5.2 (Transparency).
+         */
+
+        $body_smtp = $body;
+        if (($body_smtp{0} == '.')) {
+            $body_smtp = '.' . $body_smtp;
+        }
+        $body_smtp = str_replace("\n.","\n..",$body_smtp);
+        $length = sendSMTP($t, $c, $b, $subject, $body_smtp, $more_headers, 
                            $session);
     }
+    if ($length == 0) {
+        return(0);
+    }
     if (sqimap_mailbox_exists ($imap_stream, $sent_folder)) {
-		$headerlength = write822Header (FALSE, $t, $c, $b, $subject, $more_headers, $session, "\r\n");
-		$bodylength = writeBody(FALSE, $body, $session, "\r\n");
+		$headerlength = write822Header (false, $t, $c, $b, $subject, $more_headers, $session, "\r\n");
+		$bodylength = writeBody(false, $body, $session, "\r\n");
 		$length = $headerlength + $bodylength;
 
         sqimap_append ($imap_stream, $sent_folder, $length);
@@ -892,17 +962,16 @@ function createPriorityHeaders($prio) {
     $prio_headers['X-Priority'] = $prio;
 
     switch($prio) {
-    case 1: $prio_headers['Importance'] = 'High';
-        $prio_headers['X-MSMail-Priority'] = 'High';
+    case 1: 
+        $prio_headers['Importance'] = 'High';
         break;
 
-    case 3: $prio_headers['Importance'] = 'Normal';
-        $prio_headers['X-MSMail-Priority'] = 'Normal';
+    case 3: 
+        $prio_headers['Importance'] = 'Normal';
         break;
 
     case 5:
         $prio_headers['Importance'] = 'Low';
-        $prio_headers['X-MSMail-Priority'] = 'Low';
         break;
     }
     return  $prio_headers;

@@ -2,8 +2,10 @@
 /*
  *  event_create.php
  *
- *  Copyright (c) 2001 Michal Szczotka <michal@tuxy.org>
- *  Licensed under the GNU GPL. For full terms see the file COPYING.
+ * Copyright (c) 2002 The SquirrelMail Project Team
+ * Licensed under the GNU GPL. For full terms see the file COPYING.
+ *
+ * Originally contrubuted by Michal Szczotka <michal@tuxy.org>
  *
  *  functions to create a event for calendar.
  *
@@ -19,6 +21,56 @@ require_once('../functions/date.php');
 require_once('../config/config.php');
 require_once('../functions/page_header.php');
 require_once('../src/load_prefs.php');
+
+
+/* get globals */
+
+if (isset($_POST['year'])) {
+    $year = $_POST['year'];
+}
+elseif (isset($_GET['year'])) {
+    $year = $_GET['year'];
+}
+if (isset($_POST['month'])) {
+    $month = $_POST['month'];
+}
+elseif (isset($_GET['month'])) {
+    $month = $_GET['month'];
+}
+if (isset($_POST['day'])) {
+    $day = $_POST['day'];
+}
+elseif (isset($_GET['day'])) {
+    $day = $_GET['day'];
+}
+if (isset($_POST['hour'])) {
+    $hour = $_POST['hour'];
+}
+elseif (isset($_GET['hour'])) {
+    $hour = $_GET['hour'];
+}
+if (isset($_POST['event_hour'])) {
+    $event_hour = $_POST['event_hour'];
+}
+if (isset($_POST['event_minute'])) {
+    $event_minute = $_POST['event_minute'];
+}
+if (isset($_POST['event_length'])) {
+    $event_length = $_POST['event_length'];
+}
+if (isset($_POST['event_priority'])) {
+    $event_priority = $_POST['event_priority'];
+}
+if (isset($_POST['event_title'])) {
+    $event_title = $_POST['event_title'];
+}
+if (isset($_POST['event_text'])) {
+    $event_text = $_POST['event_text'];
+}
+if (isset($_POST['send'])) {
+    $send = $_POST['send'];
+}
+/* got 'em */
 
 //main form to gather event info
 function show_event_form() {
@@ -87,7 +139,7 @@ calendar_header();
 echo "<TR BGCOLOR=\"$color[0]\"><TD>" .
      "<TABLE WIDTH=100% BORDER=0 CELLPADDING=2 CELLSPACING=1 BGCOLOR=\"$color[0]\">" .
      '<tr><td COLSPAN=2>' .
-     date_intl( 'l, F d Y', mktime(0, 0, 0, $month, $day, $year)) .
+     date_intl( _("l, F j Y"), mktime(0, 0, 0, $month, $day, $year)) .
      '</td></tr>';
 //if form has not been filled in
 if(!isset($event_text)){
@@ -114,9 +166,9 @@ if(!isset($event_text)){
          "    <TR><TD ALIGN=RIGHT BGCOLOR=\"$color[4]\">" . _("Time:") . "</TD>\n".
          "    <TD ALIGN=LEFT BGCOLOR=\"$color[4]\">$event_hour:$event_minute</TD></TR>\n".
          "    <TR><TD ALIGN=RIGHT BGCOLOR=\"$color[4]\">" . _("Title:") . "</TD>\n".
-         "    <TD ALIGN=LEFT BGCOLOR=\"$color[4]\">$event_title</TD></TR>\n".
+         "    <TD ALIGN=LEFT BGCOLOR=\"$color[4]\">" . htmlentities($event_title) . "</TD></TR>\n".
          "    <TR><TD ALIGN=RIGHT BGCOLOR=\"$color[4]\">" . _("Message:") . "</TD>\n".
-         "    <TD ALIGN=LEFT BGCOLOR=\"$color[4]\">$event_text</TD></TR>\n".
+         "    <TD ALIGN=LEFT BGCOLOR=\"$color[4]\">" . htmlentities($event_text) . "</TD></TR>\n".
          "    <TR><TD COLSPAN=2 BGCOLOR=\"$color[4]\">\n".
          "<A HREF=\"day.php?year=$year&month=$month&day=$day\">" . _("Day View") . "</A>\n".
          "    </TD></TR>\n".

@@ -43,17 +43,18 @@ function putSelectedMessagesIntoString($msg) {
 
 function attachSelectedMessages($msg, $imapConnection) {
 
-    global $mailbox, $username, $attachment_dir, $attachments, $identity, $data_dir, $composesession, $lastTargetMailbox;
+    global $mailbox, $username, $attachment_dir, $attachments, $identity, 
+        $data_dir, $composesession, $lastTargetMailbox;
 
 
     if (!isset($attachments)) {
 	    $attachments = array();
-	    session_register('attachments');
+	    sqsession_register($attachments, 'attachments');
     }
 
     if (!isset($composesession)) {
 	    $composesession = 1;
-	    session_register('$composesession');
+	    sqsession_register($composesession, 'composesession');
     } else {
 	    $composesession++;
     }
@@ -72,8 +73,9 @@ function attachSelectedMessages($msg, $imapConnection) {
     	}
     }
 
+    sqsession_unregister('attachments');
     $attachments = $rem_attachments;
-
+    sqsession_register($attachments, 'attachments');
 
     $i = 0;
     $j = 0;
@@ -82,7 +84,7 @@ function attachSelectedMessages($msg, $imapConnection) {
         if (isset($msg[$i])) {
     	    $id = $msg[$i];
     	    $body_a = sqimap_run_command($imapConnection, "FETCH $id RFC822",true, $response, $readmessage);
-    	    if ($response = 'OK') {
+    	    if ($response == 'OK') {
     		    // get subject so we can set the remotefilename
         		$read = sqimap_run_command ($imapConnection, "FETCH $id BODY.PEEK[HEADER.FIELDS (Subject)]", true, $response, $readmessage);
         		$subject = substr($read[1], strpos($read[1], ' '));
@@ -102,16 +104,18 @@ function attachSelectedMessages($msg, $imapConnection) {
         		$localfilename = GenerateRandomString(32, 'FILE', 7);
         		$full_localfilename = "$hashed_attachment_dir/$localfilename";
         	    
-        		$fp = fopen( $full_localfilename, 'w');
+        		$fp = fopen( $full_localfilename, 'wb');
         		fwrite ($fp, $body);
         		fclose($fp);
     
         		$newAttachment = array();
         		$newAttachment['localfilename'] = $localfilename;
         		$newAttachment['type'] = "message/rfc822";
-            	$newAttachment['remotefilename'] = "$subject".".eml";
-            	$newAttachment['session'] = $composesession;
+                        $newAttachment['remotefilename'] = "$subject".".eml";
+                        $newAttachment['session'] = $composesession;
+                        sqsession_unregister('attachments');
         		$attachments[] = $newAttachment;
+                        sqsession_register($attachments, 'attachments');
         		flush();
     	    }
             $j++;	    
@@ -122,6 +126,65 @@ function attachSelectedMessages($msg, $imapConnection) {
     return $composesession;
 }
 
+
+/* MAIN */
+
+/* get globals */
+
+$username = $_SESSION['username'];
+$key  = $_COOKIE['key'];
+$onetimepad = $_SESSION['onetimepad'];
+$base_uri = $_SESSION['base_uri'];
+$delimiter = $_SESSION['delimiter'];
+
+if (isset($_GET['where'])) {
+    $where = $_GET['where'];
+}
+if (isset($_GET['what'])) {
+    $what = $_GET['what'];
+}
+if (isset($_GET['mailbox'])) {
+    $mailbox = $_GET['mailbox'];
+}
+if (isset($_GET['startMessage'])) {
+    $startMessage = $_GET['startMessage'];
+}
+if (isset($_POST['moveButton'])) {
+    $moveButton = $_POST['moveButton'];
+}
+if (isset($_POST['msg'])) {
+    $msg = $_POST['msg'];
+}
+elseif (isset($_GET['msg'])) {
+    $msg = $_GET['msg'];
+}
+if (isset($_POST['expungeButton'])) {
+    $expungeButton = $_POST['expungeButton'];
+}
+if (isset($_POST['targetMailbox'])) {
+    $targetMailbox = $_POST['targetMailbox'];
+}
+if (isset($_SESSION['lastTargetMailbox'])) {
+    $lastTargetMailbox = $_SESSION['lastTargetMailbox'];
+}
+if (isset($_POST['expungeButton'])) {
+    $expungeButton = $_POST['expungeButton'];
+}
+if (isset($_POST['undeleteButton'])) {
+    $undeleteButton = $_POST['undeleteButton'];
+}
+if (isset($_POST['markRead'])) {
+    $markRead = $_POST['markRead'];
+}
+if (isset($_POST['markUnread'])) {
+    $markUnread = $_POST['markUnread'];
+}
+if (isset($_POST['attache'])) {
+    $attache = $_POST['attache'];
+}
+
+/* end of get globals */
+
 $imapConnection = sqimap_login($username, $key, $imapServerAddress, $imapPort, 0);
 sqimap_mailbox_select($imapConnection, $mailbox);
 
@@ -130,8 +193,9 @@ if (!isset($lastTargetMailbox)) {
     $lastTargetMailbox = 'INBOX';
 }
 if ($targetMailbox != $lastTargetMailbox) {
+    sqsession_unregister('lastTargetMailbox');
     $lastTargetMailbox = $targetMailbox;
-    session_register('lastTargetMailbox');
+    sqsession_register($lastTargetMailbox, 'lastTargetMailbox');
 }
 
 // expunge-on-demand if user isn't using move_to_trash or auto_expunge
@@ -243,7 +307,6 @@ if(isset($expungeButton)) {
         }
         if ($auto_expunge == true)
             sqimap_mailbox_expunge($imapConnection, $mailbox, true);
-
         $location = get_location();
         if (isset($where) && isset($what))
             header ("Location: $location/search.php?mailbox=".urlencode($mailbox)."&what=".urlencode($what)."&where=".urlencode($where));

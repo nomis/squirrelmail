@@ -21,32 +21,32 @@
    require_once('../src/load_prefs.php');
    displayPageHeader($color, 'None');
 
-    if (isset($submit_translate) && $submit_translate ) {
-        if (isset($translate_translate_server)) {
-            setPref($data_dir, $username, 'translate_server', $translate_translate_server);
+    if (isset($_POST['submit_translate']) && $_POST['submit_translate'] ) {
+        if (isset($_POST['translate_translate_server'])) {
+            setPref($data_dir, $username, 'translate_server', $_POST['translate_translate_server']);
         } else {
             setPref($data_dir, $username, 'translate_server', 'babelfish');
         }
 
-        if (isset($translate_translate_location)) {
-            setPref($data_dir, $username, 'translate_location', $translate_translate_location);
+        if (isset($_POST['translate_translate_location'])) {
+            setPref($data_dir, $username, 'translate_location', $_POST['translate_translate_location']);
         } else {
             setPref($data_dir, $username, 'translate_location', 'center');
         }
 
-        if (isset($translate_translate_show_read)) {
+        if (isset($_POST['translate_translate_show_read'])) {
             setPref($data_dir, $username, 'translate_show_read', '1');
         } else {
             setPref($data_dir, $username, 'translate_show_read', '');
         }
 
-        if (isset($translate_translate_show_send)) {
+        if (isset($_POST['translate_translate_show_send'])) {
             setPref($data_dir, $username, 'translate_show_send', '1');
         } else {
             setPref($data_dir, $username, 'translate_show_send', '');
         }
 
-        if (isset($translate_translate_same_window)) {
+        if (isset($_POST['translate_translate_same_window'])) {
            setPref($data_dir, $username, 'translate_same_window', '1');
         } else {
             setPref($data_dir, $username, 'translate_same_window', '');
@@ -94,6 +94,10 @@
       <center><b><?php echo _("Options") . ' - '. _("Translator"); ?></b></center>
    </td></tr></table>
 
+    <?php if (isset($_POST['submit_translate']) && $_POST['submit_translate'] ) {
+        print "<center><h4>"._("Saved Translation Options")."</h4></center>\n";
+    }?>
+
    <p><?php echo _("Your server options are as follows:"); ?></p>
 
    <ul>
@@ -101,9 +105,9 @@
     ShowTrad( 'Babelfish',
               _("13 language pairs, maximum of 1000 characters translated, powered by Systran"),
               'http://babelfish.altavista.com/' );
-    ShowTrad( 'Translator.Go.com',
-              _("10 language pairs, maximum of 25 kilobytes translated, powered by Systran"),
-              'http://translator.go.com/' );
+//    ShowTrad( 'Translator.Go.com',
+//              _("10 language pairs, maximum of 25 kilobytes translated, powered by Systran"),
+//              'http://translator.go.com/' );
     ShowTrad( 'Dictionary.com',
               _("12 language pairs, no known limits, powered by Systran"),
               'http://www.dictionary.com/translate' );
@@ -126,7 +130,7 @@
             '<td><select name="translate_translate_server">';
 
     ShowOption('server', 'babelfish', 'Babelfish');
-    ShowOption('server', 'go', 'Go.com');
+//    ShowOption('server', 'go', 'Go.com');
     ShowOption('server', 'dictionary', 'Dictionary.com');
     ShowOption('server', 'intertran', 'Intertran');
     ShowOption('server', 'gpltrans', 'GPLTrans');

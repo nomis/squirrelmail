@@ -25,6 +25,20 @@ require_once('../functions/addressbook.php');
 require_once('../functions/plugin.php');
 require_once('../functions/strings.php');
 
+
+$session = $_POST['session'];
+$mailbox = $_POST['mailbox'];
+if ( isset($_POST['addrquery']) ) {
+    $addrquery = $_POST['addrquery'];
+}
+if ( isset($_POST['listall']) ) {
+    $listall = $_POST['listall'];
+}
+if ( isset($_POST['backend'] ) ) {
+    $backend = $_POST['backend'];
+}
+
+
 /* Insert hidden data */
 function addr_insert_hidden() {
     global $body, $subject, $send_to, $send_to_cc, $send_to_bcc, $mailbox,
@@ -83,6 +97,9 @@ if ($javascript_on) {
             '&nbsp;&nbsp;'.
             '<a href="#" onClick="CheckAll(\'B\');">' . _("All") . '</a>';
     }
+    else {
+        $chk_all = '';
+    }
     echo '<TABLE BORDER="0" WIDTH="98%" ALIGN="center">' .
            '<TR BGCOLOR="' . $color[9] . '"><TH ALIGN="left">&nbsp;' . $chk_all . '</TH>' .
           '<TH ALIGN="left">&nbsp;' . _("Name") . '</TH>' .
@@ -108,7 +125,7 @@ if ($javascript_on) {
              '<input type=checkbox name="send_to_search[B' . $line . ']" value = "' .
              htmlspecialchars($row['email']) . '">&nbsp;' . _("Bcc") . '&nbsp;' . 
              '</td><td nowrap>&nbsp;' . $row['name'] . '&nbsp;</td>' .
-             '<td nowrap>&nbsp;' . $row['email'] . '&nbsp;</td>' .
+             '<td >' . $row['email'] . '&nbsp;</td>' .
              '<td nowrap>&nbsp;' . $row['label'] . '&nbsp;</td>';
          if ($includesource) {
              echo '<td nowrap>&nbsp;' . $row['source'] . '&nbsp;</td>';
@@ -127,7 +144,6 @@ if ($javascript_on) {
 
 /* --- End functions --- */
 
-global $mailbox;
 if ($compose_new_win == '1') {
     compose_Header($color, $mailbox);
 }

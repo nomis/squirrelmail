@@ -30,6 +30,7 @@ function findNextMessage() {
     global $msort, $currentArrayIndex, $msgs, $sort, 
            $thread_sort_messages, $allow_server_sort,
            $server_sort_array;
+
     if (!is_array($server_sort_array)) {
         $thread_sort_messages = 0;
         $allow_server_sort = FALSE;
@@ -196,9 +197,10 @@ function ServerMDNSupport( $read ) {
 }
 
 function SendMDN ( $recipient , $sender) {
-    global $imapConnection, $mailbox, $username, $attachment_dir, $SERVER_NAME,
+    global $imapConnection, $mailbox, $username, $attachment_dir, $_SERVER,
            $version, $attachments, $identity, $data_dir, $passed_id;
 
+    $SERVER_NAME = $_SERVER['SERVER_NAME'];
     $header = sqimap_get_message_header($imapConnection, $passed_id, $mailbox);
     $hashed_attachment_dir = getHashedDir($username, $attachment_dir);
 
@@ -241,7 +243,7 @@ function SendMDN ( $recipient , $sender) {
     $localfilename = GenerateRandomString(32, 'FILE', 7);
     $full_localfilename = "$hashed_attachment_dir/$localfilename";
 
-    $fp = fopen( $full_localfilename, 'w');
+    $fp = fopen( $full_localfilename, 'wb');
     fwrite ($fp, $part2);
     fclose($fp);
 
@@ -261,7 +263,6 @@ function SendMDN ( $recipient , $sender) {
 function ToggleMDNflag ( $set ) {
     global $imapConnection, $passed_id, $mailbox;
     sqimap_mailbox_select($imapConnection, $mailbox);
-    
     $sg =  $set?'+':'-';
     $cmd = 'STORE ' . $passed_id . ' ' . $sg . 'FLAGS ($MDNSent)';
     $read = sqimap_run_command ($imapConnection, $cmd, true, $response, 
@@ -275,7 +276,7 @@ function ClearAttachments() {
 
 	$rem_attachments = array();
         foreach ($attachments as $info) {
-	    if ($info->session == -1) {
+	    if ($info['session'] == -1) {
         	$attached_file = "$hashed_attachment_dir/$info[localfilename]";
         	if (file_exists($attached_file)) {
             	    unlink($attached_file);
@@ -383,11 +384,79 @@ function formatRecipientString($recipients, $item ) {
  *   Main of read_boby.php  --------------------------------------------------
  */
 
-/*
-    Urled vars
-    ----------
-    $passed_id
-*/
+/* get the globals we may need */
+
+$username = $_SESSION['username'];
+$key = $_COOKIE['key'];
+$onetimepad = $_SESSION['onetimepad'];
+$base_uri = $_SESSION['base_uri'];
+$delimiter = $_SESSION['delimiter'];
+
+if (isset($_GET['passed_id'])) {
+    $passed_id = (int) $_GET['passed_id'];
+}
+elseif (isset($_POST['passed_id'])) {
+    $passed_id = (int) $_POST['passed_id'];
+}
+
+if (isset($_GET['sendreceipt'])) {
+    $sendreceipt = $_GET['sendreceipt'];
+}
+
+if (isset($_GET['sort'])) {
+    $sort = (int) $_GET['sort'];
+}
+elseif (isset($_POST['sort'])) {
+    $sort = (int) $_POST['sort'];
+}
+if (isset($_GET['startMessage'])) {
+    $startMessage = (int) $_GET['startMessage'];
+}
+elseif (isset($_POST['startMessage'])) {
+    $startMessage = (int) $_POST['startMessage'];
+}
+if (isset($_GET['show_more'])) {
+    $show_more = (int) $_GET['show_more'];
+}
+if (isset($_GET['show_more_cc'])) {
+    $show_more_cc = (int) $_GET['show_more_cc'];
+}
+if (isset($_GET['show_more_bcc'])) {
+    $show_more_bcc = (int) $_GET['show_more_bcc'];
+}
+if (isset($_GET['mailbox'])) {
+    $mailbox = $_GET['mailbox'];
+}
+elseif (isset($_POST['mailbox'])) {
+    $mailbox = $_POST['mailbox'];
+}
+if (isset($_GET['where'])) {
+    $where = $_GET['where'];
+}
+if (isset($_GET['what'])) {
+    $what = $_GET['what'];
+}
+if (isset($_GET['view_hdr'])) {
+    $view_hdr = (int) $_GET['view_hdr'];
+}
+if (isset($_SESSION['server_sort_array'])) {
+    $server_sort_array = $_SESSION['server_sort_array'];
+}
+if (isset($_SESSION['msgs'])) {
+    $msgs = $_SESSION['msgs'];
+}
+if (isset($_SESSION['msort'])) {
+    $msort = $_SESSION['msort'];
+}
+if (isset($_POST['move_id'])) {
+    $move_id = $_POST['move_id'];
+}
+if (isset($_SESSION['lastTargetMailbox'])) {
+    $lastTargetMailbox = $_SESSION['lastTargetMailbox'];
+}
+$thread_sort_messages = getPref($data_dir, $username, "thread_$mailbox", 0);
+
+/* end of get globals */
 
 if (isset($mailbox)){
     $mailbox = urldecode( $mailbox );
@@ -673,7 +742,7 @@ echo '<BR>' .
      '<A HREF="' . $base_uri . 'src/';
 
 if ($where && $what) {
-    if ($pos == '') {
+    if (!isset($pos) || $pos == '') {
         $pos=0;
     }
     echo "search.php?where=".urlencode($where)."&amp;pos=$pos&amp;what=".urlencode($what)."&amp;mailbox=$urlMailbox\">";
@@ -689,35 +758,35 @@ if ($where && $what) {
     echo "sort=$sort&amp;startMessage=$startMessage\">";
 }
 echo _("Delete") . '</A>&nbsp;';
-if (($mailbox == $draft_folder) && ($save_as_draft)) {
-    $comp_uri = $base_uri . "src/compose.php?mailbox=$mailbox&amp;".
-                "identity=$identity&amp;send_to=$url_to_string&amp;".
-		"send_to_cc=$url_cc_string&amp;send_to_bcc=$url_bcc_string&amp;".
-		"subject=$url_subj&amp;mailprio=$priority_level&amp;".
-		"draft_id=$passed_id&amp;ent_num=$ent_num&amp;passed_id=$passed_id";
-    
-    if ($compose_new_win == '1') {
-        echo "<a href=\"javascript:void(0)\" onclick=\"comp_in_new(false,'$comp_uri')\"";
-    } else {
-        echo '|&nbsp;<A HREF="' . $comp_uri .'"';
-    }
-    echo '>'.
-         _("Resume Draft") . '</a>';
+$comp_uri  = $base_uri . "src/compose.php?identity=$identity&amp;" .
+             "ent_num=$ent_num&amp;mailbox=$urlMailbox&amp;";
+$comp_uri .= $default_use_priority?"mailprio=$priority_level&amp;":"";
+if ($compose_new_win == '1') {
+    $link_open  = '<a href="javascript:void(0)" onclick="comp_in_new(false,\'';
+    $link_close = '\')">';
+} else {
+    $link_open  = '<a href="';
+    $link_close = '">';
 }
-if ($mailbox == $sent_folder) {
-    $comp_uri = $base_uri . "src/compose.php?mailbox=$mailbox&amp;".
-                "identity=$identity&amp;send_to=$url_to_string&amp;".
-		"send_to_cc=$url_cc_string&amp;send_to_bcc=$url_bcc_string&amp;".
-		"subject=$url_subj&amp;mailprio=$priority_level&amp;".
-		"ent_num=$ent_num&amp;passed_id=$passed_id&amp;edit_as_new=1";
+$link_open .= $comp_uri;
 
-    if ($compose_new_win == '1') {
-        echo "<a href=\"javascript:void(0)\" onclick=\"comp_in_new(false,'$comp_uri')\"";
-    } else {
-        echo '|&nbsp;<A HREF="' . $comp_uri .'"';
-    }
-    echo '>'.
-          _("Edit Message as New") . '</a>';
+if (($mailbox == $draft_folder) && ($save_as_draft)) {
+    $draft_uri = "send_to=$url_to_string&amp;".
+                 "send_to_cc=$url_cc_string&amp;send_to_bcc=$url_bcc_string&amp;".
+                 "subject=$url_subj&amp;".
+                 "draft_id=$passed_id";
+
+    echo '|&nbsp;' . $link_open . $draft_uri . $link_close .
+         _("Resume Draft") . '</a>';
+} elseif(handleAsSent($mailbox)) {
+/* is a 'handleAsSent' mailbox but not Drafts. */
+    $sent_uri = "send_to=$url_to_string&amp;".
+                "send_to_cc=$url_cc_string&amp;send_to_bcc=$url_bcc_string&amp;".
+                "subject=$url_subj&amp;".
+                "passed_id=$passed_id&amp;edit_as_new=1";
+
+    echo '|&nbsp;' . $link_open . $sent_uri . $link_close .
+         _("Edit Message as New") . '</a>';
 }
 
 echo '&nbsp;&nbsp;' .
@@ -728,7 +797,7 @@ echo '&nbsp;&nbsp;' .
 
 if ( !($where && $what) ) {
     if ($currentArrayIndex == -1) {
-        echo 'Previous&nbsp;|&nbsp;Next';
+        echo _("Previous") . '&nbsp;|&nbsp;' . _("Next");
     } else {
         $prev = findPreviousMessage();
         $next = findNextMessage();
@@ -751,50 +820,59 @@ echo                '</SMALL>' .
                 '</TD><TD WIDTH="33%" ALIGN="RIGHT">' .
                    '<SMALL>' ;
 
-$comp_uri = $base_uri . "src/compose.php?forward_id=$passed_id&amp;".
-            "forward_subj=$url_subj&amp;".
-	    ($default_use_priority?"mailprio=$priority_level&amp;":'').
-            "mailbox=$urlMailbox&amp;ent_num=$ent_num";
-	     		   
-if ($compose_new_win == '1') {
-    echo "<a href=\"javascript:void(0)\" onclick=\"comp_in_new(false,'$comp_uri')\"";
-} else {
-    echo '|&nbsp;<A HREF="' . $comp_uri .'"';
+
+/*
+ * Auto-Select identity for replies (Jonathan Angliss - 2002/09/25)
+ */
+ 
+// Get the To and CC array list for matching
+$to_arr = $message->header->to;
+$cc_arr = $message->header->cc;
+
+// Merge them to make searching easier and remove duplicated values
+$addr_arr = array_merge($to_arr , $cc_arr);
+$addr_arr = array_unique($addr_arr);
+
+$identity = '';
+$idents = getPref($data_dir, $username, 'identities');
+if (!empty($idents) && $idents > 1) {
+    for ($i = 1; $i < $idents; $i++) {
+        $ident_addr = getPref($data_dir , $username , 'email_address' . $i);
+        for($m = 0,$cnt_to = count($addr_arr); $m < $cnt_to; $m++) {
+            if (!empty($ident_addr) && stristr($addr_arr[$m] ,$ident_addr)) {
+                $identity = $i;
+                break 2;
+            }
+        }
+    }
 }
 
-    echo '>'.
-    _("Forward") .
-    '</A>&nbsp;|&nbsp;';
-
-$comp_uri = $base_uri . "src/compose.php?send_to=$url_replyto&amp;".
-            "reply_subj=$url_subj&amp;".
-            ($default_use_priority?"mailprio=$priority_level&amp;":'').
-            "reply_id=$passed_id&amp;mailbox=$urlMailbox&amp;ent_num=$ent_num";
-	        
-if ($compose_new_win == '1') {
-    echo "<a href=\"javascript:void(0)\" onclick=\"comp_in_new(false,'$comp_uri')\"";
-} else {
-    echo '|&nbsp;<A HREF="' . $comp_uri .'"';
-}
-
-    echo '>'.
-    _("Reply") .
-    '</A>&nbsp;|&nbsp;';
-
-$comp_uri = $base_uri . "src/compose.php?send_to=$url_replytoall&amp;".
-            "send_to_cc=$url_replytoallcc&amp;reply_subj=$url_subj&amp;".
-            ($default_use_priority?"mailprio=$priority_level&amp;":'').
-            "reply_id=$passed_id&amp;mailbox=$urlMailbox&amp;ent_num=$ent_num";
+$comp_uri  = $base_uri . "src/compose.php?identity=$identity&amp;" .
+             "ent_num=$ent_num&amp;mailbox=$urlMailbox&amp;";
+$comp_uri .= $default_use_priority?"mailprio=$priority_level&amp;":"";
 
 if ($compose_new_win == '1') {
-    echo "<a href=\"javascript:void(0)\" onclick=\"comp_in_new(false,'$comp_uri')\"";
+    $link_open  = '<a href="javascript:void(0)" onclick="comp_in_new(false,\'';
+    $link_close = '\')">';
 } else {
-    echo '|&nbsp;<A HREF="' . $comp_uri .'"';
+    $link_open  = '<a href="';
+    $link_close = '">';
 }
-
-    echo '>'.
-    _("Reply All") .
-    '</A>&nbsp;&nbsp;' .
+$link_open .= $comp_uri;
+$forward_uri   = "forward_id=$passed_id&amp;" .
+                 "forward_subj=$url_subj";
+$reply_uri     = "send_to=$url_replyto&amp;".
+                 "reply_subj=$url_subj&amp;".
+                 "reply_id=$passed_id";
+$reply_all_uri = "send_to=$url_replytoall&amp;".
+                 "send_to_cc=$url_replytoallcc&amp;reply_subj=$url_subj&amp;".
+                 "reply_id=$passed_id";
+echo $link_open . $forward_uri . $link_close .
+     _("Forward") . '</a>&nbsp;|&nbsp;' .
+     $link_open . $reply_uri . $link_close .
+     _("Reply") . '</a>&nbsp;|&nbsp;' .
+     $link_open . $reply_all_uri . $link_close .
+     _("Reply All") . '</a>&nbsp;&nbsp;' .
                    '</SMALL>' .
                 '</TD>' .
              '</TR>' .
@@ -837,9 +915,11 @@ echo       '<TR>' .
              '<TD BGCOLOR="' . $color[0] . '" ALIGN="RIGHT">' .
     _("From:") .
              '</TD><TD BGCOLOR="' . $color[0] . '">' .
-                "<B>$from_name</B>&nbsp;\n" .
-             '</TD>' .
+                "<B>$from_name</B>&nbsp;\n";
+                do_hook("read_body_after_from");
+echo             '</TD>' .
           '</TR>';
+
 /** date **/
 echo       '<TR>' . "\n" .
              '<TD BGCOLOR="' . $color[0] . '" ALIGN="RIGHT">' . "\n" .
@@ -897,7 +977,7 @@ if ($show_xmailer_default) {
                      "<TD BGCOLOR=\"$color[0]\" ALIGN=RIGHT VALIGN=TOP>" .
                            _("Mailer") . ': '.
                      "</TD><TD BGCOLOR=\"$color[0]\" VALIGN=TOP colspan=2>" .
-                        "<B>$mailer</B>&nbsp;" .
+                        "<B>" . htmlentities($mailer) . "</B>&nbsp;" .
                      '</TD>' .
                   "</TR>" . "\n";
     }
@@ -920,7 +1000,6 @@ if ($default_use_mdn) {
 
         $read = sqimap_run_command ($imapConnection, "FETCH $passed_id FLAGS", true,
                                 $response, $readmessage);
-
         $MDN_flag_present = preg_match( '/.*\$MDNSent/i', $read[0]);
 
         if (trim($MDN_to) &&
@@ -967,7 +1046,7 @@ if ($default_use_mdn) {
             // if no MDNsupport don't use the annoying popup messages
             else if (  !$FirstTimeSee ) {
                 $sendreceipt = 'send';
-                $url = "\"read_body.php?mailbox=$mailbox&passed_id=$passed_id&startMessage=$startMessage&show_more=$show_more&sendreceipt=$sendreceipt\"";
+                $url = "\"read_body.php?mailbox=$mailbox&amp;passed_id=$passed_id&amp;startMessage=$startMessage&amp;show_more=$show_more&amp;sendreceipt=$sendreceipt\"";
                 echo       '<TR>' .
                             "<TD BGCOLOR=\"$color[9]\"  ALIGN=RIGHT VALIGN=TOP>" .
                                 _("Read receipt") . ': ' .
@@ -980,15 +1059,14 @@ if ($default_use_mdn) {
             }
             else {
                 $sendreceipt = 'send';
-                $url = "\"read_body.php?mailbox=$mailbox&passed_id=$passed_id&startMessage=$startMessage&show_more=$show_more&sendreceipt=$sendreceipt\"";
+                $url = "\"read_body.php?mailbox=$mailbox&amp;passed_id=$passed_id&amp;startMessage=$startMessage&amp;show_more=$show_more&amp;sendreceipt=$sendreceipt\"";
                 if ($javascript_on) {
                 echo "<script language=\"javascript\" type=\"text/javascript\">  \n" .
                     '<!-- ' . "\n" .
                     "               if (window.confirm(\"" .
                     _("The message sender has requested a response to indicate that you have read this message. Would you like to send a receipt?") .
                     "\")) {  \n" .
-                    "                       window.location=($url); \n" .
-                    '                       window.location.reload()' . "\n" .
+		    '                       window.open('.$url.',"right");' . "\n". 
                     '               }' . "\n" .
                     '// -->' . "\n" .
                     '</script>' . "\n";
@@ -997,7 +1075,7 @@ if ($default_use_mdn) {
                             "<TD BGCOLOR=\"$color[9]\"  ALIGN=RIGHT VALIGN=TOP>" .
                                     _("Read receipt") . ': ' .
                             "</TD><TD BGCOLOR=\"$color[9]\" VALIGN=TOP colspan=2>" .
-                                '<B>' . _("requested") . "&nbsp&nbsp</B><a href=$url>" . '[' .
+                                '<B>' . _("requested") . "&nbsp;&nbsp;</B><a href=$url>" . '[' .
                                 _("Send read receipt now") . ']  </a>' ." \n" .
                             '</TD>' .
                             '</TR>' . "\n";
@@ -1022,6 +1100,7 @@ if ($default_use_mdn) {
                 if ( SendMDN( $MDN_to, $final_recipient ) > 0 && $supportMDN ) {
                     ToggleMDNflag( true);
                 }
+		ClearAttachments();
             }
             $sendreceipt = 'removeMDN';
             $url = "\"read_body.php?mailbox=$mailbox&amp;passed_id=$passed_id&amp;startMessage=$startMessage&amp;show_more=$show_more&amp;sendreceipt=$sendreceipt\"";

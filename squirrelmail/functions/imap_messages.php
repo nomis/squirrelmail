@@ -101,13 +101,14 @@ function sqimap_get_sort_order ($imap_stream, $sort) {
             $internal_date_sort, $server_sort_array,
             $sent_folder, $mailbox;
             
-    if (session_is_registered('server_sort_array')) {
-        session_unregister('server_sort_array');
+    if (sqsession_is_registered('server_sort_array')) {
+        sqsession_unregister('server_sort_array');
     }
     if ($sort == 6) {
         $qty = sqimap_get_num_messages ($imap_stream, $mailbox);
         $server_sort_array = range(1, $qty);
-        session_register('server_sort_array');
+        $server_sort_array = array_reverse($server_sort_array);
+        sqsession_register($server_sort_array, 'server_sort_array');
         return $server_sort_array;
     }
     $sid = sqimap_session_id();
@@ -146,7 +147,7 @@ function sqimap_get_sort_order ($imap_stream, $sort) {
     if (!preg_match("/OK/", $response)) {
 	   $server_sort_array = 'no';
 	}
-    session_register('server_sort_array');
+    sqsession_register($server_sort_array, 'server_sort_array');
     return $server_sort_array;
 }
 	
@@ -256,11 +257,11 @@ function get_parent_level ($imap_stream) {
 
 function get_thread_sort ($imap_stream) {
     global $thread_new, $sort_by_ref, $default_charset, $server_sort_array;
-    if (session_is_registered('thread_new')) {
-        session_unregister('thread_new');
+    if (sqsession_is_registered('thread_new')) {
+        sqsession_unregister('thread_new');
     }
-    if (session_is_registered('server_sort_array')) {
-        session_unregister('server_srot_array');
+    if (sqsession_is_registered('server_sort_array')) {
+        sqsession_unregister('server_sort_array');
     }
     $sid = sqimap_session_id();
     $thread_temp = array ();
@@ -314,14 +315,14 @@ function get_thread_sort ($imap_stream) {
                     }
             }
     }
-    session_register('thread_new');
+    sqsession_register($thread_new, 'thread_new');
     $thread_new = array_reverse($thread_new);
     $thread_list = implode(" ", $thread_new);
     $thread_list = str_replace("(", " ", $thread_list);
     $thread_list = str_replace(")", " ", $thread_list);
     $thread_list = preg_split("/\s/", $thread_list, -1, PREG_SPLIT_NO_EMPTY);
     $server_sort_array = $thread_list;
-    session_register('server_sort_array');
+    sqsession_register($server_sort_array, 'server_sort_array');
     return $thread_list;
 }
 
@@ -366,7 +367,7 @@ function sqimap_get_small_header_list ($imap_stream, $msg_list, $issent) {
                   _("ERROR : Could not complete request.") .
                   '</b><br>' .
                   _("Unknown response from IMAP server: ") . ' 1.' .
-                  $r[0] . "</font><br>\n";
+                  htmlspecialchars($r[0]) . "</font><br>\n";
          
 	} else 	if (! isset($id2index[$regs[1]]) || !count($id2index[$regs[1]])) {
              set_up_language($squirrelmail_language);
@@ -374,7 +375,7 @@ function sqimap_get_small_header_list ($imap_stream, $msg_list, $issent) {
                   _("ERROR : Could not complete request.") .
                   '</b><br>' .
                   _("Unknown message number in reply from server: ") .
-                  $regs[1] . "</font><br>\n";
+                  htmlspecialchars($regs[1]) . "</font><br>\n";
         } else {
     	    $read_list[$id2index[$regs[1]]] = $r;
         }
@@ -382,13 +383,13 @@ function sqimap_get_small_header_list ($imap_stream, $msg_list, $issent) {
     arsort($read_list);
 
     $patterns = array (
-			"/^To:(.*)\$/AU",
-			"/^From:(.*)\$/AU",
-			"/^X-Priority:(.*)\$/AU",
-			"/^Cc:(.*)\$/AU",
-			"/^Date:(.*)\$/AU",
-			"/^Subject:(.*)\$/AU",
-			"/^Content-Type:(.*)\$/AU"
+			"/^To:(.*)\$/AUi",
+			"/^From:(.*)\$/AUi",
+			"/^X-Priority:(.*)\$/AUi",
+			"/^Cc:(.*)\$/AUi",
+			"/^Date:(.*)\$/AUi",
+			"/^Subject:(.*)\$/AUi",
+			"/^Content-Type:(.*)\$/AUi"
 		);
     $regpattern = '';		
 
@@ -412,10 +413,10 @@ function sqimap_get_small_header_list ($imap_stream, $msg_list, $issent) {
 
         foreach ($read as $read_part) {
             //unfold multi-line headers
-            while ($prevline && strspn($read_part, "\t ") > 0) {
-               $read_part = substr($prevline, 0, -2) . ' ' . ltrim($read_part);
-            }
-	    $prev_line = $read_part;
+        if ($prevline && strpos($read_part, "\t ") === true) {
+            $read_part = substr($prevline, 0, -2) . preg_replace('/(\t\s+)/',' ',$read_part);
+        }
+	    $prevline = $read_part;
 	    
 	    if ($read_part{0} == '*') {
 	        if ($internaldate) {
@@ -572,7 +573,7 @@ function sqimap_get_flags_list ($imap_stream, $msg_list) {
                  _("ERROR : Could not complete request.") .
                  "</b><br>\n" .
                  _("Unknown response from IMAP server: ") .
-                 $result_list[$i][0] . "</font><br>\n";
+                 htmlspecialchars($result_list[$i][0]) . "</font><br>\n";
             exit;
         }
     }

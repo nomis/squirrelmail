@@ -23,13 +23,23 @@ function charset_decode ($charset, $string) {
 
     $charset = strtolower($charset);
 
+    set_my_charset() ;
+
     if (ereg('iso-8859-([[:digit:]]+)', $charset, $res)) {
         if ($res[1] == '1') {
             $ret = charset_decode_iso_8859_1 ($string);
         } else if ($res[1] == '2') {
             $ret = charset_decode_iso_8859_2 ($string);
+        } else if ($res[1] == '4') {
+            $ret = charset_decode_iso_8859_4 ($string);
+        } else if ($res[1] == '5') {
+            $ret = charset_decode_iso_8859_5 ($string);
         } else if ($res[1] == '7') {
             $ret = charset_decode_iso_8859_7 ($string);
+        } else if ($res[1] == '9') {
+	    $ret = charset_decode_iso_8859_9 ($string);
+        } else if ($res[1] == '13') {
+            $ret = charset_decode_iso_8859_13 ($string);
         } else if ($res[1] == '15') {
             $ret = charset_decode_iso_8859_15 ($string);
         } else {
@@ -39,8 +49,18 @@ function charset_decode ($charset, $string) {
         $ret = charset_decode_ns_4551_1 ($string);
     } else if ($charset == 'koi8-r') {
         $ret = charset_decode_koi8r ($string);
+    } else if ($charset == 'koi8-u') {
+        $ret = charset_decode_koi8u ($string);
     } else if ($charset == 'windows-1251') {
-        $ret = charset_decode_koi8r ($string);
+        $ret = charset_decode_windows_1251 ($string);
+    } else if ($charset == 'windows-1253') {
+	     $ret = charset_decode_windows_1253 ($string);
+    } else if ($charset == 'windows-1254') {
+	     $ret = charset_decode_windows_1254 ($string);
+    } else if ($charset == 'windows-1257') {
+        $ret = charset_decode_windows_1257 ($string);
+    } else if ($charset == 'utf-8') {
+	     $ret = charset_decode_utf8 ($string);
     } else {
         $ret = $string;
     }
@@ -397,6 +417,109 @@ function charset_decode_iso_8859_2 ($string) {
     return $string;
 }
 
+/* 
+ ISO/IEC 8859-4:1998 Latin Alphabet No. 4
+*/
+  
+function charset_decode_iso_8859_4 ($string) {
+    global $default_charset;
+
+    if (strtolower($default_charset) == 'iso-8859-4')
+	  return $string;
+
+    /* Only do the slow convert if there are 8-bit characters */
+    if (! ereg("[\200-\377]", $string))
+	return $string;
+
+    $string = str_replace ("\241", '&#260;', $string);
+    $string = str_replace ("\242", '&#312;', $string);
+    $string = str_replace ("\243", '&#342;', $string);
+    $string = str_replace ("\245", '&#296;', $string);
+    $string = str_replace ("\246", '&#315;', $string);
+    $string = str_replace ("\251", '&#352;', $string);
+    $string = str_replace ("\252", '&#274;', $string);
+    $string = str_replace ("\253", '&#290;', $string);
+    $string = str_replace ("\254", '&#358;', $string);
+    $string = str_replace ("\256", '&#381;', $string);
+    $string = str_replace ("\261", '&#261;', $string);
+    $string = str_replace ("\262", '&#731;', $string);
+    $string = str_replace ("\263", '&#343;', $string);
+    $string = str_replace ("\265", '&#297;', $string);
+    $string = str_replace ("\266", '&#316;', $string);
+    $string = str_replace ("\267", '&#711;', $string);
+    $string = str_replace ("\271", '&#353;', $string);
+    $string = str_replace ("\272", '&#275;', $string);
+    $string = str_replace ("\273", '&#291;', $string);
+    $string = str_replace ("\274", '&#359;', $string);
+    $string = str_replace ("\275", '&#330;', $string);
+    $string = str_replace ("\276", '&#382;', $string);
+    $string = str_replace ("\277", '&#331;', $string);
+    $string = str_replace ("\300", '&#256;', $string);
+    $string = str_replace ("\307", '&#302;', $string);
+    $string = str_replace ("\310", '&#268;', $string);
+    $string = str_replace ("\312", '&#280;', $string);
+    $string = str_replace ("\314", '&#278;', $string);
+    $string = str_replace ("\317", '&#298;', $string);
+    $string = str_replace ("\320", '&#272;', $string);
+    $string = str_replace ("\321", '&#325;', $string);
+    $string = str_replace ("\322", '&#332;', $string);
+    $string = str_replace ("\323", '&#310;', $string);
+    $string = str_replace ("\331", '&#370;', $string);
+    $string = str_replace ("\335", '&#360;', $string);
+    $string = str_replace ("\336", '&#362;', $string);
+    $string = str_replace ("\340", '&#257;', $string);
+    $string = str_replace ("\347", '&#303;', $string);
+    $string = str_replace ("\350", '&#269;', $string);
+    $string = str_replace ("\352", '&#281;', $string);
+    $string = str_replace ("\354", '&#279;', $string);
+    $string = str_replace ("\357", '&#299;', $string);
+    $string = str_replace ("\360", '&#273;', $string);
+    $string = str_replace ("\361", '&#326;', $string);
+    $string = str_replace ("\362", '&#333;', $string);
+    $string = str_replace ("\363", '&#311;', $string);
+    $string = str_replace ("\371", '&#371;', $string);
+    $string = str_replace ("\375", '&#361;', $string);
+    $string = str_replace ("\376", '&#363;', $string);
+    $string = str_replace ("\377", '&#729;', $string);
+
+    // rest of charset is the same as ISO-8859-1
+    return (charset_decode_iso_8859_1($string));
+}
+
+/* ISO-8859-5 is Cyrillic */
+function charset_decode_iso_8859_5 ($string) {
+    global $default_charset;
+
+    if (strtolower($default_charset) == 'iso-8859-5') {
+        return $string;
+    }
+
+    /* Only do the slow convert if there are 8-bit characters */
+    if (! ereg("[\200-\377]", $string))
+        return $string;
+
+    // NO-BREAK SPACE
+    $string = str_replace("\240", '&#160;', $string);
+    // 161-172 -> 1025-1036 (+864)
+    $string = preg_replace("/([\241-\254])/e","'&#' . (ord('\\1')+864) . ';'",$string);
+    // SOFT HYPHEN
+    $string = str_replace("\255", '&#173;', $string);
+    // 174-239 -> 1038-1103 (+864)
+    $string = preg_replace("/([\256-\357])/e","'&#' . (ord('\\1')+864) . ';'",$string);
+    // NUMERO SIGN
+    $string = str_replace("\360", '&#8470;', $string);
+    // 241-252 -> 1105-1116 (+864)
+    $string = preg_replace("/([\361-\374])/e","'&#' . (ord('\\1')+864) . ';'",$string);
+    // SECTION SIGN
+    $string = str_replace("\375", '&#167;', $string);
+    // CYRILLIC SMALL LETTER SHORT U (Byelorussian)
+    $string = str_replace("\376", '&#1118;', $string);
+    // CYRILLIC SMALL LETTER DZHE
+    $string = str_replace("\377", '&#1119;', $string);
+
+    return $string;
+}
+
 /* iso-8859-7 is Greek. */
 function charset_decode_iso_8859_7 ($string) {
     global $default_charset;
@@ -435,7 +558,7 @@ function charset_decode_iso_8859_7 ($string) {
      * ISO-8859-7 characters from 11/04 (0xB4) to 11/06 (0xB6)
      * These are Unicode 900-902
      */
-    $string = preg_replace("/([\264-\266])/","'&#' . (ord(\\1)+720)",$string);
+    $string = preg_replace("/([\264-\266])/e","'&#' . (ord('\\1')+720) . ';'",$string);
     
     /* 11/07 (0xB7) Middle dot is the same in iso-8859-1 */
     $string = str_replace("\267", '&#183;', $string);
@@ -444,7 +567,7 @@ function charset_decode_iso_8859_7 ($string) {
      * ISO-8859-7 characters from 11/08 (0xB8) to 11/10 (0xBA)
      * These are Unicode 900-902
      */
-    $string = preg_replace("/([\270-\272])/","'&#' . (ord(\\1)+720)",$string);
+    $string = preg_replace("/([\270-\272])/e","'&#' . (ord('\\1')+720) . ';'",$string);
 
     /*
      * 11/11 (0xBB) Right angle quotation mark is the same as in
@@ -453,9 +576,113 @@ function charset_decode_iso_8859_7 ($string) {
     $string = str_replace("\273", '&#187;', $string);
 
     /* And now the rest of the charset */
-    $string = preg_replace("/([\274-\376])/","'&#' . (ord(\\1)+720)",$string);
+    $string = preg_replace("/([\274-\376])/e","'&#' . (ord('\\1')+720) . ';'",$string);
 
     return $string;
+}
+
+/*
+ ISOIEC 8859-9:1999 Latin Alphabet No. 5
+*/
+function charset_decode_iso_8859_9 ($string) {
+    global $default_charset;
+
+    if (strtolower($default_charset) == 'iso-8859-9')
+        return $string;
+
+    /* Only do the slow convert if there are 8-bit characters */
+    if (! ereg("[\200-\377]", $string))
+        return $string;
+
+    // latin capital letter g with breve 208->286
+    $string = str_replace("\320", '&#286;', $string);
+    // latin capital letter i with dot above 221->304
+    $string = str_replace("\335", '&#304;', $string);
+    // latin capital letter s with cedilla 222->350
+    $string = str_replace("\336", '&#350;', $string);
+    // latin small letter g with breve 240->287
+    $string = str_replace("\360", '&#287;', $string);
+    // latin small letter dotless i 253->305
+    $string = str_replace("\375", '&#305;', $string);
+    // latin small letter s with cedilla 254->351
+    $string = str_replace("\376", '&#351;', $string);
+
+    // rest of charset is the same as ISO-8859-1
+    return (charset_decode_iso_8859_1($string));
+}
+
+/*
+ ISO/IEC 8859-13:1998 Latin Alphabet No. 7 (Baltic Rim) 
+*/
+function charset_decode_iso_8859_13 ($string) {
+    global $default_charset;
+
+    if (strtolower($default_charset) == 'iso-8859-13')
+	return $string;
+
+    /* Only do the slow convert if there are 8-bit characters */
+    if (! ereg("[\200-\377]", $string))
+    return $string;
+
+    $string = str_replace ("\241", '&#8221;', $string);
+    $string = str_replace ("\245", '&#8222;', $string);
+    $string = str_replace ("\250", '&#216;', $string);
+    $string = str_replace ("\252", '&#342;', $string);
+    $string = str_replace ("\257", '&#198;', $string);
+    $string = str_replace ("\264", '&#8220;', $string);
+    $string = str_replace ("\270", '&#248;', $string);
+    $string = str_replace ("\272", '&#343;', $string);
+    $string = str_replace ("\277", '&#230;', $string);
+    $string = str_replace ("\300", '&#260;', $string);
+    $string = str_replace ("\301", '&#302;', $string);
+    $string = str_replace ("\302", '&#256;', $string);
+    $string = str_replace ("\303", '&#262;', $string);
+    $string = str_replace ("\306", '&#280;', $string);
+    $string = str_replace ("\307", '&#274;', $string);
+    $string = str_replace ("\310", '&#268;', $string);
+    $string = str_replace ("\312", '&#377;', $string);
+    $string = str_replace ("\313", '&#278;', $string);
+    $string = str_replace ("\314", '&#290;', $string);
+    $string = str_replace ("\315", '&#310;', $string);
+    $string = str_replace ("\316", '&#298;', $string);
+    $string = str_replace ("\317", '&#315;', $string);
+    $string = str_replace ("\320", '&#352;', $string);
+    $string = str_replace ("\321", '&#323;', $string);
+    $string = str_replace ("\322", '&#325;', $string);
+    $string = str_replace ("\324", '&#332;', $string);
+    $string = str_replace ("\330", '&#370;', $string);
+    $string = str_replace ("\331", '&#321;', $string);
+    $string = str_replace ("\332", '&#346;', $string);
+    $string = str_replace ("\333", '&#362;', $string);
+    $string = str_replace ("\335", '&#379;', $string);
+    $string = str_replace ("\336", '&#381;', $string);
+    $string = str_replace ("\340", '&#261;', $string);
+    $string = str_replace ("\341", '&#303;', $string);
+    $string = str_replace ("\342", '&#257;', $string);
+    $string = str_replace ("\343", '&#263;', $string);
+    $string = str_replace ("\346", '&#281;', $string);
+    $string = str_replace ("\347", '&#275;', $string);
+    $string = str_replace ("\350", '&#269;', $string);
+    $string = str_replace ("\352", '&#378;', $string);
+    $string = str_replace ("\353", '&#279;', $string);
+    $string = str_replace ("\354", '&#291;', $string);
+    $string = str_replace ("\355", '&#311;', $string);
+    $string = str_replace ("\356", '&#299;', $string);
+    $string = str_replace ("\357", '&#316;', $string);
+    $string = str_replace ("\360", '&#353;', $string);
+    $string = str_replace ("\361", '&#324;', $string);
+    $string = str_replace ("\362", '&#326;', $string);
+    $string = str_replace ("\364", '&#333;', $string);
+    $string = str_replace ("\370", '&#371;', $string);
+    $string = str_replace ("\371", '&#322;', $string);
+    $string = str_replace ("\372", '&#347;', $string);
+    $string = str_replace ("\373", '&#363;', $string);    
+    $string = str_replace ("\375", '&#380;', $string);
+    $string = str_replace ("\376", '&#382;', $string);
+    $string = str_replace ("\377", '&#8217;', $string);
+
+    // rest of charset is the same as ISO-8859-1
+    return (charset_decode_iso_8859_1($string));
 }
 
 /*
@@ -483,12 +710,6 @@ function charset_decode_iso_8859_15 ($string) {
     return (charset_decode_iso_8859_1($string));
 }
 
-/* ISO-8859-5 is Cyrillic */
-function charset_decode_iso_8859_5 ($string) {
-    // Convert to KOI8-R, then return this decoded.
-    $string = convert_cyr_string($string, 'i', 'k');
-    return charset_decode_koi8r($string);
-}
 
 /* Remove all 8 bit characters from all other ISO-8859 character sets */
 function charset_decode_iso_8859_default ($string) {
@@ -533,9 +754,13 @@ function charset_decode_ns_4551_1 ($string) {
 function charset_decode_koi8r ($string) {
     global $default_charset;
 
-    if ($default_charset == 'koi8-r') {
+    if (strtolower($default_charset) == 'koi8-r') {
         return $string;
     }
+
+    /* Only do the slow convert if there are 8-bit characters */
+    if (! ereg("[\200-\377]", $string))
+        return $string;
 
     /*
      * Convert to Unicode HTML entities.
@@ -674,6 +899,652 @@ function charset_decode_koi8r ($string) {
 }
 
 /*
+ * KOI8-U is used to encode Ukrainian mail (Cyrrilic). Defined in RFC
+ * 2319.
+ */
+function charset_decode_koi8u ($string) {
+    global $default_charset;
+
+    if (strtolower($default_charset) == 'koi8-u') {
+        return $string;
+    }
+
+    /* Only do the slow convert if there are 8-bit characters */
+    if (! ereg("[\200-\377]", $string))
+        return $string;
+
+    // BOX DRAWINGS LIGHT HORIZONTAL
+    $string = str_replace("\200", '&#9472;', $string);
+    // BOX DRAWINGS LIGHT VERTICAL
+    $string = str_replace("\201", '&#9474;', $string);
+    // BOX DRAWINGS LIGHT DOWN AND RIGHT
+    $string = str_replace("\202", '&#9484;', $string);
+    // BOX DRAWINGS LIGHT DOWN AND LEFT
+    $string = str_replace("\203", '&#9488;', $string);
+    // BOX DRAWINGS LIGHT UP AND RIGHT
+    $string = str_replace("\204", '&#9492;', $string);
+    // BOX DRAWINGS LIGHT UP AND LEFT
+    $string = str_replace("\205", '&#9496;', $string);
+    // BOX DRAWINGS LIGHT VERTICAL AND RIGHT
+    $string = str_replace("\206", '&#9500;', $string);
+    // BOX DRAWINGS LIGHT VERTICAL AND LEFT
+    $string = str_replace("\207", '&#9508;', $string);
+    // BOX DRAWINGS LIGHT DOWN AND HORIZONTAL
+    $string = str_replace("\210", '&#9516;', $string);
+    // BOX DRAWINGS LIGHT UP AND HORIZONTAL
+    $string = str_replace("\211", '&#9524;', $string);
+    // BOX DRAWINGS LIGHT VERTICAL AND HORIZONTAL
+    $string = str_replace("\212", '&#9532;', $string);
+    // UPPER HALF BLOCK
+    $string = str_replace("\213", '&#9600;', $string);
+    // LOWER HALF BLOCK
+    $string = str_replace("\214", '&#9604;', $string);
+    // FULL BLOCK
+    $string = str_replace("\215", '&#9608;', $string);
+    // LEFT HALF BLOCK
+    $string = str_replace("\216", '&#9612;', $string);
+    // RIGHT HALF BLOCK
+    $string = str_replace("\217", '&#9616;', $string);
+    // LIGHT SHADE
+    $string = str_replace("\220", '&#9617;', $string);
+    // MEDIUM SHADE
+    $string = str_replace("\221", '&#9618;', $string);
+    // DARK SHADE
+    $string = str_replace("\222", '&#9619;', $string);
+    // TOP HALF INTEGRAL
+    $string = str_replace("\223", '&#8992;', $string);
+    // BLACK SQUARE
+    $string = str_replace("\224", '&#9632;', $string);
+    // BULLET OPERATOR
+    $string = str_replace("\225", '&#8729;', $string);
+    // SQUARE ROOT
+    $string = str_replace("\226", '&#8730;', $string);
+    // ALMOST EQUAL TO
+    $string = str_replace("\227", '&#8776;', $string);
+    // LESS THAN OR EQUAL TO
+    $string = str_replace("\230", '&#8804;', $string);
+    // GREATER THAN OR EQUAL TO
+    $string = str_replace("\231", '&#8805;', $string);
+    // NO-BREAK SPACE
+    $string = str_replace("\232", '&#160;', $string);
+    // BOTTOM HALF INTEGRAL
+    $string = str_replace("\233", '&#8993;', $string);
+    // DEGREE SIGN
+    $string = str_replace("\234", '&#176;', $string);
+    // SUPERSCRIPT DIGIT TWO
+    $string = str_replace("\235", '&#178;', $string);
+    // MIDDLE DOT
+    $string = str_replace("\236", '&#183;', $string);
+    // DIVISION SIGN
+    $string = str_replace("\237", '&#247;', $string);
+    // BOX DRAWINGS DOUBLE HORIZONTAL
+    $string = str_replace("\240", '&#9552;', $string);
+    // BOX DRAWINGS DOUBLE VERTICAL
+    $string = str_replace("\241", '&#9553;', $string);
+    // BOX DRAWINGS DOWN SINGLE AND RIGHT DOUBLE
+    $string = str_replace("\242", '&#9554;', $string);
+    // CYRILLIC SMALL LETTER IO
+    $string = str_replace("\243", '&#1105;', $string);
+    // CYRILLIC SMALL LETTER UKRAINIAN IE
+    $string = str_replace("\244", '&#1108;', $string);
+    // BOX DRAWINGS DOUBLE DOWN AND RIGHT
+    $string = str_replace("\245", '&#9556;', $string);
+    // CYRILLIC SMALL LETTER BYELORUSSIAN-UKRAINIAN I
+    $string = str_replace("\246", '&#1110;', $string);
+    // CYRILLIC SMALL LETTER YI (Ukrainian)
+    $string = str_replace("\247", '&#1111;', $string);
+    // BOX DRAWINGS DOUBLE DOWN AND LEFT
+    $string = str_replace("\250", '&#9559;', $string);
+    // BOX DRAWINGS UP SINGLE AND RIGHT DOUBLE
+    $string = str_replace("\251", '&#9560;', $string);
+    // BOX DRAWINGS UP DOUBLE AND RIGHT SINGLE
+    $string = str_replace("\252", '&#9561;', $string);
+    // BOX DRAWINGS DOUBLE UP AND RIGHT
+    $string = str_replace("\253", '&#9562;', $string);
+    // BOX DRAWINGS UP SINGLE AND LEFT DOUBLE
+    $string = str_replace("\254", '&#9563;', $string);
+    // CYRILLIC SMALL LETTER GHE WITH UPTURN
+    $string = str_replace("\255", '&#1169;', $string);
+    // BOX DRAWINGS DOUBLE UP AND LEFT
+    $string = str_replace("\256", '&#9565;', $string);
+    // BOX DRAWINGS VERTICAL SINGLE AND RIGHT DOUBLE
+    $string = str_replace("\257", '&#9566;', $string);
+    // BOX DRAWINGS VERTICAL DOUBLE AND RIGHT SINGLE
+    $string = str_replace("\260", '&#9567;', $string);
+    // BOX DRAWINGS DOUBLE VERTICAL AND RIGHT
+    $string = str_replace("\261", '&#9568;', $string);
+    // BOX DRAWINGS VERTICAL SINGLE AND LEFT DOUBLE
+    $string = str_replace("\262", '&#9569;', $string);
+    // CYRILLIC CAPITAL LETTER IO
+    $string = str_replace("\263", '&#1025;', $string);
+    // CYRILLIC CAPITAL LETTER UKRAINIAN IE
+    $string = str_replace("\264", '&#1028;', $string);
+    // DOUBLE VERTICAL AND LEFT
+    $string = str_replace("\265", '&#9571;', $string);
+    // CYRILLIC CAPITAL LETTER BYELORUSSIAN-UKRAINIAN I
+    $string = str_replace("\266", '&#1030;', $string);
+    // CYRILLIC CAPITAL LETTER YI (Ukrainian)
+    $string = str_replace("\267", '&#1031;', $string);
+    // BOX DRAWINGS DOUBLE DOWN AND HORIZONTAL
+    $string = str_replace("\270", '&#9574;', $string);
+    // BOX DRAWINGS UP SINGLE AND HORIZONTAL DOUBLE
+    $string = str_replace("\271", '&#9575;', $string);
+    // BOX DRAWINGS UP DOUBLE AND HORIZONTAL SINGLE
+    $string = str_replace("\272", '&#9576;', $string);
+    // BOX DRAWINGS DOUBLE UP AND HORIZONTAL
+    $string = str_replace("\273", '&#9577;', $string);
+    // BOX DRAWINGS VERTICAL SINGLE AND HORIZONTAL DOUBLE
+    $string = str_replace("\274", '&#9578;', $string);
+    // CYRILLIC CAPITAL LETTER GHE WITH UPTURN
+    $string = str_replace("\275", '&#1168;', $string);
+    // BOX DRAWINGS DOUBLE VERTICAL AND HORIZONTAL
+    $string = str_replace("\276", '&#9580;', $string);
+    // COPYRIGHT SIGN
+    $string = str_replace("\277", '&#169;', $string);
+    // CYRILLIC SMALL LETTER YU
+    $string = str_replace("\300", '&#1102;', $string);
+    // CYRILLIC SMALL LETTER A
+    $string = str_replace("\301", '&#1072;', $string);
+    // CYRILLIC SMALL LETTER BE
+    $string = str_replace("\302", '&#1073;', $string);
+    // CYRILLIC SMALL LETTER TSE
+    $string = str_replace("\303", '&#1094;', $string);
+    // CYRILLIC SMALL LETTER DE
+    $string = str_replace("\304", '&#1076;', $string);
+    // CYRILLIC SMALL LETTER IE
+    $string = str_replace("\305", '&#1077;', $string);
+    // CYRILLIC SMALL LETTER EF
+    $string = str_replace("\306", '&#1092;', $string);
+    // CYRILLIC SMALL LETTER GHE
+    $string = str_replace("\307", '&#1075;', $string);
+    // CYRILLIC SMALL LETTER HA
+    $string = str_replace("\310", '&#1093;', $string);
+    // CYRILLIC SMALL LETTER I
+    $string = str_replace("\311", '&#1080;', $string);
+    // CYRILLIC SMALL LETTER SHORT I
+    $string = str_replace("\312", '&#1081;', $string);
+    // CYRILLIC SMALL LETTER KA
+    $string = str_replace("\313", '&#1082;', $string);
+    // CYRILLIC SMALL LETTER EL
+    $string = str_replace("\314", '&#1083;', $string);
+    // CYRILLIC SMALL LETTER EM
+    $string = str_replace("\315", '&#1084;', $string);
+    // CYRILLIC SMALL LETTER EN
+    $string = str_replace("\316", '&#1085;', $string);
+    // CYRILLIC SMALL LETTER O
+    $string = str_replace("\317", '&#1086;', $string);
+    // CYRILLIC SMALL LETTER PE
+    $string = str_replace("\320", '&#1087;', $string);
+    // CYRILLIC SMALL LETTER YA
+    $string = str_replace("\321", '&#1103;', $string);
+    // CYRILLIC SMALL LETTER ER
+    $string = str_replace("\322", '&#1088;', $string);
+    // CYRILLIC SMALL LETTER ES
+    $string = str_replace("\323", '&#1089;', $string);
+    // CYRILLIC SMALL LETTER TE
+    $string = str_replace("\324", '&#1090;', $string);
+    // CYRILLIC SMALL LETTER U
+    $string = str_replace("\325", '&#1091;', $string);
+    // CYRILLIC SMALL LETTER ZHE
+    $string = str_replace("\326", '&#1078;', $string);
+    // CYRILLIC SMALL LETTER VE
+    $string = str_replace("\327", '&#1074;', $string);
+    // CYRILLIC SMALL LETTER SOFT SIGN
+    $string = str_replace("\330", '&#1100;', $string);
+    // CYRILLIC SMALL LETTER YERU
+    $string = str_replace("\331", '&#1099;', $string);
+    // CYRILLIC SMALL LETTER ZE
+    $string = str_replace("\332", '&#1079;', $string);
+    // CYRILLIC SMALL LETTER SHA
+    $string = str_replace("\333", '&#1096;', $string);
+    // CYRILLIC SMALL LETTER E
+    $string = str_replace("\334", '&#1101;', $string);
+    // CYRILLIC SMALL LETTER SHCHA
+    $string = str_replace("\335", '&#1097;', $string);
+    // CYRILLIC SMALL LETTER CHE
+    $string = str_replace("\336", '&#1095;', $string);
+    // CYRILLIC SMALL LETTER HARD SIGN
+    $string = str_replace("\337", '&#1098;', $string);
+    // CYRILLIC CAPITAL LETTER YU
+    $string = str_replace("\340", '&#1070;', $string);
+    // CYRILLIC CAPITAL LETTER A
+    $string = str_replace("\341", '&#1040;', $string);
+    // CYRILLIC CAPITAL LETTER BE
+    $string = str_replace("\342", '&#1041;', $string);
+    // CYRILLIC CAPITAL LETTER TSE
+    $string = str_replace("\343", '&#1062;', $string);
+    // CYRILLIC CAPITAL LETTER DE
+    $string = str_replace("\344", '&#1044;', $string);
+    // CYRILLIC CAPITAL LETTER IE
+    $string = str_replace("\345", '&#1045;', $string);
+    // CYRILLIC CAPITAL LETTER EF
+    $string = str_replace("\346", '&#1060;', $string);
+    // CYRILLIC CAPITAL LETTER GHE
+    $string = str_replace("\347", '&#1043;', $string);
+    // CYRILLIC CAPITAL LETTER HA
+    $string = str_replace("\350", '&#1061;', $string);
+    // CYRILLIC CAPITAL LETTER I
+    $string = str_replace("\351", '&#1048;', $string);
+    // CYRILLIC CAPITAL LETTER SHORT I
+    $string = str_replace("\352", '&#1049;', $string);
+    // CYRILLIC CAPITAL LETTER KA
+    $string = str_replace("\353", '&#1050;', $string);
+    // CYRILLIC CAPITAL LETTER EL
+    $string = str_replace("\354", '&#1051;', $string);
+    // CYRILLIC CAPITAL LETTER EM
+    $string = str_replace("\355", '&#1052;', $string);
+    // CYRILLIC CAPITAL LETTER EN
+    $string = str_replace("\356", '&#1053;', $string);
+    // CYRILLIC CAPITAL LETTER O
+    $string = str_replace("\357", '&#1054;', $string);
+    // CYRILLIC CAPITAL LETTER PE
+    $string = str_replace("\360", '&#1055;', $string);
+    // CYRILLIC CAPITAL LETTER YA
+    $string = str_replace("\361", '&#1071;', $string);
+    // CYRILLIC CAPITAL LETTER ER
+    $string = str_replace("\362", '&#1056;', $string);
+    // CYRILLIC CAPITAL LETTER ES
+    $string = str_replace("\363", '&#1057;', $string);
+    // CYRILLIC CAPITAL LETTER TE
+    $string = str_replace("\364", '&#1058;', $string);
+    // CYRILLIC CAPITAL LETTER U
+    $string = str_replace("\365", '&#1059;', $string);
+    // CYRILLIC CAPITAL LETTER ZHE
+    $string = str_replace("\366", '&#1046;', $string);
+    // CYRILLIC CAPITAL LETTER VE
+    $string = str_replace("\367", '&#1042;', $string);
+    // CYRILLIC CAPITAL LETTER SOFT SIGN
+    $string = str_replace("\370", '&#1068;', $string);
+    // CYRILLIC CAPITAL LETTER YERU
+    $string = str_replace("\371", '&#1067;', $string);
+    // CYRILLIC CAPITAL LETTER ZE
+    $string = str_replace("\372", '&#1047;', $string);
+    // CYRILLIC CAPITAL LETTER SHA
+    $string = str_replace("\373", '&#1064;', $string);
+    // CYRILLIC CAPITAL LETTER E
+    $string = str_replace("\374", '&#1069;', $string);
+    // CYRILLIC CAPITAL LETTER SHCHA
+    $string = str_replace("\375", '&#1065;', $string);
+    // CYRILLIC CAPITAL LETTER CHE
+    $string = str_replace("\376", '&#1063;', $string);
+    // CYRILLIC CAPITAL LETTER HARD SIGN
+    $string = str_replace("\377", '&#1066;', $string);
+
+    return $string;
+}
+
+/*
+ * windows-1251 is used to encode Bulgarian mail (Cyrrilic). 
+ */
+function charset_decode_windows_1251 ($string) {
+    global $default_charset;
+
+    if (strtolower($default_charset) == 'windows-1251') {
+        return $string;
+    }
+
+    /* Only do the slow convert if there are 8-bit characters */
+    if (! ereg("[\200-\377]", $string))
+        return $string;
+
+    // CYRILLIC CAPITAL LETTER DJE (Serbocroatian)
+    $string = str_replace("\200", '&#1026;', $string);
+    // CYRILLIC CAPITAL LETTER GJE
+    $string = str_replace("\201", '&#1027;', $string);
+    // SINGLE LOW-9 QUOTATION MARK
+    $string = str_replace("\202", '&#8218;', $string);
+    // CYRILLIC SMALL LETTER GJE
+    $string = str_replace("\203", '&#1107;', $string);
+    // DOUBLE LOW-9 QUOTATION MARK
+    $string = str_replace("\204", '&#8222;', $string);
+    // HORIZONTAL ELLIPSIS
+    $string = str_replace("\205", '&#8230;', $string);
+    // DAGGER
+    $string = str_replace("\206", '&#8224;', $string);
+    // DOUBLE DAGGER
+    $string = str_replace("\207", '&#8225;', $string);
+    // EURO SIGN
+    $string = str_replace("\210", '&#8364;', $string);
+    // PER MILLE SIGN
+    $string = str_replace("\211", '&#8240;', $string);
+    // CYRILLIC CAPITAL LETTER LJE
+    $string = str_replace("\212", '&#1033;', $string);
+    // SINGLE LEFT-POINTING ANGLE QUOTATION MARK
+    $string = str_replace("\213", '&#8249;', $string);
+    // CYRILLIC CAPITAL LETTER NJE
+    $string = str_replace("\214", '&#1034;', $string);
+    // CYRILLIC CAPITAL LETTER KJE
+    $string = str_replace("\215", '&#1036;', $string);
+    // CYRILLIC CAPITAL LETTER TSHE (Serbocroatian)
+    $string = str_replace("\216", '&#1035;', $string);
+    // CYRILLIC CAPITAL LETTER DZHE
+    $string = str_replace("\217", '&#1039;', $string);
+    // CYRILLIC SMALL LETTER DJE (Serbocroatian)
+    $string = str_replace("\220", '&#1106;', $string);
+    // LEFT SINGLE QUOTATION MARK
+    $string = str_replace("\221", '&#8216;', $string);
+    // RIGHT SINGLE QUOTATION MARK
+    $string = str_replace("\222", '&#8217;', $string);
+    // LEFT DOUBLE QUOTATION MARK
+    $string = str_replace("\223", '&#8220;', $string);
+    // RIGHT DOUBLE QUOTATION MARK
+    $string = str_replace("\224", '&#8221;', $string);
+    // BULLET
+    $string = str_replace("\225", '&#8226;', $string);
+    // EN DASH
+    $string = str_replace("\226", '&#8211;', $string);
+    // EM DASH
+    $string = str_replace("\227", '&#8212;', $string);
+    // TRADE MARK SIGN
+    $string = str_replace("\231", '&#8482;', $string);
+    // CYRILLIC SMALL LETTER LJE
+    $string = str_replace("\232", '&#1113;', $string);
+    // SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
+    $string = str_replace("\233", '&#8250;', $string);
+    // CYRILLIC SMALL LETTER NJE
+    $string = str_replace("\234", '&#1114;', $string);
+    // CYRILLIC SMALL LETTER KJE
+    $string = str_replace("\235", '&#1116;', $string);
+    // CYRILLIC SMALL LETTER TSHE (Serbocroatian)
+    $string = str_replace("\236", '&#1115;', $string);
+    // CYRILLIC SMALL LETTER DZHE
+    $string = str_replace("\237", '&#1119;', $string);
+    // NO-BREAK SPACE
+    $string = str_replace("\240", '&#160;', $string);
+    // CYRILLIC CAPITAL LETTER SHORT U (Byelorussian)
+    $string = str_replace("\241", '&#1038;', $string);
+    // CYRILLIC SMALL LETTER SHORT U (Byelorussian)
+    $string = str_replace("\242", '&#1118;', $string);
+    // CYRILLIC CAPITAL LETTER JE
+    $string = str_replace("\243", '&#1032;', $string);
+    // CURRENCY SIGN
+    $string = str_replace("\244", '&#164;', $string);
+    // CYRILLIC CAPITAL LETTER GHE WITH UPTURN
+    $string = str_replace("\245", '&#1168;', $string);
+    // BROKEN BAR
+    $string = str_replace("\246", '&#166;', $string);
+    // SECTION SIGN
+    $string = str_replace("\247", '&#167;', $string);
+    // CYRILLIC CAPITAL LETTER IO
+    $string = str_replace("\250", '&#1025;', $string);
+    // COPYRIGHT SIGN
+    $string = str_replace("\251", '&#169;', $string);
+    // CYRILLIC CAPITAL LETTER UKRAINIAN IE
+    $string = str_replace("\252", '&#1028;', $string);
+    // LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+    $string = str_replace("\253", '&#171;', $string);
+    // NOT SIGN
+    $string = str_replace("\254", '&#172;', $string);
+    // SOFT HYPHEN
+    $string = str_replace("\255", '&#173;', $string);
+    // REGISTERED SIGN
+    $string = str_replace("\256", '&#174;', $string);
+    // CYRILLIC CAPITAL LETTER YI (Ukrainian)
+    $string = str_replace("\257", '&#1031;', $string);
+    // DEGREE SIGN
+    $string = str_replace("\260", '&#176;', $string);
+    // PLUS-MINUS SIGN
+    $string = str_replace("\261", '&#177;', $string);
+    // CYRILLIC CAPITAL LETTER BYELORUSSIAN-UKRAINIAN I
+    $string = str_replace("\262", '&#1030;', $string);
+    // CYRILLIC SMALL LETTER BYELORUSSIAN-UKRAINIAN I
+    $string = str_replace("\263", '&#1110;', $string);
+    // CYRILLIC SMALL LETTER GHE WITH UPTURN
+    $string = str_replace("\264", '&#1169;', $string);
+    // MICRO SIGN
+    $string = str_replace("\265", '&#181;', $string);
+    // PILCROW SIGN
+    $string = str_replace("\266", '&#182;', $string);
+    // MIDDLE DOT
+    $string = str_replace("\267", '&#183;', $string);
+    // CYRILLIC SMALL LETTER IO
+    $string = str_replace("\270", '&#1105;', $string);
+    // NUMERO SIGN
+    $string = str_replace("\271", '&#8470;', $string);
+    // CYRILLIC SMALL LETTER UKRAINIAN IE
+    $string = str_replace("\272", '&#1108;', $string);
+    // RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+    $string = str_replace("\273", '&#187;', $string);
+    // CYRILLIC SMALL LETTER JE
+    $string = str_replace("\274", '&#1112;', $string);
+    // CYRILLIC CAPITAL LETTER DZE
+    $string = str_replace("\275", '&#1029;', $string);
+    // CYRILLIC SMALL LETTER DZE
+    $string = str_replace("\276", '&#1109;', $string);
+    // CYRILLIC SMALL LETTER YI (Ukrainian)
+    $string = str_replace("\277", '&#1111;', $string);
+
+    // 192-255 > 1040-1103 (+848)
+    $string = preg_replace("/([\300-\377])/e","'&#' . (ord('\\1')+848) . ';'",$string);
+
+    return $string;
+}
+
+/*
+ windows-1253 (Greek)
+ */
+function charset_decode_windows_1253 ($string) {
+    global $default_charset;
+
+    if (strtolower($default_charset) == 'windows-1253')
+        return $string;
+
+    /* Only do the slow convert if there are 8-bit characters */
+    if (! ereg("[\200-\377]", $string))
+        return $string;
+
+    $string = str_replace("\200", '&#8364;', $string);
+    $string = str_replace("\202", '&#8218;', $string);
+    $string = str_replace("\203", '&#402;', $string);
+    $string = str_replace("\204", '&#8222;', $string);
+    $string = str_replace("\205", '&#8230;', $string);
+    $string = str_replace("\206", '&#8224;', $string);
+    $string = str_replace("\207", '&#8225;', $string);
+    $string = str_replace("\211", '&#8240;', $string);
+    $string = str_replace("\213", '&#8249;', $string);
+    $string = str_replace("\221", '&#8216;', $string);
+    $string = str_replace("\222", '&#8217;', $string);
+    $string = str_replace("\223", '&#8220;', $string);
+    $string = str_replace("\224", '&#8221;', $string);
+    $string = str_replace("\225", '&#8226;', $string);
+    $string = str_replace("\226", '&#8211;', $string);
+    $string = str_replace("\227", '&#8212;', $string);
+    $string = str_replace("\231", '&#8482;', $string);
+    $string = str_replace("\233", '&#8250;', $string);
+    $string = str_replace("\241", '&#901;', $string);
+    $string = str_replace("\242", '&#902;', $string);
+    $string = str_replace ("\257", '&#8213;', $string);
+    $string = str_replace("\264", '&#900;', $string);
+    $string = str_replace("\270", '&#904;', $string);
+    $string = str_replace ("\271", '&#905;', $string);
+    $string = str_replace ("\272", '&#906;', $string);
+    $string = str_replace ("\274", '&#908;', $string);
+    // cycle for 190-254 symbols
+    $string = preg_replace("/([\274-\376])/e","'&#' . (ord('\\1')+720) . ';'",$string);
+
+    // Rest of charset is like iso-8859-1
+    return (charset_decode_iso_8859_1($string));
+}
+
+/*
+ windows-1254 (Turks)
+ */
+function charset_decode_windows_1254 ($string) {
+    global $default_charset;
+
+    if (strtolower($default_charset) == 'windows-1254')
+        return $string;
+
+    /* Only do the slow convert if there are 8-bit characters */
+    if (! ereg("[\200-\377]", $string))
+        return $string;
+
+    $string = str_replace("\200", '&#8364;', $string);
+    $string = str_replace("\202", '&#8218;', $string);
+    $string = str_replace("\203", '&#402;', $string);
+    $string = str_replace("\204", '&#8222;', $string);
+    $string = str_replace("\205", '&#8230;', $string);
+    $string = str_replace("\206", '&#8224;', $string);
+    $string = str_replace("\207", '&#8225;', $string);
+    $string = str_replace("\210", '&#710;', $string);
+    $string = str_replace("\211", '&#8240;', $string);
+    $string = str_replace("\212", '&#352;', $string);
+    $string = str_replace("\213", '&#8249;', $string);
+    $string = str_replace("\214", '&#338;', $string);
+    $string = str_replace("\221", '&#8216;', $string);
+    $string = str_replace("\222", '&#8217;', $string);
+    $string = str_replace("\223", '&#8220;', $string);
+    $string = str_replace("\224", '&#8221;', $string);
+    $string = str_replace("\225", '&#8226;', $string);
+    $string = str_replace("\226", '&#8211;', $string);
+    $string = str_replace("\227", '&#8212;', $string);
+    $string = str_replace("\230", '&#732;', $string);
+    $string = str_replace("\231", '&#8482;', $string);
+    $string = str_replace("\232", '&#353;', $string);
+    $string = str_replace("\233", '&#8250;', $string);
+    $string = str_replace("\234", '&#339;', $string);
+    $string = str_replace("\237", '&#376;', $string);
+    $string = str_replace("\320", '&#286;', $string);
+    $string = str_replace("\335", '&#304;', $string);
+    $string = str_replace("\336", '&#350;', $string);
+    $string = str_replace("\360", '&#287;', $string);
+    $string = str_replace("\375", '&#305;', $string);
+    $string = str_replace("\376", '&#351;', $string);
+
+    // Rest of charset is like iso-8859-1
+    return (charset_decode_iso_8859_1($string));
+}
+
+/*
+ windows-1257 (BaltRim)
+ */
+function charset_decode_windows_1257 ($string) {
+    global $default_charset;
+
+    if (strtolower($default_charset) == 'windows-1257')
+        return $string;
+
+    /* Only do the slow convert if there are 8-bit characters */
+    if (! ereg("[\200-\377]", $string))
+        return $string;
+
+    $string = str_replace("\200", '&#8364;', $string);
+    $string = str_replace("\202", '&#8218;', $string);
+    $string = str_replace("\204", '&#8222;', $string);
+    $string = str_replace("\205", '&#8230;', $string);
+    $string = str_replace("\206", '&#8224;', $string);
+    $string = str_replace("\207", '&#8225;', $string);
+    $string = str_replace("\211", '&#8240;', $string);
+    $string = str_replace("\213", '&#8249;', $string);
+    $string = str_replace("\215", '&#168;', $string);
+    $string = str_replace("\216", '&#711;', $string);
+    $string = str_replace("\217", '&#184;', $string);
+    $string = str_replace("\221", '&#8216;', $string);
+    $string = str_replace("\222", '&#8217;', $string);
+    $string = str_replace("\223", '&#8220;', $string);
+    $string = str_replace("\224", '&#8221;', $string);
+    $string = str_replace("\225", '&#8226;', $string);
+    $string = str_replace("\226", '&#8211;', $string);
+    $string = str_replace("\227", '&#8212;', $string);
+    $string = str_replace("\231", '&#8482;', $string);
+    $string = str_replace("\233", '&#8250;', $string);
+    $string = str_replace("\235", '&#175;', $string);
+    $string = str_replace("\236", '&#731;', $string);
+    $string = str_replace ("\250", '&#216;', $string);
+    $string = str_replace ("\252", '&#342;', $string);
+    $string = str_replace ("\257", '&#198;', $string);
+    $string = str_replace ("\270", '&#248;', $string);
+    $string = str_replace ("\272", '&#343;', $string);
+    $string = str_replace ("\277", '&#230;', $string);
+    $string = str_replace ("\300", '&#260;', $string);
+    $string = str_replace ("\301", '&#302;', $string);
+    $string = str_replace ("\302", '&#256;', $string);
+    $string = str_replace ("\303", '&#262;', $string);
+    $string = str_replace ("\306", '&#280;', $string);
+    $string = str_replace ("\307", '&#274;', $string);
+    $string = str_replace ("\310", '&#268;', $string);
+    $string = str_replace ("\312", '&#377;', $string);
+    $string = str_replace ("\313", '&#278;', $string);
+    $string = str_replace ("\314", '&#290;', $string);
+    $string = str_replace ("\315", '&#310;', $string);
+    $string = str_replace ("\316", '&#298;', $string);
+    $string = str_replace ("\317", '&#315;', $string);
+    $string = str_replace ("\320", '&#352;', $string);
+    $string = str_replace ("\321", '&#323;', $string);
+    $string = str_replace ("\322", '&#325;', $string);
+    $string = str_replace ("\324", '&#332;', $string);
+    $string = str_replace ("\330", '&#370;', $string);
+    $string = str_replace ("\331", '&#321;', $string);
+    $string = str_replace ("\332", '&#340;', $string);
+    $string = str_replace ("\333", '&#362;', $string);
+    $string = str_replace ("\335", '&#379;', $string);
+    $string = str_replace ("\336", '&#381;', $string);
+    $string = str_replace ("\340", '&#261;', $string);
+    $string = str_replace ("\341", '&#303;', $string);
+    $string = str_replace ("\342", '&#257;', $string);
+    $string = str_replace ("\343", '&#263;', $string);
+    $string = str_replace ("\346", '&#281;', $string);
+    $string = str_replace ("\347", '&#275;', $string);
+    $string = str_replace ("\350", '&#269;', $string);
+    $string = str_replace ("\352", '&#378;', $string);
+    $string = str_replace ("\353", '&#279;', $string);
+    $string = str_replace ("\354", '&#291;', $string);
+    $string = str_replace ("\355", '&#311;', $string);
+    $string = str_replace ("\356", '&#299;', $string);
+    $string = str_replace ("\357", '&#316;', $string);
+    $string = str_replace ("\360", '&#353;', $string);
+    $string = str_replace ("\361", '&#324;', $string);
+    $string = str_replace ("\362", '&#326;', $string);
+    $string = str_replace ("\364", '&#333;', $string);
+    $string = str_replace ("\370", '&#371;', $string);
+    $string = str_replace ("\371", '&#322;', $string);
+    $string = str_replace ("\372", '&#347;', $string);
+    $string = str_replace ("\373", '&#363;', $string);    
+    $string = str_replace ("\375", '&#380;', $string);
+    $string = str_replace ("\376", '&#382;', $string);
+    $string = str_replace ("\377", '&#729;', $string);
+
+    // Rest of charset is like iso-8859-1
+    return (charset_decode_iso_8859_1($string));
+}
+
+function charset_decode_utf8 ($string) {
+/*
+    Every decoded character consists of n bytes. First byte is octal
+    300-375, other bytes - always octals 200-277.
+
+    \a\b characters are decoded to html code octdec(a-300)*64 + octdec(b-200)
+    \a\b\c characters are decoded to html code octdec(a-340)*64*64 + 
+    + octdec(b-200)*64 + octdec(c-200)
+    
+    decoding cycle is unfinished. please test and 
+    report problems to tokul@users.sourceforge.net
+*/
+    global $default_charset, $languages, $sm_notAlias;
+
+    if (strtolower($default_charset) == 'utf-8')
+        return $string;
+    if (strtolower($languages[$sm_notAlias]['CHARSET']) == 'utf-8')
+        return $string;
+
+    /* Only do the slow convert if there are 8-bit characters */
+    if (! ereg("[\200-\377]", $string))
+        return $string;
+
+    // decode three byte unicode characters
+    $string = preg_replace("/([\340-\357])([\200-\277])([\200-\277])/e",
+    "'&#'.((ord('\\1')-224)*4096+(ord('\\2')-128)*64+(ord('\\3')-128)).';'",
+    $string);
+
+    // decode two byte unicode characters
+    $string = preg_replace("/([\300-\337])([\200-\277])/e",
+    "'&#'.((ord('\\1')-192)*64+(ord('\\2')-128)).';'",
+    $string);
+
+    return $string;
+}
+
+/*
  * Set up the language to be output
  * if $do_search is true, then scan the browser information
  * for a possible language that we know
@@ -681,7 +1552,7 @@ function charset_decode_koi8r ($string) {
 function set_up_language($sm_language, $do_search = false) {
 
     static $SetupAlready = 0;
-    global $HTTP_ACCEPT_LANGUAGE, $use_gettext, $languages,
+    global $use_gettext, $languages,
            $squirrelmail_language, $squirrelmail_default_language,
            $sm_notAlias;
 
@@ -690,8 +1561,8 @@ function set_up_language($sm_language, $do_search = false) {
     }
     $SetupAlready = TRUE;
 
-    if ($do_search && ! $sm_language && isset($HTTP_ACCEPT_LANGUAGE)) {
-        $sm_language = substr($HTTP_ACCEPT_LANGUAGE, 0, 2);
+    if ($do_search && ! $sm_language && isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+        $sm_language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     }
     
     if (!$sm_language && isset($squirrelmail_default_language)) {
@@ -732,11 +1603,11 @@ function set_my_charset(){
      * selection. This is "more right" (tm), than just stamping the
      * message blindly with the system-wide $default_charset.
      */
-    global $data_dir, $username, $default_charset, $languages;
+    global $data_dir, $username, $default_charset, $languages, $squirrelmail_default_language;
 
     $my_language = getPref($data_dir, $username, 'language');
     if (!$my_language) {
-        return;
+        $my_language = $squirrelmail_default_language ;
     }
     while (isset($languages[$my_language]['ALIAS'])) {
         $my_language = $languages[$my_language]['ALIAS'];
@@ -860,15 +1731,13 @@ $languages['tr_TR']['NAME']    = 'Turkish';
 $languages['tr_TR']['CHARSET'] = 'iso-8859-9';
 $languages['tr']['ALIAS'] = 'tr_TR';
 
-// it's zh_TW, actually.
-
-$languages['zh_TW']['NAME']    = 'Taiwan';
+$languages['zh_TW']['NAME']    = 'Chinese Trad';
 $languages['zh_TW']['CHARSET'] = 'big5';
 $languages['tw']['ALIAS'] = 'zh_TW';
 
-$languages['zh_TW']['NAME']    = 'Chinese';
-$languages['zh_TW']['CHARSET'] = 'gb2312';
-$languages['tw']['ALIAS'] = 'zh_CN';
+$languages['zh_CN']['NAME']    = 'Chinese Simp';
+$languages['zh_CN']['CHARSET'] = 'gb2312';
+$languages['cn']['ALIAS'] = 'zh_CN';
 
 $languages['sk_SK']['NAME']     = 'Slovak';
 $languages['sk_SK']['CHARSET']  = 'iso-8859-2';
@@ -883,7 +1752,7 @@ $languages['th_TH']['CHARSET'] = 'tis-620';
 $languages['th']['ALIAS'] = 'th_TH';
 
 $languages['lt_LT']['NAME']    = 'Lithuanian';
-$languages['lt_LT']['CHARSET'] = 'iso-8859-13';
+$languages['lt_LT']['CHARSET'] = 'windows-1257';
 $languages['lt']['ALIAS'] = 'lt_LT';
 
 $languages['sl_SI']['NAME']    = 'Slovenian';
@@ -893,6 +1762,10 @@ $languages['sl']['ALIAS'] = 'sl_SI';
 $languages['bg_BG']['NAME']    = 'Bulgarian';
 $languages['bg_BG']['CHARSET'] = 'windows-1251';
 $languages['bg']['ALIAS'] = 'bg_BG';
+
+$languages['uk_UA']['NAME']    = 'Ukrainian';
+$languages['uk_UA']['CHARSET'] = 'koi8-u';
+$languages['uk']['ALIAS'] = 'uk_UA';
 
 /* Detect whether gettext is installed. */
 $gettext_flags = 0;

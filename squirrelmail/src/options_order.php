@@ -6,7 +6,7 @@
  * Copyright (c) 1999-2002 The SquirrelMail Project Team
  * Licensed under the GNU GPL. For full terms see the file COPYING.
  *
- * Displays message highlighting options
+ * Displays index order options
  *
  * $Id$
  */
@@ -17,11 +17,30 @@ require_once('../functions/imap.php');
 require_once('../functions/array.php');
 require_once('../functions/plugin.php');
 
-if (! isset($action)) { $action = ''; }
-if ($action == 'delete' && isset($theid)) {
-    removePref($data_dir, $username, "highlight$theid");
-} elseif ($action == 'save') {
-} 
+/* get globals */
+if (isset($_GET['action'])) {
+    $action = $_GET['action'];
+}
+if (isset($_GET['num'])) {
+    $num = $_GET['num'];
+}
+if (isset($_GET['method'])) {
+    $method = $_GET['method'];
+}
+elseif (isset($_POST['method'])) {
+    $method = $_POST['method'];
+}
+if (isset($_POST['add'])) {
+    $add = $_POST['add'];
+}
+if (isset($_GET['submit'])) {
+    $submit = $_GET['submit'];
+}
+elseif (isset($_POST['submit'])) {
+    $submit = $_POST['submit'];
+}
+/* end of get globals */
+
 displayPageHeader($color, 'None');
 ?>
    <br>

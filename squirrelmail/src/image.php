@@ -12,11 +12,27 @@
  */
 
 require_once('../src/validate.php');
-require_once('../functions/date.php');
 require_once('../functions/page_header.php');
 require_once('../src/load_prefs.php');
 
 displayPageHeader($color, 'None');
+
+/* globals */
+
+$mailbox = $_GET['mailbox'];
+$passed_id = (int) $_GET['passed_id'];
+$passed_ent_id = $_GET['passed_ent_id'];
+$startMessage = (int) $_GET['startMessage'];
+
+if(isset($_GET['where'])) {
+    $where = $_GET['where'];
+}
+if(isset($_GET['what'])) {
+    $what = $_GET['what'];
+}
+
+/* end globals */
+
 
 echo '<BR>' . 
     '<TABLE WIDTH="100%" BORDER=0 CELLSPACING=0 CELLPADDING=2 ALIGN=CENTER>' .
@@ -37,7 +53,7 @@ if (isset($where) && isset($what)) {
 
 $DownloadLink = '../src/download.php?passed_id=' . $passed_id .
                '&amp;mailbox=' . urlencode($mailbox) . 
-               '&amp;passed_ent_id=' . $passed_ent_id . '&amp;absolute_dl=true';
+               '&amp;passed_ent_id=' . urlencode($passed_ent_id) . '&amp;absolute_dl=true';
 
 echo '</b></td></tr>' . "\n" .
     '<tr><td align=center><A HREF="' . $DownloadLink . '">' .

@@ -9,10 +9,6 @@
  * This contains functions for manipulating user preferences
  * stored in a database, accessed though the Pear DB layer.
  *
- * To use this instead of the regular prefs.php, create a
- * database as described below, and replace prefs.php
- * with this file.
- *
  * Database:
  * ---------
  *
@@ -48,8 +44,8 @@ function cachePrefValues($username) {
         return;
     }
 
-    session_unregister('prefs_cache');
-    session_unregister('prefs_are_cached');
+    sqsession_unregister('prefs_cache');
+    sqsession_unregister('prefs_are_cached');
 
     $db = new dbPrefs;
     if(isset($db->error)) {
@@ -67,8 +63,8 @@ function cachePrefValues($username) {
 
     $prefs_are_cached = true;
 
-    session_register('prefs_cache');
-    session_register('prefs_are_cached');
+    sqsession_register($prefs_cache, 'prefs_cache');
+    sqsession_register($prefs_are_cached, 'prefs_are_cached');
 }
 
 class dbPrefs {
@@ -112,7 +108,7 @@ class dbPrefs {
         }
         $dbh = DB::connect($prefs_dsn, true);
 
-        if(DB::isError($dbh) || DB::isWarning($dbh)) {
+        if(DB::isError($dbh)) {
             $this->error = DB::errorMessage($dbh);
             return false;
         }
@@ -168,10 +164,6 @@ class dbPrefs {
         }
 
         unset($prefs_cache[$key]);
-
-        if(substr($key, 0, 9) == 'highlight') {
-            $this->renumberHighlightList($user);
-        }
 
         return true;
     }
@@ -275,65 +267,6 @@ class dbPrefs {
         }
     }
 
-    /*
-     * When a highlight option is deleted the preferences module
-     * must renumber the list.  This should be done somewhere else,
-     * but it is not, so....
-     */
-    function renumberHighlightList($user) {
-        if (!$this->open()) {
-            return;
-        }
-        $query = sprintf("SELECT %s, %s as prefkey, %s as prefval FROM %s WHERE %s='%s' ".
-                         "AND %s LIKE 'highlight%%' ORDER BY %s",
-                         $this->user_field,
-                         $this->key_field,
-                         $this->val_field,
-                         $this->table,
-                         $this->user_field,
-                         $this->dbh->quoteString($user),
-                         $this->key_field,
-                         $this->key_field);
-
-        $res = $this->dbh->query($query);
-        if(DB::isError($res)) {
-            $this->failQuery($res);
-        }
-
-        /* Store old data in array */
-        $rows = Array();
-        while($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-            $rows[] = $row;
-        }
-
-        /* Renumber keys of old data */
-        $hilinum = 0;
-        for($i = 0; $i < count($rows) ; $i++) {
-            $oldkey = $rows[$i]['prefkey'];
-            $newkey = substr($oldkey, 0, 9) . $hilinum;
-            $hilinum++;
-
-            if($oldkey != $newkey) {
-                $query = sprintf("UPDATE %s SET %s='%s' ".
-                                 "WHERE %s ='%s' AND %s='%s'",
-                                 $this->table,
-                                 $this->key_field,
-                                 $this->dbh->quoteString($newkey),
-                                 $this->user_field,
-                                 $this->dbh->quoteString($user),
-                                 $this->key_field,
-                                 $this->dbh->quoteString($oldkey));
-
-                $res = $this->dbh->simpleQuery($query);
-                if(DB::isError($res)) {
-                    $this->failQuery($res);
-                }
-            }
-        }
-
-        return;
-    }
-
 } /* end class dbPrefs */
 
 
@@ -368,7 +301,7 @@ function setPref($data_dir, $username, $string, $set_to) {
         return;
     }
 
-    if ($set_to == '') {
+    if ($set_to === '') {
         removePref($data_dir, $username, $string);
         return;
     }
