@@ -12,6 +12,11 @@ Arabic - ar - cp1256
     Asrar Abbasi <asrar@canasoft.net>
     Naveed Saqib <naveed.saqib@biznas.com>
 
+Basque - eu_ES - iso-8859-1
+    Iker Etxaniz ietxaniz@csiss.jesuitak.org
+    Eneko Harreguy eharreguy@csiss.jesuitak.org
+    Jabier Martinez jmartinez@csiss.jesuitak.org
+
 British - en_GB - iso-8859-15
     Mark Boddington <mark.boddington@transactgroup.net>
 
@@ -70,11 +75,12 @@ Greek - el_GR - iso-8859-7
 
 * Hebrew - he_IL - iso-8859-8
 (SM uses cp1255, locale's header is in iso-8859-8)
-    <yoavb@zavit.net.il>
+    Yoav Bagno <yoavb@zavit.net.il>
 
 Hungarian - hu_HU - iso-8859-2
     István-Attila András <bergkatten@netscape.net>
     KADI Gergo <gergo@kapu.hu> (2003.10.01)
+    Zoltan Levardy <zoltan@levardy.org>
 
 Icelandic - is_IS - iso-8859-1
     Karl Heiðar <karlh@macho.is>
@@ -87,7 +93,8 @@ Italian - it_IT - iso-8859-1
     Aldo Moresco <moresco@idcm.it>
     Antonetti Roberto <antonr@piceniaweb.com> (help files)
     Marco Ciullini <marco.ciullini@datamar.it>
-    Gianmichele Murano <gingia@email.it>
+    Gianmichele Murano <gingia at email.it>
+    Valerio Felici <valerio at bgweb.it> (last translator)
 
 Japanese - ja_JP - euc-jp
     HIGASHIYAMA Masato <masato@yamaai-tech.com>
@@ -166,6 +173,9 @@ Turkish - tr_TR - iso-8859-9
     Volkan Yildirim <volkan@ozzmosis.pleksus.net.tr>
     Dr.Hikmet Gumus <gumush@hitstar.org>
     Kerem Erkan <kerem.erkan@hacettepe.edu.tr>
+
+Uighur - ug - utf-8
+    Mamatjan Tursun <oghri@163.com>
 
 Ukrainian - uk_UA - koi8-u
     Khohlov Sergii <sergkh@westlucky.net>
