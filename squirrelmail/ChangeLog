@@ -2,8 +2,8 @@
 *** Squirrelmail Stable Series 1.2 ***
 **************************************
 
-Version 1.2.3 -- cvs
---------------------
+Version 1.2.3 -- 21 January 2002
+--------------------------------
   - Fixed focus system on pages that contain forms.
   - Fixed IMAP code to send different command identifiers as per 
     section 2.2.1 of RFC 2060.
@@ -21,7 +21,7 @@ Version 1.2.3 -- cvs
     or remove these system-defined css located in themes/css/
   - Fixed a bug appearing on some apache virtual hosts
   - Fixed javascript error (#505255)
-  - Fixed the db_prefs so they work again (#499609)
+  - Fixed the db_prefs so they work again (#499609, thanks to Simon Dick)
 	
 Version 1.2.2 -- 1 January 2002
 -------------------------------
