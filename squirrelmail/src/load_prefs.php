@@ -17,6 +17,10 @@ require_once('../functions/prefs.php');
 require_once('../functions/plugin.php');
 require_once('../functions/constants.php');
 
+/* get globals we may need */
+$username = $_SESSION['username'];
+/* end of get globals */
+
 $username = ( !isset($username) ? '' : $username );
 
 $custom_css = getPref($data_dir, $username, 'custom_css', 'none' );
@@ -63,7 +67,7 @@ if (isset($chosen_theme) && $found_theme && (file_exists($chosen_theme))) {
 }
 
 if (!defined('download_php')) { 
-    session_register('theme_css'); 
+    sqsession_register($theme_css, 'theme_css'); 
 }
 
 $use_javascript_addr_book = getPref($data_dir, $username, 'use_javascript_addr_book', $default_use_javascript_addr_book);

@@ -30,6 +30,7 @@ function findNextMessage() {
     global $msort, $currentArrayIndex, $msgs, $sort, 
            $thread_sort_messages, $allow_server_sort,
            $server_sort_array;
+
     if (!is_array($server_sort_array)) {
         $thread_sort_messages = 0;
         $allow_server_sort = FALSE;
@@ -196,9 +197,10 @@ function ServerMDNSupport( $read ) {
 }
 
 function SendMDN ( $recipient , $sender) {
-    global $imapConnection, $mailbox, $username, $attachment_dir, $SERVER_NAME,
+    global $imapConnection, $mailbox, $username, $attachment_dir, $_SERVER,
            $version, $attachments, $identity, $data_dir, $passed_id;
 
+    $SERVER_NAME = $_SERVER['SERVER_NAME'];
     $header = sqimap_get_message_header($imapConnection, $passed_id, $mailbox);
     $hashed_attachment_dir = getHashedDir($username, $attachment_dir);
 
@@ -241,7 +243,7 @@ function SendMDN ( $recipient , $sender) {
     $localfilename = GenerateRandomString(32, 'FILE', 7);
     $full_localfilename = "$hashed_attachment_dir/$localfilename";
 
-    $fp = fopen( $full_localfilename, 'w');
+    $fp = fopen( $full_localfilename, 'wb');
     fwrite ($fp, $part2);
     fclose($fp);
 
@@ -261,7 +263,6 @@ function SendMDN ( $recipient , $sender) {
 function ToggleMDNflag ( $set ) {
     global $imapConnection, $passed_id, $mailbox;
     sqimap_mailbox_select($imapConnection, $mailbox);
-    
     $sg =  $set?'+':'-';
     $cmd = 'STORE ' . $passed_id . ' ' . $sg . 'FLAGS ($MDNSent)';
     $read = sqimap_run_command ($imapConnection, $cmd, true, $response, 
@@ -275,7 +276,7 @@ function ClearAttachments() {
 
 	$rem_attachments = array();
         foreach ($attachments as $info) {
-	    if ($info->session == -1) {
+	    if ($info['session'] == -1) {
         	$attached_file = "$hashed_attachment_dir/$info[localfilename]";
         	if (file_exists($attached_file)) {
             	    unlink($attached_file);
@@ -383,11 +384,77 @@ function formatRecipientString($recipients, $item ) {
  *   Main of read_boby.php  --------------------------------------------------
  */
 
-/*
-    Urled vars
-    ----------
-    $passed_id
-*/
+/* get the globals we may need */
+
+$username = $_SESSION['username'];
+$key = $_COOKIE['key'];
+$onetimepad = $_SESSION['onetimepad'];
+$msgs = $_SESSION['msgs'];
+$base_uri = $_SESSION['base_uri'];
+$delimiter = $_SESSION['delimiter'];
+
+if (isset($_GET['passed_id'])) {
+    $passed_id = $_GET['passed_id'];
+}
+elseif (isset($_POST['passed_id'])) {
+    $passed_id = $_POST['passed_id'];
+}
+
+if (isset($_GET['sendreceipt'])) {
+    $sendreceipt = $_GET['sendreceipt'];
+}
+
+if (isset($_GET['sort'])) {
+    $sort = $_GET['sort'];
+}
+elseif (isset($_POST['sort'])) {
+    $sort = $_POST['sort'];
+}
+if (isset($_GET['startMessage'])) {
+    $startMessage = $_GET['startMessage'];
+}
+elseif (isset($_POST['startMessage'])) {
+    $startMessage = $_POST['startMessage'];
+}
+if (isset($_GET['show_more'])) {
+    $show_more = $_GET['show_more'];
+}
+elseif (isset($_POST['show_more'])) {
+    $show_more = $_POST['show_more'];
+}
+if (isset($_GET['mailbox'])) {
+    $mailbox = $_GET['mailbox'];
+}
+elseif (isset($_POST['mailbox'])) {
+    $mailbox = $_POST['mailbox'];
+}
+if (isset($_GET['where'])) {
+    $where = $_GET['where'];
+}
+if (isset($_GET['what'])) {
+    $what = $_GET['what'];
+}
+if (isset($_GET['view_hdr'])) {
+    $view_hdr = $_GET['view_hdr'];
+}
+if (isset($_SESSION['server_sort_array'])) {
+    $server_sort_array = $_SESSION['server_sort_array'];
+}
+if (isset($_SESSION['msgs'])) {
+    $msgs = $_SESSION['msgs'];
+}
+if (isset($_SESSION['msort'])) {
+    $msort = $_SESSION['msort'];
+}
+if (isset($_POST['move_id'])) {
+    $move_id = $_POST['move_id'];
+}
+if (isset($_SESSION['lastTargetMailbox'])) {
+    $lastTargetMailbox = $_SESSION['lastTargetMailbox'];
+}
+$thread_sort_messages = getPref($data_dir, $username, "thread_$mailbox", 0);
+
+/* end of get globals */
 
 if (isset($mailbox)){
     $mailbox = urldecode( $mailbox );
@@ -673,7 +740,7 @@ echo '<BR>' .
      '<A HREF="' . $base_uri . 'src/';
 
 if ($where && $what) {
-    if ($pos == '') {
+    if (!isset($pos) || $pos == '') {
         $pos=0;
     }
     echo "search.php?where=".urlencode($where)."&amp;pos=$pos&amp;what=".urlencode($what)."&amp;mailbox=$urlMailbox\">";
@@ -694,7 +761,7 @@ if (($mailbox == $draft_folder) && ($save_as_draft)) {
                 "identity=$identity&amp;send_to=$url_to_string&amp;".
 		"send_to_cc=$url_cc_string&amp;send_to_bcc=$url_bcc_string&amp;".
 		"subject=$url_subj&amp;mailprio=$priority_level&amp;".
-		"draft_id=$passed_id&amp;ent_num=$ent_num&amp;passed_id=$passed_id";
+		"draft_id=$passed_id&amp;ent_num=$ent_num";
     
     if ($compose_new_win == '1') {
         echo "<a href=\"javascript:void(0)\" onclick=\"comp_in_new(false,'$comp_uri')\"";
@@ -837,9 +904,11 @@ echo       '<TR>' .
              '<TD BGCOLOR="' . $color[0] . '" ALIGN="RIGHT">' .
     _("From:") .
              '</TD><TD BGCOLOR="' . $color[0] . '">' .
-                "<B>$from_name</B>&nbsp;\n" .
-             '</TD>' .
+                "<B>$from_name</B>&nbsp;\n";
+                do_hook("read_body_after_from");
+echo             '</TD>' .
           '</TR>';
+
 /** date **/
 echo       '<TR>' . "\n" .
              '<TD BGCOLOR="' . $color[0] . '" ALIGN="RIGHT">' . "\n" .
@@ -920,7 +989,6 @@ if ($default_use_mdn) {
 
         $read = sqimap_run_command ($imapConnection, "FETCH $passed_id FLAGS", true,
                                 $response, $readmessage);
-
         $MDN_flag_present = preg_match( '/.*\$MDNSent/i', $read[0]);
 
         if (trim($MDN_to) &&
@@ -987,8 +1055,7 @@ if ($default_use_mdn) {
                     "               if (window.confirm(\"" .
                     _("The message sender has requested a response to indicate that you have read this message. Would you like to send a receipt?") .
                     "\")) {  \n" .
-                    "                       window.location=($url); \n" .
-                    '                       window.location.reload()' . "\n" .
+		    '                       window.open('.$url.',"right");' . "\n". 
                     '               }' . "\n" .
                     '// -->' . "\n" .
                     '</script>' . "\n";
@@ -1022,6 +1089,7 @@ if ($default_use_mdn) {
                 if ( SendMDN( $MDN_to, $final_recipient ) > 0 && $supportMDN ) {
                     ToggleMDNflag( true);
                 }
+		ClearAttachments();
             }
             $sendreceipt = 'removeMDN';
             $url = "\"read_body.php?mailbox=$mailbox&amp;passed_id=$passed_id&amp;startMessage=$startMessage&amp;show_more=$show_more&amp;sendreceipt=$sendreceipt\"";

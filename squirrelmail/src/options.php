@@ -108,9 +108,32 @@ function print_optionpages_row($leftopt, $rightopt = false) {
 
 /* ---------------------------- main ---------------------------- */
 
+/* get the globals that we may need */
+if (isset($_GET['optpage'])) {
+    $optpage = $_GET['optpage'];
+}
+elseif (isset($_POST['optpage'])) {
+    $optpage = $_POST['optpage'];
+}
+if (isset($_POST['optmode'])) {
+    $optmode = $_POST['optmode'];
+}
+if (isset($_POST['optpage_data'])) {
+    $optpage_data = $_POST['optpage_data'];
+}
+$username = $_SESSION['username'];
+$key = $_COOKIE['key'];
+$onetimepad = $_SESSION['onetimepad'];
+$delimiter = $_SESSION['delimiter'];
+
+/* end of getting globals */
+
 /* Make sure we have an Option Page set. Default to main. */
-if (!isset($optpage)) {
-    $optpage = 'main';
+if (!isset($optpage) || $optpage == '') {
+    $optpage = 'SMOPT_PAGE_MAIN';
+}
+else {
+    $optpage = strip_tags($optpage);
 }
 
 /* Make sure we have an Option Mode set. Default to display. */
@@ -129,7 +152,8 @@ $optpage_loader = '';
 
 /* Set the load information for each page. */
 switch ($optpage) {
-    case SMOPT_PAGE_MAIN: break;
+    case SMOPT_PAGE_MAIN:
+        break;
     case SMOPT_PAGE_PERSONAL:
         $optpage_name     = _("Personal Information");
         $optpage_file     = '../src/options_personal.php';
@@ -167,7 +191,10 @@ switch ($optpage) {
 /*** Second, load the option information for this page. ***/
 /**********************************************************/
 
-if ($optpage != SMOPT_PAGE_MAIN) {
+if ( !@is_file( $optpage_file ) ) {
+    $optpage = SMOPT_PAGE_MAIN;
+} 
+elseif ($optpage != SMOPT_PAGE_MAIN ) {
     /* Include the file for this optionpage. */
     require_once($optpage_file);
 

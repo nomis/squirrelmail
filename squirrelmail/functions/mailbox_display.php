@@ -32,7 +32,7 @@ function printMessageInfo($imapConnection, $t, $i, $key, $mailbox, $sort,
     $server_sort_order, /* sort value when using server-sorting */
     $row_count,
 	$allow_server_sort; /* enable/disable server-side sorting */
-  $color_string = $color[4];
+    $color_string = $color[4];
   
   if ($GLOBALS['alt_index_colors']) {
     if (!isset($row_count)) {
@@ -252,7 +252,8 @@ function showMessagesForMailbox($imapConnection, $mailbox, $num_msgs,
     $id = get_thread_sort($imapConnection);
   if ($id == 'no') {
       echo '<b><small><center><font color=red>Thread sorting is not'.
-             ' supported by your IMAP server.<br>Please report this'.
+             ' supported by your IMAP server<br>or there may be a problem'.
+             ' with your configuration.<br>Please report this'.
              ' to the system administrator.</center></small></b>';
      $thread_sort_messages = 0; 
     $id = array();
@@ -273,9 +274,9 @@ function showMessagesForMailbox($imapConnection, $mailbox, $num_msgs,
     $server_sort_order = $sort;
     $id = sqimap_get_sort_order($imapConnection, $server_sort_order);
   if ($id == 'no') {
-    echo '<b><small><center><font color=red>Server-side sorting'.
-       ' is not supported by your IMAP server.<br>Please report this'.
-       ' to the system administrator.</center></small></b>';
+    echo '<b><small><center><font color=red>'.
+         _("Server-side sorting is not supported by your IMAP server.<br>Please report this to the system administrator" ).
+         '</center></small></b>';
     $sort = $server_sort_order;
 	  $allow_server_sort = FALSE;
 	  $id = array();
@@ -460,7 +461,7 @@ function showMessagesForMailbox($imapConnection, $mailbox, $num_msgs,
      * 4 = Subject (up)
      * 5 = Subject (dn)
      */
-    session_unregister('msgs');
+    sqsession_unregister('msgs');
     if (($sort == 0) || ($sort == 1)) {
       $msort = array_cleave ($msgs, 'TIME_STAMP');
     } elseif (($sort == 2) || ($sort == 3)) {
@@ -478,18 +479,18 @@ function showMessagesForMailbox($imapConnection, $mailbox, $num_msgs,
 	arsort($msort);
       }
     }		
-    session_register('msort');
+    sqsession_register($msort, 'msort');
   } elseif ($thread_sort_messages == 1 || $allow_server_sort == TRUE) {
     $msort = $msgs;
-    session_unregister('msgs');
-    session_register('msort');
+    sqsession_unregister('msgs');
+    sqsession_register($msort, 'msort');
   }
   displayMessageArray($imapConnection, $num_msgs, $start_msg, $msgs, 
 		      $msort, $mailbox, $sort, $color,$show_num);
   /**
    * TODO: Switch to using $_SESSION[] whenever we ditch the 4.0.x series.
    */
-  session_register('msgs');
+  sqsession_register($msgs, 'msgs');
 }
 
 /* Generic function to convert the msgs array into an HTML table. */
@@ -503,10 +504,10 @@ function displayMessageArray($imapConnection, $num_msgs, $start_msg,
 
   /* If cache isn't already set, do it now. */
   if (!session_is_registered('msgs')) {
-    session_register('msgs');
+    sqsession_register($msgs, 'msgs');
   }
   if (!session_is_registered('msort')) {
-    session_register('msort');
+    sqsession_register($msort, 'msort');
   }
   
   if ($start_msg + ($show_num - 1) < $num_msgs){

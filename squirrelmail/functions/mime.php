@@ -525,7 +525,7 @@ function mime_print_body_lines ($imap_stream, $id, $ent_id, $encoding) {
     // Don't kill the connection if the browser is over a dialup
     // and it would take over 30 seconds to download it.
 
-    // don´t call set_time_limit in safe mode.
+    // don t call set_time_limit in safe mode.
     if (!ini_get("safe_mode")) {
         set_time_limit(0);
     }
@@ -776,7 +776,16 @@ function formatBody($imap_stream, $message, $color, $wrap_at) {
         // them here
         if ($body_message->header->type1 == 'html') {
             if ( $show_html_default <> 1 ) {
-                $body = strip_tags( $body );
+                $entity_conv = array('&nbsp;' => ' ',
+                                     '<p>'    => "\n\n",
+                                     '<br>'   => "\n",
+                                     '<P>'    => "\n",
+                                     '<BR>'   => "\n",
+                                     '&gt;'   => '>',
+                                     '&lt;'   => '<');
+                $body = strtr($body, $entity_conv);
+                $body = trim($body);
+                $body = strip_tags($body);
                 translateText($body, $wrap_at, $body_message->header->charset);
             } else {
                 $body = MagicHTML( $body, $id );
@@ -795,7 +804,7 @@ function formatBody($imap_stream, $message, $color, $wrap_at) {
         }
 
         /** Display the ATTACHMENTS: message if there's more than one part **/
-        if (isset($message->entities[1])) {
+        if (isset($message->entities[1]) || ($message->header->type0 == 'multipart')) {
             $body .= formatAttachments ($message, $ent_num, $message->header->mailbox, $id);
         }
     } else {
@@ -931,7 +940,7 @@ function formatAttachments($message, $ent_id, $mailbox, $id) {
             $DefaultLink =
                 "../src/download.php?startMessage=$startMessage&amp;passed_id=$id&amp;mailbox=$urlMailbox&amp;passed_ent_id=$ent";
             if ($where && $what) {
-	       $DefaultLink = '&amp;where='. urlencode($where).'&amp;what='.urlencode($what);
+	       $DefaultLink .= '&amp;where='. urlencode($where).'&amp;what='.urlencode($what);
             }
             $Links['download link']['text'] = _("download");
             $Links['download link']['href'] =
@@ -996,7 +1005,8 @@ function decodeBody($body, $encoding) {
 
   global $show_html_default;
 
-  if ($encoding == 'quoted-printable') {
+  if ($encoding == 'quoted-printable' ||
+      $encoding == 'quoted_printable') {
      $body = quoted_printable_decode($body);
 
 
@@ -1274,10 +1284,12 @@ function sq_getnxtag($body, $offset){
          * A comment or an SGML declaration.
          */
         if (substr($body, $pos+1, 2) == "--"){
-            $gt = strpos($body, "-->", $pos)+2;
+            $gt = strpos($body, "-->", $pos);
             if ($gt === false){
                 $gt = strlen($body);
-            }
+            } else {
+	        $gt += 2;
+	    }
             return Array(false, false, false, $lt, $gt);
         } else {
             $gt = sq_findnxstr($body, $pos, ">");
@@ -1686,10 +1698,14 @@ function sq_fixstyle($message, $id, $content){
     }
 
     /**
-     * Fix stupid expression: declarations which lead to vulnerabilities
+     * Fix stupid css declarations which lead to vulnerabilities
      * in IE.
      */
-    $content = preg_replace("/expression\s*:/si", "idiocy:", $content);
+    $match   = Array('/expression/si',
+		     '/behaviou*r/si',
+		     '/binding/si');
+    $replace = Array('idiocy', 'idiocy', 'idiocy');
+    $content = preg_replace($match, $replace, $content);
     return $content;
 }
 
@@ -1798,6 +1814,11 @@ function sq_sanitize($body,
     $open_tags = Array();
     $trusted = "<!-- begin sanitized html -->\n";
     $skip_content = false;
+    /**
+     * Take care of netscape's stupid javascript entities like
+     * &{alert('boo')};
+     */
+    $body = preg_replace("/&(\{.*?\};)/si", "&amp;\\1", $body);
 
     while (($curtag=sq_getnxtag($body, $curpos)) != FALSE){
         list($tagname, $attary, $tagtype, $lt, $gt) = $curtag;
@@ -1939,14 +1960,18 @@ function magicHTML($body, $id){
                       "meta",
                       "html",
                       "head",
-                      "base"
+                      "base",
+                      "link",
+		      "frame",
+		      "iframe"
                       );
 
     $rm_tags_with_content = Array(
                                   "script",
                                   "applet",
                                   "embed",
-                                  "title"
+                                  "title",
+				  "frameset"
                                   );
 
     $self_closing_tags =  Array(
@@ -1962,7 +1987,9 @@ function magicHTML($body, $id){
                          "/.*/" =>
                          Array(
                                "/target/si",
-                               "/^on.*/si"
+                               "/^on.*/si",
+			       "/^dynsrc/si",
+			       "/^data.*/si"
                                )
                          );
 
@@ -1970,28 +1997,55 @@ function magicHTML($body, $id){
     $bad_attvals = Array(
         "/.*/" =>
             Array(
-                "/^src|background|href|action/i" =>
+                "/^src|background/i" =>
                     Array(
                           Array(
                                 "|^([\'\"])\s*\.\./.*([\'\"])|si",
-                                "/^([\'\"])\s*\S+script\s*:.*([\'\"])/si"
+                                "/^([\'\"])\s*\S+script\s*:.*([\'\"])/si",
+				"/^([\'\"])\s*mocha\s*:*.*([\'\"])/si",
+				"/^([\'\"])\s*about\s*:.*([\'\"])/si"
                                 ),
                           Array(
                                 "\\1$secremoveimg\\2",
-                                "\\1$secremoveimg\\2"
+                                "\\1$secremoveimg\\2",
+				"\\1$secremoveimg\\2",
+				"\\1$secremoveimg\\2"
+                                )
+                        ),
+                "/^href|action/i" =>
+                    Array(
+                          Array(
+                                "|^([\'\"])\s*\.\./.*([\'\"])|si",
+                                "/^([\'\"])\s*\S+script\s*:.*([\'\"])/si",
+				"/^([\'\"])\s*mocha\s*:*.*([\'\"])/si",
+				"/^([\'\"])\s*about\s*:.*([\'\"])/si"
+                                ),
+                          Array(
+                                "\\1#\\2",
+                                "\\1#\\2",
+				"\\1#\\2",
+				"\\1#\\2"
                                 )
                         ),
                 "/^style/si" =>
                     Array(
                           Array(
-                                "/expression\s*:/si",
+                                "/expression/si",
+				"/binding/si",
+				"/behaviou*r/si",
                                 "|url\(([\'\"])\s*\.\./.*([\'\"])\)|si",
-                                "/url\(([\'\"])\s*\S+script:.*([\'\"])\)/si"
+                                "/url\(([\'\"])\s*\S+script\s*:.*([\'\"])\)/si",
+				"/url\(([\'\"])\s*mocha\s*:.*([\'\"])\)/si",
+				"/url\(([\'\"])\s*about\s*:.*([\'\"])\)/si"
                                ),
                           Array(
-                                "idiocy:",
-                                "url(\\1$secremoveimg\\2)",
-                                "url(\\1$secremoveimg\\2)"
+                                "idiocy",
+				"idiocy",
+				"idiocy",
+                                "url(\\1#\\2)",
+                                "url(\\1#\\2)",
+				"url(\\1#\\2)",
+				"url(\\1#\\2)"
                                )
                           )
                 )
@@ -2001,30 +2055,14 @@ function magicHTML($body, $id){
          * Remove any references to http/https if view_unsafe_images set
          * to false.
          */
-        $addendum = Array(
-          "/.*/" =>
-            Array(
-                "/^src|background/i" =>
-                    Array(
-                          Array(
-                                "/^([\'\"])\s*https*:.*([\'\"])/si"
-                                ),
-                          Array(
-                                "\\1$secremoveimg\\2"
-                                )
-                        ),
-                "/^style/si" =>
-                    Array(
-                          Array(
-                                "/url\(([\'\"])\s*https*:.*([\'\"])\)/si"
-                               ),
-                          Array(
-                                "url(\\1$secremoveimg\\2)"
-                               )
-                          )
-                )
-          );
-        $bad_attvals = array_merge($bad_attvals, $addendum);
+         array_push($bad_attvals{'/.*/'}{'/^src|background/i'}[0],
+                    '/^([\'\"])\s*https*:.*([\'\"])/si');
+         array_push($bad_attvals{'/.*/'}{'/^src|background/i'}[1],
+                    "\\1$secremoveimg\\2");
+         array_push($bad_attvals{'/.*/'}{'/^style/si'}[0],
+                    '/url\(([\'\"])\s*https*:.*([\'\"])\)/si');
+         array_push($bad_attvals{'/.*/'}{'/^style/si'}[1],
+                    "url(\\1$secremoveimg\\2)");
     }
 
     $add_attr_to_tag = Array(

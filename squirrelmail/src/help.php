@@ -66,17 +66,17 @@ function get_info($doc, $pos) {
             }
             if (isset($ary)) {
                 $ary[3] = $n;
-                return $ary;
             } else {
-                $ary[0] = 'ERROR: Help files are not in the right format!';
-                $ary[1] = 'ERROR: Help files are not in the right format!';
-                $ary[2] = 'ERROR: Help files are not in the right format!';
-                return $ary;
+                $ary[0] = _("ERROR: Help files are not in the right format!");
+                $ary[1] = $ary[0];
+                $ary[2] = $ary[0];
             }
+        return ($ary);
         }
     }
-    $ary[0] = 'ERROR: Help files are not in the right format!';
-    $ary[1] = 'ERROR: Help files are not in the right format!';
+    $ary[0] = _("ERROR: Help files are not in the right format!");
+    $ary[1] = $ary[0];
+
     return $ary;
 }
 
@@ -99,8 +99,8 @@ function get_info($doc, $pos) {
 <tr>
 <td>
 <?php 
-if (isset($HTTP_REFERER)) {
-    $ref = strtolower($HTTP_REFERER);
+if (isset($_SERVER['HTTP_REFERER'])) {
+    $ref = strtolower($_SERVER['HTTP_REFERER']);
     if (strpos($ref, 'src/compose')){
         $context = 'compose';
     } else if (strpos($ref, 'src/addr')){
@@ -162,9 +162,14 @@ if ($help_exists == true) {
         $chapter = 3;
     } else if ($context == 'search'){
         $chapter = 8;
+    } else if (isset($_GET['chapter'])) {
+        $chapter = intval($_GET['chapter']);
+    }
+    else {
+        $chapter = 0;
     }
 
-    if (!isset($chapter)) {
+    if ($chapter == 0 || !isset($helpdir[$chapter])) {
         echo '<table cellpadding="0" cellspacing="0" border="0" align="center"><tr><td>' .
              '<b><center>' . _("Table of Contents") . '</center></b><br>';
         do_hook('help_chapter');
@@ -190,7 +195,7 @@ if ($help_exists == true) {
         }
         echo '<a href="../src/help.php">' . _("Table of Contents") . '</a>';
         if ($chapter >= count($helpdir)){
-            echo ' | <font color="$color[9]">' . _("Next") . '</font>';
+            echo ' | <font color="' . $color[9]. '">' . _("Next") . '</font>';
         } else {
             echo ' | <a href="../src/help.php?chapter=' . ($chapter+1)
                  . '">' . _("Next") . '</a>';

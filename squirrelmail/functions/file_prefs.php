@@ -11,20 +11,18 @@
  * $Id$
  */
 
-global $prefs_are_cached, $prefs_cache;
 
 /**
  * Check the preferences into the session cache.
  */
 function cachePrefValues($data_dir, $username) {
     global $prefs_are_cached, $prefs_cache;
-       
     if ( isset($prefs_are_cached) && $prefs_are_cached) {
         return;
     }
     
-    session_unregister('prefs_cache');
-    session_unregister('prefs_are_cached');
+    sqsession_unregister('prefs_cache');
+    sqsession_unregister('prefs_are_cached');
     
     /* Calculate the filename for the user's preference file */
     $filename = getHashedFile($username, $data_dir, "$username.pref");
@@ -39,8 +37,12 @@ function cachePrefValues($data_dir, $username) {
         logout_error( sprintf( _("Preference file, %s, does not exist. Log out, and log back in to create a default preference file."), $filename)  );
         exit;
     }
-
-    $file = fopen($filename, 'r');
+    /* Open the file, or else display an error to the user. */
+    if(!$file = @fopen($filename, 'r')) {
+        include_once( '../functions/display_messages.php' );
+        logout_error( sprintf( _("Preference file, %s, could not be opened. Contact your system administrator to resolve this issue."), $filename) );
+        exit;
+    }
 
     /* Read in the preferences. */
     $highlight_num = 0;
@@ -64,8 +66,8 @@ function cachePrefValues($data_dir, $username) {
 
     $prefs_are_cached = TRUE;
 
-    session_register('prefs_cache');
-    session_register('prefs_are_cached');
+    sqsession_register($prefs_cache, 'prefs_cache');
+    sqsession_register($prefs_are_cached, 'prefs_are_cached');
 }
    
 /**
@@ -94,7 +96,13 @@ function savePrefValues($data_dir, $username) {
    
     $filename = getHashedFile($username, $data_dir, "$username.pref");
 
-    $file = fopen($filename, 'w');
+    /* Open the file for writing, or else display an error to the user. */
+    if(!$file = @fopen($filename, 'w')) {
+        include_once( '../functions/display_messages.php' );
+        logout_error( sprintf( _("Preference file, %s, could not be opened. Contact your system administrator to resolve this issue."), $filename) );
+        exit;
+    }
+
     foreach ($prefs_cache as $Key => $Value) {
         if (isset($Value)) {
             fwrite($file, $Key . '=' . $Value . "\n");
@@ -168,8 +176,11 @@ function checkForPrefs($data_dir, $username, $filename = '') {
             logout_error( $errString, $errTitle );
             exit;
         } else if (!@copy($default_pref, $filename)) {
-            $user_data = posix_getpwuid(posix_getuid());
-            $uid = $user_data['name'];
+            $uid = 'httpd';
+            if (function_exists('posix_getuid')){
+                $user_data = posix_getpwuid(posix_getuid());
+                $uid = $user_data['name'];
+            }
             $errString = $errTitle . '<br>' .
                        _("Could not create initial preference file!") . "<br>\n" .
                        sprintf( _("%s should be writable by user %s"), $data_dir, $uid ) .
@@ -186,7 +197,12 @@ function checkForPrefs($data_dir, $username, $filename = '') {
  */
 function setSig($data_dir, $username, $number, $value) {
     $filename = getHashedFile($username, $data_dir, "$username.si$number");
-    $file = fopen($filename, 'w');
+    /* Open the file for writing, or else display an error to the user. */
+    if(!$file = @fopen($filename, 'w')) {
+        include_once( '../functions/display_messages.php' );
+        logout_error( sprintf( _("Signature file, %s, could not be opened. Contact your system administrator to resolve this issue."), $filename) );
+        exit;
+    }
     fwrite($file, $value);
     fclose($file);
 }
@@ -195,11 +211,16 @@ function setSig($data_dir, $username, $number, $value) {
  * Get the signature.
  */
 function getSig($data_dir, $username, $number) {
-    #$filename = $data_dir . $username . '.si$number';
     $filename = getHashedFile($username, $data_dir, "$username.si$number");
     $sig = '';
     if (file_exists($filename)) {
         $file = fopen($filename, 'r');
+        /* Open the file, or else display an error to the user. */
+        if(!$file = @fopen($filename, 'r')) {
+            include_once( '../functions/display_messages.php' );
+            logout_error( sprintf( _("Signature file, %s, could not be opened. Contact your system administrator to resolve this issue."), $filename) );
+            exit;
+        }
         while (!feof($file)) {
             $sig .= fgets($file, 1024);
         }

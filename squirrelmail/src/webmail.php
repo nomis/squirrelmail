@@ -20,14 +20,30 @@ require_once('../functions/imap.php');
 require_once('../functions/plugin.php');
 require_once('../functions/i18n.php');
 require_once('../functions/auth.php');
+require_once('../src/global.php');
 
 if (!function_exists('sqm_baseuri')){
     require_once('../functions/display_messages.php');
 }
 $base_uri = sqm_baseuri();
-
 session_start();
+
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+}
+if (isset($_SESSION['delimiter'])) {
+    $delimiter = $_SESSION['delimiter'];
+}
+if (isset($_SESSION['onetimepad'])) {
+    $onetimepad = $_SESSION['onetimepad'];
+}
+if (isset($_GET['right_frame'])) {
+    $right_frame = $_GET['right_frame'];
+}
+
 is_logged_in();
+
+do_hook('webmail_top');
 
 /**
  * We'll need this to later have a noframes version

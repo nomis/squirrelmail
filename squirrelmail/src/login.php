@@ -55,6 +55,7 @@ if (isset($emailaddress)) {
 
 require_once('../functions/strings.php');
 require_once('../config/config.php');
+require_once('../src/global.php');
 require_once('../functions/i18n.php');
 require_once('../functions/plugin.php');
 require_once('../functions/constants.php');
@@ -64,6 +65,9 @@ require_once('../functions/page_header.php');
  * $squirrelmail_language is set by a cookie when the user selects
  * language and logs out
  */
+if (isset($_COOKIE['squirrelmail_language'])) {
+        $squirrelmail_language = $_COOKIE['squirrelmail_language'];
+}
 set_up_language($squirrelmail_language, TRUE);
 
 /**
@@ -113,10 +117,10 @@ $loginname_value = (isset($loginname) ? htmlspecialchars($loginname) : '');
 
 /* Display width and height like good little people */
 $width_and_height = '';
-if (isset($org_logo_width) && is_int($org_logo_width) && $org_logo_width>0) {
+if (isset($org_logo_width) && is_numeric($org_logo_width) && $org_logo_width>0) {
     $width_and_height = " WIDTH=\"$org_logo_width\"";
 }
-if (isset($org_logo_height) && is_int($org_logo_height) && $org_logo_height>0) {
+if (isset($org_logo_height) && is_numeric($org_logo_height) && $org_logo_height>0) {
     $width_and_height .= " HEIGHT=\"$org_logo_height\"";
 }
 

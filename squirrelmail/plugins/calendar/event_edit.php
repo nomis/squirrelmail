@@ -2,8 +2,10 @@
 /*
  *  event_edit.php
  *
- *  Copyright (c) 2001 Michal Szczotka <michal@tuxy.org>
- *  Licensed under the GNU GPL. For full terms see the file COPYING.
+ * Copyright (c) 2002 The SquirrelMail Project Team
+ * Licensed under the GNU GPL. For full terms see the file COPYING.
+ *
+ * Originally contrubuted by Michal Szczotka <michal@tuxy.org>
  *
  *  Functions to edit an event.
  *
@@ -19,6 +21,77 @@ require_once('../functions/date.php');
 require_once('../config/config.php');
 require_once('../functions/page_header.php');
 require_once('../src/load_prefs.php');
+
+
+/* get globals */
+
+if (isset($_POST['updated'])) {
+    $updated = $_POST['updated'];
+}
+if (isset($_POST['event_year'])) {
+    $event_year = $_POST['event_year'];
+}
+if (isset($_POST['event_month'])) {
+    $event_month = $_POST['event_month'];
+}
+if (isset($_POST['event_day'])) {
+    $event_day = $_POST['event_day'];
+}
+if (isset($_POST['event_hour'])) {
+    $event_hour = $_POST['event_hour'];
+}
+if (isset($_POST['event_minute'])) {
+    $event_minute = $_POST['event_minute'];
+}
+if (isset($_POST['event_length'])) {
+    $event_length = $_POST['event_length'];
+}
+if (isset($_POST['event_title'])) {
+    $event_title = $_POST['event_title'];
+}
+if (isset($_POST['event_text'])) {
+    $event_text = $_POST['event_text'];
+}
+if (isset($_POST['send'])) {
+    $send = $_POST['send'];
+}
+if (isset($_POST['event_priority'])) {
+    $event_priority = $_POST['event_priority'];
+}
+if (isset($_POST['confirmed'])) {
+    $confirmed = $_POST['confirmed'];
+}
+if (isset($_POST['year'])) {
+    $year = $_POST['year'];
+}
+elseif (isset($_GET['year'])) {
+    $year = $_GET['year'];
+}
+if (isset($_POST['month'])) {
+    $month = $_POST['month'];
+}
+elseif (isset($_GET['month'])) {
+    $month = $_GET['month'];
+}
+if (isset($_POST['day'])) {
+    $day = $_POST['day'];
+}
+elseif (isset($_GET['day'])) {
+    $day = $_GET['day'];
+}
+if (isset($_POST['hour'])) {
+    $hour = $_POST['hour'];
+}
+elseif (isset($_GET['hour'])) {
+    $hour = $_GET['hour'];
+}
+if (isset($_POST['minute'])) {
+    $minute = $_POST['minute'];
+}
+elseif (isset($_GET['minute'])) {
+    $minute = $_GET['minute'];
+}
+/* got 'em */
 
 // update event info
 function show_event_form() {
@@ -167,7 +240,7 @@ calendar_header();
 echo "<TR BGCOLOR=\"$color[0]\"><TD>" .
      "<TABLE WIDTH=100% BORDER=0 CELLPADDING=2 CELLSPACING=1 BGCOLOR=\"$color[0]\">" .
      '<tr><td COLSPAN=2>' .
-     date_intl( 'l, F d Y', mktime(0, 0, 0, $month, $day, $year)) .
+     date_intl( _("l, F d Y"), mktime(0, 0, 0, $month, $day, $year)) .
      '</td></tr>';
 if (!isset($updated)){
     //get changes to event

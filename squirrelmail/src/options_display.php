@@ -322,7 +322,11 @@ function save_option_theme($option) {
 }
 
 function save_option_javascript_autodetect($option) {
-    global $data_dir, $username, $new_javascript_setting;
+    global $data_dir, $new_javascript_setting;
+    if ( (float)substr(PHP_VERSION,0,3) < 4.1 ) {
+        global $_SESSION;
+    }
+        $username = $_SESSION['username'];
 
     /* Set javascript either on or off. */
     if ($new_javascript_setting == SMPREF_JS_AUTODETECT) {
