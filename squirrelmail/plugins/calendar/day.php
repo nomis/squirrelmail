@@ -2,8 +2,10 @@
 /*
  *  day.php
  *
- *  Copyright (c) 2001 Michal Szczotka <michal@tuxy.org>
- *  Licensed under the GNU GPL. For full terms see the file COPYING.
+ * Copyright (c) 2002 The SquirrelMail Project Team
+ * Licensed under the GNU GPL. For full terms see the file COPYING.
+ *
+ * Originally contrubuted by Michal Szczotka <michal@tuxy.org>
  *
  *  Displays the day page (day view).
  *
@@ -20,6 +22,28 @@ require_once('../config/config.php');
 require_once('../functions/page_header.php');
 require_once('../src/load_prefs.php');
 
+/* get globals */
+if (isset($_GET['year'])) {
+    $year = $_GET['year'];
+}
+elseif (isset($_POST['year'])) {
+    $year = $_POST['year'];
+}
+if (isset($_GET['month'])) {
+    $month = $_GET['month'];
+}
+elseif (isset($_POST['month'])) {
+    $month = $_POST['month'];
+}
+if (isset($_GET['day'])) {
+    $day = $_GET['day'];
+}
+elseif (isset($_POST['day'])) {
+    $day = $_POST['day'];
+}
+
+/* got 'em */
+
 //displays head of day calendar view
 function day_header() {
     global $color, $month, $day, $year, $prev_year, $prev_month, $prev_day,
@@ -30,7 +54,7 @@ function day_header() {
          "         <TR><TH WIDTH=\"5%\" ALIGN=LEFT><A HREF=\"day.php?year=$prev_year&month=$prev_month&day=$prev_day\">&lt;&nbsp;".
          date_intl('D',$prev_date)."</A></TH>\n" .
          "         <TH WIDTH=\"75%\">" .
-         date_intl( 'l, F d Y', mktime(0, 0, 0, $month, $day, $year)) . "</TH>\n" .
+         date_intl( _("l, F j Y"), mktime(0, 0, 0, $month, $day, $year)) . "</TH>\n" .
          "         <TH ALIGN=RIGHT><A HREF=\"day.php?year=$next_year&month=$next_month&day=$next_day\">".
          date_intl('D',$next_date)."&nbsp;&gt;</A></TH></TR>\n";
 }

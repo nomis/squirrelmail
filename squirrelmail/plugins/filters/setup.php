@@ -101,10 +101,19 @@ require_once ('../plugins/filters/filters.php');
 
 function squirrelmail_plugin_init_filters() {
     global $squirrelmail_plugin_hooks;
-    global $mailbox, $imap_stream, $imapConnection;
+
+    if (isset($_GET['mailbox'])) {
+        $mailbox = $_GET['mailbox'];
+    }
+    elseif (isset($_POST['mailbox'])) {
+        $mailbox = $_POST['mailbox'];
+    }
+    else {
+        $mailbox = 'INBOX';
+    }
 
     $squirrelmail_plugin_hooks['left_main_before']['filters'] = 'start_filters';
-    if ($mailbox == 'INBOX') {
+    if (isset($mailbox) && $mailbox == 'INBOX') {
         $squirrelmail_plugin_hooks['right_main_after_header']['filters'] = 'start_filters';
     }
     $squirrelmail_plugin_hooks['optpage_register_block']['filters'] = 'filters_optpage_register_block';

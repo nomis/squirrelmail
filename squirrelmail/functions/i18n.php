@@ -681,7 +681,7 @@ function charset_decode_koi8r ($string) {
 function set_up_language($sm_language, $do_search = false) {
 
     static $SetupAlready = 0;
-    global $HTTP_ACCEPT_LANGUAGE, $use_gettext, $languages,
+    global $use_gettext, $languages,
            $squirrelmail_language, $squirrelmail_default_language,
            $sm_notAlias;
 
@@ -690,8 +690,8 @@ function set_up_language($sm_language, $do_search = false) {
     }
     $SetupAlready = TRUE;
 
-    if ($do_search && ! $sm_language && isset($HTTP_ACCEPT_LANGUAGE)) {
-        $sm_language = substr($HTTP_ACCEPT_LANGUAGE, 0, 2);
+    if ($do_search && ! $sm_language && isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+        $sm_language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     }
     
     if (!$sm_language && isset($squirrelmail_default_language)) {
@@ -860,15 +860,13 @@ $languages['tr_TR']['NAME']    = 'Turkish';
 $languages['tr_TR']['CHARSET'] = 'iso-8859-9';
 $languages['tr']['ALIAS'] = 'tr_TR';
 
-// it's zh_TW, actually.
-
-$languages['zh_TW']['NAME']    = 'Taiwan';
+$languages['zh_TW']['NAME']    = 'Chinese Trad';
 $languages['zh_TW']['CHARSET'] = 'big5';
 $languages['tw']['ALIAS'] = 'zh_TW';
 
-$languages['zh_TW']['NAME']    = 'Chinese';
-$languages['zh_TW']['CHARSET'] = 'gb2312';
-$languages['tw']['ALIAS'] = 'zh_CN';
+$languages['zh_CN']['NAME']    = 'Chinese Simp';
+$languages['zh_CN']['CHARSET'] = 'gb2312';
+$languages['cn']['ALIAS'] = 'zh_CN';
 
 $languages['sk_SK']['NAME']     = 'Slovak';
 $languages['sk_SK']['CHARSET']  = 'iso-8859-2';

@@ -14,13 +14,23 @@
  */
 
 require_once('../src/validate.php');
-require_once('../functions/imap_utf7_decode_local.php');
 require_once('../functions/imap.php');
 require_once('../functions/array.php');
 require_once('../functions/plugin.php');
 
 displayPageHeader($color, 'None');
 
+/* get globals we may need */
+
+$username = $_SESSION['username'];
+$key = $_COOKIE['key'];
+$delimiter = $_SESSION['delimiter'];
+$onetimepad = $_SESSION['onetimepad'];
+if (isset($_GET['success'])) {
+    $success = $_GET['success'];
+}
+
+/* end of get globals */
 ?>
 
 <br>
@@ -34,9 +44,7 @@ displayPageHeader($color, 'None');
 
 <?php
 
-if ((isset($success) && $success) ||
-    (isset($sent_create) && $sent_create == 'true') ||
-    (isset($trash_create) && $trash_create == 'true')) {
+if ( isset($success) && $success ) {
     echo "<table width=\"100%\" align=center cellpadding=4 cellspacing=0 border=0>\n" .
          "   <tr><td align=center>\n";
     if ($success == "subscribe") {
@@ -50,9 +58,9 @@ if ((isset($success) && $success) ||
     } else if ($success == "rename") {
         echo "<b>" . _("Renamed successfully!") . "</b><br>";
     }
-
-    echo "   <a href=\"../src/left_main.php\" target=left>" . _("refresh folder list") . "</a>".
-         "   </td></tr>\n";
+    unset($success);
+    echo "   <a href=\"../src/webmail.php?right_frame=folders.php\" target=_top>" . _("refresh folder list") . "</a>".
+         "   </td></tr>\n".
          "</table><br>\n";
 } else {
     echo "<br>";
@@ -83,13 +91,13 @@ for ($i = 0; $i < count($boxes); $i++) {
             $default_sub_of_inbox) {
 
             $box = $boxes[$i]['unformatted'];
-            $box2 = imap_utf7_decode_local(
-		      str_replace(' ', '&nbsp;', $boxes[$i]['unformatted-disp']));
+            $box2 = str_replace(' ','&nbsp;',imap_utf7_decode_local(
+                $boxes[$i]['unformatted-disp']));
             echo "<OPTION SELECTED VALUE=\"$box\">$box2</option>\n";
         } else {
             $box = $boxes[$i]['unformatted'];
-            $box2 = imap_utf7_decode_local(
-		      str_replace(' ', '&nbsp;', $boxes[$i]['unformatted-disp']));
+            $box2 = str_replace(' ','&nbsp;',imap_utf7_decode_local(
+                $boxes[$i]['unformatted-disp']));
             if (strtolower($imap_server_type) != 'courier' ||
                   strtolower($box) != "inbox.trash")
                 echo "<OPTION VALUE=\"$box\">$box2</option>\n";
@@ -152,9 +160,8 @@ if ($count_special_folders < count($boxes)) {
             ($boxes[$i]['unformatted'] != $sent_folder) &&
             ($boxes[$i]['unformatted'] != $draft_folder)) {
             $box = $boxes[$i]['unformatted-dm'];
-
-            $box2 = imap_utf7_decode_local(
-		      str_replace(' ', '&nbsp;', $boxes[$i]['unformatted-disp']));
+            $box2 = str_replace(' ','&nbsp;',imap_utf7_decode_local(
+                $boxes[$i]['unformatted-disp']));
             if (strtolower($imap_server_type) != 'courier' || strtolower($box) != 'inbox.trash') {
                 echo "<OPTION VALUE=\"$box\">$box2</option>\n";
             }
@@ -192,8 +199,8 @@ if ($count_special_folders < count($boxes)) {
             ((strtolower($imap_server_type) != 'courier') ||
              (strtolower($boxes[$i]['unformatted']) != 'inbox.trash'))) {
             $box = $boxes[$i]['unformatted-dm'];
-            $box2 = imap_utf7_decode_local(
-		      str_replace(' ', '&nbsp;', $boxes[$i]['unformatted-disp']));
+            $box2 = str_replace(' ','&nbsp;',imap_utf7_decode_local(
+                $boxes[$i]['unformatted-disp']));
             echo "         <OPTION VALUE=\"$box\">$box2</option>\n";
         }
     }
@@ -223,8 +230,8 @@ if ($count_special_folders < count($boxes)) {
             ($boxes[$i]["unformatted"] != $sent_folder) &&
             ($boxes[$i]["unformatted"] != $draft_folder)) {
             $box = $boxes[$i]["unformatted-dm"];
-            $box2 = imap_utf7_decode_local(
-		      str_replace(' ', '&nbsp;', $boxes[$i]["unformatted-disp"]));
+            $box2 = str_replace(' ','&nbsp;',imap_utf7_decode_local(
+                $boxes[$i]['unformatted-disp']));
             echo "         <OPTION VALUE=\"$box\">$box2\n";
         }
     }
@@ -261,7 +268,6 @@ for ($i = 0, $q = 0; $i < count($boxes_all); $i++) {
         $q++;
     }
 }
-sqimap_logout($imap_stream);
 
 if ($box && $box2) {
     echo "<FORM ACTION=\"folders_subscribe.php?method=sub\" METHOD=\"POST\">\n";

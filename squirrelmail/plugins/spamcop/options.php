@@ -2,7 +2,14 @@
    chdir ("..");
    require_once('../src/validate.php');
 
-   displayPageHeader($color, "None");   
+   displayPageHeader($color, 'None');
+   
+   /* globals */
+   sqextractGlobalVar('action');
+   sqextractGlobalVar('meth');
+   sqextractGlobalVar('ID');
+   extract($_SESSION);
+   /* end of globals */
 
    if (! isset($action))
       $action = '';

@@ -13,11 +13,20 @@
 
 require_once('../functions/strings.php');
 require_once('../functions/imap_utf7_decode_local.php');
+require_once('../src/global.php');
 
 /* Always set up the language before calling these functions */
 function displayHtmlHeader( $title = 'SquirrelMail', $xtra = '', $do_hook = TRUE ) {
-
-    global $theme_css, $custom_css, $base_uri;
+    if ( !check_php_version(4,1) ) {
+            global $_SESSION;
+    }
+    if (isset($_SESSION['base_uri'])) {
+        $base_uri = $_SESSION['base_uri'];
+    }
+    else {
+        global $base_uri;
+    }
+    global $theme_css, $custom_css;
 
     echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">' .
          "\n\n<HTML>\n<HEAD>\n";
@@ -31,12 +40,21 @@ function displayHtmlHeader( $title = 'SquirrelMail', $xtra = '', $do_hook = TRUE
              $base_uri . 'themes/css/'.$custom_css.'">';
     }
     
+    if ($do_hook) {
+        do_hook ("generic_header");
+    }
+
     echo "\n<title>$title</title>$xtra</head>\n\n";
+
 }
 
 function displayInternalLink($path, $text, $target='') {
-    global $base_uri;
 
+    if ( !check_php_version(4,1) ) {
+            global $_SESSION;
+    }
+
+    $base_uri = $_SESSION['base_uri'];    
     if ($target != '') {
         $target = " target=\"$target\"";
     }
@@ -46,10 +64,16 @@ function displayInternalLink($path, $text, $target='') {
 
 function displayPageHeader($color, $mailbox, $xtra='', $session=false) {
 
-    global $delimiter, $hide_sm_attributions, $base_uri, $PHP_SELF, $frame_top,
+    global $hide_sm_attributions, $PHP_SELF, $frame_top,
            $compose_new_win, $username, $datadir, $compose_width, $compose_height,
            $attachemessages, $session;
+           
+    if ( !check_php_version(4,1) ) {
+            global $_SESSION;
+    }
 
+    $base_uri = $_SESSION['base_uri'];
+    $delimiter = $_SESSION['delimiter'];
     $module = substr( $PHP_SELF, ( strlen( $PHP_SELF ) - strlen( $base_uri ) ) * -1 );
     if ($qmark = strpos($module, '?')) {
         $module = substr($module, 0, $qmark);
@@ -62,13 +86,13 @@ function displayPageHeader($color, $mailbox, $xtra='', $session=false) {
         Locate the first displayable form element
     */
 
-    if ($session !== false) {
+    if ($session != false) {
 	$compose_uri = 'src/compose.php?mailbox='. urlencode($mailbox).'&attachedmessages=true&session='."$session";
     } else {
         $compose_uri = 'src/compose.php?newmessage=1';
 	$session = 0;
     }
-
+   
     switch ( $module ) {
     case 'src/read_body.php':
             if ($compose_new_win == '1') {
@@ -82,15 +106,14 @@ function displayPageHeader($color, $mailbox, $xtra='', $session=false) {
                     "\n<!--\n";
                 $js .= "function comp_in_new(new_mes, comp_uri) {\n".
 		     '    if (new_mes) { '."\n".
-		     "       comp_uri = \"../src/compose.php?newmessage=1\";\n".
+		     "       comp_uri = \"".$base_uri."src/compose.php?newmessage=1\";\n".
 		     '    } else { '."\n".
 		     "       if (comp_uri =='') {\n".
 		     '           comp_uri = "'.$base_uri.$compose_uri."\";\n".
 		     '       }'. "\n".
 		     '    }'. "\n".
                      '    var newwin = window.open(comp_uri' .
-                     ', "_blank",
-                "width='.$compose_width.",height=$compose_height".
+                     ', "_blank", "width='.$compose_width.",height=$compose_height".
                      ",scrollbars=yes,resizable=yes\");\n".
                      "}\n";
 
@@ -163,15 +186,14 @@ function displayPageHeader($color, $mailbox, $xtra='', $session=false) {
                 }
                 $js .= "function comp_in_new(new_mes, comp_uri) {\n".
 		     '    if (new_mes) { '."\n".
-		     "       comp_uri = \"../src/compose.php?newmessage=1\";\n".
+		     "       comp_uri = \"".$base_uri."src/compose.php?newmessage=1\";\n".
 		     '    } else { '."\n".
 		     "       if (comp_uri =='') {\n".
 		     '           comp_uri = "'.$base_uri.$compose_uri."\";\n".
 		     '       }'. "\n".
 		     '    }'. "\n".
                      '    var newwin = window.open(comp_uri' .
-                     ', "_blank",
-                "width='.$compose_width.",height=$compose_height".
+                     ', "_blank","width='.$compose_width.",height=$compose_height".
                      ",scrollbars=yes,resizable=yes\");\n".
                      "}\n";
             }

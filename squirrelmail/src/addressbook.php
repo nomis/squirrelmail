@@ -17,6 +17,35 @@ require_once('../functions/display_messages.php');
 require_once('../functions/addressbook.php');
 require_once('../functions/strings.php');
 
+/* lets get the global vars we may need */
+$key  = $_COOKIE['key'];
+
+$username = $_SESSION['username'];
+$onetimepad = $_SESSION['onetimepad'];
+$base_uri = $_SESSION['base_uri'];
+$delimiter = $_SESSION['delimiter'];
+
+/* From the address form */
+if ( isset($_POST['addaddr']) ) {
+    $addaddr = &$_POST['addaddr'];
+}
+if ( isset($_POST['editaddr']) ) {
+    $editaddr = &$_POST['editaddr'];
+}
+if ( isset($_POST['deladdr']) ) {
+    $deladdr = &$_POST['deladdr'];
+}
+$sel = &$_POST['sel'];
+
+if (isset($_POST['oldnick'])) {
+    $oldnick = $_POST['oldnick'];
+}
+if (isset($_POST['backend'])) {
+    $backend = $_POST['backend'];
+}
+if (isset($_POST['doedit'])) {
+    $doedit = $_POST['doedit'];
+}
 /* Make an input field */
 function adressbook_inp_field($label, $field, $name, $size, $values, $add) {
     global $color;
@@ -25,7 +54,7 @@ function adressbook_inp_field($label, $field, $name, $size, $values, $add) {
          '<TD BGCOLOR="' . $color[4] . '" ALIGN=left>' .
          '<INPUT NAME="' . $name . '[' . $field . ']" SIZE="' . $size . '" VALUE="';
     if (isset($values[$field])) {
-        echo htmlspecialchars($values[$field]);
+        echo htmlspecialchars(strip_tags($values[$field]));
     }
     echo '">' . $add . '</TD></TR>' . "\n";
 }
@@ -71,12 +100,15 @@ $defselected  = array();
 
 
 /* Handle user's actions */
-if($REQUEST_METHOD == 'POST') {
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     /**************************************************
      * Add new address                                *
      **************************************************/
-    if (!empty($addaddr['nickname'])) {
+    if (!empty($addaddr)) {
+        foreach( $addaddr as $k => $adr ) {
+            $addaddr[$k] = strip_tags( $adr );
+        }
 
         $r = $abook->add($addaddr, $abook->localbackend);
 
@@ -90,7 +122,6 @@ if($REQUEST_METHOD == 'POST') {
             $showaddrlist = false;
             $defdata = $addaddr;
         }
-
     } else {
 
         /************************************************
@@ -265,7 +296,8 @@ if ($showaddrlist) {
             /* New table header for each backend */
             if($prevbackend != $row['backend']) {
                 if($prevbackend < 0) {
-                    echo '<TR><TD COLSPAN=5 ALIGN=center>' . "\n" .
+                    echo '<TABLE ALIGN="CENTER" WIDTH="95%">'."\n".
+                         '<TR><TD COLSPAN=5 ALIGN=center>' . "\n" .
                          '<INPUT TYPE=submit NAME=editaddr VALUE="' . 
                          _("Edit selected") . "\">\n" .
                          '<INPUT TYPE=submit NAME=deladdr VALUE="' .
@@ -309,12 +341,14 @@ if ($showaddrlist) {
                  '&nbsp;</TD>' .
                  '<TD VALIGN=top NOWRAP WIDTH="1%">&nbsp;' . $row['name'] .
                  '&nbsp;</TD>',
-                 '<TD VALIGN=top NOWRAP WIDTH="1%">&nbsp;' .
-                 '<A HREF="compose.php?send_to=' . rawurlencode($row['email']);
+                 '<TD VALIGN=top WIDTH="1%">'; 
                 if ($compose_new_win == '1') {
-                     echo '" TARGET="compose_window" onClick="comp_in_new()"';
+                    echo '<a href="javascript:void(0)" onclick=comp_in_new(false,"compose.php?send_to='.rawurlencode($row['email']).'")>';
                 }
-                echo '">' . $row['email'] . '</A>&nbsp;</TD>'."\n",
+                else {
+                 echo '<A HREF="compose.php?send_to=' . rawurlencode($row['email']).'">';
+                }
+                echo $row['email'] . '</A>&nbsp;</TD>'."\n",
                  '<TD VALIGN=top WIDTH="1%">&nbsp;' . $row['label'] . '&nbsp;</TD>' .
                  "</TR>\n";
             $line++;
