@@ -324,12 +324,14 @@ but may be out of date soon thereafter.  You never know.  ;-)
   webmail_top                    src/webmail.php                 do_hook
   webmail_bottom                 src/webmail.php                 concat_hook
   logout_above_text              src/signout.php                 concat_hook
+  O info_bottom                  plugins/info/options.php        do_hook
    
 % = This hook is used in multiple places in the given file
 # = Called with hook type (see below)
 & = Special identity hooks (see below)
 ^ = Special attachments hook (see below)
 * = Special options hooks (see below)
+O = optional hook used by plugin
 
 
 (#) Called With
@@ -377,7 +379,7 @@ options_identities_table
    holds each identity.  The arguments to this hook are:
 
       [0] = color of table (use it like this in your plugin:
-               <tr bgcolor="<?PHP echo $info[1]?>">
+               <tr bgcolor="<?php echo $info[1]; ?>">
       [1] = is this an empty section (the one at the end of the list)?
       [2] = what is the 'post' value? (ident # or empty string if default)
 
