@@ -27,7 +27,15 @@ if(!sqgetGlobalVar('mf_cypher', $mf_cypher, SQ_POST)) {
     $mf_cypher = '';
 }
 if(! sqgetGlobalVar('mf_action', $mf_action, SQ_POST) ) {
-    $mf_action = 'config';
+    if (sqgetGlobalVar('mf_action_mod', $mf_action_mod, SQ_POST)) {
+        $mf_action = 'Modify';
+    }
+    elseif (sqgetGlobalVar('mf_action_del', $mf_action_del, SQ_POST)) {
+        $mf_action = 'Delete';
+    }
+    else {
+        $mf_action = 'config';
+    }
 }
 
 sqgetGlobalVar('mf_sn',            $mf_sn,            SQ_POST);
@@ -41,6 +49,7 @@ sqgetGlobalVar('mf_login',         $mf_login,         SQ_POST);
 sqgetGlobalVar('mf_fref',          $mf_fref,          SQ_POST);
 sqgetGlobalVar('mf_lmos',          $mf_lmos,          SQ_POST);
 sqgetGlobalVar('submit_mailfetch', $submit_mailfetch, SQ_POST);
+
 
 /* end globals */
 
@@ -146,7 +155,7 @@ sqgetGlobalVar('submit_mailfetch', $submit_mailfetch, SQ_POST);
                         '<b>' . _("Remote POP server settings") . '</b>',
                     'center', $color[0] )
                 ),
-            'center', '', 'width="95%" cols="1"' ) .
+            'center', '', 'width="95%"' ) .
             html_tag( 'table',
                 html_tag( 'tr',
                     html_tag( 'td',
@@ -161,15 +170,15 @@ sqgetGlobalVar('submit_mailfetch', $submit_mailfetch, SQ_POST);
                 html_tag( 'tr',
                     html_tag( 'td',
                         '<input type=checkbox name=mf_cypher ' .
-                        (($mailfetch_cypher=='on')?'checked >':'>') .
+                        (($mailfetch_cypher=='on')?'checked>':'>') .
                         _("Encrypt passwords (informative only)") ,
                     'right' )
                 ) ,
-            'center', '', 'width="95%" cols="1"' );
+            'center', '', 'width="95%"' );
 
     switch( $mf_action ) {
     case 'config':
-        echo html_tag( 'table', '', 'center', '', 'width="70%" cols="1" cellpadding="5" cellspacing="1"' ) .
+        echo html_tag( 'table', '', 'center', '', 'width="70%" cellpadding="5" cellspacing="1"' ) .
                     html_tag( 'tr',
                         html_tag( 'td', '<b>' . _("Add Server") . '</b>', 'center', $color[9] )
                     ) .
@@ -185,7 +194,7 @@ sqgetGlobalVar('submit_mailfetch', $submit_mailfetch, SQ_POST);
                 ) .
                 html_tag( 'tr',
                     html_tag( 'th', _("Port:"), 'right') .
-                    html_tag( 'td', '<input type=text name=mf_port value="110" size=20', 'left')
+                    html_tag( 'td', '<input type=text name=mf_port value="110" size=20>', 'left')
                 ) .
                 html_tag( 'tr',
                     html_tag( 'th', _("Alias:"), 'right' ) .
@@ -228,11 +237,11 @@ sqgetGlobalVar('submit_mailfetch', $submit_mailfetch, SQ_POST);
                         '<input type=submit name="submit_mailfetch" value="' . _("Add Server") . '">',
                     'center', '', 'colspan="2"' )
                 ) .
-            '</table></form></td></tr></table>';
+            '</table></td></tr></table></form>';
 
         // Modify Server
         echo '<font size=-5><BR></font>' .
-            html_tag( 'table', '', 'center', '', 'width="70%" cols="1" cellpadding="5" cellspacing="1"' ) .
+            html_tag( 'table', '', 'center', '', 'width="70%" cellpadding="5" cellspacing="1"' ) .
                 html_tag( 'tr',
                     html_tag( 'td', '<b>' . _("Modify Server") . '</b>', 'center', $color[9] )
                 ) .
@@ -243,23 +252,23 @@ sqgetGlobalVar('submit_mailfetch', $submit_mailfetch, SQ_POST);
             echo '<b>' . _("Server Name:") . '</b> <select name="mf_sn">';
             for ($i=0;$i<$mailfetch_server_number;$i++) {
                 echo "<option value=\"$i\">" .
-                    htmlspecialchars( (($mailfetch_alias_[$i]=='')?$mailfetch_server_[$i]:$mailfetch_alias_[$i])) . "</option>>";
+                    htmlspecialchars( (($mailfetch_alias_[$i]=='')?$mailfetch_server_[$i]:$mailfetch_alias_[$i])) . "</option>";
             }
             echo '</select>'.
-                 '&nbsp;&nbsp;<INPUT TYPE=submit name=mf_action value="' . _("Modify") . '">'.
-                 '&nbsp;&nbsp;<INPUT TYPE=submit name=mf_action value="' . _("Delete") . '">'.
+                 '&nbsp;&nbsp;<INPUT TYPE=submit name=mf_action_mod value="' . _("Modify") . '">'.
+                 '&nbsp;&nbsp;<INPUT TYPE=submit name=mf_action_del value="' . _("Delete") . '">'.
                  '</form>';
         } else {
             echo _("No-one server in use. Try to add.");
         }
         echo '</td></tr></table>';
         break;
-    case _("Delete"):                                     //erase confirmation about a server
+    case 'Delete':                                     //erase confirmation about a server
         echo html_tag( 'table',
                     html_tag( 'tr',
                         html_tag( 'td', '<b>' . _("Fetching Servers") . '</b>', 'center', $color[0] )
                     ) ,
-                'center', '', 'width="95%" cols="1" cellpadding="5" cellspacing="1"' ) .
+                'center', '', 'width="95%" cellpadding="5" cellspacing="1"' ) .
             '<br>' .
             html_tag( 'table',
                 html_tag( 'tr',
@@ -275,18 +284,18 @@ sqgetGlobalVar('submit_mailfetch', $submit_mailfetch, SQ_POST);
                         '<br></form>' ,
                     'center', $color[9] )
                 ) ,
-            'center', '', 'width="70%" cols="1" cellpadding="5" cellspacing="1"' );
+            'center', '', 'width="70%" cellpadding="5" cellspacing="1"' );
         break;                                  //modify a server
-    case _("Modify"):
+    case 'Modify':
         echo html_tag( 'table',
                     html_tag( 'tr',
                         html_tag( 'td', '<b>' . _("Fetching Servers") . '</b>', 'center', $color[0] )
                     ) ,
-                'center', '', 'width="95%" cols="1" cellpadding="5" cellspacing="1"' ) .
+                'center', '', 'width="95%" cellpadding="5" cellspacing="1"' ) .
             '<br>' .
-            html_tag( 'table', '', 'center', '', 'width="70%" cols="1" cellpadding="5" cellspacing="1"' ) .
+            html_tag( 'table', '', 'center', '', 'width="70%" cellpadding="5" cellspacing="1"' ) .
                 html_tag( 'tr',
-                    html_tag( 'td', '<b>' . _("Mofify a Server") . '</b>', 'center', $color[9] )
+                    html_tag( 'td', '<b>' . _("Modify Server") . '</b>', 'center', $color[9] )
                 ) .
                 html_tag( 'tr' ) .
                     html_tag( 'td', '', 'center', $color[0] ) .
@@ -363,14 +372,14 @@ sqgetGlobalVar('submit_mailfetch', $submit_mailfetch, SQ_POST);
             html_tag( 'tr',
                 html_tag( 'td', '<b>' . _("Fetching Servers") . '</b>', 'center', $color[0] )
             ) ,
-        'center', '', 'width="95%" cols="1"' ) .
+        'center', '', 'width="95%"' ) .
         '<br>' .
         html_tag( 'table',
             html_tag( 'tr',
                 html_tag( 'td', '<b>' . _("Undefined Function") . '</b>', 'center', $color[9] ) .
                 html_tag( 'td', '<b>' . _("Hey! Wath do You are looking for?") . '</b>', 'center', $color[0] )
             ) ,
-        'center', '', 'width="70%" cols="1"' );
+        'center', '', 'width="70%"' );
     }
 
     ?>

@@ -167,6 +167,7 @@ define('SQ_POST',2);
 define('SQ_SESSION',3);
 define('SQ_COOKIE',4);
 define('SQ_SERVER',5);
+define('SQ_FORM',6);
 
 /**
  * Search for the var $name in $_SESSION, $_POST, $_GET,
@@ -188,8 +189,16 @@ define('SQ_SERVER',5);
  * Returns TRUE if it is.
  */
 function sqgetGlobalVar($name, &$value, $search = SQ_INORDER) {
+
     if ( !check_php_version(4,1) ) {
-        global $_SESSION, $_GET, $_POST, $_COOKIE, $_SERVER;
+        global $HTTP_COOKIE_VARS, $HTTP_GET_VARS, $HTTP_POST_VARS, 
+               $HTTP_SERVER_VARS, $HTTP_SESSION_VARS;
+
+        $_COOKIE  =& $HTTP_COOKIE_VARS;
+        $_GET     =& $HTTP_GET_VARS;
+        $_POST    =& $HTTP_POST_VARS;
+        $_SERVER  =& $HTTP_SERVER_VARS;
+        $_SESSION =& $HTTP_SESSION_VARS;
     }
 
     /* NOTE: DO NOT enclose the constants in the switch
@@ -201,7 +210,7 @@ function sqgetGlobalVar($name, &$value, $search = SQ_INORDER) {
 	   so that if a valid value isn't specified, 
 	   all three arrays will be searched. */
       default:
-      case SQ_INORDER:
+      case SQ_INORDER:   // check session, post, get
       case SQ_SESSION:
         if( isset($_SESSION[$name]) ) {
             $value = $_SESSION[$name];
@@ -209,6 +218,7 @@ function sqgetGlobalVar($name, &$value, $search = SQ_INORDER) {
         } elseif ( $search == SQ_SESSION ) {
             break;
         }
+      case SQ_FORM:      //  check post, get
       case SQ_POST:
         if( isset($_POST[$name]) ) {
             $value = $_POST[$name];

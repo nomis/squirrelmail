@@ -51,11 +51,14 @@ function sqimap_run_command_list ($imap_stream, $query, $handle_errors, &$respon
     
 }
 
-function sqimap_run_command ($imap_stream, $query, $handle_errors, &$response, &$message, $unique_id = false) {
+function sqimap_run_command ($imap_stream, $query, $handle_errors, &$response, 
+                            &$message, $unique_id = false,$filter=false,
+                             $outputstream=false,$no_return=false) {
     if ($imap_stream) {
         $sid = sqimap_session_id($unique_id);
         fputs ($imap_stream, $sid . ' ' . $query . "\r\n");
-        $read = sqimap_read_data ($imap_stream, $sid, $handle_errors, $response, $message, $query);
+        $read = sqimap_read_data ($imap_stream, $sid, $handle_errors, $response,
+                                  $message, $query,$filter,$outputstream,$no_return);
         return $read;
     } else {
         global $squirrelmail_language, $color;
@@ -83,6 +86,9 @@ function sqimap_fgets($imap_stream) {
     $offset = 0;
     while (strpos($results, "\r\n", $offset) === false) {
         if (!($read = fgets($imap_stream, $buffer))) {
+        /* this happens in case of an error */
+        /* reset $results because it's useless */
+        $results = false;
             break;
         }
         if ( $results != '' ) {
@@ -93,62 +99,246 @@ function sqimap_fgets($imap_stream) {
     return $results;
 }
 
+function sqimap_fread($imap_stream,$iSize,$filter=false,
+                      $outputstream=false, $no_return=false) {
+    if (!$filter || !$outputstream) {
+        $iBufferSize = $iSize;
+    } else {
+        // FIXME This doesn't work with base64 decode, Why ?
+	// The idea is to use a buffersize of 32k i.e.
+        $iBufferSize = $iSize;
+    }
+    $iRet = $iSize - $iBufferSize;
+    $iRetrieved = 0;
+    $i = 0;
+    $results = '';
+    while (($iRetrieved < ($iSize - $iBufferSize))) {
+        $sRead = fread($imap_stream,$iBufferSize);
+        if ($sRead === false) {
+            $results = false;
+            break;
+        }
+        $iRetrieved += $iBufferSize;
+        if ($filter) {
+	   
+           $filter($sRead);
+        }
+        if ($outputstream) {
+           if (is_resource($outputstream)) {
+               fwrite($outputstream,$sRead);
+           } else if ($outputstream == 'php://stdout') {
+               echo $sRead;
+           }
+        }
+        if ($no_return) {
+            $sRead = '';
+        }    
+        $results .= $sRead;
+    }
+    if ($results !== false) {
+        $sRead = fread($imap_stream,($iSize - ($iRetrieved)));  
+        if ($filter) {
+           $filter($sRead);
+        }
+        if ($outputstream) {
+           if (is_resource($outputstream)) {      
+               fwrite($outputstream,$sRead);
+           } else if ($outputstream == 'php://stdout') { // FIXME
+               echo $sRead;
+           }
+        }
+        if ($no_return) {
+            $sRead = '';
+        }    
+        $results .= $sRead;
+    }
+    return $results;       
+}        
+
+
+
 /*
  * Reads the output from the IMAP stream.  If handle_errors is set to true,
  * this will also handle all errors that are received.  If it is not set,
  * the errors will be sent back through $response and $message
  */
 
-function sqimap_read_data_list ($imap_stream, $pre, $handle_errors, &$response, &$message, $query = '') {
+function sqimap_read_data_list ($imap_stream, $tag_uid, $handle_errors, 
+          &$response, &$message, $query = '',
+           $filter = false, $outputstream = false, $no_return = false) {
     global $color, $squirrelmail_language;
     $read = '';
-    $pre_a = explode(' ',trim($pre));
-    $pre = $pre_a[0];
+    $tag_uid_a = explode(' ',trim($tag_uid));
+    $tag = $tag_uid_a[0];
     $resultlist = array();
     $data = array();
     $read = sqimap_fgets($imap_stream);
-    while (1) {
-        switch (true) { 
-            case preg_match("/^$pre (OK|BAD|NO)(.*)$/", $read, $regs):
-            case preg_match('/^\* (BYE \[ALERT\])(.*)$/', $read, $regs):
-                $response = $regs[1];
-                $message = trim($regs[2]);
-                break 2;
-            case preg_match("/^\* (OK \[PARSE\])(.*)$/", $read):
+    $i = 0;
+    while ($read) {
+        $char = $read{0};
+        switch ($char)
+        {
+          case '+':
+          default:
+            $read = sqimap_fgets($imap_stream);
+            break;
+
+          case $tag{0}:
+          {
+            /* get the command */
+            $arg = '';
+            $i = strlen($tag)+1;
+            $s = substr($read,$i);
+            if (($j = strpos($s,' ')) || ($j = strpos($s,"\n"))) {
+                $arg = substr($s,0,$j);
+            }
+            $found_tag = substr($read,0,$i-1);
+            if ($arg && $found_tag==$tag) {
+                switch ($arg)
+                {
+                  case 'OK':
+                  case 'BAD':
+                  case 'NO':
+                  case 'BYE':
+                  case 'PREAUTH':
+                    $response = $arg;
+                    $message = trim(substr($read,$i+strlen($arg)));
+                    break 3; /* switch switch while */
+                  default: 
+                    /* this shouldn't happen */
+                    $response = $arg;
+                    $message = trim(substr($read,$i+strlen($arg)));
+                    break 3; /* switch switch while */
+                }
+            } elseif($found_tag !== $tag) {
+                /* reset data array because we do not need this reponse */
+                $data = array();
                 $read = sqimap_fgets($imap_stream);
-                break 1;
-            case preg_match('/^\* ([0-9]+) FETCH.*/', $read, $regs):
+                break;
+            }
+          } // end case $tag{0}
+
+          case '*':
+          {
+            if (preg_match('/^\*\s\d+\sFETCH/',$read)) {
+                /* check for literal */
+                $s = substr($read,-3);
                 $fetch_data = array();
-                $fetch_data[] = $read;
-                $read = sqimap_fgets($imap_stream);
-                while (!preg_match('/^\* [0-9]+ FETCH.*/', $read) &&
-                       !preg_match("/^$pre (OK|BAD|NO)(.*)$/", $read)) {
-                    $fetch_data[] = $read;
-                    $last = $read;
-                    $read = sqimap_fgets($imap_stream);
-                }
-                if (isset($last) && preg_match('/^\)/', $last)) {
-                    array_pop($fetch_data);
-                }
+                do { /* outer loop, continue until next untagged fetch
+                        or tagged reponse */
+                    do { /* innerloop for fetching literals. with this loop
+                            we prohibid that literal responses appear in the
+                            outer loop so we can trust the untagged and
+                            tagged info provided by $read */
+                        if ($s === "}\r\n") {
+                            $j = strrpos($read,'{');
+                            $iLit = substr($read,$j+1,-3);
+                            $fetch_data[] = $read;
+                            $sLiteral = sqimap_fread($imap_stream,$iLit,$filter,$outputstream,$no_return);
+                            if ($sLiteral === false) { /* error */
+                                break 4; /* while while switch while */
+                            }
+                            /* backwards compattibility */
+                            $aLiteral = explode("\n", $sLiteral);
+                            /* release not neaded data */
+                            unset($sLiteral);
+                            foreach ($aLiteral as $line) {
+                                $fetch_data[] = $line ."\n";
+                            }
+                            /* release not neaded data */
+                            unset($aLiteral); 
+                            /* next fgets belongs to this fetch because
+                               we just got the exact literalsize and there
+                               must follow data to complete the response */
+                            $read = sqimap_fgets($imap_stream);
+                            if ($read === false) { /* error */
+                                break 4; /* while while switch while */
+                            }
+                            $fetch_data[] = $read;
+                        } else {
+                            $fetch_data[] = $read;
+                        }
+                        /* retrieve next line and check in the while
+                           statements if it belongs to this fetch response */
+                        $read = sqimap_fgets($imap_stream);
+                        if ($read === false) { /* error */
+                            break 4; /* while while switch while */
+                        }
+                        /* check for next untagged reponse and break */
+                        if ($read{0} == '*') break 2;
+                        $s = substr($read,-3);
+                    } while ($s === "}\r\n");
+                    $s = substr($read,-3);
+                } while ($read{0} !== '*' &&
+                         substr($read,0,strlen($tag)) !== $tag);
                 $resultlist[] = $fetch_data;
+                /* release not neaded data */
+                unset ($fetch_data);
+            } else {
+                $s = substr($read,-3);
+                do {
+                    if ($s === "}\r\n") {
+                        $j = strrpos($read,'{');
+                        $iLit = substr($read,$j+1,-3);
+                        $data[] = $read;
+                        $sLiteral = fread($imap_stream,$iLit);
+                        if ($sLiteral === false) { /* error */
+                            $read = false;
+                            break 3; /* while switch while */
+                        }
+                        $data[] = $sLiteral;
+                        $data[] = sqimap_fgets($imap_stream);
+                    } else {
+                         $data[] = $read;
+                    }
+                    $read = sqimap_fgets($imap_stream);
+                    if ($read === false) {
+                        break 3; /* while switch while */
+                    } else if ($read{0} == '*') {
+                        break;
+                    }
+                    $s = substr($read,-3);
+                } while ($s === "}\r\n");
                 break 1;
-            default:
-                $data[] = $read;
-                $read = sqimap_fgets($imap_stream);
-                break 1;
-        }
+            }
+            break;
+          } // end case '*'
+        }   // end switch
+    } // end while
+    
+    /* error processing in case $read is false */
+    if ($read === false) {
+        unset($data);
+        set_up_language($squirrelmail_language);
+        require_once(SM_PATH . 'functions/display_messages.php');
+        $string = "<b><font color=$color[2]>\n" .
+                  _("ERROR : Connection dropped by imap-server.") .
+                  "</b><br>\n" .
+                  _("Query:") . ' '.
+                  htmlspecialchars($query) . '<br>' . "</font><br>\n";
+        error_box($string,$color);    
+        exit;
     }
+    
+    /* Set $resultlist array */
     if (!empty($data)) {
         $resultlist[] = $data;
     }
     elseif (empty($resultlist)) {
         $resultlist[] = array(); 
     }
+
+    /* Return result or handle errors */
     if ($handle_errors == false) {
         return( $resultlist );
-    } 
-    elseif ($response == 'NO') {
-    /* ignore this error from M$ exchange, it is not fatal (aka bug) */
+    }
+    switch ($response)
+    {
+    case 'OK':
+        return $resultlist;
+        break;
+    case 'NO': 
+        /* ignore this error from M$ exchange, it is not fatal (aka bug) */
         if (strstr($message, 'command resulted in') === false) {
             set_up_language($squirrelmail_language);
             require_once(SM_PATH . 'functions/display_messages.php');
@@ -160,10 +350,11 @@ function sqimap_read_data_list ($imap_stream, $pre, $handle_errors, &$response, 
                 _("Reason Given: ") .
                 htmlspecialchars($message) . "</font><br>\n";
             error_box($string,$color);
+            echo '</body></html>';
             exit;
         }
-    } 
-    elseif ($response == 'BAD') {
+        break;
+    case 'BAD': 
         set_up_language($squirrelmail_language);
         require_once(SM_PATH . 'functions/display_messages.php');
         $string = "<b><font color=$color[2]>\n" .
@@ -173,30 +364,58 @@ function sqimap_read_data_list ($imap_stream, $pre, $handle_errors, &$response, 
             htmlspecialchars($query) . '<br>' .
             _("Server responded: ") .
             htmlspecialchars($message) . "</font><br>\n";
-        error_box($string,$color);    
+        error_box($string,$color);
+        echo '</body></html>';        
+        exit; 
+    case 'BYE': 
+        set_up_language($squirrelmail_language);
+        require_once(SM_PATH . 'functions/display_messages.php');
+        $string = "<b><font color=$color[2]>\n" .
+            _("ERROR : Imap server closed the connection.") .
+            "</b><br>\n" .
+            _("Query:") . ' '.
+            htmlspecialchars($query) . '<br>' .
+            _("Server responded: ") .
+            htmlspecialchars($message) . "</font><br>\n";
+        error_box($string,$color);
+        echo '</body></html>';        
         exit;
-    } 
-    else {
-        return $resultlist;
+    default: 
+        set_up_language($squirrelmail_language);
+        require_once(SM_PATH . 'functions/display_messages.php');
+        $string = "<b><font color=$color[2]>\n" .
+            _("ERROR : Unknown imap response.") .
+            "</b><br>\n" .
+            _("Query:") . ' '.
+            htmlspecialchars($query) . '<br>' .
+            _("Server responded: ") .
+            htmlspecialchars($message) . "</font><br>\n";
+        error_box($string,$color);
+       /* the error is displayed but because we don't know the reponse we
+          return the result anyway */
+       return $resultlist;    
+       break;
     }
 }
 
-function sqimap_read_data ($imap_stream, $pre, $handle_errors, &$response, &$message, $query = '') {
-    $res = sqimap_read_data_list($imap_stream, $pre, $handle_errors, $response, $message, $query);
-  
+function sqimap_read_data ($imap_stream, $tag_uid, $handle_errors, 
+                           &$response, &$message, $query = '',
+                           $filter=false,$outputstream=false,$no_return=false) {
+    $res = sqimap_read_data_list($imap_stream, $tag_uid, $handle_errors, 
+              $response, $message, $query,$filter,$outputstream,$no_return); 
     /* sqimap_read_data should be called for one response
        but since it just calls sqimap_read_data_list which 
        handles multiple responses we need to check for that
        and merge the $res array IF they are seperated and 
        IF it was a FETCH response. */
   
-    if (isset($res[1]) && is_array($res[1]) && isset($res[1][0]) 
-        && preg_match('/^\* \d+ FETCH/', $res[1][0])) {
-        $result = array();
-        foreach($res as $index=>$value) {
-            $result = array_merge($result, $res["$index"]);
-        }
-    }
+//    if (isset($res[1]) && is_array($res[1]) && isset($res[1][0]) 
+//        && preg_match('/^\* \d+ FETCH/', $res[1][0])) {
+//        $result = array();
+//        foreach($res as $index=>$value) {
+//            $result = array_merge($result, $res["$index"]);
+//        }
+//    }
     if (isset($result)) {
         return $result;
     }
@@ -304,12 +523,12 @@ function sqimap_login ($username, $password, $imap_server_address, $imap_port, $
                 set_up_language($squirrelmail_language, true);
                 require_once(SM_PATH . 'functions/display_messages.php');
                 if ($response == 'BAD') {
-                   $string = sprintf (_("Bad request: %s")."<br>\r\n", $message);
+                    $string = sprintf (_("Bad request: %s")."<br>\r\n", $message);
                 } else {
-                   $string = sprintf (_("Unknown error: %s") . "<br>\n", $message);
+                    $string = sprintf (_("Unknown error: %s") . "<br>\n", $message);
                 }
                 if (isset($read) && is_array($read)) {
-                        $string .= '<br>' . _("Read data:") . "<br>\n";
+                    $string .= '<br>' . _("Read data:") . "<br>\n";
                     foreach ($read as $line) {
                         $string .= htmlspecialchars($line) . "<br>\n";
                     }
@@ -432,130 +651,163 @@ function sqimap_get_num_messages ($imap_stream, $mailbox) {
 }
 
 
-function parseAddress($address, $max=0, $addr_ar = array(), $group = '', $host='') {
-    $pos = 0;
-    $j = strlen($address);
-    $personal = '';
-    $addr = '';
-    $comment = '';
-    if ($max && $max = count($addr_ar)) {
-        return $addr_ar;
-    }
-    while ($pos < $j) {
-        if ($max && $max = count($addr_ar)) {
-            return $addr_ar;
-        }
-        $char = $address{$pos};
-        switch ($char) {
-            case '=':
-                if (preg_match('/^(=\?([^?]*)\?(Q|B)\?([^?]*)\?=)(.*)/Ui',substr($address,$pos),$reg)) {
-		    if (!$personal) {
-			$personal = substr($address,0,$pos);
-		    }
-                    $personal .= $reg[1];
-                    $pos += strlen($personal);
-                }
-                ++$pos;
-                break;
-            case '"': /* get the personal name */
-                ++$pos;
-                if ($address{$pos} == '"') {
-                    ++$pos;
-                } else {                
-                    $personal_start = $personal_end = $pos;
-                    while ($pos < $j) {
-                        $personal_end = strpos($address,'"',$pos);
-                        if (($personal_end-2)>0 && (substr($address,$personal_end-2,2) === '\\"' ||
-                            substr($address,$personal_end-2,2) === '\\\\')) {
-                            $pos = $personal_end+1;
-                        } else {
-                            $personal = substr($address,$personal_start,$personal_end-$personal_start);
-                            break;
-                        }
-                    }
-                    if ($personal_end) { /* prohibit endless loops due to very wrong addresses */
-                         $pos = $personal_end+1;
+function parseAddress($address, $max=0) {
+    $aTokens = array();
+    $aAddress = array();
+    $iCnt = strlen($address);
+    $aSpecials = array('(' ,'<' ,',' ,';' ,':');
+    $aReplace =  array(' (',' <',' ,',' ;',' :');
+    $address = str_replace($aSpecials,$aReplace,$address);
+    $i = 0;
+    while ($i < $iCnt) {
+        $cChar = $address{$i};
+        switch($cChar)
+        {
+        case '<':
+            $iEnd = strpos($address,'>',$i+1);
+            if (!$iEnd) {
+               $sToken = substr($address,$i);
+               $i = $iCnt;
+            } else {
+               $sToken = substr($address,$i,$iEnd - $i +1);
+               $i = $iEnd;
+            }
+            $sToken = str_replace($aReplace, $aSpecials,$sToken);
+            $aTokens[] = $sToken;
+            break;
+        case '"':
+            $iEnd = strpos($address,$cChar,$i+1);
+            if ($iEnd) {
+                // skip escaped quotes
+                $prev_char = $address{$iEnd-1};
+                while ($prev_char === '\\' && substr($address,$iEnd-2,2) !== '\\\\') {
+                    $iEnd = strpos($address,$cChar,$iEnd+1);
+                    if ($iEnd) {
+                        $prev_char = $address{$iEnd-1};
                     } else {
-                         $pos = $j;
+                        $prev_char = false;
                     }
                 }
+            }
+            if (!$iEnd) {
+                $sToken = substr($address,$i);
+                $i = $iCnt;
+            } else {
+                // also remove the surrounding quotes
+                $sToken = substr($address,$i+1,$iEnd - $i -1);
+                $i = $iEnd;
+            }
+            $sToken = str_replace($aReplace, $aSpecials,$sToken);
+            if ($sToken) $aTokens[] = $sToken;
+            break;
+        case '(':
+            $iEnd = strpos($address,')',$i);
+            if (!$iEnd) {
+                $sToken = substr($address,$i);
+                $i = $iCnt;
+            } else {
+                $sToken = substr($address,$i,$iEnd - $i + 1);
+                $i = $iEnd;
+            }
+            $sToken = str_replace($aReplace, $aSpecials,$sToken);
+            $aTokens[] = $sToken;
+            break;
+        case ',':
+        case ';':
+        case ';':
+        case ' ':
+            $aTokens[] = $cChar;
+            break;
+        default:
+            $iEnd = strpos($address,' ',$i+1);
+            if ($iEnd) {
+                $sToken = trim(substr($address,$i,$iEnd - $i));
+                $i = $iEnd-1;
+            } else {
+                $sToken = trim(substr($address,$i));
+                $i = $iCnt;
+            }
+            if ($sToken) $aTokens[] = $sToken;
+        }
+        ++$i;
+    }
+    $sPersonal = $sEmail = $sComment = $sGroup = '';
+    $aStack = $aComment = array();
+    foreach ($aTokens as $sToken) {
+        if ($max && $max == count($aAddress)) {
+            return $aAddress;
+        }
+        $cChar = $sToken{0};
+        switch ($cChar)
+        {
+          case '=':
+          case '"':
+          case ' ':
+            $aStack[] = $sToken; 
+            break;
+          case '(':
+            $aComment[] = substr($sToken,1,-1);
+            break;
+          case ';':
+            if ($sGroup) {
+                $sEmail = trim(implode(' ',$aStack));
+                $aAddress[] = array($sGroup,$sEmail);
+                $aStack = $aComment = array();
+                $sGroup = '';
                 break;
-            case '<':  /* get email address */
-                $addr_start = $pos;
-                $addr_end = strpos($address,'>',$addr_start);
-                $addr = substr($address,$addr_start+1,$addr_end-$addr_start-1);
-                $pos = $addr_end+1;
-                break;
-            case '(':  /* rip off comments */
-                $addr_start = $pos;
-                $pos = strpos($address,')');
-                if ($pos !== false) {
-                    $comment = substr($address, $addr_start+1,($pos-$addr_start-1));
-                    $address_start = substr($address, 0, $addr_start);
-                    $address_end   = substr($address, $pos + 1);
-                    $address       = $address_start . $address_end;
+            }
+          case ',':
+            if (!$sEmail) {
+                while (count($aStack) && !$sEmail) {
+                    $sEmail = trim(array_pop($aStack));
                 }
-                $j = strlen($address);
-                $pos = $addr_start + 1;
-                break;
-            case ',':  /* we reached a delimiter */
-                if ($addr == '') {
-                    $addr = substr($address, 0, $pos);
-                } else if ($personal == '') {
-                    $personal = trim(substr($address, 0, $addr_start));
-                }
-                if (!$personal && $comment) $personal = $comment;
-                if ($personal) $personal = decodeHeader($personal);
-                $addr_ar[] = array($addr,$personal);
-                $address = trim(substr($address, $pos+1));
-                $j = strlen($address);
-                $pos = 0;
-                $personal = '';
-                $addr = '';
-                break;
-            case ':':  /* process the group addresses */
-                /* group marker */
-                $group = substr($address, 0, $pos);
-                $address = substr($address, $pos+1);
-                $result = parseAddress($address, $max, $addr_ar, $group);
-                $addr_ar = array( $result[0] );
-                $pos = $result[1];
-                $address = substr($address, $pos++);
-                $j = strlen($address);
-                $group = '';
-                break;
-            case ';':
-                if ($group) {
-                    $address = substr($address, 0, $pos - 1);
-                }
-                ++$pos;
-                break;
-            default:
-                ++$pos;
-                break;
+            }
+            if (count($aStack)) {
+                $sPersonal = trim(implode('',$aStack));
+            } else { 
+                $sPersonal = '';
+            }
+            if (!$sPersonal && count($aComment)) {
+                $sComment = implode(' ',$aComment);
+                $sPersonal .= $sComment;
+            }
+            $aAddress[] = array($sEmail,$sPersonal);
+            $sPersonal = $sComment = $sEmail = '';
+            $aStack = $aComment = array();
+            break;
+          case ':': 
+            $sGroup = implode(' ',$aStack); break;
+            $aStack = array();
+            break;
+          case '<':
+            $sEmail = trim(substr($sToken,1,-1));
+            break;
+          case '>':
+            /* skip */
+            break; 
+          default: $aStack[] = $sToken; break;
         }
     }
-    if ($addr == '') {
-        $addr = substr($address, 0, $pos);
-    } else if ($personal == '') {
-        $personal = trim(substr($address, 0, $addr_start));
+    /* now do the action again for the last address */
+    if (!$sEmail) {
+        while (count($aStack) && !$sEmail) {
+            $sEmail = trim(array_pop($aStack));
+        }
     }
-    if (!$personal && $comment) $personal = $comment;
-    $email = $addr;
-    if ($group && $addr == '') { /* no addresses found in group */
-        $personal = $group;
-        $addr_ar[] = array('',$personal);
-        return (array($addr_ar,$pos+1 ));
-    } elseif ($group) {
-        $addr_ar[] = array($addr,$personal);
-        return (array($addr_ar,$pos+1 ));
+    if (count($aStack)) {
+        $sPersonal = trim(implode('',$aStack));
     } else {
-        if ($personal || $addr) {
-            $addr_ar[] = array($addr, $personal);
-        }
+        $sPersonal = '';
     }
-    return ($addr_ar);
-}
+    if (!$sPersonal && count($aComment)) {
+        $sComment = implode(' ',$aComment);
+        $sPersonal .= $sComment;
+    }
+    $aAddress[] = array($sEmail,$sPersonal);
+    return $aAddress;
+} 
+
+
 
 /*
  * Returns the number of unseen messages in this folder

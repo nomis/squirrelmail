@@ -12,13 +12,11 @@
  * $Id$
  */
 
-require_once(SM_PATH . 'functions/global.php');
-
 /**
  * SquirrelMail version number -- DO NOT CHANGE
  */
 global $version;
-$version = '1.4.1 [CVS]';
+$version = '1.4.1';
 
 /** 
  * SquirrelMail internal version number -- DO NOT CHANGE
@@ -27,6 +25,7 @@ $version = '1.4.1 [CVS]';
 global $SQM_INTERNAL_VERSION;
 $SQM_INTERNAL_VERSION = array(1,4,1);
 
+require_once(SM_PATH . 'functions/global.php');
 
 /**
  * Wraps text at $wrap characters
@@ -143,42 +142,6 @@ function readShortMailboxName($haystack, $needle) {
 	    }
     }
     return( $elem );
-}
-
-/**
- * Returns an array of email addresses.
- * Be cautious of "user@host.com"
- */
-function parseAddrs($text) {
-    if (trim($text) == '')
-        return array();
-    $text = str_replace(' ', '', $text);
-    $text = ereg_replace('"[^"]*"', '', $text);
-    $text = ereg_replace('\\([^\\)]*\\)', '', $text);
-    $text = str_replace(',', ';', $text);
-    $array = explode(';', $text);
-    for ($i = 0; $i < count ($array); $i++) {
-        $array[$i] = eregi_replace ('^.*[<]', '', $array[$i]);
-        $array[$i] = eregi_replace ('[>].*$', '', $array[$i]);
-    }
-    return $array;
-}
-
-/**
- * Returns a line of comma separated email addresses from an array.
- */
-function getLineOfAddrs($array) {
-    if (is_array($array)) {
-        $to_line = implode(', ', $array);
-        $to_line = ereg_replace(', (, )+', ', ', $to_line);
-        $to_line = trim(ereg_replace('^, ', '', $to_line));
-        if( substr( $to_line, -1 ) == ',' )
-            $to_line = substr( $to_line, 0, -1 );
-    } else {
-        $to_line = '';
-    }
-    
-    return( $to_line );
 }
 
 function php_self () {
@@ -465,6 +428,21 @@ function RemoveSlashes(&$array) {
     }
 }
 
-$PHP_SELF = php_self();
+/**
+* sm_print_r($some_variable);
+* Debugging function - does the same as print_r, but makes sure special
+* characters are converted to htmlentities first.  This will allow
+* values like <some@email.address> to be displayed.
+* The output is wrapped in <pre> and </pre> tags.
+*/
+function sm_print_r($var) {
+    ob_start();  // Buffer output
+    print_r($var);
+    $buffer = ob_get_contents(); // Grab the print_r output
+    ob_end_clean();  // Silently discard the output & stop buffering
+    print "<pre>";
+    print htmlentities($buffer);
+    print "</pre>";
+}
 
-?>
+$PHP_SELF = php_self();

@@ -73,11 +73,13 @@ function printMessageInfo($imapConnection, $t, $not_last=true, $key, $mailbox,
     if (handleAsSent($mailbox)) {
        $msg['FROM'] = $msg['TO'];
     }
+    $msg['FROM'] = parseAddress($msg['FROM'],1);
+    
        /*
         * This is done in case you're looking into Sent folders,
         * because you can have multiple receivers.
         */
-        
+
     $senderNames = $msg['FROM'];
     $senderName  = '';
     if (sizeof($senderNames)){
@@ -91,11 +93,11 @@ function printMessageInfo($imapConnection, $t, $not_last=true, $key, $mailbox,
                 $senderName .= htmlspecialchars($senderNames_part[0]);
             }
         }
-    } 
-    
-    $subject_full = decodeHeader($msg['SUBJECT']);
-    $subject = processSubject($subject_full, $indent_array[$msg['ID']]);
-
+    }
+    $senderName = str_replace('&nbsp;',' ',$senderName);
+    $msg['SUBJECT'] = decodeHeader($msg['SUBJECT']);
+    $subject = processSubject($msg['SUBJECT'], $indent_array[$msg['ID']]);
+    $subject = str_replace('&nbsp;',' ',$subject);    
     echo html_tag( 'tr','','','','VALIGN="top"') . "\n";
 
     if (isset($msg['FLAG_FLAGGED']) && ($msg['FLAG_FLAGGED'] == true)) {
@@ -132,34 +134,40 @@ function printMessageInfo($imapConnection, $t, $not_last=true, $key, $mailbox,
     } else {
         $searchstr = '';
     }
-    /**
-    * AAAAH! Make my eyes stop bleeding!
-    * Who wrote this?!
-    */
-    if (is_array($message_highlight_list) && count($message_highlight_list)){
+    
+    if (is_array($message_highlight_list) && count($message_highlight_list)) {
+        $msg['TO'] = parseAddress($msg['TO']);
+        $msg['CC'] = parseAddress($msg['CC']);
         foreach ($message_highlight_list as $message_highlight_list_part) {
             if (trim($message_highlight_list_part['value']) != '') {
                 $high_val   = strtolower($message_highlight_list_part['value']);
                 $match_type = strtoupper($message_highlight_list_part['match_type']);
-                if ($match_type == 'TO_CC') {
-                    foreach ($msg['TO'] as $address) {
-                        if (strstr('^^' . strtolower($address[0]), $high_val) ||
-                            strstr('^^' . strtolower($address[1]), $high_val)) {
-                            $hlt_color = $message_highlight_list_part['color'];
-                            continue;
-                        }
-                    }
-                    foreach ($msg['CC'] as $address) {
-                        if( strstr('^^' . strtolower($address[0]), $high_val) ||
-                            strstr('^^' . strtolower($address[1]), $high_val)) {
-                            $hlt_color = $message_highlight_list_part['color'];
-                            continue;
-                        }
-                    }
+                if($match_type == 'TO_CC') {
+                    $match = array('TO', 'CC');
                 } else {
-                    if (strstr('^^' . strtolower($msg[$match_type]), $high_val)) {
-                        $hlt_color = $message_highlight_list_part['color'];
-                        continue;
+                    $match = array($match_type);
+                }
+                foreach($match as $match_type) {
+                    switch($match_type) {
+                        case('TO'):
+                        case('CC'):
+                        case('FROM'):
+                            foreach ($msg[$match_type] as $address) {
+                                $address[0] = decodeHeader($address[0]);
+                                $address[1] = decodeHeader($address[1]);
+                                if (strstr('^^' . strtolower($address[0]), $high_val) ||
+                                    strstr('^^' . strtolower($address[1]), $high_val)) {
+                                    $hlt_color = $message_highlight_list_part['color'];
+                                    break 4;
+                                }
+                            }
+                            break;
+                        default:
+                            if (strstr('^^' . strtolower($msg[$match_type]), $high_val)) {
+                                $hlt_color = $message_highlight_list_part['color'];
+                                break 3; 
+                            }
+                            break;
                     }
                 }
             }
@@ -209,11 +217,11 @@ function printMessageInfo($imapConnection, $t, $not_last=true, $key, $mailbox,
                 $td_str .= '<a href="read_body.php?mailbox='.$urlMailbox
                         .  '&amp;passed_id='. $msg["ID"]
                         .  '&amp;startMessage='.$start_msg.$searchstr.'"';
-                do_hook("subject_link");
-                if ($subject != $subject_full) {
+                $td_str .= ' ' .concat_hook_function('subject_link', array($start_msg, $searchstr));
+                if ($subject != $msg['SUBJECT']) {
                     $title = get_html_translation_table(HTML_SPECIALCHARS);
                     $title = array_flip($title);
-                    $title = strtr($subject_full, $title);
+                    $title = strtr($msg['SUBJECT'], $title);
                     $title = str_replace('"', "''", $title);
                     $td_str .= " title=\"$title\"";
                 }
@@ -287,7 +295,7 @@ function getServerMessages($imapConnection, $start_msg, $show_num, $num_msgs, $i
         } else {
             $end_loop = $show_num;
         }
-        return fillMessageArray($imapConnection,$id,$end_loop);
+        return fillMessageArray($imapConnection,$id,$end_loop,$show_num);
     } else {
         return false;
     }
@@ -312,6 +320,9 @@ function getSelfSortMessages($imapConnection, $start_msg, $show_num,
         if ($sort < 6 ) {
             $end = $num_msgs;
             $end_loop = $end;
+	    /* set shownum to 999999 to fool sqimap_get_small_header_list
+	       and rebuild the msgs_str to 1:* */
+	    $show_num = 999999;
         } else {
             /* if it's not sorted */
             if ($start_msg + ($show_num - 1) < $num_msgs) {
@@ -335,7 +346,7 @@ function getSelfSortMessages($imapConnection, $start_msg, $show_num,
                 $end_loop = $show_num;
             }
         }
-        $msgs = fillMessageArray($imapConnection,$id,$end_loop);
+        $msgs = fillMessageArray($imapConnection,$id,$end_loop, $show_num);
     }
     return $msgs;
 }
@@ -366,7 +377,7 @@ function showMessagesForMailbox($imapConnection, $mailbox, $num_msgs,
         $msgs = array();
     }
 
-    $start = microtime();
+    //$start = microtime();
     /* If autoexpunge is turned on, then do it now. */
     $mbxresponse = sqimap_mailbox_select($imapConnection, $mailbox);
     $srt = $sort;
@@ -403,8 +414,13 @@ function showMessagesForMailbox($imapConnection, $mailbox, $num_msgs,
             $mode = '';
         }
 
-        sqsession_unregister('msort');
-        sqsession_unregister('msgs');
+	if ($use_cache) {
+	    sqgetGlobalVar('msgs', $msgs, SQ_SESSION);
+	    sqgetGlobalVar('msort', $msort, SQ_SESSION);
+	} else {
+    	    sqsession_unregister('msort');
+    	    sqsession_unregister('msgs');
+	}
         switch ($mode) {
             case 'thread':
                 $id   = get_thread_sort($imapConnection);
@@ -446,6 +462,7 @@ function showMessagesForMailbox($imapConnection, $mailbox, $num_msgs,
         } // switch
         sqsession_register($msort, 'msort');
         sqsession_register($msgs,  'msgs');
+
     } /* if exists > 0 */
 
     $res = getEndMessage($start_msg, $show_num, $num_msgs);
@@ -480,7 +497,7 @@ function showMessagesForMailbox($imapConnection, $mailbox, $num_msgs,
 
     mail_message_listing_end($num_msgs, $paginator_str, $msg_cnt_str, $color); 
     echo '</td></tr></table>';
-    $t = elapsed($start);
+    //$t = elapsed($start);
     //echo("elapsed time = $t seconds\n");
 }
 
@@ -520,8 +537,8 @@ function calc_msort($msgs, $sort) {
     return $msort;
 }
 
-function fillMessageArray($imapConnection, $id, $count) {
-    return sqimap_get_small_header_list($imapConnection, $id);
+function fillMessageArray($imapConnection, $id, $count, $show_num=false) {
+    return sqimap_get_small_header_list($imapConnection, $id, $show_num);
 }
 
 
@@ -658,7 +675,9 @@ function mail_message_listing_beginning ($imapConnection,
      * This is the beginning of the message list table.
      * It wraps around all messages
      */
-    echo '<form name="messageList" method="post" action="move_messages.php">' ."\n"
+    $safe_name = preg_replace("/[^0-9A-Za-z_]/", '_', $mailbox);
+    $form_name = "FormMsgs" . $safe_name;
+    echo '<form name="' . $form_name . '" method="post" action="move_messages.php">' ."\n"
 	. $moveFields
         . html_tag( 'table' ,
             html_tag( 'tr',
@@ -864,18 +883,22 @@ function get_selectall_link($start_msg, $sort) {
 
     $result = '';
     if ($javascript_on) {
+        $safe_name = preg_replace("/[^0-9A-Za-z_]/", '_', $mailbox);
+        $func_name = "CheckAll" . $safe_name;
+        $form_name = "FormMsgs" . $safe_name;
         $result = '<script language="JavaScript" type="text/javascript">'
                 . "\n<!-- \n"
-                . "function CheckAll() {\n"
-                . "  for (var i = 0; i < document.messageList.elements.length; i++) {\n"
-                . "    if(document.messageList.elements[i].type == 'checkbox'){\n"
-                . "      document.messageList.elements[i].checked = "
-                . "        !(document.messageList.elements[i].checked);\n"
+                . "function " . $func_name . "() {\n"
+                . "  for (var i = 0; i < document." . $form_name . ".elements.length; i++) {\n"
+                . "    if(document." . $form_name . ".elements[i].type == 'checkbox'){\n"
+                . "      document." . $form_name . ".elements[i].checked = "
+                . "        !(document." . $form_name . ".elements[i].checked);\n"
                 . "    }\n"
                 . "  }\n"
                 . "}\n"
                 . "//-->\n"
-                . '</script><a href="#" onClick="CheckAll();">' . _("Toggle All")
+                . '</script><a href="javascript:void(0)" onClick="' . $func_name . '();">' . _("Toggle All")
+/*                . '</script><a href="javascript:' . $func_name . '()">' . _("Toggle All")*/
                 . "</a>\n";
     } else {
         if (strpos($PHP_SELF, "?")) {
