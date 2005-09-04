@@ -1,3 +1,58 @@
+2005-09-01
+ - Added mail_alias 2.0.0 template.
+
+2005-08-24
+ - Updated to block_attach 0.7.
+
+2005-08-15
+ - Updated to qmailadmin_login 1.1 and proon 4.0.0.
+ - Added mini 0.3rc1 and select_language 1.0rc1.
+
+2005-08-13
+ - New and updated Nynorsk translations by Ola.
+
+2005-08-06
+ - Fixed msgfmt -c errors in translations and added -c option to
+   msgfmt calls in compilation scripts (#1252843).
+
+2005-08-01
+ - Added Finnish sec_remove image.
+
+2005-07-26
+ - Added German abook_import_export, check_quota and notes
+   translations.
+ - Added proon 1.0.0.
+ - Updated debugger to 1.2, useracl to 2.0 and amavisnewsql to 0.8.0.
+
+2005-07-20
+ - Updated vacation_local to 2.0.
+
+2005-07-13
+ - Dutch "Height of Editor Window" translation fix.
+ 
+2005-07-08
+ - Added Czech vacation_local translation.
+ - Updated vkeyboard to 0.8.1, sasql to 3.1.2.
+ - Added squirrel_logger 2.0.
+
+2005-06-28
+ - Updated html_mail to 2.2.
+ - Added limit_languages 1.0.
+ - Updated calendar_sql_backend and view_as_html version numbers.
+ - Updated Brazilian Portuguese and Faroese translations.
+ - Added Brazilian Portuguese sec_remove image.
+
+2005-06-23
+ - Updated compatibility to 2.0
+
+2005-06-08
+ - Branched SM-1_4_5.
+
+2005-06-07
+ - Updated custom_charset to 1.1, restrict_senders to 1.1,
+   shared_calendar to 2.0.1
+ - Added debugger 1.1, show_ssl_link 2.2
+
 2005-04-15
  - Added compose_fix 0.3
 

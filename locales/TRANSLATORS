@@ -2,7 +2,8 @@ SquirrelMail i18n team
 =====================
 
  Mailinglist:    squirrelmail-i18n at lists.sourceforge.net
- Leader:         Philippe Mingo <philippe at squirrelmail.org>
+ Leaders:        Philippe Mingo <philippe at squirrelmail.org>
+                 Tomas Kuliavas <tokul at users.sourceforge.net>
 
 ----
 <language> - <locale> - <encoding>
@@ -32,6 +33,10 @@ Catalan - ca_ES - iso-8859-1
 
 Chinese (Simplified) - zh_CN - gb2313
     Bo Jin <bensonjin at yahoo.com>
+
+Chinese (Traditional) - zh_TW - big5
+    Ching <ching at kiwa.com.tw>
+    Ray Liao <ray6 at mail2000.com.tw>
 
 Croatian - hr_HR - iso-8859-2
     Albert Novak <Albert.Novak at CARNet.hr>
@@ -63,6 +68,7 @@ Finnish - fi_FI - iso-8859-1
     Teemu Junnila <teejun at vallcom.com> (email is not valid)
     Jaakko Heusala <jaakko.heusala at kapsi.fi>
     Juha Ojaniemi <juha.ojaniemi at netello.com>
+    Kari Mattsson <kari at trivore.com>
 
 French - fr_FR - iso-8859-1
     Ali Nedjimi <lrdfrx at club-internet.fr>
@@ -71,12 +77,14 @@ French - fr_FR - iso-8859-1
     Antoine Hulin <antoine at origan.fdn.org>
     Alex Lemaresquier <alex at brainstorm.fr> (current maintainer)
     Laurent Pozza <laurent at pozza.org>
+    Intri Geri <intrigeri at boum.org>
 
 German - de_DE - iso-8859-1
     Roland Bauerschmidt <rb at debian.org>
     Ralf Hildebrandt <Ralf.Hildebrandt at charite.de> (coordinator)
     Klaus Brunner <klaus at winf.at>
     Ferdie Ferdsen <ferdie at despam.de>
+    Thomas Fründ <fruend at fhos.de>
 
 Greek - el_GR - iso-8859-7
     George P. Kremmydas <george at kefalonia-ithaki.gr>
@@ -174,9 +182,6 @@ Swedish - sv_SE - iso-8859-1
 Tagalog - tl_PH - iso-8859-1
     (for select range plugin)
 
-Taiwan - zh_TW - big5
-    Ching <ching at kiwa.com.tw>
-    Ray Liao <ray6 at mail2000.com.tw>
 
 Thai - th_TH - tis-620
     Nartpong Ampornaramweth <yongnarak at yahoo.com>
