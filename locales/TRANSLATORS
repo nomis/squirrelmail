@@ -79,6 +79,10 @@ French - fr_FR - iso-8859-1
     Alex Lemaresquier <alex at brainstorm.fr> (current maintainer)
     Laurent Pozza <laurent at pozza.org>
     Intri Geri <intrigeri at boum.org>
+    Frédéric Perrouin <frederic.perrouin at fredprod.com>
+
+Georgian - ka - utf-8
+    Tamuna Changiani <tamuniach at gmail.com>
 
 German - de_DE - iso-8859-1
     Roland Bauerschmidt <rb at debian.org>
@@ -152,6 +156,7 @@ Portuguese (Brazil) - pt_BR - iso-8859-1
 
 Portuguese (Portugal) - pt_PT - iso-8859-1
     Ruben Leote Mendes <ruben at nocturno.org>
+    Alexandre Pereira <b62 at clix.pt>
 
 Romanian - ro_RO - iso-8859-2
     Mircea Ilie <mrx at tep.ro>
@@ -175,6 +180,7 @@ Spanish - es_ES - iso-8859-1
     Hernan Collazo <hcollazo at opengeeks.com.ar>
     Philippe Mingo <philippe at squirrelmail.org>
     Dirk Enrique Seiffert <ds at caribenet.com>
+    Fernando Gozalo <fgozalo at csi.uned.es>
 
 Swedish - sv_SE - iso-8859-1
     Tobias Ekbom <tobias at vallcom.net>
@@ -183,13 +189,6 @@ Swedish - sv_SE - iso-8859-1
     Johan Fernberger <johan at fernberger.com>
     Fredrik Jervfors <sqm_admin at fimbul.net> (current maintainer/coordinator)
 
-Tagalog - tl_PH - iso-8859-1
-    (for select range plugin)
-
-
-Thai - th_TH - tis-620
-    Nartpong Ampornaramweth <yongnarak at yahoo.com>
-
 Turkish - tr_TR - iso-8859-9
     Volkan Yildirim <volkan at ozzmosis.pleksus.net.tr>
     Dr.Hikmet Gumus <gumush at hitstar.org>
@@ -197,16 +196,6 @@ Turkish - tr_TR - iso-8859-9
 
 Uighur - ug - utf-8
     Mamatjan Tursun <oghri at 163.com>
-
-Ukrainian - uk_UA - koi8-u
-    Khohlov Sergii <sergkh at westlucky.net>
-
-Russian (Ukrainian) - ru_UA - koi8-r
-    Oleg Baranovsky <oleg at uazone.net>
-
-* Vietnamese - vi_VN - utf-8
-(translation is done in iso-8859-1 and html codes)
-    Le Viet Hung <heros at hcm.fpt.vn>
 
 Welsh - cy_GB - iso-8859-1
     Andrew Rawlins <awr at aber.ac.uk>
