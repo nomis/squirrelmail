@@ -1,6 +1,6 @@
 # translation of squirrelmail.po into Russian
 # Copyright (c) 1999-2005 The SquirrelMail Project Team
-# $Id$
+# $Id: squirrelmail.po 12699 2007-09-26 22:53:12Z jervfors $
 # Konstantin Riabitsev <squirrelmail-i18n@mricon.com>, 2001.
 # Gregory Mokhin <mok@kde.ru>, 2003-2007.
 #
