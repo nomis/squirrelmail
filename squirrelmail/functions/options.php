@@ -475,7 +475,7 @@ class SquirrelOption {
         }
 
         /* Close the select tag and return our happy result. */
-        $result .= '</select>' . sm_encode_html_special_chars($this->trailing_text) . "\n";
+        $result .= '</select> ' . sm_encode_html_special_chars($this->trailing_text) . "\n";
         return $result;
     }
 
@@ -558,7 +558,7 @@ class SquirrelOption {
             $result .= $new_option;
         }
         /* Close the select tag and return our happy result. */
-        $result .= '</select>' . sm_encode_html_special_chars($this->trailing_text) . "\n";
+        $result .= '</select> ' . sm_encode_html_special_chars($this->trailing_text) . "\n";
         return $result;
     }
 
@@ -1125,7 +1125,7 @@ class SquirrelOption {
 
         $result = "<input type=\"submit\" name=\"$this->name\" value=\""
                 . sm_encode_html_special_chars($this->comment)
-                . "\" $this->script />" 
+                . "\" $this->script /> "
                 . sm_encode_html_special_chars($this->trailing_text) . "\n";
 
         return $result;
