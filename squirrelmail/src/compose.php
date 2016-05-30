@@ -72,6 +72,7 @@ if (!sqgetGlobalVar('smtoken',$submitted_token, $SQ_GLOBAL)) {
 }
 sqgetGlobalVar('session',$session, $SQ_GLOBAL);
 sqgetGlobalVar('mailbox',$mailbox, $SQ_GLOBAL);
+sqgetGlobalVar('identity',$orig_identity, $SQ_GLOBAL);
 if ( !sqgetGlobalVar('identity',$identity, $SQ_GLOBAL) ) {
     $identity = 0;
 }
@@ -678,6 +679,12 @@ elseif (isset($sigappend)) {
     }
     if (isset($subject)) {
         $values['subject'] = $subject;
+    }
+    if (isset($mailprio)) {
+        $values['mailprio'] = $mailprio;
+    }
+    if (isset($orig_identity)) {
+        $values['identity'] = $orig_identity;
     }
     showInputForm($session, $values);
 }
