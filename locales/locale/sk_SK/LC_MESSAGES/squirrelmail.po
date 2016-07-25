@@ -967,7 +967,7 @@ msgid "Apr"
 msgstr "Apr"
 
 msgid "Ma&#121;"
-msgstr "Mar"
+msgstr "Máj"
 
 msgid "Jun"
 msgstr "Jún"
