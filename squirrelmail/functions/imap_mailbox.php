@@ -428,7 +428,10 @@ function sqimap_mailbox_parse ($line, $line_lsub) {
     global $folder_prefix, $delimiter;
 
     /* Process each folder line */
-    for ($g = 0, $cnt = count($line); $g < $cnt; ++$g) {
+    ksort($line); // get physical ordering same as alphabetical sort we did before now (might be a better place for this)
+    foreach ($line as $g => $l)
+    // was this but array not guaranteed to be contiguous: for ($g = 0, $cnt = count($line); $g < $cnt; ++$g)
+    {
         /* Store the raw IMAP reply */
         if (isset($line[$g])) {
             $boxesall[$g]['raw'] = $line[$g];
@@ -708,7 +711,9 @@ function sqimap_mailbox_list($imap_stream, $force=false) {
         /* Find INBOX */
         $cnt = count($boxesall);
         $used = array_pad($used,$cnt,false);
-        for($k = 0; $k < $cnt; ++$k) {
+        foreach ($boxesall as $k => $b)
+        // was this but array not guaranteed to be contiguous: for($k = 0; $k < $cnt; ++$k)
+        {
             if (strtolower($boxesall[$k]['unformatted']) == 'inbox') {
                 $boxesnew[] = $boxesall[$k];
                 $used[$k] = true;
@@ -722,7 +727,9 @@ function sqimap_mailbox_list($imap_stream, $force=false) {
          * to be added before special folders
          */
         if (!$default_sub_of_inbox) {
-            for($k = 0; $k < $cnt; ++$k) {
+            foreach ($boxesall as $k => $b)
+            // was this but array not guaranteed to be contiguous: for($k = 0; $k < $cnt; ++$k)
+            {
                 if (!$used[$k] && isBoxBelow(strtolower($boxesall[$k]['unformatted']), 'inbox') &&
                     strtolower($boxesall[$k]['unformatted']) != 'inbox') {
                     $boxesnew[] = $boxesall[$k];
@@ -734,7 +741,9 @@ function sqimap_mailbox_list($imap_stream, $force=false) {
 
         /* List special folders and their subfolders, if requested. */
         if ($list_special_folders_first) {
-            for($k = 0; $k < $cnt; ++$k) {
+            foreach ($boxesall as $k => $b)
+            // was this but array not guaranteed to be contiguous: for($k = 0; $k < $cnt; ++$k)
+            {
                 if (!$used[$k] && isSpecialMailbox($boxesall[$k]['unformatted'])) {
                     $boxesnew[] = $boxesall[$k];
                     $used[$k]   = true;
@@ -745,7 +754,9 @@ function sqimap_mailbox_list($imap_stream, $force=false) {
 
         /* Find INBOX's children for systems where folders are ONLY under INBOX */
         if ($default_sub_of_inbox) {
-            for($k = 0; $k < $cnt; ++$k) {
+            foreach ($boxesall as $k => $b)
+            // was this but array not guaranteed to be contiguous: for($k = 0; $k < $cnt; ++$k)
+            {
                 if (!$used[$k] && isBoxBelow(strtolower($boxesall[$k]['unformatted']), 'inbox') &&
                     strtolower($boxesall[$k]['unformatted']) != 'inbox') {
                     $boxesnew[] = $boxesall[$k];
@@ -756,7 +767,9 @@ function sqimap_mailbox_list($imap_stream, $force=false) {
 
 
         /* Rest of the folders */
-        for($k = 0; $k < $cnt; $k++) {
+        foreach ($boxesall as $k => $b)
+        // was this but array not guaranteed to be contiguous: for($k = 0; $k < $cnt; $k++)
+        {
             if (!$used[$k]) {
                 $boxesnew[] = $boxesall[$k];
             }
