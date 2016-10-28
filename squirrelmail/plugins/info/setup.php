@@ -28,4 +28,3 @@ function info_opt() {
     );
 }
 
-?>

@@ -105,7 +105,8 @@ print "<br></td></tr></table></center><br>\n";
 if ($submit == 'submit') {
     $type = array();
     for ($i=0;$i<count($list);$i++) {
-        $type[$list[$i]] = $$list[$i];
+        $temp = $list[$i]; 
+        $type[$list[$i]] = $$temp;
     }
 }
 
@@ -180,4 +181,3 @@ if ($submit == 'submit') {
     print "</form></td></tr></table></center></body></html>";
     sqimap_logout($imap_stream);
     do_hook('info_bottom');
-?>
