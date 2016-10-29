@@ -138,7 +138,9 @@ compete, and even surpass, the commercial servers.
         with some Perl scripts. One of the most useful is
         <tt>config/conf.pl</tt>, which will help you configure your SquirrelMail
         installation.
-  <item>An SQL database supported by the PEAR DB library, and the PEAR DB
+  <item>Only if you are not using a version of PHP that includes PDO (which
+        should be included in PHP 5.1 and above), a SQL database supported
+        by the PEAR DB library, and the PEAR DB
         library itself. See <ref id="db-backend" name="Using database backends">
         for more information.
   <item><url url="http://aspell.net/" name="Aspell"> or <url
@@ -1633,10 +1635,17 @@ database is included as a part of the distribution.
 
 <sect2>Configuring PEAR DB
 <p>
-SquirrelMail needs the <url url="http://pear.php.net/package/DB" name="DB
+SquirrelMail comes with PDO support for connecting to most databases, so
+<em>PEAR DB support is not required unless your version of PHP does not
+include PDO.</em> PDO should come preinstalled with PHP version 5.1 and
+above.
+
+If you do not have PDO support, SquirrelMail will need the
+<url url="http://pear.php.net/package/DB" name="DB
 database abstraction layer">, which is a part of the <url
 url="http://pear.php.net/" name="PHP Extension and Application Repository
-(PEAR)">, to provide database backends. Make sure that your database is <url
+(PEAR)"> to provide database support. In such cases, make sure that your
+database is <url
 url="http://pear.php.net/manual/en/package.database.db.php" name="compatible
 with PEAR DB">, that PEAR is installed, and that the directory containing PEAR
 is in <url url="http://php.net/configuration" name="PHP's include path"> (PHP
@@ -1672,8 +1681,9 @@ Both the address books and the preferences need to be configured with a data
 source name (DSN). The DSN should look something like
 <tt>mysql://squirreluser:sqpassword@localhost/squirrelmail</tt> or
 <tt>pgsql://squirreluser:sqpassword@localhost/squirrelmail</tt>. See the <url
-url="http://pear.php.net/manual/en/package.database.db.php" name="PHP Pear DB
-manual"> for more details about DSN syntax.
+url="http://pear.php.net/manual/en/package.database.db.intro-dsn.php" name="PHP Pear DB
+manual"> for more details about DSN syntax. SquirrelMail's PDO support uses the same
+DSN syntax as Pear DB.
 
 When including a sensitive password in your DSN, please make sure that you
 tighten the permissions on <tt>config/config.php</tt> accordingly, so untrusted
@@ -2437,9 +2447,8 @@ to one user or to group of users or to all users that use the same
 SquirrelMail installation.
 
 SquirrelMail comes with support for address books in its own flat file format,
-any database supported by the PHP Pear DB abstraction layer (see <url
-url="http://pear.php.net/manual/en/package.database.db.intro-dsn.php">)
-and LDAP.
+any database supported by the PHP PDO or Pear DB abstraction layers, as well
+as LDAP.
 
 LDAP address books are read-only in SquirrelMail versions until 1.5.2. In
 version 1.5.2 and up, you can configure a writeable LDAP address book. The
