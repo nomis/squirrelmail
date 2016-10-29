@@ -144,7 +144,7 @@ class dbPrefs {
      */
     function dbPrefs() {
         // Try and read the default preferences file.
-        $default_pref = SM_PATH . 'config/default_pref';
+        $default_pref = SM_PATH . 'data/default_pref';
         if (@file_exists($default_pref)) {
             if ($file = @fopen($default_pref, 'r')) {
                 while (!feof($file)) {
