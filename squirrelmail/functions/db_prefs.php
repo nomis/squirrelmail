@@ -72,6 +72,8 @@ if (!$use_pdo && !include_once('DB.php')) {
     // same error also in abook_database.php
     require_once(SM_PATH . 'functions/display_messages.php');
     $error  = _("Could not find or include PHP PDO or PEAR database functions required for the database backend.") . "<br />\n";
+    if (!empty($disable_pdo))
+        $error .= _("You have set \$disable_pdo - please try removing that.") . "<br />\n";
     $error .= sprintf(_("PDO should come preinstalled with PHP version 5.1 or higher. Otherwise, is PEAR installed, and is the include path set correctly to find %s?"), '<tt>DB.php</tt>') . "<br />\n";
     $error .= _("Please contact your system administrator and report this error.");
     error_box($error, $color);
