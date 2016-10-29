@@ -145,9 +145,9 @@ class dbPrefs {
             return true;
         }
 
-        if (preg_match('/^mysql/', $prefs_dsn)) {
+        if (strpos($prefs_dsn, 'mysql') === 0) {
             $this->db_type = SMDB_MYSQL;
-        } elseif (preg_match('/^pgsql/', $prefs_dsn)) {
+        } else if (strpos($prefs_dsn, 'pgsql') === 0) {
             $this->db_type = SMDB_PGSQL;
         }
 
