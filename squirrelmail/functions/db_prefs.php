@@ -62,7 +62,7 @@ define('SMDB_MYSQL', 1);
 /** PostgreSQL */
 define('SMDB_PGSQL', 2);
 
-global $use_pdo;
+global $disable_pdo, $use_pdo;
 if (empty($disable_pdo) && class_exists('PDO'))
     $use_pdo = TRUE;
 else
