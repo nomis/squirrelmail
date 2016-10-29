@@ -235,18 +235,18 @@ class dbPrefs {
             if (preg_match('|^(.+):(\d+)$|', $matches[4], $host_port_matches)) {
                 $matches[4] = $host_port_matches[1];
                 $matches[6] = $host_port_matches[2];
-            } 
+            }
             if (preg_match('|^(.+?)\((.+)\)$|', $matches[4], $protocol_matches)) {
                 $matches[8] = $protocol_matches[1];
                 $matches[9] = $protocol_matches[2];
                 $matches[4] = NULL;
                 $matches[6] = NULL;
-            } 
+            }
 //TODO: currently we just ignore options specified on the end of the DSN
             if (preg_match('|^(.+?)\?(.+)$|', $matches[5], $database_name_options_matches)) {
                 $matches[5] = $database_name_options_matches[1];
                 $matches[7] = $database_name_options_matches[2];
-            } 
+            }
             if ($matches[8] === 'unix' && !empty($matches[9]))
                 $pdo_prefs_dsn = $matches[1] . ':unix_socket=' . $matches[9] . ';dbname=' . $matches[5];
             else
