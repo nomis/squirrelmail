@@ -138,6 +138,27 @@ class dbPrefs {
                          'do_not_reply_to_self' => 1,
                          'show_html_default' => '0');
 
+    /**
+     * initialize the default preferences array.
+     *
+     */
+    function dbPrefs() {
+        // Try and read the default preferences file.
+        $default_pref = SM_PATH . 'config/default_pref';
+        if (@file_exists($default_pref)) {
+            if ($file = @fopen($default_pref, 'r')) {
+                while (!feof($file)) {
+                    $pref = fgets($file, 1024);
+                    $i = strpos($pref, '=');
+                    if ($i > 0) {
+                        $this->default[trim(substr($pref, 0, $i))] = trim(substr($pref, $i + 1));
+                    }
+                }
+                fclose($file);
+            }
+        }
+    }
+
     function open() {
         global $prefs_dsn, $prefs_table, $use_pdo, $pdo_identifier_quote_char;
         global $prefs_user_field, $prefs_key_field, $prefs_val_field;
