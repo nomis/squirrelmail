@@ -91,6 +91,8 @@ Version 1.4.23 - SVN
   - Added new "smtp_helo_override" hook; allows plugins to override
     the HELO host sent to the SMTP server when sending messages
   - Added STARTTLS support for both IMAP and SMTP connections
+  - Added PDO support for database connections, so no external
+    database module needs to be installed
 
 Version 1.4.22 - 12 July 2011
 -----------------------------
