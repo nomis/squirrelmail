@@ -4,7 +4,8 @@
  * db_prefs.php
  *
  * This contains functions for manipulating user preferences
- * stored in a database, accessed though the Pear DB layer.
+ * stored in a database, accessed though the Pear DB layer
+ * or PDO, the latter taking precedence if available.
  *
  * Database:
  *
@@ -21,6 +22,31 @@
  * Configuration of databasename, username and password is done
  * by using conf.pl or the administrator plugin
  *
+ * Three settings that control PDO behavior can be specified in
+ * config/config_local.php if needed:
+ *    boolean $disable_pdo SquirrelMail uses PDO by default to access the
+ *                         user preferences and address book databases, but
+ *                         setting this to TRUE will cause SquirrelMail to
+ *                         fall back to using Pear DB instead.
+ *    boolean $pdo_show_sql_errors When database errors are encountered,
+ *                                 setting this to TRUE causes the actual
+ *                                 database error to be displayed, otherwise
+ *                                 generic errors are displayed, preventing
+ *                                 internal database information from being
+ *                                 exposed. This should be enabled only for
+ *                                 debugging purposes.
+ *    string $pdo_identifier_quote_char By default, SquirrelMail will quote
+ *                                      table and field names in database
+ *                                      queries with what it thinks is the
+ *                                      appropriate quote character for the
+ *                                      database type being used (backtick
+ *                                      for MySQL (and thus MariaDB), double
+ *                                      quotes for all others), but you can
+ *                                      override the character used by
+ *                                      putting it here, or tell SquirrelMail
+ *                                      NOT to quote identifiers by setting
+ *                                      this to "none"
+ *
  * @copyright 1999-2016 The SquirrelMail Project Team
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @version $Id$
@@ -36,7 +62,13 @@ define('SMDB_MYSQL', 1);
 /** PostgreSQL */
 define('SMDB_PGSQL', 2);
 
-if (!include_once('DB.php')) {
+global $use_pdo;
+if (empty($disable_pdo) && class_exists('PDO'))
+    $use_pdo = TRUE;
+else
+    $use_pdo = FALSE;
+
+if (!$use_pdo && !include_once('DB.php')) {
     // same error also in abook_database.php
     require_once(SM_PATH . 'functions/display_messages.php');
     $error  = _("Could not include PEAR database functions required for the database backend.") . "<br />\n";
@@ -98,13 +130,15 @@ class dbPrefs {
     var $error = NULL;
     var $db_type = SMDB_UNKNOWN;
 
+    var $identifier_quote_char = '';
+
     var $default = Array('theme_default' => 0,
                          'include_self_reply_all' => 0,
                          'do_not_reply_to_self' => 1,
                          'show_html_default' => '0');
 
     function open() {
-        global $prefs_dsn, $prefs_table;
+        global $prefs_dsn, $prefs_table, $use_pdo, $pdo_identifier_quote_char;
         global $prefs_user_field, $prefs_key_field, $prefs_val_field;
 
         if(isset($this->dbh)) {
@@ -116,6 +150,17 @@ class dbPrefs {
         } elseif (preg_match('/^pgsql/', $prefs_dsn)) {
             $this->db_type = SMDB_PGSQL;
         }
+
+        // figure out identifier quoting (only used for PDO, though we could change that)
+        if (empty($pdo_identifier_quote_char)) {
+            if ($this->db_type == SMDB_MYSQL)
+                $this->identifier_quote_char = '`';
+            else
+                $this->identifier_quote_char = '"';
+        } else if ($pdo_identifier_quote_char === 'none')
+            $this->identifier_quote_char = '';
+        else
+            $this->identifier_quote_char = $pdo_identifier_quote_char;
 
         if (!empty($prefs_table)) {
             $this->table = $prefs_table;
@@ -137,11 +182,41 @@ class dbPrefs {
         if (!empty($prefs_val_field)) {
             $this->val_field = $prefs_val_field;
         }
-        $dbh = DB::connect($prefs_dsn, true);
 
-        if(DB::isError($dbh)) {
-            $this->error = DB::errorMessage($dbh);
-            return false;
+        // connect, create database connection object
+        //
+        if ($use_pdo) {
+            // parse and convert DSN to PDO style
+            // $matches will contain:
+            // 1: database type
+            // 2: username
+            // 3: password
+            // 4: hostname
+            // 5: database name
+//TODO: add support for unix_socket and charset
+            if (!preg_match('|^(.+)://(.+):(.+)@(.+)/(.+)$|i', $prefs_dsn, $matches)) {
+                $this->error = _("Could not parse prefs DSN");
+                return false;
+            }
+            if (preg_match('|^(.+):(\d+)$|', $matches[4], $host_port_matches)) {
+                $matches[4] = $host_port_matches[1];
+                $matches[6] = $host_port_matches[2];
+            } else
+                $matches[6] = NULL;
+            $pdo_prefs_dsn = $matches[1] . ':host=' . $matches[4] . (!empty($matches[6]) ? ';port=' . $matches[6] : '') . ';dbname=' . $matches[5];
+            try {
+                $dbh = new PDO($pdo_prefs_dsn, $matches[2], $matches[3]);
+            } catch (Exception $e) {
+                $this->error = $e->getMessage();
+                return false;
+            }
+        } else {
+            $dbh = DB::connect($prefs_dsn, true);
+
+            if(DB::isError($dbh)) {
+                $this->error = DB::errorMessage($dbh);
+                return false;
+            }
         }
 
         $this->dbh = $dbh;
@@ -149,12 +224,13 @@ class dbPrefs {
     }
 
     function failQuery($res = NULL) {
+        global $use_pdo;
         if($res == NULL) {
             printf(_("Preference database error (%s). Exiting abnormally"),
                   $this->error);
         } else {
             printf(_("Preference database error (%s). Exiting abnormally"),
-                  DB::errorMessage($res));
+                  ($use_pdo ? implode(' - ', $res->errorInfo()) : DB::errorMessage($res)));
         }
         exit;
     }
@@ -188,21 +264,38 @@ class dbPrefs {
     }
 
     function deleteKey($user, $key) {
-        global $prefs_cache;
+        global $prefs_cache, $use_pdo, $pdo_show_sql_errors;
 
         if (!$this->open()) {
             return false;
         }
-        $query = sprintf("DELETE FROM %s WHERE %s='%s' AND %s='%s'",
-                         $this->table,
-                         $this->user_field,
-                         $this->dbh->quoteString($user),
-                         $this->key_field,
-                         $this->dbh->quoteString($key));
+        if ($use_pdo) {
+            if (!($sth = $this->dbh->prepare('DELETE FROM ' . $this->identifier_quote_char . $this->table . $this->identifier_quote_char . ' WHERE ' . $this->identifier_quote_char . $this->user_field . $this->identifier_quote_char . ' = ? AND ' . $this->identifier_quote_char . $this->key_field . $this->identifier_quote_char . ' = ?'))) {
+                if ($pdo_show_sql_errors)
+                    $this->error = implode(' - ', $this->dbh->errorInfo());
+                else
+                    $this->error = _("Could not prepare query");
+                $this->failQuery();
+            }
+            if (!($res = $sth->execute(array($user, $key)))) {
+                if ($pdo_show_sql_errors)
+                    $this->error = implode(' - ', $sth->errorInfo());
+                else
+                    $this->error = _("Could not execute query");
+                $this->failQuery();
+            }
+        } else {
+            $query = sprintf("DELETE FROM %s WHERE %s='%s' AND %s='%s'",
+                             $this->table,
+                             $this->user_field,
+                             $this->dbh->quoteString($user),
+                             $this->key_field,
+                             $this->dbh->quoteString($key));
 
-        $res = $this->dbh->simpleQuery($query);
-        if(DB::isError($res)) {
-            $this->failQuery($res);
+            $res = $this->dbh->simpleQuery($query);
+            if(DB::isError($res)) {
+                $this->failQuery($res);
+            }
         }
 
         unset($prefs_cache[$key]);
@@ -211,73 +304,169 @@ class dbPrefs {
     }
 
     function setKey($user, $key, $value) {
+        global $use_pdo, $pdo_show_sql_errors;
         if (!$this->open()) {
             return false;
         }
         if ($this->db_type == SMDB_MYSQL) {
-            $query = sprintf("REPLACE INTO %s (%s, %s, %s) ".
-                             "VALUES('%s','%s','%s')",
-                             $this->table,
-                             $this->user_field,
-                             $this->key_field,
-                             $this->val_field,
-                             $this->dbh->quoteString($user),
-                             $this->dbh->quoteString($key),
-                             $this->dbh->quoteString($value));
+            if ($use_pdo) {
+                if (!($sth = $this->dbh->prepare('REPLACE INTO ' . $this->identifier_quote_char . $this->table . $this->identifier_quote_char . ' (' . $this->identifier_quote_char . $this->user_field . $this->identifier_quote_char . ', ' . $this->identifier_quote_char . $this->key_field . $this->identifier_quote_char . ', ' . $this->identifier_quote_char . $this->val_field . $this->identifier_quote_char . ') VALUES (?, ?, ?)'))) {
+                    if ($pdo_show_sql_errors)
+                        $this->error = implode(' - ', $this->dbh->errorInfo());
+                    else
+                        $this->error = _("Could not prepare query");
+                    $this->failQuery();
+                }
+                if (!($res = $sth->execute(array($user, $key, $value)))) {
+                    if ($pdo_show_sql_errors)
+                        $this->error = implode(' - ', $sth->errorInfo());
+                    else
+                        $this->error = _("Could not execute query");
+                    $this->failQuery();
+                }
+            } else {
+                $query = sprintf("REPLACE INTO %s (%s, %s, %s) ".
+                                 "VALUES('%s','%s','%s')",
+                                 $this->table,
+                                 $this->user_field,
+                                 $this->key_field,
+                                 $this->val_field,
+                                 $this->dbh->quoteString($user),
+                                 $this->dbh->quoteString($key),
+                                 $this->dbh->quoteString($value));
 
-            $res = $this->dbh->simpleQuery($query);
-            if(DB::isError($res)) {
-                $this->failQuery($res);
+                $res = $this->dbh->simpleQuery($query);
+                if(DB::isError($res)) {
+                    $this->failQuery($res);
+                }
             }
         } elseif ($this->db_type == SMDB_PGSQL) {
-            $this->dbh->simpleQuery("BEGIN TRANSACTION");
-            $query = sprintf("DELETE FROM %s WHERE %s='%s' AND %s='%s'",
-                             $this->table,
-                             $this->user_field,
-                             $this->dbh->quoteString($user),
-                             $this->key_field,
-                             $this->dbh->quoteString($key));
-            $res = $this->dbh->simpleQuery($query);
-            if (DB::isError($res)) {
-                $this->dbh->simpleQuery("ROLLBACK TRANSACTION");
-                $this->failQuery($res);
+            if ($use_pdo) {
+                if ($this->dbh->exec('BEGIN TRANSACTION') === FALSE) {
+                    if ($pdo_show_sql_errors)
+                        $this->error = implode(' - ', $this->dbh->errorInfo());
+                    else
+                        $this->error = _("Could not execute query");
+                    $this->failQuery();
+                }
+                if (!($sth = $this->dbh->prepare('DELETE FROM ' . $this->identifier_quote_char . $this->table . $this->identifier_quote_char . ' WHERE ' . $this->identifier_quote_char . $this->user_field . $this->identifier_quote_char . ' = ? AND ' . $this->identifier_quote_char . $this->key_field . $this->identifier_quote_char . ' = ?'))) {
+                    if ($pdo_show_sql_errors)
+                        $this->error = implode(' - ', $this->dbh->errorInfo());
+                    else
+                        $this->error = _("Could not prepare query");
+                    $this->failQuery();
+                }
+                if (!($res = $sth->execute(array($user, $key)))) {
+                    if ($pdo_show_sql_errors)
+                        $this->error = implode(' - ', $sth->errorInfo());
+                    else
+                        $this->error = _("Could not execute query");
+                    $this->dbh->exec('ROLLBACK TRANSACTION');
+                    $this->failQuery();
+                }
+                if (!($sth = $this->dbh->prepare('INSERT INTO ' . $this->identifier_quote_char . $this->table . $this->identifier_quote_char . ' (' . $this->identifier_quote_char . $this->user_field . $this->identifier_quote_char . ', ' . $this->identifier_quote_char . $this->key_field . $this->identifier_quote_char . ', ' . $this->identifier_quote_char . $this->val_field . $this->identifier_quote_char . ') VALUES (?, ?, ?)'))) {
+                    if ($pdo_show_sql_errors)
+                        $this->error = implode(' - ', $this->dbh->errorInfo());
+                    else
+                        $this->error = _("Could not prepare query");
+                    $this->failQuery();
+                }
+                if (!($res = $sth->execute(array($user, $key, $value)))) {
+                    if ($pdo_show_sql_errors)
+                        $this->error = implode(' - ', $sth->errorInfo());
+                    else
+                        $this->error = _("Could not execute query");
+                    $this->dbh->exec('ROLLBACK TRANSACTION');
+                    $this->failQuery();
+                }
+                if ($this->dbh->exec('COMMIT TRANSACTION') === FALSE) {
+                    if ($pdo_show_sql_errors)
+                        $this->error = implode(' - ', $this->dbh->errorInfo());
+                    else
+                        $this->error = _("Could not execute query");
+                    $this->failQuery();
+                }
+            } else {
+                $this->dbh->simpleQuery("BEGIN TRANSACTION");
+                $query = sprintf("DELETE FROM %s WHERE %s='%s' AND %s='%s'",
+                                 $this->table,
+                                 $this->user_field,
+                                 $this->dbh->quoteString($user),
+                                 $this->key_field,
+                                 $this->dbh->quoteString($key));
+                $res = $this->dbh->simpleQuery($query);
+                if (DB::isError($res)) {
+                    $this->dbh->simpleQuery("ROLLBACK TRANSACTION");
+                    $this->failQuery($res);
+                }
+                $query = sprintf("INSERT INTO %s (%s, %s, %s) VALUES ('%s', '%s', '%s')",
+                                 $this->table,
+                                 $this->user_field,
+                                 $this->key_field,
+                                 $this->val_field,
+                                 $this->dbh->quoteString($user),
+                                 $this->dbh->quoteString($key),
+                                 $this->dbh->quoteString($value));
+                $res = $this->dbh->simpleQuery($query);
+                if (DB::isError($res)) {
+                    $this->dbh->simpleQuery("ROLLBACK TRANSACTION");
+                    $this->failQuery($res);
+                }
+                $this->dbh->simpleQuery("COMMIT TRANSACTION");
             }
-            $query = sprintf("INSERT INTO %s (%s, %s, %s) VALUES ('%s', '%s', '%s')",
-                             $this->table,
-                             $this->user_field,
-                             $this->key_field,
-                             $this->val_field,
-                             $this->dbh->quoteString($user),
-                             $this->dbh->quoteString($key),
-                             $this->dbh->quoteString($value));
-            $res = $this->dbh->simpleQuery($query);
-            if (DB::isError($res)) {
-                $this->dbh->simpleQuery("ROLLBACK TRANSACTION");
-                $this->failQuery($res);
-            }
-            $this->dbh->simpleQuery("COMMIT TRANSACTION");
         } else {
-            $query = sprintf("DELETE FROM %s WHERE %s='%s' AND %s='%s'",
-                             $this->table,
-                             $this->user_field,
-                             $this->dbh->quoteString($user),
-                             $this->key_field,
-                             $this->dbh->quoteString($key));
-            $res = $this->dbh->simpleQuery($query);
-            if (DB::isError($res)) {
-                $this->failQuery($res);
-            }
-            $query = sprintf("INSERT INTO %s (%s, %s, %s) VALUES ('%s', '%s', '%s')",
-                             $this->table,
-                             $this->user_field,
-                             $this->key_field,
-                             $this->val_field,
-                             $this->dbh->quoteString($user),
-                             $this->dbh->quoteString($key),
-                             $this->dbh->quoteString($value));
-            $res = $this->dbh->simpleQuery($query);
-            if (DB::isError($res)) {
-                $this->failQuery($res);
+            if ($use_pdo) {
+                if (!($sth = $this->dbh->prepare('DELETE FROM ' . $this->identifier_quote_char . $this->table . $this->identifier_quote_char . ' WHERE ' . $this->identifier_quote_char . $this->user_field . $this->identifier_quote_char . ' = ? AND ' . $this->identifier_quote_char . $this->key_field . $this->identifier_quote_char . ' = ?'))) {
+                    if ($pdo_show_sql_errors)
+                        $this->error = implode(' - ', $this->dbh->errorInfo());
+                    else
+                        $this->error = _("Could not prepare query");
+                    $this->failQuery();
+                }
+                if (!($res = $sth->execute(array($user, $key)))) {
+                    if ($pdo_show_sql_errors)
+                        $this->error = implode(' - ', $sth->errorInfo());
+                    else
+                        $this->error = _("Could not execute query");
+                    $this->failQuery();
+                }
+                if (!($sth = $this->dbh->prepare('INSERT INTO ' . $this->identifier_quote_char . $this->table . $this->identifier_quote_char . ' (' . $this->identifier_quote_char . $this->user_field . $this->identifier_quote_char . ', ' . $this->identifier_quote_char . $this->key_field . $this->identifier_quote_char . ', ' . $this->identifier_quote_char . $this->val_field . $this->identifier_quote_char . ') VALUES (?, ?, ?)'))) {
+                    if ($pdo_show_sql_errors)
+                        $this->error = implode(' - ', $this->dbh->errorInfo());
+                    else
+                        $this->error = _("Could not prepare query");
+                    $this->failQuery();
+                }
+                if (!($res = $sth->execute(array($user, $key, $value)))) {
+                    if ($pdo_show_sql_errors)
+                        $this->error = implode(' - ', $sth->errorInfo());
+                    else
+                        $this->error = _("Could not execute query");
+                    $this->failQuery();
+                }
+            } else {
+                $query = sprintf("DELETE FROM %s WHERE %s='%s' AND %s='%s'",
+                                 $this->table,
+                                 $this->user_field,
+                                 $this->dbh->quoteString($user),
+                                 $this->key_field,
+                                 $this->dbh->quoteString($key));
+                $res = $this->dbh->simpleQuery($query);
+                if (DB::isError($res)) {
+                    $this->failQuery($res);
+                }
+                $query = sprintf("INSERT INTO %s (%s, %s, %s) VALUES ('%s', '%s', '%s')",
+                                 $this->table,
+                                 $this->user_field,
+                                 $this->key_field,
+                                 $this->val_field,
+                                 $this->dbh->quoteString($user),
+                                 $this->dbh->quoteString($key),
+                                 $this->dbh->quoteString($value));
+                $res = $this->dbh->simpleQuery($query);
+                if (DB::isError($res)) {
+                    $this->failQuery($res);
+                }
             }
         }
 
@@ -285,27 +474,48 @@ class dbPrefs {
     }
 
     function fillPrefsCache($user) {
-        global $prefs_cache;
+        global $prefs_cache, $use_pdo, $pdo_show_sql_errors;
 
         if (!$this->open()) {
             return;
         }
 
         $prefs_cache = array();
-        $query = sprintf("SELECT %s as prefkey, %s as prefval FROM %s ".
-                         "WHERE %s = '%s'",
-                         $this->key_field,
-                         $this->val_field,
-                         $this->table,
-                         $this->user_field,
-                         $this->dbh->quoteString($user));
-        $res = $this->dbh->query($query);
-        if (DB::isError($res)) {
-            $this->failQuery($res);
-        }
+        if ($use_pdo) {
+            if (!($sth = $this->dbh->prepare('SELECT ' . $this->identifier_quote_char . $this->key_field . $this->identifier_quote_char . ' AS prefkey, ' . $this->identifier_quote_char . $this->val_field . $this->identifier_quote_char . ' AS prefval FROM ' . $this->identifier_quote_char . $this->table . $this->identifier_quote_char . ' WHERE ' . $this->identifier_quote_char . $this->user_field . $this->identifier_quote_char . ' = ?'))) {
+                if ($pdo_show_sql_errors)
+                    $this->error = implode(' - ', $this->dbh->errorInfo());
+                else
+                    $this->error = _("Could not prepare query");
+                $this->failQuery();
+            }
+            if (!($res = $sth->execute(array($user)))) {
+                if ($pdo_show_sql_errors)
+                    $this->error = implode(' - ', $sth->errorInfo());
+                else
+                    $this->error = _("Could not execute query");
+                $this->failQuery();
+            }
 
-        while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-            $prefs_cache[$row['prefkey']] = $row['prefval'];
+            while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+                $prefs_cache[$row['prefkey']] = $row['prefval'];
+            }
+        } else {
+            $query = sprintf("SELECT %s as prefkey, %s as prefval FROM %s ".
+                             "WHERE %s = '%s'",
+                             $this->key_field,
+                             $this->val_field,
+                             $this->table,
+                             $this->user_field,
+                             $this->dbh->quoteString($user));
+            $res = $this->dbh->query($query);
+            if (DB::isError($res)) {
+                $this->failQuery($res);
+            }
+
+            while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+                $prefs_cache[$row['prefkey']] = $row['prefval'];
+            }
         }
     }
 
