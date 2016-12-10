@@ -139,10 +139,11 @@ class dbPrefs {
                          'show_html_default' => '0');
 
     /**
+     * Constructor (PHP5 style, required in some future version of PHP)
      * initialize the default preferences array.
      *
      */
-    function dbPrefs() {
+    function __construct() {
         // Try and read the default preferences file.
         $default_pref = SM_PATH . 'data/default_pref';
         if (@file_exists($default_pref)) {
@@ -157,6 +158,15 @@ class dbPrefs {
                 fclose($file);
             }
         }
+    }
+
+    /**
+     * Constructor (PHP4 style, kept for compatibility reasons)
+     * initialize the default preferences array.
+     *
+     */
+    function dbPrefs() {
+       self::__construct();
     }
 
     function open() {
