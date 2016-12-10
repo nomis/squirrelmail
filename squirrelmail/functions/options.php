@@ -99,7 +99,10 @@ class SquirrelOption {
     var $possible_values;
     var $htmlencoded=false;
 
-    function SquirrelOption
+    /**
+     * Constructor (PHP5 style, required in some future version of PHP)
+     */
+    function __construct
     ($raw_option_array, $name, $caption, $type, $refresh_level, $initial_value = '', $possible_values = '', $htmlencoded = false) {
         /* Set the basic stuff. */
         $this->raw_option_array = $raw_option_array;
@@ -146,6 +149,14 @@ class SquirrelOption {
         } else {
             $this->save_function = SMOPT_SAVE_NOOP;
         }
+    }
+
+    /**
+     * Constructor (PHP4 style, kept for compatibility reasons)
+     */
+    function SquirrelOption
+    ($raw_option_array, $name, $caption, $type, $refresh_level, $initial_value = '', $possible_values = '', $htmlencoded = false) {
+        self::__construct($raw_option_array, $name, $caption, $type, $refresh_level, $initial_value, $possible_values, $htmlencoded);
     }
 
     /** Convenience function that identifies which types of
