@@ -293,9 +293,18 @@ class AddressBook {
     var $localbackendname = '';
     var $add_extra_field = false;
 
-      // Constructor function.
-    function AddressBook() {
+    /**
+     * Constructor (PHP5 style, required in some future version of PHP)
+     */
+    function __construct() {
         $this->localbackendname = _("Personal address book");
+    }
+
+    /**
+     * Constructor (PHP4 style, kept for compatibility reasons)
+     */
+    function AddressBook() {
+        self::__construct();
     }
 
     /*
