@@ -85,7 +85,7 @@ class Deliver_SendMail extends Deliver {
     * @param Message $message Message object containing the from address
     * @param string $sendmail_path Location of sendmail binary
     * @param mixed $ignore_x Eight extra arguments that the parent class
-    *                      requires which are not used here
+    *                        requires which are not used here
     * @return void
     * @access public
     */
