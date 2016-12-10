@@ -23,12 +23,19 @@
  */
 class Disposition {
     /**
-     * Constructor function
+     * Constructor (PHP5 style, required in some future version of PHP)
+     */
+    function __construct($name) {
+       $this->name = $name;
+       $this->properties = array();
+    }
+
+    /**
+     * Constructor (PHP4 style, kept for compatibility reasons)
      * @param string $name
      */
     function Disposition($name) {
-       $this->name = $name;
-       $this->properties = array();
+       self::__construct($name);
     }
 
     /**
