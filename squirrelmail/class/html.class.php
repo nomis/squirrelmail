@@ -19,7 +19,10 @@ class html {
     var $tag, $text, $style, $class,  
         $id, $html_el = array(), $javascript, $xtr_prop;
 
-    function html($tag='', $text='', $style ='', $class='', $id='',
+    /**
+     * Constructor (PHP5 style, required in some future version of PHP)
+     */
+    function __construct($tag='', $text='', $style ='', $class='', $id='',
             $xtr_prop = '', $javascript = '') {
         $this->tag = $tag;
         $this->text = $text;
@@ -28,6 +31,14 @@ class html {
         $this->id = $id;
         $this->xtr_prop = $xtr_prop;
         $this->javascript = $javascript;
+    }
+
+    /**
+     * Constructor (PHP4 style, kept for compatibility reasons)
+     */
+    function html($tag='', $text='', $style ='', $class='', $id='',
+            $xtr_prop = '', $javascript = '') {
+       self::__construct($tag, $text, $style, $class, $id, $xtr_prop, $javascript);
     }
 
     function htmlAdd($el, $last=true) {
