@@ -142,10 +142,10 @@ class abook_database extends addressbook_backend {
     /* ========================== Private ======================= */
 
     /**
-     * Constructor
+     * Constructor (PHP5 style, required in some future version of PHP)
      * @param array $param address book backend options
      */
-    function abook_database($param) {
+    function __construct($param) {
         $this->sname = _("Personal address book");
 
         if (is_array($param)) {
@@ -191,6 +191,13 @@ class abook_database extends addressbook_backend {
         }
     }
 
+    /**
+     * Constructor (PHP4 style, kept for compatibility reasons)
+     * @param array $param address book backend options
+     */
+    function abook_database($param) {
+        return self::__construct($param);
+    }
 
     /**
      * Open the database.
