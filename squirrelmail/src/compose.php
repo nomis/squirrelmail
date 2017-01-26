@@ -1735,7 +1735,7 @@ function deliverMessage(&$composeMessage, $draft=false) {
 
     /* Here you can modify the message structure just before we hand
        it over to deliver */
-    $hookReturn = do_hook('compose_send', $composeMessage);
+    $hookReturn = do_hook('compose_send', $composeMessage, $draft);
     /* Get any changes made by plugins to $composeMessage. */
     if ( is_object($hookReturn[1]) ) {
         $composeMessage = $hookReturn[1];
