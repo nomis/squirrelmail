@@ -1740,6 +1740,10 @@ function deliverMessage(&$composeMessage, $draft=false) {
     if ( is_object($hookReturn[1]) ) {
         $composeMessage = $hookReturn[1];
     }
+    /* Get any changes made by plugins to $draft. */
+    if ( !empty($hookReturn[2]) || $hookReturn[2] === FALSE ) {
+        $draft = $hookReturn[2];
+    }
 
     if (!$useSendmail && !$draft) {
         require_once(SM_PATH . 'class/deliver/Deliver_SMTP.class.php');
