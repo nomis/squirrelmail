@@ -95,7 +95,7 @@ Version 1.4.23 - SVN
     database module needs to be installed
   - compose_send hook now has $draft flag in hook arguments
   - Fixed insufficient sendmail command argument escaping (thanks
-    to Mitchel Sahertian, Maor Shwartz, Dawid Golunski and Filippo
+    to Mitchel Sahertian, Beyond Security/Dawid Golunski and Filippo
     Cavallarin for bringing this to our attention). [CVE-2017-7692]
 
 Version 1.4.22 - 12 July 2011
