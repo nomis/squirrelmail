@@ -57,10 +57,11 @@ require_once(SM_PATH . 'functions/page_header.php');
 require_once(SM_PATH . 'functions/prefs.php');
 
 /* Set up the language (i18n.php was included by auth.php). */
-global $username, $data_dir;
+global $username, $data_dir, $server_timezone;
 set_up_language(getPref($data_dir, $username, 'language'));
 
 $timeZone = getPref($data_dir, $username, 'timezone');
+$server_timezone = date('T');
 
 /* Check to see if we are allowed to set the TZ environment variable.
  * We are able to do this if ...
