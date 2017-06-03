@@ -53,7 +53,7 @@ function show_message_details() {
                         $params . '","MessageDetails","width=800,height=600");' . "\n".
                 "  }\n" .
                 "// -->\n" .
-                "</script>\n" .
+                "</script>" .
                 "&nbsp;|&nbsp;<A HREF=\"javascript:MessageSource();\">$print_text</A>\n";
     }
     echo $result;
