@@ -337,7 +337,9 @@ class SquirrelOption {
     }
 
     function createWidget_Info() {
-        $result = sm_encode_html_special_chars($this->value) . "\n";
+        // $result = sm_encode_html_special_chars($this->value) . "\n";
+        // like COMMENT, allow HTML here
+        $result = $this->value . "\n";
         return $result;
     }
 
