@@ -782,7 +782,7 @@ function mail_message_listing_beginning ($imapConnection,
             echo getButton('SUBMIT', 'attache',_("Forward")) . "\n";
             do_hook('mailbox_display_buttons');
 
-    echo "      </small></td>\n"
+    echo "      </td>\n"
          . html_tag( 'td', '', 'right', '', 'nowrap' );
 
     if (!$auto_expunge) {
@@ -1320,7 +1320,7 @@ function processSubject($subject, $threadlevel = 0) {
 
 function getMbxList($imapConnection) {
     global $lastTargetMailbox;
-    echo  '         <small>&nbsp;<tt><select name="targetMailbox">';
+    echo  '         &nbsp;<tt><select name="targetMailbox">';
     echo sqimap_mailbox_option_list($imapConnection, array(strtolower($lastTargetMailbox)) );
     echo '         </select></tt>&nbsp;';
 }
