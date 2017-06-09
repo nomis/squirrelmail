@@ -140,7 +140,7 @@ function error_box($string, $color) {
     }
 
     /* check if the page header has been sent; if not, send it! */
-    if(!isset($pageheader_sent) && !$pageheader_sent) {
+    if(!isset($pageheader_sent) || !$pageheader_sent) {
         /* include this just to be sure */
         include_once( SM_PATH . 'functions/page_header.php' );
         displayHtmlHeader($org_title.': '.$err);
