@@ -530,7 +530,7 @@ function formatMenuBar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
     $urlMailbox = urlencode($mailbox);
     $s = '<table width="100%" cellpadding="3" cellspacing="0" align="center"'.
          ' border="0" bgcolor="'.$color[9].'"><tr>' .
-         html_tag( 'td', '', 'left', '', 'width="33%"' ) . '<small>';
+         html_tag( 'td', '', 'left', '', 'width="49%"' ) . '<small>';
 
     $msgs_url = $base_uri . 'src/';
     if (isset($where) && isset($what)) {
@@ -583,7 +583,7 @@ function formatMenuBar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
         $s .= makeComposeLink($comp_alt_uri, '<span style="white-space: nowrap;">' . $comp_alt_string . '</span>');
     }
 
-    $s .= '</small></td><td align="center" width="1%" style="white-space: nowrap"><small>' . $topbar_delimiter;
+    $s .= '</small></td><td align="center" width="2%" style="white-space: nowrap"><small>' . $topbar_delimiter;
 
     if (!(isset($where) && isset($what)) && !$passed_ent_id) {
         $prev = findPreviousMessage($mbx_response['EXISTS'], $passed_id);
@@ -648,7 +648,7 @@ function formatMenuBar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
     }
 
     $s .= $topbar_delimiter . '</small></td>' . "\n" .
-          html_tag( 'td', '', 'right', '', 'width="33%" ' ) . '<small>';
+          html_tag( 'td', '', 'right', '', 'width="49%" ' ) . '<small>';
     $comp_action_uri = $comp_uri . '&amp;smaction=forward';
     $s .= makeComposeLink($comp_action_uri, _("Forward"));
 
