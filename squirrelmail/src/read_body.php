@@ -526,6 +526,7 @@ function formatMenuBar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
            $enable_forward_as_attachment;
 
     $topbar_delimiter = '&nbsp;|&nbsp;';
+    $topbar_delimiter = ' | ';
     $urlMailbox = urlencode($mailbox);
     $s = '<table width="100%" cellpadding="3" cellspacing="0" align="center"'.
          ' border="0" bgcolor="'.$color[9].'"><tr>' .
@@ -541,7 +542,7 @@ function formatMenuBar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
                      $startMessage . '&amp;mailbox=' . $urlMailbox;
         $msgs_str  = _("Message List");
     }
-    $s .= '<a href="' . $msgs_url . '">' . $msgs_str . '</a>';
+    $s .= '<a href="' . $msgs_url . '" style="white-space: nowrap;">' . $msgs_str . '</a>';
 
     $delete_url = $base_uri . 'src/delete_message.php?mailbox=' . $urlMailbox .
                   '&amp;message=' . $passed_id . '&amp;smtoken=' . sm_generate_security_token() . '&amp;';
@@ -579,10 +580,10 @@ function formatMenuBar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
     }
     if (isset($comp_alt_uri)) {
         $s .= $topbar_delimiter;
-        $s .= makeComposeLink($comp_alt_uri, $comp_alt_string);
+        $s .= makeComposeLink($comp_alt_uri, '<span style="white-space: nowrap;">' . $comp_alt_string . '</span>');
     }
 
-    $s .= '</small></td><td align="center" width="33%"><small>';
+    $s .= '</small></td><td align="center" width="1%" style="white-space: nowrap"><small>' . $topbar_delimiter;
 
     if (!(isset($where) && isset($what)) && !$passed_ent_id) {
         $prev = findPreviousMessage($mbx_response['EXISTS'], $passed_id);
@@ -646,15 +647,15 @@ function formatMenuBar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
         $s .= $topbar_delimiter . $next_link;
     }
 
-    $s .= '</small></td>' . "\n" .
-          html_tag( 'td', '', 'right', '', 'width="33%" nowrap' ) . '<small>';
+    $s .= $topbar_delimiter . '</small></td>' . "\n" .
+          html_tag( 'td', '', 'right', '', 'width="33%" ' ) . '<small>';
     $comp_action_uri = $comp_uri . '&amp;smaction=forward';
     $s .= makeComposeLink($comp_action_uri, _("Forward"));
 
     if ($enable_forward_as_attachment) {
         $comp_action_uri = $comp_uri . '&amp;smaction=forward_as_attachment';
         $s .= $topbar_delimiter;
-        $s .= makeComposeLink($comp_action_uri, _("Forward as Attachment"));
+        $s .= makeComposeLink($comp_action_uri, '<span style="white-space: nowrap;">' . _("Forward as Attachment") . '</span>');
     }
 
     $comp_action_uri = $comp_uri . '&amp;smaction=reply';
@@ -663,7 +664,7 @@ function formatMenuBar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
 
     $comp_action_uri = $comp_uri . '&amp;smaction=reply_all';
     $s .= $topbar_delimiter;
-    $s .= makeComposeLink($comp_action_uri, _("Reply All"));
+    $s .= makeComposeLink($comp_action_uri, '<span style="white-space: nowrap;">' . _("Reply All") . '</span>');
     $s .= '</small></td></tr></table>';
     $ret = do_hook_function('read_body_menu_top', $s);
     if(!is_null($ret)) {
