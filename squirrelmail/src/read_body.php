@@ -525,7 +525,7 @@ function formatMenuBar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
            $startMessage, $PHP_SELF, $save_as_draft,
            $enable_forward_as_attachment;
 
-    $topbar_delimiter = '&nbsp;|&nbsp;';
+    // wrapping is ok:  $topbar_delimiter = '&nbsp;|&nbsp;';
     $topbar_delimiter = ' | ';
     $urlMailbox = urlencode($mailbox);
     $s = '<table width="100%" cellpadding="3" cellspacing="0" align="center"'.
