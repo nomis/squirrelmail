@@ -150,10 +150,10 @@ function printer_friendly_link($mailbox, $passed_id, $passed_ent_id, $color) {
                   "  }\n" .
                   "// -->\n" .
                   '</script>' .
-                  "<a href=\"javascript:printFormat();\">$print_text</a>";
+                  "<a href=\"javascript:printFormat();\" style=\"white-space: nowrap;\">$print_text</a>";
     } else {
         $result = '<a target="_blank" href="../src/printer_friendly_bottom.php' .
-                  "$params\">$print_text</a>";
+                  "$params\" style=\"white-space: nowrap;\">$print_text</a>";
     }
     return $result;
 }
@@ -696,10 +696,10 @@ function formatToolbar($mailbox, $passed_id, $passed_ent_id, $message, $color) {
     $s  = "<tr>\n" .
           html_tag( 'td', '', 'right', '', 'valign="middle" width="20%"' ) . '<b>' . _("Options") . ":&nbsp;&nbsp;</b></td>\n" .
           html_tag( 'td', '', 'left', '', 'valign="middle" width="80%"' ) . '<small>' .
-          '<a href="'.$url.'">'._("View Full Header").'</a>';
+          '<a href="'.$url.'" style="white-space: nowrap;">'._("View Full Header").'</a>';
 
     /* Output the printer friendly link if we are in subtle mode. */
-    $s .= '&nbsp;|&nbsp;' .
+    $s .= ' | ' .
           printer_friendly_link($mailbox, $passed_id, $passed_ent_id, $color);
     echo $s;
 
