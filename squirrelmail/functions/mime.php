@@ -400,7 +400,7 @@ function formatBody($imap_stream, $message, $color, $wrap_at, $ent_num, $id, $ma
 
         // Always add the link for downloading the mail as a file to the global
         // variable.
-        $download_and_unsafe_link .= ' | <a href="download.php?absolute_dl=true&amp;' .
+        $download_and_unsafe_link .= '&nbsp;| <a href="download.php?absolute_dl=true&amp;' .
             $link . '" style="white-space: nowrap;">' . _("Download this as a file") .  '</a>';
 
         // Find out the right text to use in the link depending on the
@@ -421,7 +421,7 @@ function formatBody($imap_stream, $message, $color, $wrap_at, $ent_num, $id, $ma
         // Only create a link for unsafe images if there's need for one. If so:
         // add it to the global variable.
         if($text != '') {
-            $download_and_unsafe_link .= ' | <a href="read_body.php?' . $link . '" style="white-space: nowrap;">' . $text . '</a>';
+            $download_and_unsafe_link .= '&nbsp;| <a href="read_body.php?' . $link . '" style="white-space: nowrap;">' . $text . '</a>';
         }
     }
     return $body;

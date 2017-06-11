@@ -526,7 +526,7 @@ function formatMenuBar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
            $enable_forward_as_attachment;
 
     // wrapping is ok:  $topbar_delimiter = '&nbsp;|&nbsp;';
-    $topbar_delimiter = ' | ';
+    $topbar_delimiter = '&nbsp;| ';
     $urlMailbox = urlencode($mailbox);
     $s = '<table width="100%" cellpadding="3" cellspacing="0" align="center"'.
          ' border="0" bgcolor="'.$color[9].'"><tr>' .
@@ -583,7 +583,8 @@ function formatMenuBar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
         $s .= makeComposeLink($comp_alt_uri, '<span style="white-space: nowrap;">' . $comp_alt_string . '</span>');
     }
 
-    $s .= '</small></td><td align="center" width="2%" style="white-space: nowrap"><small>' . $topbar_delimiter;
+    $s .= '</small></td><td align="center" width="2%" style="white-space: nowrap"><small>'
+       . (strpos($topbar_delimiter, '&nbsp;') === 0 ? substr($topbar_delimiter, 6) : ltrim($topbar_delimiter));
 
     if (!(isset($where) && isset($what)) && !$passed_ent_id) {
         $prev = findPreviousMessage($mbx_response['EXISTS'], $passed_id);
@@ -647,7 +648,8 @@ function formatMenuBar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
         $s .= $topbar_delimiter . $next_link;
     }
 
-    $s .= $topbar_delimiter . '</small></td>' . "\n" .
+    $s .= (strrpos($topbar_delimiter, '&nbsp;') === strlen($topbar_delimiter) - 6 ? substr($topbar_delimiter, 0, -6) : rtrim($topbar_delimiter))
+        . '</small></td>' . "\n" .
           html_tag( 'td', '', 'right', '', 'width="49%" ' ) . '<small>';
     $comp_action_uri = $comp_uri . '&amp;smaction=forward';
     $s .= makeComposeLink($comp_action_uri, _("Forward"));
@@ -699,7 +701,7 @@ function formatToolbar($mailbox, $passed_id, $passed_ent_id, $message, $color) {
           '<a href="'.$url.'" style="white-space: nowrap;">'._("View Full Header").'</a>';
 
     /* Output the printer friendly link if we are in subtle mode. */
-    $s .= ' | ' .
+    $s .= '&nbsp;| ' .
           printer_friendly_link($mailbox, $passed_id, $passed_ent_id, $color);
     echo $s;
 
