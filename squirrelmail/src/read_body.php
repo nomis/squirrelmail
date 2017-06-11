@@ -149,11 +149,11 @@ function printer_friendly_link($mailbox, $passed_id, $passed_ent_id, $color) {
                   $params . '","Print","width=800,height=600");' . "\n".
                   "  }\n" .
                   "// -->\n" .
-                  "</script>\n" .
-                  "<a href=\"javascript:printFormat();\">$print_text</a>\n";
+                  '</script>' .
+                  "<a href=\"javascript:printFormat();\">$print_text</a>";
     } else {
         $result = '<a target="_blank" href="../src/printer_friendly_bottom.php' .
-                  "$params\">$print_text</a>\n";
+                  "$params\">$print_text</a>";
     }
     return $result;
 }
