@@ -3,7 +3,7 @@
 /**
  * view_text.php -- Displays the main frameset
  *
- * Who knows what this file does. However PUT IT HERE DID NOT PUT
+ * Who knows what this file does. Whoever PUT IT HERE DID NOT PUT
  * A SINGLE FREAKING COMMENT IN! Whoever is responsible for this,
  * be very ashamed.
  *
@@ -106,9 +106,9 @@ echo _("Viewing a text attachment") . ' - ' .
 </b></td><tr><tr><td><center>
 <?php
 if ( $ishtml ) {
-    echo '<a href="' . $unsafe_url . '">' . _("View Unsafe Images") . '</a> | ';
+    echo '<a href="' . $unsafe_url . '" style="white-space: nowrap;">' . _("View Unsafe Images") . '</a>&nbsp;| ';
 }
-echo '<a href="' . $dwnld_url . '">' . _("Download this as a file") . '</a>';
+echo '<a href="' . $dwnld_url . '" style="white-space: nowrap;">' . _("Download this as a file") . '</a>';
 ?>
 </center><br />
 </center></b>
