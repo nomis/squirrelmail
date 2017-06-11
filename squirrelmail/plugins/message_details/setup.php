@@ -54,7 +54,7 @@ function show_message_details() {
                 "  }\n" .
                 "// -->\n" .
                 "</script>" .
-                "&nbsp;|&nbsp;<a href=\"javascript:MessageSource();\" style=\"white-space: nowrap;\">$print_text</A>\n";
+                "&nbsp;| <a href=\"javascript:MessageSource();\" style=\"white-space: nowrap;\">$print_text</a>";
     }
     echo $result;
 }
