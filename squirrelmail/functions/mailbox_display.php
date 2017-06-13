@@ -819,7 +819,7 @@ function mail_message_listing_beginning ($imapConnection,
                               . "$sort" . '&amp;start_messages=1&amp;set_thread=' . "$set_thread"
                               . '&amp;mailbox=' . urlencode($mailbox) . '">' . $thread_name
                               . '</a></small>&nbsp;'
-                     , '', '', '' )
+                     , '', '', ' colspan="2" ' )
                  , '', '', '' );
     }
 
