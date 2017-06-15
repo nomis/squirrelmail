@@ -30,8 +30,13 @@ function squirrelmail_plugin_init_mail_fetch() {
 }
 
 function mail_fetch_link() {
-    displayInternalLink('plugins/mail_fetch/fetch.php', _("Fetch"), '');
-    echo "&nbsp;&nbsp;\n";
+    global $username, $data_dir;
+    $mailfetch_server_number = getPref($data_dir, $username, 'mailfetch_server_number', 0); 
+    if ($mailfetch_server_number > 0) {
+        displayInternalLink('plugins/mail_fetch/fetch.php', _("Fetch"), '');
+        echo "&nbsp;&nbsp;\n";
+    }
+
 }
 
 function mail_fetch_load_pref() {
