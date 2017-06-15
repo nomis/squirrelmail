@@ -28,8 +28,14 @@ function squirrelmail_plugin_init_delete_move_next() {
     $squirrelmail_plugin_hooks['right_main_after_header']['delete_move_next'] = 'delete_move_next_action';
     $squirrelmail_plugin_hooks['read_body_bottom']['delete_move_next'] = 'delete_move_next_read_b';
     $squirrelmail_plugin_hooks['read_body_menu_bottom']['delete_move_next'] = 'delete_move_next_read_t';
-    $squirrelmail_plugin_hooks['options_display_inside']['delete_move_next'] = 'delete_move_next_display_inside';
-    $squirrelmail_plugin_hooks['options_display_save']['delete_move_next'] = 'delete_move_next_display_save';
+
+    // Show options on display preferences page
+    //
+    $squirrelmail_plugin_hooks['optpage_loadhook_display']['delete_move_next']
+      = 'delete_move_next_display_options';
+
+    // $squirrelmail_plugin_hooks['options_display_inside']['delete_move_next'] = 'delete_move_next_display_inside';
+    // $squirrelmail_plugin_hooks['options_display_save']['delete_move_next'] = 'delete_move_next_display_save';
     $squirrelmail_plugin_hooks['loading_prefs']['delete_move_next'] = 'delete_move_next_loading_prefs';
 }
 
@@ -150,7 +156,7 @@ function delete_move_next_read_t() {
 
     global $delete_move_next_t;
 
-    if($delete_move_next_t == 'on') {
+    if($delete_move_next_t == SMPREF_ON) {
         delete_move_next_read('top');
     }
 }
@@ -159,7 +165,7 @@ function delete_move_next_read_b() {
 
     global $delete_move_next_b;
 
-    if ($delete_move_next_b != 'off') {
+    if ($delete_move_next_b != SMPREF_NO) {
         delete_move_next_read('bottom');
     }
 }
@@ -198,23 +204,23 @@ function delete_move_next_read($currloc) {
 
         if ($prev > 0){
             echo "<a href=\"" . $base_uri . "src/read_body.php?passed_id=$prev_if_del&amp;mailbox=$urlMailbox&amp;sort=$sort&amp;startMessage=$startMessage&amp;show_more=0&amp;delete_id=$passed_id&amp;smtoken=" . sm_generate_security_token() . "\">" . _("Delete &amp; Prev") . "</a>" . "&nbsp;|&nbsp;";
-            if ($delete_move_next_show_unread == 'on') {
+            if ($delete_move_next_show_unread == SMPREF_ON) {
                 echo "<a href=\"" . $base_uri . "src/read_body.php?passed_id=$prev_if_del&amp;mailbox=$urlMailbox&amp;sort=$sort&amp;startMessage=$startMessage&amp;show_more=0&amp;unread_id=$passed_id&amp;smtoken=" . sm_generate_security_token() . "\">" . _("Unread &amp; Prev") . "</a>" . "&nbsp;|&nbsp;";
             }
         }
         else {
             echo _("Delete &amp; Prev") . "&nbsp;|&nbsp;";
-            if ($delete_move_next_show_unread == 'on') {
+            if ($delete_move_next_show_unread == SMPREF_ON) {
                 echo _("Unread &amp; Prev") . "&nbsp;|&nbsp;";
             }
         }
         if ($next > 0){
-            if ($delete_move_next_show_unread == 'on') {
+            if ($delete_move_next_show_unread == SMPREF_ON) {
                 echo "<a href=\"" . $base_uri . "src/read_body.php?passed_id=$next_if_del&amp;mailbox=$urlMailbox&amp;sort=$sort&amp;startMessage=$startMessage&amp;show_more=0&amp;unread_id=$passed_id&amp;smtoken=" . sm_generate_security_token() . "\">" . _("Unread &amp; Next") . "</a>&nbsp;|&nbsp;";
             }
             echo "<a href=\"" . $base_uri . "src/read_body.php?passed_id=$next_if_del&amp;mailbox=$urlMailbox&amp;sort=$sort&amp;startMessage=$startMessage&amp;show_more=0&amp;delete_id=$passed_id&amp;smtoken=" . sm_generate_security_token() . "\">" . _("Delete &amp; Next") . "</a>";
         } else {
-            if ($delete_move_next_show_unread == 'on') {
+            if ($delete_move_next_show_unread == SMPREF_ON) {
                 echo _("Unread &amp; Next") . "&nbsp;|&nbsp;";
             }
             echo _("Delete &amp; Next");
@@ -224,14 +230,14 @@ function delete_move_next_read($currloc) {
         if ($next_if_del < 0) {
             $next_if_del = $prev_if_del;
         }
-        if (($delete_move_next_formATtop == 'on') && ($currloc == 'top')) {
+        if (($delete_move_next_formATtop == SMPREF_ON) && ($currloc == 'top')) {
             if ($next_if_del > 0) {
                 delete_move_next_moveNextForm($next_if_del);
             } else {
                 delete_move_next_moveRightMainForm();
             }
         }
-        if (($delete_move_next_formATbottom != 'off') && ($currloc == 'bottom')) {
+        if (($delete_move_next_formATbottom != SMPREF_NO) && ($currloc == 'bottom')) {
             if ($next_if_del > 0) {
                 delete_move_next_moveNextForm($next_if_del);
             } else {
@@ -360,84 +366,88 @@ function delete_move_next_move() {
     }
 }
 
-function delete_move_next_display_inside() {
-    global $username,$data_dir, $delete_move_next_show_unread,
-        $delete_move_next_t, $delete_move_next_formATtop,
-        $delete_move_next_b, $delete_move_next_formATbottom;
+/**
+  * Show options on display preferences page
+  *
+  */
+function delete_move_next_display_options()
+{
+   global $optpage_data, $do_not_convert_delete_move_next_legacy_preferences;
 
-    echo "<tr>" . html_tag('td',_("Delete/Unread/Move/Next Buttons:"),'right','','valign="top"') . "\n".
-         '<td><input type="checkbox" name="delete_move_next_ti" id="delete_move_next_ti"';
+   // convert legacy on/off values to standardized values
+   //
+   // IF YOUR INSTALLATION IS NEW, OR ALL USER PREFS HAVE BEEN CONVERTED
+   // FROM "on"/"off" to 0/1 THEN YOU CAN ADD TO FOLLOWING TO SQUIRRELMAIL'S
+   // config/config_local.php TO AVOID CONVERTING LEGACY VALUES OVER AND OVER:
+   //
+   //    $do_not_convert_delete_move_next_legacy_preferences = TRUE;
+   //
+   // unfortunately, SquirrelMail's prefs storage does a lazy == comparison to the prefs cache,
+   // which means saving a pref as zero will appear equal to "on" (or "off", but that's irrelevant)
+   // so the only way to upgrade these prefs is to save any that are already "on" as 1 (so that
+   // subsequent requests to turn off prefs will actually work)
+   //
+   if (!@include_once(SM_PATH . 'plugins/delete_move_next/config.php'))
+      @include_once(SM_PATH . 'plugins/delete_move_next/config_default.php');
+   if (!$do_not_convert_delete_move_next_legacy_preferences)
+   {
+      global $data_dir, $username, $delete_move_next_t,
+             $delete_move_next_formATtop, $delete_move_next_b,
+             $delete_move_next_formATbottom, $delete_move_next_show_unread;
 
-    if ($delete_move_next_t == 'on') {
-        echo ' checked="checked"';
-    }
-    echo '><label for="delete_move_next_ti"> ' . _("Display at top").
-         '</label> <input type="checkbox" name="delete_move_next_formATtopi" id="delete_move_next_formATtopi"';
+      if ($delete_move_next_t == SMPREF_ON)
+         setPref($data_dir, $username, 'delete_move_next_t', SMPREF_ON);
+      if ($delete_move_next_b == SMPREF_ON)
+         setPref($data_dir, $username, 'delete_move_next_b', SMPREF_ON);
+      if ($delete_move_next_formATtop == SMPREF_ON)
+         setPref($data_dir, $username, 'delete_move_next_formATtop', SMPREF_ON);
+      if ($delete_move_next_formATbottom == SMPREF_ON)
+         setPref($data_dir, $username, 'delete_move_next_formATbottom', SMPREF_ON);
+      if ($delete_move_next_show_unread == SMPREF_ON)
+         setPref($data_dir, $username, 'delete_move_next_show_unread', SMPREF_ON);
+   }
 
-    if ($delete_move_next_formATtop == 'on') {
-        echo ' checked="checked"';
-    }
-    echo '><label for="delete_move_next_formATtopi"> ' . _("with move option") . '</label><br>';
-
-    echo '<input type="checkbox" name="delete_move_next_bi" id="delete_move_next_bi"';
-    if($delete_move_next_b != 'off') {
-        echo ' checked="checked"';
-    }
-    echo '><label for="delete_move_next_bi"> ' . _("Display at bottom") .
-         '</label> <input type="checkbox" name="delete_move_next_formATbottomi" id="delete_move_next_formATbottomi"';
-
-    if ($delete_move_next_formATbottom != 'off') {
-        echo ' checked="checked"';
-    }
-    echo '><label for="delete_move_next_formATbottomi"> ' . _("with move option") . '</label><br>'.
-         '<input type="checkbox" name="delete_move_next_show_unread" id="delete_move_next_show_unread"';
-    if($delete_move_next_show_unread != 'off') {
-        echo ' checked="checked"';
-    }
-    echo '><label for="delete_move_next_show_unread"> ' . _("Show unread options") .
-         "</label></td></tr>\n";
-}
-
-function delete_move_next_display_save() {
-
-    global $username,$data_dir;
-
-    if ( sqgetGlobalVar('delete_move_next_ti', $delete_move_next_ti, SQ_POST) ) {
-        setPref($data_dir, $username, 'delete_move_next_t', 'on');
-    } else {
-        setPref($data_dir, $username, 'delete_move_next_t', "off");
-    }
-
-    if ( sqgetGlobalVar('delete_move_next_formATtopi', $delete_move_next_formATtopi, SQ_POST) ) {
-        setPref($data_dir, $username, 'delete_move_next_formATtop', 'on');
-    } else {
-        setPref($data_dir, $username, 'delete_move_next_formATtop', "off");
-    }
+   // $optpage_data['vals'][2] is the "Message Display" section
+   //
+   $optpage_data['vals'][2][] = array(
+      'name'          => 'delete_move_next_t',
+      'caption'       => _("Display Delete/Move/Next Controls At Top"),
+      'type'          => SMOPT_TYPE_BOOLEAN,
+      'refresh'       => SMOPT_REFRESH_NONE,
+   );
+   $optpage_data['vals'][2][] = array(
+      'name'          => 'delete_move_next_formATtop',
+      'caption'       => _("Include Move Control At Top"),
+      'type'          => SMOPT_TYPE_BOOLEAN,
+      'refresh'       => SMOPT_REFRESH_NONE,
+   );
+   $optpage_data['vals'][2][] = array(
+      'name'          => 'delete_move_next_b',
+      'caption'       => _("Display Delete/Move/Next Controls At Bottom"),
+      'type'          => SMOPT_TYPE_BOOLEAN,
+      'refresh'       => SMOPT_REFRESH_NONE,
+   );
+   $optpage_data['vals'][2][] = array(
+      'name'          => 'delete_move_next_formATbottom',
+      'caption'       => _("Include Move Control At Bottom"),
+      'type'          => SMOPT_TYPE_BOOLEAN,
+      'refresh'       => SMOPT_REFRESH_NONE,
+   );
+   $optpage_data['vals'][2][] = array(
+      'name'          => 'delete_move_next_show_unread',
+      'caption'       => _("Show Unread & Previous/Next Options"),
+      'type'          => SMOPT_TYPE_BOOLEAN,
+      'refresh'       => SMOPT_REFRESH_NONE,
+   );
 
 
-    if ( sqgetGlobalVar('delete_move_next_bi', $delete_move_next_bi, SQ_POST) ) {
-        setPref($data_dir, $username, 'delete_move_next_b', 'on');
-    } else {
-        setPref($data_dir, $username, 'delete_move_next_b', "off");
-    }
-
-    if ( sqgetGlobalVar('delete_move_next_formATbottomi', $delete_move_next_formATbottomi, SQ_POST) ) {
-        setPref($data_dir, $username, 'delete_move_next_formATbottom', 'on');
-    } else {
-        setPref($data_dir, $username, 'delete_move_next_formATbottom', "off");
-    }
-
-    if ( sqgetGlobalVar('delete_move_next_show_unread', $delete_move_next_show_unread, SQ_POST) ) {
-        setPref($data_dir, $username, 'delete_move_next_show_unread', 'on');
-    } else {
-        setPref($data_dir, $username, 'delete_move_next_show_unread', "off");
-    }
 }
 
 function delete_move_next_loading_prefs() {
     global $username,$data_dir, $delete_move_next_show_unread,
            $delete_move_next_t, $delete_move_next_formATtop,
-           $delete_move_next_b, $delete_move_next_formATbottom;
+           $delete_move_next_b, $delete_move_next_formATbottom,
+           $do_not_convert_delete_move_next_legacy_preferences;
 
     $delete_move_next_t = getPref($data_dir, $username, 'delete_move_next_t');
     $delete_move_next_b = getPref($data_dir, $username, 'delete_move_next_b');
@@ -445,5 +455,34 @@ function delete_move_next_loading_prefs() {
     $delete_move_next_formATbottom = getPref($data_dir, $username, 'delete_move_next_formATbottom');
     $delete_move_next_show_unread = getPref($data_dir, $username, 'delete_move_next_show_unread');
 
+    // convert legacy on/off values to standardized values
+    //
+    if (!$do_not_convert_delete_move_next_legacy_preferences)
+    {
+        if (empty($delete_move_next_t) || $delete_move_next_t == 'off')
+            $delete_move_next_t = SMPREF_OFF;
+        else
+            $delete_move_next_t = SMPREF_ON;
+
+        if (empty($delete_move_next_b) || $delete_move_next_b == 'off')
+            $delete_move_next_b = SMPREF_OFF;
+        else
+            $delete_move_next_b = SMPREF_ON;
+
+        if (empty($delete_move_next_formATtop) || $delete_move_next_formATtop == 'off')
+            $delete_move_next_formATtop = SMPREF_OFF;
+        else
+            $delete_move_next_formATtop = SMPREF_ON;
+
+        if (empty($delete_move_next_formATbottom) || $delete_move_next_formATbottom == 'off')
+            $delete_move_next_formATbottom = SMPREF_OFF;
+        else
+            $delete_move_next_formATbottom = SMPREF_ON;
+
+        if (empty($delete_move_next_show_unread) || $delete_move_next_show_unread == 'off')
+            $delete_move_next_show_unread = SMPREF_OFF;
+        else
+            $delete_move_next_show_unread = SMPREF_ON;
+    }
 }
 
