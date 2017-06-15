@@ -97,6 +97,12 @@ Version 1.4.23 - SVN
   - Fixed insufficient sendmail command argument escaping (thanks
     to Mitchel Sahertian, Beyond Security/Dawid Golunski and Filippo
     Cavallarin for bringing this to our attention). [CVE-2017-7692]
+  - Upgraded preferences for the delete_move_next plugin.  Automatic
+    user preference updates are included, but note that if your
+    installation is new, or all user prefs have been converted from
+    "on"/"off" to 0/1 then you can add the following to SquirrelMail's
+    config/config_local.php to avoid convertign legacy values over and over:
+       $do_not_convert_delete_move_next_legacy_preferences = TRUE;
 
 Version 1.4.22 - 12 July 2011
 -----------------------------
