@@ -377,7 +377,7 @@ function delete_move_next_display_options()
    // convert legacy on/off values to standardized values
    //
    // IF YOUR INSTALLATION IS NEW, OR ALL USER PREFS HAVE BEEN CONVERTED
-   // FROM "on"/"off" to 0/1 THEN YOU CAN ADD TO FOLLOWING TO SQUIRRELMAIL'S
+   // FROM "on"/"off" to 0/1 THEN YOU CAN ADD THE FOLLOWING TO SQUIRRELMAIL'S
    // config/config_local.php TO AVOID CONVERTING LEGACY VALUES OVER AND OVER:
    //
    //    $do_not_convert_delete_move_next_legacy_preferences = TRUE;
