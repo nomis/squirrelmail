@@ -103,6 +103,11 @@ Version 1.4.23 - SVN
     "on"/"off" to 0/1 then you can add the following to SquirrelMail's
     config/config_local.php to avoid convertign legacy values over and over:
        $do_not_convert_delete_move_next_legacy_preferences = TRUE;
+  - Added ability to control the display of the "Check Spelling"
+    button provided by the squirrelspell plugin, which allows
+    administrators to offer this plugin but keep it out of the way
+    for users who do not want it. Put sqspell_show_button=0 in
+    default preferences if it should be hidden by default
 
 Version 1.4.22 - 12 July 2011
 -----------------------------
