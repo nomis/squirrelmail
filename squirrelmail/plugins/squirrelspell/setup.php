@@ -60,8 +60,9 @@ function squirrelspell_optpage_register_block() {
  * @return void
  */
 function squirrelspell_setup() {
-    global $javascript_on;
-    if ($javascript_on) {
+    global $data_dir, $username, $javascript_on;
+    $sqspell_show_button = getPref($data_dir, $username, 'sqspell_show_button', 1);
+    if ($javascript_on && $sqspell_show_button) {
         echo '<input type="button" value="'
            . _("Check Spelling")
            . '" name="check_spelling" onclick="window.open(\'../plugins/squirrelspell/sqspell_interface.php\', \'sqspell\', \'status=yes,width=550,height=370,resizable=yes\')" />';
