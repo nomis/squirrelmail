@@ -477,21 +477,15 @@ if( substr( phpversion(), 0, 3 ) == '4.1'  ) {
 echo html_tag( 'div', '<b>' . _("Current Search") . '</b>', 'left' ) . "\n"
    . '<form action="search.php" name="s">'
    . addHidden('smtoken', sm_generate_security_token())
-   . html_tag( 'table', '', '', '', 'width="95%" cellpadding="0" cellspacing="0" border="0"' )
-   . html_tag( 'tr' )
-   . html_tag( 'td', '', 'left' )
    . '<select name="mailbox">'
    . '<option value="All Folders"';
-   if ($mailbox == 'All Folders') {
-       echo ' selected="selected"';
-   }
-   echo '>[ ' . _("All Folders") . " ]</option>\n";
+if ($mailbox == 'All Folders') {
+    echo ' selected="selected"';
+}
+echo '>[ ' . _("All Folders") . " ]</option>\n";
 
-   $show_selected = array(strtolower($mailbox));
-   echo sqimap_mailbox_option_list($imapConnection, $show_selected, 0, $boxes);
-
-   echo '         </select>'.
-        "       </td>\n";
+$show_selected = array(strtolower($mailbox));
+echo sqimap_mailbox_option_list($imapConnection, $show_selected, 0, $boxes);
 
 // FIXME: explain all str_replace calls.
 $what_disp = str_replace(',', ' ', $what);
@@ -499,21 +493,18 @@ $what_disp = str_replace('\\\\', '\\', $what_disp);
 $what_disp = str_replace('\\"', '"', $what_disp);
 $what_disp = str_replace('"', '&quot;', $what_disp);
 
-echo html_tag( 'td', '<input type="text" size="35" name="what" value="' . $what_disp . '" />' . "\n", 'center' )
-     . html_tag( 'td', '', 'right' )
-     . "<select name=\"where\">";
+echo '         </select>'
+   . '<input type="text" size="35" name="what" value="' . $what_disp . '" />'
+   . "<select name=\"where\">";
 s_opt( 'BODY', $where, _("Body") );
 s_opt( 'TEXT', $where, _("Everywhere") );
 s_opt( 'SUBJECT', $where, _("Subject") );
 s_opt( 'FROM', $where, _("From") );
 s_opt( 'CC', $where, _("Cc") );
 s_opt( 'TO', $where, _("To") );
-echo "         </select>\n" .
-     "        </td>\n".
-     html_tag( 'td', '<input type="submit" name="submit" value="' . _("Search") . '" />' . "\n", 'center', '', 'colspan="3"' ) .
-     "     </tr>\n".
-     "   </table>\n".
-     "</form>\n";
+echo "         </select>\n" 
+   . '<input type="submit" name="submit" value="' . _("Search") . '" />'
+   . "</form>\n";
 
 
 do_hook('search_after_form');
