@@ -108,6 +108,8 @@ Version 1.4.23 - SVN
     administrators to offer this plugin but keep it out of the way
     for users who do not want it. Put sqspell_show_button=0 in
     default preferences if it should be hidden by default
+  - Added ability (and user preference) to return to message list
+    after moving a message
 
 Version 1.4.22 - 12 July 2011
 -----------------------------
