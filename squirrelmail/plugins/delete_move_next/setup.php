@@ -175,7 +175,8 @@ function delete_move_next_read($currloc) {
            $color, $where, $what, $currentArrayIndex, $passed_id,
            $mailbox, $sort, $startMessage, $delete_id, $move_id, $base_uri,
            $imapConnection, $auto_expunge, $move_to_trash, $mbx_response,
-           $uid_support, $passed_ent_id, $delete_move_next_show_unread;
+           $uid_support, $passed_ent_id, $delete_move_next_show_unread,
+           $delete_move_next_return_to_message_list;
 
     $urlMailbox = urlencode($mailbox);
 
@@ -231,14 +232,16 @@ function delete_move_next_read($currloc) {
             $next_if_del = $prev_if_del;
         }
         if (($delete_move_next_formATtop == SMPREF_ON) && ($currloc == 'top')) {
-            if ($next_if_del > 0) {
+            if (!$delete_move_next_return_to_message_list
+             && $next_if_del > 0) {
                 delete_move_next_moveNextForm($next_if_del);
             } else {
                 delete_move_next_moveRightMainForm();
             }
         }
         if (($delete_move_next_formATbottom != SMPREF_NO) && ($currloc == 'bottom')) {
-            if ($next_if_del > 0) {
+            if (!$delete_move_next_return_to_message_list
+             && $next_if_del > 0) {
                 delete_move_next_moveNextForm($next_if_del);
             } else {
                 delete_move_next_moveRightMainForm();
@@ -299,7 +302,7 @@ function delete_move_next_moveRightMainForm() {
             _("Move to:") .
             ' <select name="targetMailbox">';
     get_move_target_list(); 
-    echo    ' </select>' .
+    echo    ' </select> ' .
             '<input type=submit value="' . _("Move") . '">'.
             '</small>'.
          '</form>' .
@@ -439,6 +442,12 @@ function delete_move_next_display_options()
       'type'          => SMOPT_TYPE_BOOLEAN,
       'refresh'       => SMOPT_REFRESH_NONE,
    );
+   $optpage_data['vals'][2][] = array(
+      'name'          => 'delete_move_next_return_to_message_list',
+      'caption'       => _("Return To Message List After Move"),
+      'type'          => SMOPT_TYPE_BOOLEAN,
+      'refresh'       => SMOPT_REFRESH_NONE,
+   );
 
 
 }
@@ -447,6 +456,7 @@ function delete_move_next_loading_prefs() {
     global $username,$data_dir, $delete_move_next_show_unread,
            $delete_move_next_t, $delete_move_next_formATtop,
            $delete_move_next_b, $delete_move_next_formATbottom,
+           $delete_move_next_return_to_message_list,
            $do_not_convert_delete_move_next_legacy_preferences;
 
     $delete_move_next_t = getPref($data_dir, $username, 'delete_move_next_t');
@@ -454,6 +464,7 @@ function delete_move_next_loading_prefs() {
     $delete_move_next_formATtop = getPref($data_dir, $username, 'delete_move_next_formATtop');
     $delete_move_next_formATbottom = getPref($data_dir, $username, 'delete_move_next_formATbottom');
     $delete_move_next_show_unread = getPref($data_dir, $username, 'delete_move_next_show_unread');
+    $delete_move_next_return_to_message_list = getPref($data_dir, $username, 'delete_move_next_return_to_message_list', 1);
 
     // convert legacy on/off values to standardized values
     //
