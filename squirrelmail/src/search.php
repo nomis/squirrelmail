@@ -258,20 +258,18 @@ function printSearchMessages($msgs,$mailbox, $cnt, $imapConnection, $where, $wha
         mail_message_listing_beginning($imapConnection, $mailbox, $sort,
                                        $msg_cnt_str, $toggle_all, 1);
 
-        echo '</td></tr>';
         echo '<tr><td height="5" bgcolor="'.$color[4].'"></td></tr>';
         echo '<tr><td>';
         echo '    <table width="100%" cellpadding="1" cellspacing="0" align="center"'.' border="0" bgcolor="'.$color[9].'">';
         echo '     <tr><td>';
         echo '       <table width="100%" cellpadding="1" cellspacing="0" align="center" border="0" bgcolor="'.$color[5].'">';
-        echo '<tr><td>';
 
         printHeader($mailbox, 6, $color, false);
 
         displayMessageArray($imapConnection, $cnt, 1,
             $msort, $mailbox, $sort, $color, $cnt, $where, $what);
 
-        echo '</td></tr></table></td></tr></table>';
+        echo '</table></td></tr></table>';
         // space for paginator argument is intentional, so html_tag() closes the tag
         mail_message_listing_end($cnt, ' ', $msg_cnt_str, $color);
         echo "\n</table></form>\n\n";
