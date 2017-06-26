@@ -272,7 +272,8 @@ function printSearchMessages($msgs,$mailbox, $cnt, $imapConnection, $where, $wha
             $msort, $mailbox, $sort, $color, $cnt, $where, $what);
 
         echo '</td></tr></table></td></tr></table>';
-        mail_message_listing_end($cnt, '', $msg_cnt_str, $color);
+        // space for paginator argument is intentional, so html_tag() closes the tag
+        mail_message_listing_end($cnt, ' ', $msg_cnt_str, $color);
         echo "\n</table></form>\n\n";
     }
 }
