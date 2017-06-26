@@ -17,6 +17,9 @@
 /**
  * Generate html tags
  *
+ * NOTE!  If $val is non-empty, a closing tag will be added after $val
+ *        Otherwise, NO closing tag is provided!
+ *
  * @param string $tag Tag to output
  * @param string $val Value between tags
  * @param string $align Alignment (left, center, etc)
