@@ -728,7 +728,7 @@ function mail_message_listing_beginning ($imapConnection,
                                          $start_msg = 1) {
     global $color, $auto_expunge, $base_uri, $thread_sort_messages,
            $allow_thread_sort, $allow_server_sort, $server_sort_order,
-           $PHP_SELF;
+           $PHP_SELF, $javascript_on;
 
     $php_self = $PHP_SELF;
     /* fix for incorrect $PHP_SELF */
@@ -741,6 +741,25 @@ function mail_message_listing_beginning ($imapConnection,
         $source_url = $regs[1];
     } else {
         $source_url = $php_self;
+    }
+
+    if ($javascript_on) {
+        $safe_name = preg_replace("/[^0-9A-Za-z_]/", '_', $mailbox);
+        $form_name = "FormMsgs" . $safe_name;
+        $func_name = "CheckAll" . $safe_name;
+        echo '<script language="JavaScript" type="text/javascript">'
+                . "\n<!-- \n"
+                . "function " . $func_name . "() {\n"
+                . "  var c;\n"
+                . "  for (var i = 0; i < document." . $form_name . ".elements.length; i++) {\n"
+                . "    c = document." . $form_name . ".elements[i];\n"
+                . "    if(c.type == 'checkbox' && c.name.substring(0,3) == 'msg'){\n"
+                . "      c.checked = !c.checked;\n"
+                . "    }\n"
+                . "  }\n"
+                . "}\n"
+                . "//-->\n"
+                . '</script>';
     }
 
     /*
