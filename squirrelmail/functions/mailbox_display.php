@@ -988,19 +988,7 @@ function get_selectall_link($start_msg, $sort) {
     if ($javascript_on) {
         $safe_name = preg_replace("/[^0-9A-Za-z_]/", '_', $mailbox);
         $func_name = "CheckAll" . $safe_name;
-        $form_name = "FormMsgs" . $safe_name;
-        $result = '<script language="JavaScript" type="text/javascript">'
-                . "\n<!-- \n"
-                . "function " . $func_name . "() {\n"
-                . "  for (var i = 0; i < document." . $form_name . ".elements.length; i++) {\n"
-                . "    if(document." . $form_name . ".elements[i].type == 'checkbox'){\n"
-                . "      document." . $form_name . ".elements[i].checked = "
-                . "        !(document." . $form_name . ".elements[i].checked);\n"
-                . "    }\n"
-                . "  }\n"
-                . "}\n"
-                . "//-->\n"
-                . '</script><a href="javascript:void(0)" onClick="' . $func_name . '();">' . _("Toggle All")
+        $result = '<a href="javascript:void(0)" onClick="' . $func_name . '();">' . _("Toggle All")
 /*                . '</script><a href="javascript:' . $func_name . '()">' . _("Toggle All")*/
                 . "</a>\n";
     } else {
