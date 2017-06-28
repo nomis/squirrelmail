@@ -984,11 +984,12 @@ function get_selectall_link($start_msg, $sort) {
     global $checkall, $what, $where, $mailbox, $javascript_on;
     global $PHP_SELF, $PG_SHOWNUM;
 
+    $whitespace_style = ' style="white-space:nowrap" ';
     $result = '';
     if ($javascript_on) {
         $safe_name = preg_replace("/[^0-9A-Za-z_]/", '_', $mailbox);
         $func_name = "CheckAll" . $safe_name;
-        $result = '<a href="javascript:void(0)" onClick="' . $func_name . '();">' . _("Toggle All")
+        $result = '<a href="javascript:void(0)" onClick="' . $func_name . '();"' . $whitespace_style . '>' . _("Toggle All")
 /*                . '</script><a href="javascript:' . $func_name . '()">' . _("Toggle All")*/
                 . "</a>\n";
     } else {
@@ -1009,7 +1010,7 @@ function get_selectall_link($start_msg, $sort) {
             $result .= '&amp;where=' . urlencode($where)
                     .  '&amp;what=' . urlencode($what);
         }
-        $result .= "\">";
+        $result .= "\"$whitespace_style>";
 
         if (isset($checkall) && ($checkall == '1')) {
             $result .= _("Unselect All");
@@ -1240,7 +1241,7 @@ function get_paginator_str($box, $start_msg, $end_msg, $num_msgs,
     if (($prv_str != '') || ($nxt_str != '')) {
         $all_str = "<a href=\"right_main.php?PG_SHOWALL=1"
                  . "&amp;use_mailbox_cache=$use&amp;startMessage=1&amp;mailbox=$box\" "
-                 . ">" . _("Show All") . '</a>';
+                 . "style=\"white-space:nowrap\">" . _("Show All") . '</a>';
     }
 
     /* Last but not least, get the value for the toggle all link. */
@@ -1252,11 +1253,11 @@ function get_paginator_str($box, $start_msg, $end_msg, $num_msgs,
      * a different approach would be any easier to read. ;)
      */
     $result = '';
-    $result .= ($prv_str != '' ? $prv_str . $spc . $sep . $spc : '');
-    $result .= ($nxt_str != '' ? $nxt_str . $spc . $sep . $spc : '');
+    $result .= ($prv_str != '' ? $prv_str . $spc . $sep . ' ' : '');
+    $result .= ($nxt_str != '' ? $nxt_str . $spc . $sep . ' ' : '');
     $result .= ($pg_str  != '' ? $pg_str : '');
-    $result .= ($all_str != '' ? $sep . $spc . $all_str . $spc : '');
-    $result .= ($result  != '' ? $sep . $spc . $tgl_str: $tgl_str);
+    $result .= ($all_str != '' ? $sep . ' ' . $all_str . $spc : '');
+    $result .= ($result  != '' ? $sep . ' ' . $tgl_str: $tgl_str);
 
     /* If the resulting string is blank, return a non-breaking space. */
     if ($result == '') {
