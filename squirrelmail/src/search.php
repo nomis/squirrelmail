@@ -324,12 +324,7 @@ if (!empty($submit)) {
     sm_validate_security_token($submitted_token, -1, TRUE);
 }
 
-if ($submit == _("Search") && !empty($what)) {
-    if ($recent_count > 0) {
-        update_recent($what, $where, $mailbox, $username, $data_dir);
-    }
-}
-elseif ($submit == 'forget' && isset($count)) {
+if ($submit == 'forget' && isset($count)) {
     forget_recent($count, $username, $data_dir);
 }
 elseif ($submit == 'save' && isset($count)) {
@@ -337,6 +332,12 @@ elseif ($submit == 'save' && isset($count)) {
 }
 elseif ($submit == 'delete' && isset($count)) {
     delete_saved($count, $username, $data_dir);
+}
+elseif (!empty($submit) && !empty($what)) {
+    $submit = _("Search");
+    if ($recent_count > 0) {
+        update_recent($what, $where, $mailbox, $username, $data_dir);
+    }
 }
 
 do_hook('search_before_form');
