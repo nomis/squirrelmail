@@ -604,7 +604,7 @@ class SquirrelOption {
             default: $rows = 5; $cols =  50;
         }
         $result = "<textarea name=\"new_$this->name\" rows=\"$rows\" "
-                . "cols=\"$cols\" $this->script>"
+                . "cols=\"$cols\" $this->script>\n"
                 . sm_encode_html_special_chars($this->value) . "</textarea>\n";
         return ($result);
     }

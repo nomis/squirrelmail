@@ -129,7 +129,7 @@ function addTextArea($name, $text = '', $cols = 40, $rows = 10, $attr = '') {
     return '<textarea name="'.sm_encode_html_special_chars($name).'" '.
         ($name !== null && strpos($attr, 'id="') === FALSE ? 'id="'.sm_encode_html_special_chars(strtr($name, '[]', '__')).'" ' : ' ').
         'rows="'.(int)$rows .'" cols="'.(int)$cols.'" '.
-        $attr . '>'.sm_encode_html_special_chars($text) ."</textarea>\n";
+        $attr . '>'. "\n" . sm_encode_html_special_chars($text) ."</textarea>\n";
 }
 
 /**
