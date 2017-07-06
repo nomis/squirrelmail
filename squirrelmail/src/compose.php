@@ -1305,13 +1305,13 @@ function showInputForm ($session, $values=false) {
         echo '   <tr>' . "\n" .
             '      <td bgcolor="' . $color[0] . '" colspan="2" align="center">' . "\n" .
             '         <textarea name="body" id="body" rows="' . (int)$editor_height .
-            '" cols="' . (int)$editor_size . '" wrap="virtual"' . $onfocus . '>';
+            '" cols="' . (int)$editor_size . '" wrap="virtual"' . $onfocus . ">\n";
     }
     else {
         echo '   <tr>' . "\n" .
             '      <td bgcolor="' . $color[4] . '" colspan="2">' . "\n" .
             '         &nbsp;&nbsp;<textarea name="body" id="body" rows="' . (int)$editor_height .
-            '" cols="' . (int)$editor_size . '" wrap="virtual"' . $onfocus . '>';
+            '" cols="' . (int)$editor_size . '" wrap="virtual"' . $onfocus . ">\n";
     }
 
     if ($use_signature == true && $newmail == true && !isset($from_htmladdr_search)) {
