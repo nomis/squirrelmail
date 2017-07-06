@@ -50,11 +50,12 @@ function addr_insert_hidden() {
     global $body, $subject, $send_to, $send_to_cc, $send_to_bcc, $mailbox, $action,
            $mailprio, $request_mdn, $request_dr, $identity, $session, $composeMessage;
 
-   if (substr($body, 0, 1) == "\r") {
-       echo addHidden('body', "\n".$body);
-   } else {
+   // someone tell me why this is needed and if so, why it isn't something like replace \r\n with \n
+   // if (substr($body, 0, 1) == "\r") {
+   //     echo addHidden('body', "\n".$body);
+   // } else {
        echo addHidden('body', $body);
-   }
+   // }
 
    if (is_object($composeMessage) && $composeMessage->entities)
        echo addHidden('attachments', serialize($composeMessage->entities));
