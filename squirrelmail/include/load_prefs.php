@@ -73,9 +73,10 @@ if (isset($chosen_theme) && $found_theme && (file_exists($chosen_theme))) {
 }
 
 
-if (!defined('download_php')) {
+// "download_php" is found nowhere in the source - this must be some orphaned legacy code
+// if (!defined('download_php')) {
     sqsession_register($theme_css, 'theme_css');
-}
+// }
 
 
 /* Load the user's special folder preferences */
