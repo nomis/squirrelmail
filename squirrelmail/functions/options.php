@@ -84,6 +84,7 @@ class SquirrelOption {
     var $post_script;
     var $trailing_text;
     var $trailing_text_small;
+    var $trailing_text_is_html;
     var $yes_text;
     var $no_text;
     var $use_add_widget;
@@ -121,6 +122,7 @@ class SquirrelOption {
         $this->post_script = '';
         $this->trailing_text = '';
         $this->trailing_text_small = FALSE;
+        $this->trailing_text_is_html = FALSE;
         $this->yes_text = '';
         $this->no_text = '';
         $this->use_add_widget = TRUE;
@@ -196,6 +198,11 @@ class SquirrelOption {
     /* Set the trailing text for this option. */
     function setTrailingTextSmall($trailing_text_small) {
         $this->trailing_text_small = $trailing_text_small;
+    }
+
+    /* Set the trailing text for this option. */
+    function setTrailingTextIsHtml($trailing_text_is_html) {
+        $this->trailing_text_is_html = $trailing_text_is_html;
     }
 
     /* Set the yes text for this option. */
@@ -378,7 +385,7 @@ class SquirrelOption {
                 . sm_encode_html_special_chars($this->value)
                 . "\" size=\"$width\" $this->script /> " 
                 . ($this->trailing_text_small ? '<small>' : '')
-                . sm_encode_html_special_chars($this->trailing_text)
+                . ($this->trailing_text_is_html ? $this->trailing_text : sm_encode_html_special_chars($this->trailing_text))
                 . ($this->trailing_text_small ? '</small>' : '')
                 . "\n";
         return $result;
@@ -500,7 +507,7 @@ class SquirrelOption {
         /* Close the select tag and return our happy result. */
         $result .= '</select> '
                 . ($this->trailing_text_small ? '<small>' : '')
-                . sm_encode_html_special_chars($this->trailing_text)
+                . ($this->trailing_text_is_html ? $this->trailing_text : sm_encode_html_special_chars($this->trailing_text))
                 . ($this->trailing_text_small ? '</small>' : '')
                 . "\n";
         return $result;
@@ -587,7 +594,7 @@ class SquirrelOption {
         /* Close the select tag and return our happy result. */
         $result .= '</select> '
                 . ($this->trailing_text_small ? '<small>' : '')
-                . sm_encode_html_special_chars($this->trailing_text)
+                . ($this->trailing_text_is_html ? $this->trailing_text : sm_encode_html_special_chars($this->trailing_text))
                 . ($this->trailing_text_small ? '</small>' : '')
                 . "\n";
         return $result;
@@ -674,7 +681,7 @@ class SquirrelOption {
                     . "\" $yes_chk " . $this->script . ' />&nbsp;'
                     . '<label for="new_' . $this->name . '">' 
                     . ($this->trailing_text_small ? '<small>' : '')
-                    . sm_encode_html_special_chars($this->trailing_text)
+                    . ($this->trailing_text_is_html ? $this->trailing_text : sm_encode_html_special_chars($this->trailing_text))
                     . ($this->trailing_text_small ? '</small>' : '')
                     . '</label>';
         }
@@ -1161,7 +1168,7 @@ class SquirrelOption {
                 . sm_encode_html_special_chars($this->comment)
                 . "\" $this->script /> "
                 . ($this->trailing_text_small ? '<small>' : '')
-                . sm_encode_html_special_chars($this->trailing_text)
+                . ($this->trailing_text_is_html ? $this->trailing_text : sm_encode_html_special_chars($this->trailing_text))
                 . ($this->trailing_text_small ? '</small>' : '')
                 . "\n";
 
@@ -1390,6 +1397,11 @@ function create_option_groups($optgrps, $optvals) {
                 $next_option->setTrailingTextSmall($optset['trailing_text_small']);
             }
 
+            /* If provided, set whether the trailing_text is HTML (and thus should not be sanitized - CAREFUL!) for this option. */
+            if (isset($optset['trailing_text_is_html'])) {
+                $next_option->setTrailingTextIsHtml($optset['trailing_text_is_html']);
+            }
+
             /* If provided, set the yes_text for this option. */
             if (isset($optset['yes_text'])) {
                 $next_option->setYesText($optset['yes_text']);
@@ -1479,6 +1491,7 @@ function print_option_groups($option_groups) {
                 //
                 if ($option->type == SMOPT_TYPE_TEXTAREA && !empty($option->trailing_text))
 //TODO: I guess we should change this to obey trailing_text_small, but that would break existing plugins
+//TODO: What about trailing_text_is_html?  Why wasn't this being sanitized with sm_encode_html_special_chars()?????
                     $option->caption .= '<br /><small>' . $option->trailing_text . '</small>';
 
                 global $color;
