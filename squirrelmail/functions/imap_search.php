@@ -20,6 +20,12 @@ require_once(SM_PATH . 'functions/date.php');
 require_once(SM_PATH . 'functions/mailbox_display.php');
 require_once(SM_PATH . 'functions/mime.php');
 
+/**
+  * @param string $search_where The location to search (see RFC3501 section 6.4.4)
+  *                             If this string contains underscores, they are
+  *                             interpreted as an OR condition, thus "TO_CC" will
+  *                             result in a search of the TO *or* CC headers
+  */
 function sqimap_search($imapConnection, $search_where, $search_what, $mailbox,
                        $color, $search_position = '', $search_all, $count_all) {
 
@@ -44,6 +50,14 @@ function sqimap_search($imapConnection, $search_where, $search_what, $mailbox,
         }
     }
 
+    $and_search = TRUE;
+    while ($pos = strpos($search_where, '_')) {
+        $and_search = FALSE;
+        $search_where = 'OR ' . substr($search_where, 0, $pos) . ' %s ' . substr($search_where, $pos + 1);
+    }
+    $search_where .= ' %s ';
+    $search_parts = array_filter(explode(' %s ', $search_where));
+
     $search_literal = array('commands'=>array(), 'literal_args'=>array());
     $use_search_literal = FALSE;
     foreach ($multi_search as $string) {
@@ -53,12 +67,14 @@ function sqimap_search($imapConnection, $search_where, $search_what, $mailbox,
             $string = mb_convert_encoding($string, 'JIS', 'auto');
         if (preg_match('/["\\\\\r\n\x80-\xff]/', $string))
             $use_search_literal = TRUE;
-        $search_literal['commands'][] = $search_where;
-        $search_literal['literal_args'][] = $string;
-        $search_string .= $search_where
-                       . ' "'
+        foreach ($search_parts as $chunk) {
+            $search_literal['commands'][] = $chunk;
+            $search_literal['literal_args'][] = $string;
+        }
+        $search_string .= str_replace('%s', 
+                         '"'
                        . str_replace(array('\\', '"'), array('\\\\', '\\"'), $string)
-                       . '" ';
+                       . '"', $search_where);
     }
 
     $search_string = trim($search_string);
@@ -74,7 +90,7 @@ function sqimap_search($imapConnection, $search_where, $search_what, $mailbox,
         } else {
             $ss = "SEARCH CHARSET "
                 . strtoupper($languages[$squirrelmail_language]['CHARSET'])
-                . " ALL $search_string";
+                . ($and_search ? ' ALL' : '') . " $search_string";
         }
     } else {
         if ($use_search_literal) {
