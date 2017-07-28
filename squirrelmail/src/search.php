@@ -51,7 +51,7 @@ if (!sqgetGlobalVar('what',$what,SQ_GET)) {
     $what='';
 }
 if (! sqgetGlobalVar('where',$where,SQ_GET) ||
-    ! in_array( $where, array('BODY','TEXT','SUBJECT','FROM','CC','TO'))) {
+    ! in_array( $where, array('BODY','TEXT','SUBJECT','FROM','CC','TO','TO_CC','TO_CC_FROM','TO_CC_FROM_SUBJECT'))) {
     // make sure that 'where' is one if standard IMAP SEARCH keywords
     if (isset($mailbox) && isSentMailbox($mailbox, TRUE))
         $where = 'TO';
@@ -502,6 +502,9 @@ s_opt( 'SUBJECT', $where, _("Subject") );
 s_opt( 'FROM', $where, _("From") );
 s_opt( 'CC', $where, _("Cc") );
 s_opt( 'TO', $where, _("To") );
+s_opt( 'TO_CC', $where, _("To/Cc") );
+s_opt( 'TO_CC_FROM', $where, _("To/Cc/From") );
+s_opt( 'TO_CC_FROM_SUBJECT', $where, _("To/Cc/From/Subject") );
 echo "         </select>\n" 
    . '<input type="submit" name="submit" value="' . _("Search") . '" />'
    . "</form>\n";
