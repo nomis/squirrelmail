@@ -110,6 +110,8 @@ Version 1.4.23 - SVN
     default preferences if it should be hidden by default
   - Added ability (and user preference) to return to message list
     after moving a message
+  - Search enhancement: Added ability to search in more than one
+    header without having to search the body
 
 Version 1.4.22 - 12 July 2011
 -----------------------------
