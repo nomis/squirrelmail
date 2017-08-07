@@ -72,7 +72,7 @@ function formatMailboxName($imapConnection, $box_array) {
     /* Create the link for this folder. */
     if ($status !== false) {
         $line .= '<a href="right_main.php?PG_SHOWALL=0&amp;sort=0&amp;startMessage=1&amp;mailbox='.
-                 $mailboxURL.'" target="right" style="text-decoration:none">';
+                 $mailboxURL.'" target="right" title="' . ($mailbox == 'INBOX' ? _("INBOX") : $mailbox) . '" style="text-decoration:none">';
     }
     if ($special_color) {
         $line .= "<font color=\"$color[11]\">";
