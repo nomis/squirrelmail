@@ -703,7 +703,10 @@ class SquirrelOption {
                        . '<label for="new_' . $this->name . '_no">' . (!empty($this->no_text) ? sm_encode_html_special_chars($this->no_text) : _("No")) . '</label>';
     
             /* Build the combined "boolean widget". */
-            $result = "$yes_option&nbsp;&nbsp;&nbsp;&nbsp;$no_option";
+            $result = "$yes_option&nbsp;&nbsp;&nbsp;&nbsp;$no_option "
+                    . ($this->trailing_text_small ? '<small>' : '')
+                    . ($this->trailing_text_is_html ? $this->trailing_text : sm_encode_html_special_chars($this->trailing_text))
+                    . ($this->trailing_text_small ? '</small>' : '');
 
         }
 
@@ -1485,7 +1488,9 @@ function print_option_groups($option_groups) {
                 if ($option->type == SMOPT_TYPE_BOOLEAN_CHECKBOX
                  || $option->type == SMOPT_TYPE_BOOLEAN)
                     $option->caption = '<label for="new_' . $option->name . '">'
-                                     . $option->caption . '</label>';
+                                     . $option->caption . ':</label>';
+                else if (!empty($option->caption))
+                    $option->caption .= ':';
 
                 // text area trailing text just goes under the caption
                 //
@@ -1502,7 +1507,7 @@ function print_option_groups($option_groups) {
                     echo html_tag('tr', "\n" . html_tag('td', "\n" . html_tag('table', "\n" . html_tag('tr', "\n" . html_tag('td', "\n" . $option->createHTMLWidget())), '', $color[$info_bgcolor], 'width="' . $info_width . '%"'), 'center' ,'', 'colspan="2" valign="middle"')) ."\n";
                 else
                     echo html_tag( 'tr', "\n".
-                               html_tag( 'td', $option->caption . (!empty($option->caption) ? ':' : ''), 'right' ,'', 'valign="middle"' . ($option->caption_wrap ? '' : ' style="white-space:nowrap"') ) .
+                               html_tag( 'td', $option->caption, 'right' ,'', 'valign="middle"' . ($option->caption_wrap ? '' : ' style="white-space:nowrap"') ) .
                                html_tag( 'td', $option->createHTMLWidget(), 'left' )
                            ) ."\n";
             } else {
