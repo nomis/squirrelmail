@@ -357,7 +357,7 @@ function displayPageHeader($color, $mailbox, $xtra='', $session=false) {
     echo "&nbsp;&nbsp;\n";
     displayInternalLink ('src/options.php', _("Options"));
     echo "&nbsp;&nbsp;\n";
-    displayInternalLink ("src/search.php?mailbox=$urlMailbox", _("Search"));
+    displayInternalLink ("src/search.php?mailbox=$urlMailbox&amp;what=", _("Search"));
     echo "&nbsp;&nbsp;\n";
     displayInternalLink ('src/help.php', _("Help"));
     echo "&nbsp;&nbsp;\n";
