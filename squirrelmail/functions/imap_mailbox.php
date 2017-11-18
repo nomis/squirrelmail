@@ -242,6 +242,10 @@ function sqimap_mailbox_exists ($imap_stream, $mailbox) {
  *                               and when FALSE, error status
  *                               is returned to the caller
  *                               (OPTIONAL; default is TRUE)
+ * @return mixed Void/unpredictable when handling errors internally
+ *               or an array when $handle_errors is false; in that
+ *               case, good responses are returned in an array,
+ *               bad ones with an empty array.
  */
 function sqimap_mailbox_select ($imap_stream, $mailbox, $handle_errors=true) {
     global $auto_expunge;
