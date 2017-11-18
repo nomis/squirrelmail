@@ -854,6 +854,8 @@ function newMail ($mailbox='', $passed_id='', $passed_ent_id='', $action='', $se
                 }
                 sqUnWordWrap($body);
                 $composeMessage = getAttachments($message, $composeMessage, $passed_id, $entities, $imapConnection);
+                if (!empty($orig_header->x_sm_flag_reply))
+                    $composeMessage->rfc822_header->more_headers['X-SM-Flag-Reply'] = $orig_header->x_sm_flag_reply;
 //TODO: completely unclear if should be using $compose_session instead of $session below
                 $compose_messages[$session] = $composeMessage;
                 sqsession_register($compose_messages,'compose_messages');
@@ -1748,6 +1750,18 @@ function deliverMessage(&$composeMessage, $draft=false) {
         $draft = $hookReturn[2];
     }
 
+    // remove special header if present and prepare to mark
+    // a message that a draft was composed in reply to
+    if (!empty($composeMessage->rfc822_header->x_sm_flag_reply) && !$draft) {
+        global $passed_id, $mailbox, $action;
+        list($passed_id, $mailbox) = explode('::', $rfc822_header->x_sm_flag_reply, 2);
+        unset($composeMessage->rfc822_header->x_sm_flag_reply);
+        unset($composeMessage->rfc822_header->more_headers['X-SM-Flag-Reply']);
+
+        // tricks the code below that marks the reply
+        $action = 'reply';
+    }
+
     if (!$useSendmail && !$draft) {
         require_once(SM_PATH . 'class/deliver/Deliver_SMTP.class.php');
         $deliver = new Deliver_SMTP();
@@ -1783,6 +1797,13 @@ function deliverMessage(&$composeMessage, $draft=false) {
         $imap_stream = sqimap_login($username, $key, $imapServerAddress,
                 $imapPort, 0, $imap_stream_options);
         if (sqimap_mailbox_exists ($imap_stream, $draft_folder)) {
+//TODO: this can leak private information about folders and message IDs if messages are accessed/sent from another client --- should this feature be optional?
+            // make note of the message to mark as having been replied to
+            global $passed_id, $mailbox, $action;
+            if ($action == 'reply' || $action == 'reply_all') {
+                $composeMessage->rfc822_header->more_headers['X-SM-Flag-Reply'] = $passed_id . '::' . $mailbox;
+            }
+
             require_once(SM_PATH . 'class/deliver/Deliver_IMAP.class.php');
             $imap_deliver = new Deliver_IMAP();
             $succes = $imap_deliver->mail($composeMessage, $imap_stream, $reply_id, $reply_ent_id, $imap_stream, $draft_folder);
@@ -1819,8 +1840,12 @@ function deliverMessage(&$composeMessage, $draft=false) {
         // mark original message as having been replied to if applicable
         global $passed_id, $mailbox, $action;
         if ($action == 'reply' || $action == 'reply_all') {
-            sqimap_mailbox_select ($imap_stream, $mailbox);
-            sqimap_messages_flag ($imap_stream, $passed_id, $passed_id, 'Answered', false);
+            // select errors here could be due to a draft reply being sent
+            // after the original message's mailbox is moved or deleted
+            $result = sqimap_mailbox_select ($imap_stream, $mailbox, false);
+            // a non-empty return from above means we can proceed
+            if (!empty($result))
+                sqimap_messages_flag ($imap_stream, $passed_id, $passed_id, 'Answered', false);
         }
 
 
