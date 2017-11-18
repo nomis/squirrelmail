@@ -239,6 +239,9 @@ function sqimap_mailbox_exists ($imap_stream, $mailbox) {
  *                               are handled herein, causing
  *                               an error to be displayed on
  *                               screen and execution to stop
+ *                               and when FALSE, error status
+ *                               is returned to the caller
+ *                               (OPTIONAL; default is TRUE)
  */
 function sqimap_mailbox_select ($imap_stream, $mailbox, $handle_errors=true) {
     global $auto_expunge;
