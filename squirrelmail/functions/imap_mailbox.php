@@ -234,8 +234,13 @@ function sqimap_mailbox_exists ($imap_stream, $mailbox) {
 
 /**
  * Selects a mailbox
+ *
+ * @param boolean $handle_errors When TRUE, IMAP errors
+ *                               are handled herein, causing
+ *                               an error to be displayed on
+ *                               screen and execution to stop
  */
-function sqimap_mailbox_select ($imap_stream, $mailbox) {
+function sqimap_mailbox_select ($imap_stream, $mailbox, $handle_errors=true) {
     global $auto_expunge;
 
     if (empty($mailbox)) {
@@ -263,7 +268,7 @@ function sqimap_mailbox_select ($imap_stream, $mailbox) {
     $mailbox = str_replace(array("\r","\n"), array("",""),$mailbox);
 
     $read = sqimap_run_command($imap_stream, "SELECT \"$mailbox\"",
-                               true, $response, $message);
+                               $handle_errors, $response, $message);
     $result = array();
     for ($i = 0, $cnt = count($read); $i < $cnt; $i++) {
         if (preg_match('/^\*\s+OK\s\[(\w+)\s(\w+)\]/',$read[$i], $regs)) {
