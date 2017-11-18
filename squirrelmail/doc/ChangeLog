@@ -112,6 +112,9 @@ Version 1.4.23 - SVN
     after moving a message
   - Search enhancement: Added ability to search in more than one
     header without having to search the body
+  - Add ability for saved drafts to indicate if they are a reply and
+    if so, to which message, and mark that message as replied when
+    the draft is finally sent
 
 Version 1.4.22 - 12 July 2011
 -----------------------------
