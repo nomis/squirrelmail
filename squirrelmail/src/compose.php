@@ -1754,12 +1754,10 @@ function deliverMessage(&$composeMessage, $draft=false) {
     // a message that a draft was composed in reply to
     if (!empty($composeMessage->rfc822_header->x_sm_flag_reply) && !$draft) {
         global $passed_id, $mailbox, $action;
-        list($passed_id, $mailbox) = explode('::', $rfc822_header->x_sm_flag_reply, 2);
+        // tricks the code below that marks the reply
+        list($action, $passed_id, $mailbox) = explode('::', $rfc822_header->x_sm_flag_reply, 3);
         unset($composeMessage->rfc822_header->x_sm_flag_reply);
         unset($composeMessage->rfc822_header->more_headers['X-SM-Flag-Reply']);
-
-        // tricks the code below that marks the reply
-        $action = 'reply';
     }
 
     if (!$useSendmail && !$draft) {
@@ -1801,7 +1799,7 @@ function deliverMessage(&$composeMessage, $draft=false) {
             // make note of the message to mark as having been replied to
             global $passed_id, $mailbox, $action;
             if ($action == 'reply' || $action == 'reply_all') {
-                $composeMessage->rfc822_header->more_headers['X-SM-Flag-Reply'] = $passed_id . '::' . $mailbox;
+                $composeMessage->rfc822_header->more_headers['X-SM-Flag-Reply'] = $action . '::' . $passed_id . '::' . $mailbox;
             }
 
             require_once(SM_PATH . 'class/deliver/Deliver_IMAP.class.php');
