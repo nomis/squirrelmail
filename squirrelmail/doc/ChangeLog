@@ -115,6 +115,8 @@ Version 1.4.23 - SVN
   - Add ability for saved drafts to indicate if they are a reply and
     if so, to which message, and mark that message as replied when
     the draft is finally sent
+  - Added option to allow returning to the message one had been
+    replying to after sending
 
 Version 1.4.22 - 12 July 2011
 -----------------------------
