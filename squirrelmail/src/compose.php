@@ -507,7 +507,8 @@ if ($send) {
         }
         else {
             global $return_to_message_after_reply;
-            if (($action === 'reply' || $action === 'reply_all') && $return_to_message_after_reply)
+            if (($action === 'reply' || $action === 'reply_all' || $action === 'forward' || $action === 'forward_as_attachment')
+             && $return_to_message_after_reply)
                 Header("Location: $location/read_body.php?passed_id=$passed_id&mailbox=$urlMailbox&sort=$sort".
                         "&startMessage=$startMessage");
             else
