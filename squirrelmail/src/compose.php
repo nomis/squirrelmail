@@ -506,7 +506,7 @@ if ($send) {
             Header("Location: $location/compose.php?mail_sent=yes");
         }
         else {
-            $return_to_message_after_reply = getPref($data_dir, $username, 'return_to_message_after_reply', 0);
+            global $return_to_message_after_reply;
             if (($action === 'reply' || $action === 'reply_all') && $return_to_message_after_reply)
                 Header("Location: $location/read_body.php?passed_id=$passed_id&mailbox=$urlMailbox&sort=$sort".
                         "&startMessage=$startMessage");

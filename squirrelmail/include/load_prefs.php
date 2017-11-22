@@ -243,6 +243,9 @@ $do_not_reply_to_self =
 $include_self_reply_all =
     getPref($data_dir, $username, 'include_self_reply_all', SMPREF_ON);
 
+$return_to_message_after_reply =
+    getPref($data_dir, $username, 'return_to_message_after_reply', SMPREF_OFF);
+
 /* Page selector options */
 $page_selector = getPref($data_dir, $username, 'page_selector', SMPREF_ON);
 $page_selector_max = getPref($data_dir, $username, 'page_selector_max', 10);
