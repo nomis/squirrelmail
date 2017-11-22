@@ -506,8 +506,13 @@ if ($send) {
             Header("Location: $location/compose.php?mail_sent=yes");
         }
         else {
-            Header("Location: $location/right_main.php?mailbox=$urlMailbox&sort=$sort".
-                    "&startMessage=$startMessage");
+            $return_to_message_after_reply = getPref($data_dir, $username, 'return_to_message_after_reply', 0);
+            if (($action === 'reply' || $action === 'reply_all') && $return_to_message_after_reply)
+                Header("Location: $location/read_body.php?passed_id=$passed_id&mailbox=$urlMailbox&sort=$sort".
+                        "&startMessage=$startMessage");
+            else
+                Header("Location: $location/right_main.php?mailbox=$urlMailbox&sort=$sort".
+                        "&startMessage=$startMessage");
         }
     } else {
         if ($compose_new_win == '1') {

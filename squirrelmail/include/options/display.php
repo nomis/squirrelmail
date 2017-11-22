@@ -279,6 +279,13 @@ function load_optpage_data_display() {
     );
 
     $optvals[SMOPT_GRP_MESSAGE][] = array(
+        'name'    => 'return_to_message_after_reply',
+        'caption' => _("Return to Original Message After Replying"),
+        'type'    => SMOPT_TYPE_BOOLEAN,
+        'refresh' => SMOPT_REFRESH_NONE
+    );
+
+    $optvals[SMOPT_GRP_MESSAGE][] = array(
         'name'    => 'show_xmailer_default',
         'caption' => _("Enable Mailer Display"),
         'type'    => SMOPT_TYPE_BOOLEAN,
