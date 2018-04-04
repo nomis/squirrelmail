@@ -117,6 +117,7 @@ Version 1.4.23 - SVN
     the draft is finally sent
   - Added option to allow returning to the message one had been
     replying to after sending
+  - Sanitize user-supplied attachment filenames [CVE-2017-7692]
 
 Version 1.4.22 - 12 July 2011
 -----------------------------
