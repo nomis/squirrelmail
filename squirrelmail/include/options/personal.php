@@ -13,7 +13,6 @@
 
 /** SquirrelMail required files. */
 require_once(SM_PATH . 'functions/imap.php');
-include_once(SM_PATH . 'functions/identity.php');
 
 /* Define the group constants for the personal options page. */
 define('SMOPT_GRP_CONTACT', 0);
@@ -130,8 +129,7 @@ function load_optpage_data_personal() {
         'save'    => 'save_option_signature'
     );
 
-//TODO: use getPref(...'identities'...)?
-    $identities_count = count(get_identities());
+    $identities_count = getPref($data_dir, $username, 'identities', 0);
     if ($identities_count > 1 || $edit_identity) {
         $identities_link_value = '<a href="options_identities.php">'
                                . _("Edit Advanced Identities")

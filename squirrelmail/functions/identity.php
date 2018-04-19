@@ -66,14 +66,14 @@ function get_identities() {
  */
 function save_identities($identities) {
 
-    global $username, $data_dir, $domain, $edit_identity, $edit_name, $edit_reply_to;
+    global $username, $data_dir;
 
     if (empty($identities) || !is_array($identities)) {
         return;
     }
 
 
-    $num_cur = getPref($data_dir, $username, 'identities');
+    $num_cur = getPref($data_dir, $username, 'identities', 0);
     
     $cnt = count($identities);
 
@@ -89,16 +89,8 @@ function save_identities($identities) {
 
         $key = ($id?$id:'');
 
-        if (!$edit_identity && !$edit_name)
-            $ident['full_name'] = getPref($data_dir, $username, 'full_name' . $key);
         setPref($data_dir, $username, 'full_name' . $key, $ident['full_name']);
-
-        if (!$edit_identity)
-            $ident['email_address'] = getPref($data_dir, $username, 'email_address' . $key);
         setPref($data_dir, $username, 'email_address' . $key, $ident['email_address']);
-
-        if (!$edit_identity && !$edit_reply_to)
-            $ident['reply_to'] = getPref($data_dir, $username, 'reply_to' . $key);
         setPref($data_dir, $username, 'reply_to' . $key, $ident['reply_to']);
 
         if ($id === 0) {
@@ -123,14 +115,25 @@ function save_identities($identities) {
  */
 function sqfixidentities( $identities, $id, $action ) {
 
-    global $edit_identity;
-    $num_cur = getPref($data_dir, $username, 'identities');
+    global $edit_identity, $data_dir, $username,
+           $edit_name, $edit_reply_to;
+    $num_cur = (int)getPref($data_dir, $username, 'identities', 0);
     $fixed = array();
     $tmp_hold = array();
     $i = 0;
 
     if (empty($identities) || !is_array($identities)) {
         return $fixed;
+    }
+
+    // make sure no one is being sneaky trying to add identities when they shouldn't
+    if (!$edit_identity && $num_cur !== count($identities)) {
+        exit;
+    }
+    // make sure someone not trying to mess with index numbers
+    for ($x = 0; $x < $num_cur ; $x++) {
+        if (!isset($identities[$x]))
+            exit;
     }
 
     foreach( $identities as $key=>$ident ) {
@@ -140,6 +143,15 @@ function sqfixidentities( $identities, $id, $action ) {
         // if (empty_identity($ident)) {
         //     continue;
         // }
+
+        // when user isn't allowed to edit some fields, make sure they are unchanged
+        $pref_index = ($key ? $key : '');
+        if (!$edit_identity && !$edit_name)
+            $ident['full_name'] = getPref($data_dir, $username, 'full_name' . $pref_index);
+        if (!$edit_identity)
+            $ident['email_address'] = getPref($data_dir, $username, 'email_address' . $pref_index);
+        if (!$edit_identity && !$edit_reply_to)
+            $ident['reply_to'] = getPref($data_dir, $username, 'reply_to' . $pref_index);
 
         switch($action) {
 
@@ -199,10 +211,6 @@ function sqfixidentities( $identities, $id, $action ) {
 
             // Process actions from plugins and save/update action //
             default:
-                // make sure no one is being sneaky trying to add identities when they shouldn't
-                if (!$edit_identity && $num_cur !== count($identities)) {
-                    exit;
-                }
                 /**
                  * send action and id information. number of hook arguments 
                  * differs from 1.4.4 or older and 1.5.0. count($args) can 
