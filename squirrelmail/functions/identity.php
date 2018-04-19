@@ -142,19 +142,21 @@ function sqfixidentities( $identities, $id, $action, $override_edit_identity=FAL
     if (!$edit_identity_local && $num_cur !== count($identities)) {
         exit;
     }
+    // only allow growing the identities list if action is "save" and the last ident is populated
+    if ($edit_identity_local && ($action !== 'save' || empty_identity(end($identities)))) {
+        array_pop($identities);
+    }
     // make sure someone not trying to mess with index numbers
-    for ($x = 0; $x < $num_cur ; $x++) {
+    for ($x = 0; $x < $num_cur ; $x++) { // there could be one more when adding but that's ok
         if (!isset($identities[$x]))
             exit;
     }
 
     foreach( $identities as $key=>$ident ) {
 
-        // we already have a delete action; legit empty array
-        // can happen if email address is not ediable
-        // if (empty_identity($ident)) {
-        //     continue;
-        // }
+        if ($edit_identity_local && empty_identity($ident)) {
+            continue;
+        }
 
         // when user isn't allowed to edit some fields, make sure they are unchanged
         $pref_index = ($key ? $key : '');
@@ -247,7 +249,7 @@ function sqfixidentities( $identities, $id, $action, $override_edit_identity=FAL
 /**
  * Function to test if identity is empty
  *
- * @param   array   $identity   Identitiy Array
+ * @param   array   $identity   Identity Array
  * @return  boolean
  */
 function empty_identity($ident) {
