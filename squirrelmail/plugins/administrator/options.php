@@ -244,7 +244,9 @@ foreach ( $defcfg as $key => $def ) {
 $cfgfile = SM_PATH . 'config/config.php';
 parseConfig( SM_PATH . 'config/config_default.php' );
 parseConfig( $cfgfile );
-// backward compatibility for SMTP TLS
+// backward compatibility for IMAP/SMTP TLS
+if ($newcfg['$use_imap_tls'] === 'TRUE')
+    $newcfg['$use_imap_tls'] = '1';
 if ($newcfg['$use_smtp_tls'] === 'TRUE')
     $newcfg['$use_smtp_tls'] = '1';
 // Test/debug
