@@ -111,9 +111,14 @@ function save_identities($identities) {
  * @param   array       $identities      Array of identities
  * @param   int         $id             Identity to modify
  * @param   string      $action         Action to perform
+ * @param   boolean     $override_edit_identity  For use by plugins
+ *                                               where the incoming
+ *                                               identities array is
+ *                                               trusted (OPTIONAL;
+ *                                               default FALSE)
  * @return  array
  */
-function sqfixidentities( $identities, $id, $action ) {
+function sqfixidentities( $identities, $id, $action, $override_edit_identity=FALSE ) {
 
     global $edit_identity, $data_dir, $username,
            $edit_name, $edit_reply_to;
@@ -126,8 +131,15 @@ function sqfixidentities( $identities, $id, $action ) {
         return $fixed;
     }
 
+    if ($override_edit_identity)
+        $edit_identity_local = TRUE;
+    else
+        $edit_identity_local = $edit_identity;
+
+    // NOTE that $identities is untrusted user input at this point
+
     // make sure no one is being sneaky trying to add identities when they shouldn't
-    if (!$edit_identity && $num_cur !== count($identities)) {
+    if (!$edit_identity_local && $num_cur !== count($identities)) {
         exit;
     }
     // make sure someone not trying to mess with index numbers
@@ -146,11 +158,11 @@ function sqfixidentities( $identities, $id, $action ) {
 
         // when user isn't allowed to edit some fields, make sure they are unchanged
         $pref_index = ($key ? $key : '');
-        if (!$edit_identity && !$edit_name)
+        if (!$edit_identity_local && !$edit_name)
             $ident['full_name'] = getPref($data_dir, $username, 'full_name' . $pref_index);
-        if (!$edit_identity)
+        if (!$edit_identity_local)
             $ident['email_address'] = getPref($data_dir, $username, 'email_address' . $pref_index);
-        if (!$edit_identity && !$edit_reply_to)
+        if (!$edit_identity_local && !$edit_reply_to)
             $ident['reply_to'] = getPref($data_dir, $username, 'reply_to' . $pref_index);
 
         switch($action) {
@@ -197,7 +209,7 @@ function sqfixidentities( $identities, $id, $action ) {
             case 'delete':
 
                 // can only get here if someone is trying to be sneaky
-                if (!$edit_identity) exit;
+                if (!$edit_identity_local) exit;
 
                 if ($key == $id) {
                     // inform plugins about deleted id
