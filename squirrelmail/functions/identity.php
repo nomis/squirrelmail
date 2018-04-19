@@ -66,7 +66,7 @@ function get_identities() {
  */
 function save_identities($identities) {
 
-    global $username, $data_dir, $domain;
+    global $username, $data_dir, $domain, $edit_identity, $edit_name, $edit_reply_to;
 
     if (empty($identities) || !is_array($identities)) {
         return;
@@ -89,8 +89,16 @@ function save_identities($identities) {
 
         $key = ($id?$id:'');
 
+        if (!$edit_identity && !$edit_name)
+            $ident['full_name'] = getPref($data_dir, $username, 'full_name' . $key);
         setPref($data_dir, $username, 'full_name' . $key, $ident['full_name']);
+
+        if (!$edit_identity)
+            $ident['email_address'] = getPref($data_dir, $username, 'email_address' . $key);
         setPref($data_dir, $username, 'email_address' . $key, $ident['email_address']);
+
+        if (!$edit_identity && !$edit_reply_to)
+            $ident['reply_to'] = getPref($data_dir, $username, 'reply_to' . $key);
         setPref($data_dir, $username, 'reply_to' . $key, $ident['reply_to']);
 
         if ($id === 0) {
@@ -115,6 +123,8 @@ function save_identities($identities) {
  */
 function sqfixidentities( $identities, $id, $action ) {
 
+    global $edit_identity;
+    $num_cur = getPref($data_dir, $username, 'identities');
     $fixed = array();
     $tmp_hold = array();
     $i = 0;
@@ -125,13 +135,18 @@ function sqfixidentities( $identities, $id, $action ) {
 
     foreach( $identities as $key=>$ident ) {
 
-        if (empty_identity($ident)) {
-            continue;
-        }
+        // we already have a delete action; legit empty array
+        // can happen if email address is not ediable
+        // if (empty_identity($ident)) {
+        //     continue;
+        // }
 
         switch($action) {
 
             case 'makedefault':
+
+                // can only get here if someone is trying to be sneaky
+                if ($num_cur < 2) exit;
 
                 if ($key == $id) {
                     $fixed[0] = $ident;
@@ -146,6 +161,9 @@ function sqfixidentities( $identities, $id, $action ) {
                 break;
 
             case 'move':
+
+                // can only get here if someone is trying to be sneaky
+                if ($num_cur < 2) exit;
 
                 if ($key == ($id - 1)) {
                     $tmp_hold = $ident;
@@ -166,6 +184,9 @@ function sqfixidentities( $identities, $id, $action ) {
 
             case 'delete':
 
+                // can only get here if someone is trying to be sneaky
+                if (!$edit_identity) exit;
+
                 if ($key == $id) {
                     // inform plugins about deleted id
                     do_hook('options_identities_process', $action, $id);
@@ -178,6 +199,10 @@ function sqfixidentities( $identities, $id, $action ) {
 
             // Process actions from plugins and save/update action //
             default:
+                // make sure no one is being sneaky trying to add identities when they shouldn't
+                if (!$edit_identity && $num_cur !== count($identities)) {
+                    exit;
+                }
                 /**
                  * send action and id information. number of hook arguments 
                  * differs from 1.4.4 or older and 1.5.0. count($args) can 
