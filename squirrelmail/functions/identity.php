@@ -143,7 +143,11 @@ function sqfixidentities( $identities, $id, $action, $override_edit_identity=FAL
         exit;
     }
     // only allow growing the identities list if action is "save" and the last ident is populated
-    if ($edit_identity_local && ($action !== 'save' || empty_identity(end($identities)))) {
+    // (the input form always has a blank set of inputs for adding a new identity)
+    // (but we assume when $override_edit_identities is used, a plugin is not passing in the
+    // identities array with a blank element on the end)
+    if (!$override_edit_identity && $edit_identity_local
+     && ($action !== 'save' || empty_identity(end($identities)))) {
         array_pop($identities);
     }
     // make sure someone not trying to mess with index numbers
