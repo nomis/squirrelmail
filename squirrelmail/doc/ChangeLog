@@ -121,6 +121,7 @@ Version 1.4.23 - SVN
     Grunow for reporting this issue) [CVE-2018-8741]
   - Allow users who cannot edit their email address but who have
     multiple identities to edit all their identities
+  - Changed anti-CSRF security token lifetime to be session-based.
 
 Version 1.4.22 - 12 July 2011
 -----------------------------
