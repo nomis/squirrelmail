@@ -1868,7 +1868,7 @@ function deliverMessage(&$composeMessage, $draft=false) {
 
 
         // copy message to sent folder
-        $move_to_sent = getPref($data_dir,$username,'move_to_sent');
+        $move_to_sent = getPref($data_dir,$username,'move_to_sent', $default_move_to_sent);
         if (isset($default_move_to_sent) && ($default_move_to_sent != 0)) {
             $svr_allow_sent = true;
         } else {
