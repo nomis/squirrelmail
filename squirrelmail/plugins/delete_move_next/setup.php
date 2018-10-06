@@ -204,9 +204,9 @@ function delete_move_next_read($currloc) {
                  "<td bgcolor=\"$color[9]\" width=\"100%\" align=\"center\"><small>";
 
         if ($prev > 0){
-            echo "<a href=\"" . $base_uri . "src/read_body.php?passed_id=$prev_if_del&amp;mailbox=$urlMailbox&amp;sort=$sort&amp;startMessage=$startMessage&amp;show_more=0&amp;delete_id=$passed_id&amp;smtoken=" . sm_generate_security_token() . "\">" . _("Delete &amp; Prev") . "</a>" . "&nbsp;|&nbsp;";
+            echo "<a href=\"" . $base_uri . "src/read_body.php?passed_id=$prev_if_del&amp;mailbox=$urlMailbox&amp;sort=$sort&amp;startMessage=$startMessage&amp;delete_id=$passed_id&amp;smtoken=" . sm_generate_security_token() . "\">" . _("Delete &amp; Prev") . "</a>" . "&nbsp;|&nbsp;";
             if ($delete_move_next_show_unread == SMPREF_ON) {
-                echo "<a href=\"" . $base_uri . "src/read_body.php?passed_id=$prev_if_del&amp;mailbox=$urlMailbox&amp;sort=$sort&amp;startMessage=$startMessage&amp;show_more=0&amp;unread_id=$passed_id&amp;smtoken=" . sm_generate_security_token() . "\">" . _("Unread &amp; Prev") . "</a>" . "&nbsp;|&nbsp;";
+                echo "<a href=\"" . $base_uri . "src/read_body.php?passed_id=$prev_if_del&amp;mailbox=$urlMailbox&amp;sort=$sort&amp;startMessage=$startMessage&amp;unread_id=$passed_id&amp;smtoken=" . sm_generate_security_token() . "\">" . _("Unread &amp; Prev") . "</a>" . "&nbsp;|&nbsp;";
             }
         }
         else {
@@ -217,9 +217,9 @@ function delete_move_next_read($currloc) {
         }
         if ($next > 0){
             if ($delete_move_next_show_unread == SMPREF_ON) {
-                echo "<a href=\"" . $base_uri . "src/read_body.php?passed_id=$next_if_del&amp;mailbox=$urlMailbox&amp;sort=$sort&amp;startMessage=$startMessage&amp;show_more=0&amp;unread_id=$passed_id&amp;smtoken=" . sm_generate_security_token() . "\">" . _("Unread &amp; Next") . "</a>&nbsp;|&nbsp;";
+                echo "<a href=\"" . $base_uri . "src/read_body.php?passed_id=$next_if_del&amp;mailbox=$urlMailbox&amp;sort=$sort&amp;startMessage=$startMessage&amp;unread_id=$passed_id&amp;smtoken=" . sm_generate_security_token() . "\">" . _("Unread &amp; Next") . "</a>&nbsp;|&nbsp;";
             }
-            echo "<a href=\"" . $base_uri . "src/read_body.php?passed_id=$next_if_del&amp;mailbox=$urlMailbox&amp;sort=$sort&amp;startMessage=$startMessage&amp;show_more=0&amp;delete_id=$passed_id&amp;smtoken=" . sm_generate_security_token() . "\">" . _("Delete &amp; Next") . "</a>";
+            echo "<a href=\"" . $base_uri . "src/read_body.php?passed_id=$next_if_del&amp;mailbox=$urlMailbox&amp;sort=$sort&amp;startMessage=$startMessage&amp;delete_id=$passed_id&amp;smtoken=" . sm_generate_security_token() . "\">" . _("Delete &amp; Next") . "</a>";
         } else {
             if ($delete_move_next_show_unread == SMPREF_ON) {
                 echo _("Unread &amp; Next") . "&nbsp;|&nbsp;";
