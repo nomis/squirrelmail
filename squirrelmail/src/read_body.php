@@ -592,7 +592,7 @@ function formatMenuBar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
         if ($prev != -1) {
             $uri = $base_uri . 'src/read_body.php?passed_id='.$prev.
                    '&amp;mailbox='.$urlMailbox.'&amp;sort='.$sort.
-                   '&amp;startMessage='.$startMessage.'&amp;show_more=0';
+                   '&amp;startMessage='.$startMessage;
             $s .= '<a href="'.$uri.'">'._("Previous").'</a>';
         } else {
             $s .= _("Previous");
@@ -601,7 +601,7 @@ function formatMenuBar($mailbox, $passed_id, $passed_ent_id, $message, $mbx_resp
         if ($next != -1) {
             $uri = $base_uri . 'src/read_body.php?passed_id='.$next.
                    '&amp;mailbox='.$urlMailbox.'&amp;sort='.$sort.
-                   '&amp;startMessage='.$startMessage.'&amp;show_more=0';
+                   '&amp;startMessage='.$startMessage;
             $s .= '<a href="'.$uri.'">'._("Next").'</a>';
         } else {
             $s .= _("Next");
