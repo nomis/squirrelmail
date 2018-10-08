@@ -474,7 +474,7 @@ if ($optpage == SMOPT_PAGE_MAIN) {
             break;
         default:
             $inside_hook_name = '';
-            $bottom_hook_name = '';
+            $bottom_hook_name = 'options_generic_bottom';
             $submit_name = 'submit';
     }
 
