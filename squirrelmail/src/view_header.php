@@ -129,6 +129,7 @@ function view_header($header, $mailbox, $color) {
             '</td></tr></table>'."\n" 
          )
     );
+    do_hook('view_header_bottom');
     echo '</body></html>';
 }
 
