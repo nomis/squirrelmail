@@ -122,6 +122,9 @@ Version 1.4.23 - SVN
   - Allow users who cannot edit their email address but who have
     multiple identities to edit all their identities
   - Changed anti-CSRF security token lifetime to be session-based.
+  - Added favicon and ability for admins to use their own by setting
+    $head_tag_extra in config_local.php (see documented comments in,
+    for example, src/webmail.php)
 
 Version 1.4.22 - 12 July 2011
 -----------------------------
