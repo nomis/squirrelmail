@@ -63,6 +63,18 @@ set_up_language($squirrelmail_language, true, true);
 <head>
    <meta name="robots" content="noindex,nofollow">
 <?php
+    // For adding a favicon or anything else that should be inserted in *ALL* <head> for *ALL* documents,
+    // define $head_tag_extra in config/config_local.php
+    // The string "###SM BASEURI###" will be replaced with the base URI for this SquirrelMail installation.
+    // When not defined, a default is provided that displays the default favicon.ico.
+    // If you override this and still want to use the default favicon.ico, you'll have to include the following
+    // following in your $head_tag_extra string:
+    // $head_tag_extra = '<link rel="shortcut icon" href="###SM BASEURI###favicon.ico">...<YOUR CONTENT HERE>...';
+    //
+    global $head_tag_extra;
+    echo (empty($head_tag_extra) ? '<link rel="shortcut icon" href="' . sqm_baseuri() . 'favicon.ico">'
+       : str_replace('###SM BASEURI###', sqm_baseuri(), $head_tag_extra));
+
     if ($theme_css != '') {
 ?>
    <link rel="stylesheet" type="text/css" href="<?php echo $theme_css; ?>">
