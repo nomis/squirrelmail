@@ -67,22 +67,22 @@ function do_hook ($name) {
  * @return mixed the return value of the hook function
  */
 function do_hook_function($name,$parm=NULL) {
-    global $squirrelmail_plugin_hooks;
-    $ret = NULL;
+    global $squirrelmail_plugin_hooks, $hook_return_value;
+    $hook_return_value = NULL;
 
     if (isset($squirrelmail_plugin_hooks[$name])
           && is_array($squirrelmail_plugin_hooks[$name])) {
         foreach ($squirrelmail_plugin_hooks[$name] as $function) {
             /* Add something to set correct gettext domain for plugin. */
             if (function_exists($function)) {
-                $ret = $function($parm);
+                $hook_return_value = $function($parm, $hook_return_value);
             }
         }
     }
 
     /* Variable-length argument lists have a slight problem when */
     /* passing values by reference. Pity. This is a workaround.  */
-    return $ret;
+    return $hook_return_value;
 }
 
 /**
@@ -94,22 +94,22 @@ function do_hook_function($name,$parm=NULL) {
  * @return string a concatenation of the results of each plugin function
  */
 function concat_hook_function($name,$parm=NULL) {
-    global $squirrelmail_plugin_hooks;
-    $ret = '';
+    global $squirrelmail_plugin_hooks, $hook_return_value;
+    $hook_return_value = '';
 
     if (isset($squirrelmail_plugin_hooks[$name])
           && is_array($squirrelmail_plugin_hooks[$name])) {
         foreach ($squirrelmail_plugin_hooks[$name] as $function) {
             /* Concatenate results from hook. */
             if (function_exists($function)) {
-                $ret .= $function($parm);
+                $hook_return_value .= $function($parm, $hook_return_value);
             }
         }
     }
 
     /* Variable-length argument lists have a slight problem when */
     /* passing values by reference. Pity. This is a workaround.  */
-    return $ret;
+    return $hook_return_value;
 }
 
 /**
