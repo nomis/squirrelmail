@@ -13,6 +13,9 @@
  * @package squirrelmail
  */
 
+/** This is the view_text page */
+define('PAGE_NAME', 'view_text');
+
 /**
  * Path for SquirrelMail required files.
  * @ignore
