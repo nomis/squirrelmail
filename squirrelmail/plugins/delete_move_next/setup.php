@@ -279,7 +279,7 @@ function delete_move_next_moveNextForm($next) {
             ' <select name="targetMailbox">';
     get_move_target_list(); 
     echo    '</select> '.
-            '<input type="submit" value="' . _("Move") . '">'.
+            '<input type="submit" id="moveBtn" value="' . _("Move") . '">'.
             '</small>'.
            '</form>'.
          '</td>'.
@@ -303,7 +303,7 @@ function delete_move_next_moveRightMainForm() {
             ' <select name="targetMailbox">';
     get_move_target_list(); 
     echo    ' </select> ' .
-            '<input type=submit value="' . _("Move") . '">'.
+            '<input type=submit id="moveBtn" value="' . _("Move") . '">'.
             '</small>'.
          '</form>' .
          '</td>'.
