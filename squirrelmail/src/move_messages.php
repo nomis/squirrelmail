@@ -33,13 +33,7 @@ if ( !sqgetGlobalVar('composesession', $composesession, SQ_SESSION) ) {
 function attachSelectedMessages($msg, $imapConnection) {
     global $username, $attachment_dir, $startMessage,
            $data_dir, $composesession, $uid_support, $mailbox,
-       $msgs, $thread_sort_messages, $allow_server_sort, $show_num,
-       $compose_messages;
-
-    if (!isset($compose_messages)) {
-        $compose_messages = array();
-            sqsession_register($compose_messages,'compose_messages');
-    }
+       $msgs, $thread_sort_messages, $allow_server_sort, $show_num;
 
     if (!$composesession) {
         $composesession = 1;
@@ -117,6 +111,12 @@ function attachSelectedMessages($msg, $imapConnection) {
             $j++;
         }
         $i++;
+    }
+
+    sqgetGlobalVar('compose_messages', $compose_messages, SQ_SESSION);
+    if (!isset($compose_messages)
+     || !is_array($compose_messages)) {
+        $compose_messages = array();
     }
     $compose_messages[$composesession] = $composeMessage;
     sqsession_register($compose_messages,'compose_messages');
