@@ -142,8 +142,9 @@ function attachment_common_link_text(&$Args) {
 function attachment_common_link_message(&$Args) {
 
     global $squirrelmail_attachments_finished_handling;
-    if (!empty($squirrelmail_attachments_finished_handling[$Args[7]])) return;
-    $squirrelmail_attachments_finished_handling[$Args[7]] = TRUE;
+    // TODO: The two lines below used to only depend on $Args[7] (the so-called "display filename") but that prevents messages with the same subject from having "View" links, which makes no sense.... however, was there originally some use case where this made sense??  For now, I've added the entity ID to make it unique, though I suspect we can just remove this check entirely.  Also take a look at the other attachement_common hood functions herein - are they making the same mistake?  If so, why?
+    if (!empty($squirrelmail_attachments_finished_handling[$Args[7] . $Args[5]])) return;
+    $squirrelmail_attachments_finished_handling[$Args[7] . $Args[5]] = TRUE;
 
     $Args[1]['attachment_common']['href'] = SM_PATH . 'src/read_body.php?startMessage=' .
         $Args[2] . '&amp;passed_id=' . $Args[3] . '&amp;mailbox=' . $Args[4] .
