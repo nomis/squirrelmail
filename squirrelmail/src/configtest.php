@@ -300,6 +300,7 @@ if (isset($plugins[0])) {
         }
     }
     // load plugin functions
+    include_once(SM_PATH . 'functions/i18n.php');  // so some plugins can run "normal" code that switches text domain
     include_once(SM_PATH . 'functions/plugin.php');
     // turn on output buffering in order to prevent output of new lines
     ob_start();
