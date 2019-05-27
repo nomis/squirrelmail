@@ -237,6 +237,19 @@ function displayPageHeader($color, $mailbox, $xtra='', $session=false) {
             $js = '<script language="JavaScript" type="text/javascript">' .
              "\n<!--\n" .
              "var alreadyFocused = false;\n" .
+             "function cursorToTop(element) {\n" .
+             "    if (typeof element.selectionStart == 'number')\n" .
+             // also works:
+             // "        element.setSelectionRange(0, 0);\n" .
+             "        element.selectionStart = element.selectionEnd = 0;\n" .
+             "    else if (typeof element.createTextRange != 'undefined') {\n" .
+             "        var selectionRange = element.createTextRange();\n" .
+             // also works, but maybe more recent?:
+             // "        selectionRange.collapse(true);\n" .
+             "        selectionRange.moveStart('character', 0);\n" .
+             "        selectionRange.select();\n" .
+             "    }\n" .
+             "}\n" .
              "function checkForm() {\n" .
              "\n    if (alreadyFocused) return;\n";
 
@@ -244,7 +257,7 @@ function displayPageHeader($color, $mailbox, $xtra='', $session=false) {
             if (strpos($action, 'reply') !== FALSE && $reply_focus)
             {
                 if ($reply_focus == 'select') $js .= "document.forms['compose'].body.select();}\n";
-                else if ($reply_focus == 'focus') $js .= "document.forms['compose'].body.focus();}\n";
+                else if ($reply_focus == 'focus') $js .= "document.forms['compose'].body.focus(); cursorToTop(document.forms['compose'].body);}\n";
                 else if ($reply_focus == 'none') $js .= "}\n";
             }
             // no reply focus also applies to composing new messages
