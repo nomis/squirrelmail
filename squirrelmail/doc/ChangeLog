@@ -138,6 +138,8 @@ Version 1.4.23 - SVN
     by setting $imap_id_command_args in config/config_local.php
     (see notes in functions/imap_general.php for more details)
   - Fixed PHP7 warnings (#2847)
+  - Added handling for RCDATA and RAWTEXT elements in HTML sanitizer
+    [CVE-2019-12970]
 
 Version 1.4.22 - 12 July 2011
 -----------------------------
