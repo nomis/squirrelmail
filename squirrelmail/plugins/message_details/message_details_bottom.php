@@ -194,9 +194,9 @@ for ($i=1; $i < $count; $i++) {
             $entStr = CalcEntity("$entStr",0);
             $content_indx++;
             $content[$content_indx]=array();		
-            $content[$content_indx]['ent'] = '<a href="#'."$entStr \">$entStr".'</a>';
+            $content[$content_indx]['ent'] = '<a href="#' . $entStr . '">' . $entStr . '</a>';
             $pre .= "\n \n".'</div>'."\n \n".'<div class="entheader" id="'.
-                $entStr.'H"><a name="'."$entStr".'"><b><font color ='."$color[2]>";
+                $entStr.'H"><a name="'."$entStr".'"></a><b><font color ='."$color[2]>";
             $end .= '</font></b>'."\n";
             $header = true;
             $mimepart = false;
