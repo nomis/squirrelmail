@@ -303,7 +303,9 @@ function displayPageHeader($color, $mailbox, $xtra='', $session=false) {
         default:
             $js = '<script language="JavaScript" type="text/javascript">' .
              "\n<!--\n" .
+             "var alreadyFocused = false;\n" .
              "function checkForm() {\n".
+             "   if (alreadyFocused) return;\n".
              "   var f = document.forms.length;\n".
              "   var i = 0;\n".
              "   var remembered_form = -1;\n".
