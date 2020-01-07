@@ -11,7 +11,7 @@
  *
  * POP3 class
  *
- * @copyright 1999-2019 The SquirrelMail Project Team
+ * @copyright 1999-2020 The SquirrelMail Project Team
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @version $Id$
  * @package plugins
