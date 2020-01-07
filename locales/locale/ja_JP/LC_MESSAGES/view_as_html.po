@@ -1,5 +1,5 @@
 # Japanese (ja_JP) view_as_html translation.
-# Copyright (c) 2003-2019 The SquirrelMail Project Team
+# Copyright (c) 2003-2020 The SquirrelMail Project Team
 # Kosaku Nagasaka <nagasaka@yamaguchi-u.ac.jp>
 #
 #

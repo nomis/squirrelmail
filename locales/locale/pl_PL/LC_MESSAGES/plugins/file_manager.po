@@ -1,6 +1,6 @@
 # SquirrelMail file manager plugin
 # Polish translation
-# Copyright (c) 2002-2019 The SquirrelMail Project Team
+# Copyright (c) 2002-2020 The SquirrelMail Project Team
 # Franciszek Lewenda <F.Lewenda@nask.pl>, 2002.
 #
 msgid ""
