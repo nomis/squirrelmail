@@ -40,6 +40,7 @@ sqgetGlobalVar('delimiter', $delimiter, SQ_SESSION);
 sqgetGlobalVar('onetimepad', $onetimepad, SQ_SESSION);
 sqgetGlobalVar('composenew' , $composenew, SQ_FORM);
 sqgetGlobalVar('composesession' , $composesession , SQ_SESSION);
+sqgetGlobalVar('lastTargetMailbox', $lastTargetMailbox, SQ_SESSION);
 
 if (!sqgetGlobalVar('mailbox',$mailbox,SQ_GET)) {
     unset($mailbox);
