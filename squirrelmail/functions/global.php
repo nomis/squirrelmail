@@ -112,6 +112,7 @@ if (isset($_SERVER['REQUEST_URI'])) {
  */
 require_once(SM_PATH . 'functions/strings.php');
 require_once(SM_PATH . 'config/config.php');
+$PHP_SELF = php_self();
 
 /**
  * Allow disabling of all plugins or enabling just a select few
