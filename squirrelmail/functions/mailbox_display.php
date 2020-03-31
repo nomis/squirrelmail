@@ -82,8 +82,13 @@ function printMessageInfo($imapConnection, $t, $not_last=true, $key, $mailbox,
     $urlMailbox = urlencode($mailbox);
 
     if (handleAsSent($mailbox)) {
+       $toAddresses = _("From") . ': ' . (!empty($msg['FROM']) ? sm_encode_html_special_chars($msg['FROM']) : '');
        $msg['FROM'] = $msg['TO'];
     }
+    else
+       $toAddresses = _("To") . ': ' . (!empty($msg['TO']) ? sm_encode_html_special_chars($msg['TO']) : '') . '&#10;'
+                    . _("Cc") . ': ' . (!empty($msg['CC']) ? sm_encode_html_special_chars($msg['CC']) : '');
+
     $msg['FROM'] = parseAddress($msg['FROM'],1);
 
 
@@ -216,7 +221,7 @@ function printMessageInfo($imapConnection, $t, $not_last=true, $key, $mailbox,
             switch ($index_order_part) {
             case 1: /* checkbox */
                 echo html_tag( 'td',
-                               "<input type=\"checkbox\" name=\"msg[$t]\" id=\"msg".$msg['ID'].
+                               "<input type=\"checkbox\" name=\"msg[$t]\" title=\"$toAddresses\" id=\"msg".$msg['ID'].
                                    "\" value=\"".$msg['ID']."\"$checked>",
                                'center',
                                $hlt_color );
