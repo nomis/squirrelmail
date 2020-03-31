@@ -148,6 +148,8 @@ Version 1.4.23 - SVN
     delimiters. This may be helpful when the web server sees traffic
     from a proxy so the normal $PHP_SELF does not resolve to what it
     should be for the real client.
+  - Users can now mouse over the checkbox on the message list to see
+    who a message is from
 
 Version 1.4.22 - 12 July 2011
 -----------------------------
