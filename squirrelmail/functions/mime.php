@@ -546,7 +546,7 @@ function formatAttachments($message, $exclude_id, $mailbox, $id) {
         $defaultlink = $hookresults[6];
 
         // base64 encoded file sizes are misleading, so approximate real size
-        if (!empty($header->encoding) && $header->encoding == 'base64')
+        if (!empty($header->encoding) && strtolower($header->encoding) == 'base64')
             $size = $header->size / 4 * 3;
         else
             $size = $header->size;

@@ -274,11 +274,17 @@ function pf_show_attachments($message, $exclude_id, $mailbox, $id) {
 
         $display_filename = $filename;
 
+        // base64 encoded file sizes are misleading, so approximate real size
+        if (!empty($header->encoding) && strtolower($header->encoding) == 'base64')
+            $size = $header->size / 4 * 3;
+        else
+            $size = $header->size;
+
         // TODO: maybe make it nicer?
         $attachments .= '<table cellpadding="0" cellspacing="0" border="1"><tr><th colspan="2">'.decodeHeader($display_filename).'</th></tr>' .
             '<tr border="0">'.
             html_tag( 'td',_("Size:"), 'right') .
-            html_tag( 'td',show_readable_size($header->size), 'left') .
+            html_tag( 'td',show_readable_size($size), 'left') .
             '</tr><tr>' .
             html_tag( 'td',_("Type:"), 'right') .
             html_tag( 'td',sm_encode_html_special_chars($type0).'/'.sm_encode_html_special_chars($type1), 'left') . 
