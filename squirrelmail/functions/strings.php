@@ -577,14 +577,16 @@ function OneTimePadCreate ($length=100) {
  * Returns a string showing the size of the message/attachment.
  *
  * @param int bytes the filesize in bytes
+ * @param int filesize_divisor the divisor we'll use (OPTIONAL; default 1024)
  * @return string the filesize in human readable format
  */
-function show_readable_size($bytes) {
-    $bytes /= 1024;
+function show_readable_size($bytes, $filesize_divisor=1024) {
+
+    $bytes /= $filesize_divisor;
     $type = 'k';
 
-    if ($bytes / 1024 > 1) {
-        $bytes /= 1024;
+    if ($bytes / $filesize_divisor > 1) {
+        $bytes /= $filesize_divisor;
         $type = 'M';
     }
 
