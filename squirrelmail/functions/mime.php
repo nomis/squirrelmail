@@ -545,9 +545,15 @@ function formatAttachments($message, $exclude_id, $mailbox, $id) {
         $links = $hookresults[1];
         $defaultlink = $hookresults[6];
 
+        // base64 encoded file sizes are misleading, so approximate real size
+        if (!empty($header->encoding) && $header->encoding == 'base64')
+            $size = $header->size / 4 * 3;
+        else
+            $size = $header->size;
+
         $attachments .= '<tr><td>' .
             '<a href="'.$defaultlink.'">'.decodeHeader($display_filename).'</a>&nbsp;</td>' .
-            '<td><small><b>' . show_readable_size($header->size) .
+            '<td><small><b>' . show_readable_size($size) .
             '</b>&nbsp;&nbsp;</small></td>' .
             '<td><small>[ '.sm_encode_html_special_chars($type0).'/'.sm_encode_html_special_chars($type1).' ]&nbsp;</small></td>' .
             '<td><small>';
