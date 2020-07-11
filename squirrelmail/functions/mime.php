@@ -534,13 +534,13 @@ function formatAttachments($message, $exclude_id, $mailbox, $id) {
          */
         $hookresults = do_hook("attachment $type0/$type1", $links,
                 $startMessage, $id, $urlMailbox, $ent, $defaultlink,
-                $display_filename, $where, $what);
+                $display_filename, $where, $what, $type0, $type1);
         $hookresults = do_hook("attachment $type0/*", $hookresults[1],
                 $startMessage, $id, $urlMailbox, $ent, $hookresults[6],
-                $display_filename, $where, $what);
+                $display_filename, $where, $what, $type0, $type1);
         $hookresults = do_hook("attachment */*", $hookresults[1],
                 $startMessage, $id, $urlMailbox, $ent, $hookresults[6],
-                $display_filename, $where, $what);
+                $display_filename, $where, $what, $type0, $type1);
 
         $links = $hookresults[1];
         $defaultlink = $hookresults[6];
