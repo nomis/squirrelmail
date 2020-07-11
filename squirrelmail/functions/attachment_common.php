@@ -235,7 +235,6 @@ function attachment_common_octet_stream(&$Args) {
 
     $Ext = '';
     if (is_array($Regs) && isset($Regs[1])) {
-        $Ext = $Regs[1];
         $Ext = strtolower($Regs[1]);
     }
 
