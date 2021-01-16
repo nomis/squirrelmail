@@ -290,7 +290,7 @@ if ($errors){
    */
   $extrajs.= "var suggestions = new Array();\n";
   $i=0;
-  while (list($word, $value) = each($misses)){
+  foreach ($misses as $value){
     if ($value=='_NONE') $value='';
     $extrajs.= "suggestions[$i] = \"$value\";\n";
     $i++;
@@ -302,7 +302,7 @@ if ($errors){
    */
   $extrajs.= "var locations= new Array();\n";
   $i=0;
-  while (list($word, $value) = each($locations)){
+  foreach ($locations as $value){
     $extrajs.= "locations[$i] = \"$value\";\n";
     $i++;
   }

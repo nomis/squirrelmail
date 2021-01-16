@@ -1183,7 +1183,7 @@ function sq_tagprint($tagname, $attary, $tagtype){
         $fulltag = '<' . $tagname;
         if (is_array($attary) && sizeof($attary)){
             $atts = Array();
-            while (list($attname, $attvalue) = each($attary)){
+            foreach ($attary as $attname => $attvalue){
                 array_push($atts, "$attname=$attvalue");
             }
             $fulltag .= ' ' . join(" ", $atts);
@@ -1616,7 +1616,7 @@ function sq_fixatts($tagname,
                     $mailbox
                     ){
     $me = 'sq_fixatts';
-    while (list($attname, $attvalue) = each($attary)){
+    foreach ($attary as $attname => $attvalue){
         /**
          * See if this attribute should be removed.
          */

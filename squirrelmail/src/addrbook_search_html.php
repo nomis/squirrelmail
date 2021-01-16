@@ -223,7 +223,7 @@ if ($abook->numbackends > 1) {
     $selopts['-1'] = _("All address books"); 
     $ret = $abook->get_backend_list();
     
-    while (list($undef,$v) = each($ret)) {
+    foreach ($ret as $v) {
         $selopts[$v->bnum] = $v->sname;
     }
     echo addSelect('backend', $selopts, $backend, TRUE);
