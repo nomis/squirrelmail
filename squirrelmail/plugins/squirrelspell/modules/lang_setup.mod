@@ -4,7 +4,7 @@
  * ---------------
  * Squirrelspell module
  *
- * Copyright (c) 1999-2020 The SquirrelMail Project Team
+ * Copyright (c) 1999-2021 The SquirrelMail Project Team
  * Licensed under the GNU GPL. For full terms see the file COPYING.
  *
  * This module displays available dictionaries to the user and lets
