@@ -2281,9 +2281,9 @@ function sq_sanitize($body,
                         if ($tagname == "body"){
                             $tagname = "div";
                         }
-                        if (isset($open_tags{$tagname}) &&
-                                $open_tags{$tagname} > 0){
-                            $open_tags{$tagname}--;
+                        if (isset($open_tags[$tagname]) &&
+                                $open_tags[$tagname] > 0){
+                            $open_tags[$tagname]--;
                         } else {
                             $tagname = false;
                         }
@@ -2325,10 +2325,10 @@ function sq_sanitize($body,
                                         $message, $id);
                             }
                             if ($tagtype == 1){
-                                if (isset($open_tags{$tagname})){
-                                    $open_tags{$tagname}++;
+                                if (isset($open_tags[$tagname])){
+                                    $open_tags[$tagname]++;
                                 } else {
-                                    $open_tags{$tagname}=1;
+                                    $open_tags[$tagname]=1;
                                 }
                             }
                             /**
@@ -2547,13 +2547,13 @@ function magicHTML($body, $id, $message, $mailbox = 'INBOX', $take_mailto_links 
          * Remove any references to http/https if view_unsafe_images set
          * to false.
          */
-        array_push($bad_attvals{'/.*/'}{'/^src|background/i'}[0],
+        array_push($bad_attvals['/.*/']['/^src|background/i'][0],
                 '/^([\'\"])\s*https*:.*([\'\"])/si');
-        array_push($bad_attvals{'/.*/'}{'/^src|background/i'}[1],
+        array_push($bad_attvals['/.*/']['/^src|background/i'][1],
                 "\\1$secremoveimg\\1");
-        array_push($bad_attvals{'/.*/'}{'/^style/i'}[0],
+        array_push($bad_attvals['/.*/']['/^style/i'][0],
                 '/url\([\'\"]?https?:[^\)]*[\'\"]?\)/si');
-        array_push($bad_attvals{'/.*/'}{'/^style/i'}[1],
+        array_push($bad_attvals['/.*/']['/^style/i'][1],
                 "url(\\1$secremoveimg\\1)");
     }
 
