@@ -130,7 +130,7 @@ function displayHtmlHeader($title='SquirrelMail', $xtra_param='', $do_hook=TRUE,
     // usage of $script_libs is discussed in the docs for this function above
     // 
     foreach (array_unique($script_libs) as $item) {
-        if ($item{0} === '<')
+        if ($item[0] === '<')
             echo $item . "\n";
         else if (strpos($item, '/') !== FALSE || strpos($item, '\\') !== FALSE)
             echo '<script language="JavaScript" type="text/javascript" src="' . $item . '"></script>' . "\n";
