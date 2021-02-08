@@ -167,7 +167,8 @@ function mime_fetch_body($imap_stream, $id, $ent_id=1, $fetch_size=0) {
     return $ret;
 }
 
-function mime_print_body_lines ($imap_stream, $id, $ent_id=1, $encoding, $rStream='php://stdout') {
+// TODO: Needs documentation.  $ent_id default is usually 1
+function mime_print_body_lines ($imap_stream, $id, $ent_id, $encoding, $rStream='php://stdout') {
     global $uid_support;
 
     /* Don't kill the connection if the browser is over a dialup
