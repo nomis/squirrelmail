@@ -729,8 +729,11 @@ function decodeHeader ($string, $utfencode=true,$htmlsave=true,$decide=false) {
                 case 'Q':
                     $replace = str_replace('_', ' ', $res[4]);
                     $replace = preg_replace_callback('/=([0-9a-f]{2})/i',
-                            create_function ('$matches', 'return chr(hexdec($matches[1]));'),
-                            $replace);
+                                             (check_php_version(5, 3, 0)
+                                              ? function($matches) { return chr(hexdec($matches[1])); }
+                                              : create_function ('$matches', 'return chr(hexdec($matches[1]));')
+                                             ),
+                                             $replace);
                     if ($can_be_encoded) {
                         // string is converted from one charset to another. sanitizing depends on $htmlsave
                         $replace = charset_convert($res[2], $replace,$default_charset,$htmlsave);
