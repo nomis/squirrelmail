@@ -39,7 +39,8 @@ function elapsed($start)
    return $diff2 + $diff1;
 }
 
-function printMessageInfo($imapConnection, $t, $not_last=true, $key, $mailbox,
+// TODO: This function needs documentation.  $not_last should usually start out as TRUE?
+function printMessageInfo($imapConnection, $t, $not_last, $key, $mailbox,
                           $start_msg, $where, $what) {
     global $checkall, $preselected,
            $color, $msgs, $msort, $td_str, $msg,
