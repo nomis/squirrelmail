@@ -26,14 +26,11 @@ require_once(SM_PATH . 'functions/mime.php');
   *                             interpreted as an OR condition, thus "TO_CC" will
   *                             result in a search of the TO *or* CC headers
   */
-function sqimap_search($imapConnection, $search_where, $search_what, $mailbox,
-                       $color, $search_position = '', $search_all, $count_all) {
+function sqimap_search($imapConnection, $search_where, $search_what, $mailbox, $color) {
 
     global $message_highlight_list, $squirrelmail_language, $languages,
            $index_order, $pos, $allow_charset_search, $uid_support,
 	   $imap_server_type;
-
-    $pos = $search_position;
 
     $urlMailbox = urlencode($mailbox);
 
