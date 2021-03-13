@@ -1120,7 +1120,7 @@ function getAttachments($message, &$composeMessage, $passed_id, $entities, $imap
 }
 
 function getMessage_RFC822_Attachment($message, $composeMessage, $passed_id,
-        $passed_ent_id='', $imapConnection) {
+        $passed_ent_id='', $imapConnection=NULL) {
     global $attachment_dir, $username, $data_dir, $uid_support;
     $hashed_attachment_dir = getHashedDir($username, $attachment_dir);
     if (!$passed_ent_id) {
