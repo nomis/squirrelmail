@@ -928,7 +928,7 @@ if (($attachment_common_show_images) &&
 
         echo html_tag( 'table', "\n" .
                     html_tag( 'tr', "\n" .
-                        html_tag( 'td', '<img src="' . $imgurl . '" />' ."\n", 'left'
+                        html_tag( 'td', '<img width="100%" src="' . $imgurl . '" />' ."\n", 'left'
                         )
                     ) ,
         'center', '', 'cellspacing="0" border="0" cellpadding="2"');
