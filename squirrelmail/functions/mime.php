@@ -568,9 +568,14 @@ function formatAttachments($message, $exclude_id, $mailbox, $id) {
             } else {
                 $attachments .= '&nbsp;&nbsp;|&nbsp;&nbsp;';
             }
-            $attachments .= '<a href="' . $val['href'] . '" '
-                         . (!empty($val['extra']) ? $val['extra'] : '')
-                         . '>' .  $val['text'] . '</a>';
+            if (empty($val['href']))
+               $attachments .= '<span '
+                            . (!empty($val['extra']) ? $val['extra'] : '')
+                            . '>' .  $val['text'] . '</span>';
+            else
+               $attachments .= '<a href="' . $val['href'] . '" '
+                            . (!empty($val['extra']) ? $val['extra'] : '')
+                            . '>' .  $val['text'] . '</a>';
         }
         unset($links);
         $attachments .= "</td></tr>\n";
