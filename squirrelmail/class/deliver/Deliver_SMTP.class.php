@@ -54,7 +54,7 @@ class Deliver_SMTP extends Deliver {
         global $use_smtp_tls, $smtp_auth_mech;
 
         if ($authpop) {
-            $this->authPop($pop_host, '', $user, $pass);
+            $this->authPop($user, $pass, $pop_host, '');
         }
 
         $rfc822_header = $message->rfc822_header;
@@ -457,7 +457,7 @@ class Deliver_SMTP extends Deliver {
         return true;
     }
 
-    function authPop($pop_server='', $pop_port='', $user, $pass) {
+    function authPop($user, $pass, $pop_server='', $pop_port='') {
         if (!$pop_port) {
             $pop_port = 110;
         }
