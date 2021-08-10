@@ -910,7 +910,7 @@ function sqimap_get_small_header_list($imap_stream, $msg_list, $show_num=false) 
         }
         if (isset($date) || isset($internal_date)) {
             if (isset($internal_date)) {
-                $internal_date = str_replace('  ', ' ', $internal_date);
+                $internal_date = preg_replace('/\s+/', ' ', $internal_date);
                 $tmpinternal_date  = explode(' ', trim($internal_date));
                 if (!isset($date)) {
                     $date = $internal_date;
@@ -918,7 +918,7 @@ function sqimap_get_small_header_list($imap_stream, $msg_list, $show_num=false) 
                 }
             }
             if (isset($date)) {
-                $date = str_replace('  ', ' ', $date);
+                $date = preg_replace('/\s+/', ' ', $date);
                 $tmpdate  = explode(' ', trim($date));
                 if (!isset($internal_date)) {
                     $internal_date = $date;
