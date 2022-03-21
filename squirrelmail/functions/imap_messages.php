@@ -725,7 +725,7 @@ function parsePriority($sValue) {
  */
 function sqimap_get_small_header_list($imap_stream, $msg_list, $show_num=false) {
     global $squirrelmail_language, $color, $data_dir, $username, $imap_server_type;
-    global $uid_support, $allow_server_sort;
+    global $uid_support, $allow_server_sort, $extra_small_header_fields;
     /* Get the small headers for each message in $msg_list */
     $maxmsg = sizeof($msg_list);
     if ($show_num != '999999') {
@@ -747,9 +747,9 @@ function sqimap_get_small_header_list($imap_stream, $msg_list, $show_num=false) 
 
     $internaldate = getPref($data_dir, $username, 'internal_date_sort', SMPREF_ON);
     if ($internaldate) {
-        $query = "FETCH $msgs_str (FLAGS UID RFC822.SIZE INTERNALDATE BODY.PEEK[HEADER.FIELDS (Date To Cc From Subject X-Priority Importance Priority Content-Type)])";
+        $query = "FETCH $msgs_str (FLAGS UID RFC822.SIZE INTERNALDATE BODY.PEEK[HEADER.FIELDS (Date To Cc From Subject X-Priority Importance Priority Content-Type $extra_small_header_fields)])";
     } else {
-        $query = "FETCH $msgs_str (FLAGS UID RFC822.SIZE BODY.PEEK[HEADER.FIELDS (Date To Cc From Subject X-Priority Importance Priority Content-Type)])";
+        $query = "FETCH $msgs_str (FLAGS UID RFC822.SIZE BODY.PEEK[HEADER.FIELDS (Date To Cc From Subject X-Priority Importance Priority Content-Type $extra_small_header_fields)])";
     }
     $read_list = sqimap_run_command_list ($imap_stream, $query, true, $response, $message, $uid_support);
     $i = 0;
@@ -793,6 +793,7 @@ function sqimap_get_small_header_list($imap_stream, $msg_list, $show_num=false) 
         $read = substr($read,$i+1);
         $i_len = strlen($read);
         $i = 0;
+        $extra_small_header_field_values = array();
         while ($i < $i_len && $i !== false) {
             /* get argument */
             $read = trim(substr($read,$i));
@@ -897,7 +898,9 @@ function sqimap_get_small_header_list($imap_stream, $msg_list, $show_num=false) 
                                     $type[1] = 'plain';
                                 }
                                 break;
-                            default: break;
+                            default:
+                                $extra_small_header_field_values[$field] = $value;
+                                break;
                             }
                         }
                     }
@@ -955,6 +958,8 @@ function sqimap_get_small_header_list($imap_stream, $msg_list, $show_num=false) 
         $messages[$msgi]['FLAG_ANSWERED'] = $flag_answered;
         $messages[$msgi]['FLAG_SEEN'] = $flag_seen;
         $messages[$msgi]['FLAG_FLAGGED'] = $flag_flagged;
+        foreach ($extra_small_header_field_values as $field => $value)
+            $messages[$msgi][strtoupper($field)] = $value;
 
         /* non server sort stuff */
         if (!$allow_server_sort) {
