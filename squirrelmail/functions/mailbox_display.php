@@ -1335,7 +1335,8 @@ function processSubject($subject, $threadlevel = 0) {
 function getMbxList($imapConnection) {
     global $lastTargetMailbox;
     echo  '         &nbsp;<tt><select name="targetMailbox">';
-    echo sqimap_mailbox_option_list($imapConnection, array(strtolower($lastTargetMailbox)) );
+    echo sqimap_mailbox_option_list($imapConnection,
+                                    isset($lastTargetMailbox) ? array(strtolower($lastTargetMailbox)) : array());
     echo '         </select></tt>&nbsp;';
 }
 
