@@ -1726,7 +1726,7 @@ function deliverMessage(&$composeMessage, $draft=false) {
 
     /* Receipt: On Delivery */
     if (isset($request_dr) && $request_dr) {
-        $rfc822_header->more_headers['Return-Receipt-To'] = $from_mail;
+        $rfc822_header->dsn = $rfc822_header->parseAddress($from_mail,true);
     }
 
     /* multipart messages */

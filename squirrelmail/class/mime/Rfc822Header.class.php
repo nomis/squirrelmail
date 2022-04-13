@@ -122,6 +122,10 @@ class Rfc822Header {
     /**
      * @var mixed
      */
+    var $dsn = '';
+    /**
+     * @var mixed
+     */
     var $encoding = '';
     /**
      * @var mixed
@@ -266,10 +270,13 @@ class Rfc822Header {
                 $this->references = $value;
                 break;
             case 'x-confirm-reading-to':
-            case 'return-receipt-to':
             case 'disposition-notification-to':
                 $value = $this->stripComments($value);
                 $this->dnt = $this->parseAddress($value);
+                break;
+            case 'return-receipt-to':
+                $value = $this->stripComments($value);
+                $this->dsn = $this->parseAddress($value);
                 break;
             case 'mime-version':
                 $value = $this->stripComments($value);
