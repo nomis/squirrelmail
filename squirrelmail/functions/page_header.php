@@ -122,6 +122,13 @@ function displayHtmlHeader($title='SquirrelMail', $xtra_param='', $do_hook=TRUE,
         do_hook('generic_header');
     }
 
+    // Add message subject to page title (should only have an effect when loaded in its own browser window/tab)
+    // TODO: For search page, could add " - Search: $what" or something like that
+    global $message;
+    if (!empty($message) && !empty($message->rfc822_header) && !empty($message->rfc822_header->subject))
+        // decodeHeader() should already encode the output, so no sm_encode_html_special_chars()
+        $title .= ' - ' . decodeHeader($message->rfc822_header->subject);
+
     echo "\n<title>$title</title>$xtra\n";
 
     // output <script> tags as needed (use array_unique so
