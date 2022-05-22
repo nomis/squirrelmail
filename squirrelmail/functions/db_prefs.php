@@ -35,17 +35,17 @@
  *                                 internal database information from being
  *                                 exposed. This should be enabled only for
  *                                 debugging purposes.
- *    string $identifier_quote_char By default, SquirrelMail will quote
- *                                  table and field names in database
- *                                  queries with what it thinks is the
- *                                  appropriate quote character for the
- *                                  database type being used (backtick
- *                                  for MySQL (and thus MariaDB), double
- *                                  quotes for all others), but you can
- *                                  override the character used by
- *                                  putting it here, or tell SquirrelMail
- *                                  NOT to quote identifiers by setting
- *                                  this to "none"
+ *    string $db_identifier_quote_char By default, SquirrelMail will quote
+ *                                     table and field names in database
+ *                                     queries with what it thinks is the
+ *                                     appropriate quote character for the
+ *                                     database type being used (backtick
+ *                                     for MySQL (and thus MariaDB), double
+ *                                     quotes for all others), but you can
+ *                                     override the character used by
+ *                                     putting it here, or tell SquirrelMail
+ *                                     NOT to quote identifiers by setting
+ *                                     this to "none"
  *
  * @copyright 1999-2022 The SquirrelMail Project Team
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -170,7 +170,7 @@ class dbPrefs {
     }
 
     function open() {
-        global $prefs_dsn, $prefs_table, $use_pdo, $identifier_quote_char;
+        global $prefs_dsn, $prefs_table, $use_pdo, $db_identifier_quote_char;
         global $prefs_user_field, $prefs_key_field, $prefs_val_field;
 
         if(isset($this->dbh)) {
@@ -184,15 +184,15 @@ class dbPrefs {
         }
 
         // figure out identifier quoting
-        if (empty($identifier_quote_char)) {
+        if (empty($db_identifier_quote_char)) {
             if ($this->db_type == SMDB_MYSQL)
                 $this->identifier_quote_char = '`';
             else
                 $this->identifier_quote_char = '"';
-        } else if ($identifier_quote_char === 'none')
+        } else if ($db_identifier_quote_char === 'none')
             $this->identifier_quote_char = '';
         else
-            $this->identifier_quote_char = $identifier_quote_char;
+            $this->identifier_quote_char = $db_identifier_quote_char;
 
         if (!empty($prefs_table)) {
             $this->table = $prefs_table;
