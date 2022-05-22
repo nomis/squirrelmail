@@ -653,6 +653,8 @@ function formatMenubar($aMailbox, $passed_id, $passed_ent_id, $message,
             $oTemplate->assign('move_delete_form_action', $base_uri.'src/read_body.php');
         $oTemplate->assign('delete_form_extra', addHidden('mailbox', $aMailbox['NAME'])."\n" .
                                                 addHidden('msg[0]', $passed_id)."\n" .
+                                                // only need when $return_to_message_list_after_move is off
+                                                addHidden('passed_id', ($next >= 0 ? $next : $prev))."\n" .
                                                 addHidden('startMessage', $startMessage)."\n" );
         if (!(isset($passed_ent_id) && $passed_ent_id)) {
             $oTemplate->assign('can_be_moved', true);
@@ -938,6 +940,13 @@ if (isset($aMailbox['MSG_HEADERS'][$passed_id]['FLAGS'])) {
  */
 if ( sqgetGlobalVar('delete_id', $delete_id, SQ_GET) ) {
     handleMessageListForm($imapConnection,$aMailbox,$sButton='setDeleted', array($delete_id));
+}
+
+/**
+ * or delete button... why is handleMessageListForm (per above) conditional anway?
+ */
+if ( sqgetGlobalVar('delete', $ignore, SQ_POST) ) {
+    $sError = handleMessageListForm($imapConnection,$aMailbox);
 }
 
 /**
