@@ -87,6 +87,9 @@ $move_to_trash =
 $save_as_draft =
     getPref($data_dir, $username, 'save_as_draft', $default_save_as_draft);
 
+$mark_as_read_upon_delete =
+    getPref($data_dir, $username, 'mark_as_read_upon_delete', FALSE);
+
 if ($default_unseen_type == '') {
     $default_unseen_type = 1;
 }
@@ -130,7 +133,6 @@ if (($load_draft_folder == '') && ($save_as_draft)) {
 
 $show_num = getPref($data_dir, $username, 'show_num', 15 );
 
-$wrap_at = getPref( $data_dir, $username, 'wrap_at', 86 );
 if ($wrap_at < 15) { $wrap_at = 15; }
 
 $left_size = getPref($data_dir, $username, 'left_size');

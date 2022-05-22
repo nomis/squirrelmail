@@ -71,8 +71,10 @@ function sqimap_msgs_list_move($imap_stream, $id, $mailbox, $handle_errors = tru
  *
  */
 function sqimap_msgs_list_delete($imap_stream, $mailbox, $id) {
-    global $move_to_trash, $trash_folder, $uid_support;
+    global $move_to_trash, $trash_folder, $uid_support, $mark_as_read_upon_delete;
     $msgs_id = sqimap_message_list_squisher($id);
+    if ($mark_as_read_upon_delete)
+        sqimap_toggle_flag($imap_stream, $id, '\\Seen', true, true);
     if (($move_to_trash == true) && (sqimap_mailbox_exists($imap_stream, $trash_folder) && ($mailbox != $trash_folder))) {
         /**
          * turn off internal error handling (third argument = false) and

@@ -97,6 +97,12 @@ function load_optpage_data_folder() {
         'posvals' => $sent_folder_values,
         'save'    => 'save_option_sent_folder'
     );
+    $optvals[SMOPT_GRP_SPCFOLDER][] = array(
+        'name'    => 'mark_as_read_upon_delete',
+        'caption' => _("Mark Deleted Messages as Read"),
+        'type'    => SMOPT_TYPE_BOOLEAN,
+        'refresh' => SMOPT_REFRESH_NONE
+    );
 
     /*** Load the General Options into the array ***/
     $optgrps[SMOPT_GRP_FOLDERLIST] = _("Folder List Options");
