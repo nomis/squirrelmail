@@ -311,6 +311,7 @@ struct ProxyConfig
     unsigned char login_disabled;             /* login disabled flag */
     char *chroot_directory;                   /* chroot(2) into this dir */
     char *preauth_command;                    /* arbitrary pre-authentication command */
+    char *auth_sasl_mech;                     /* SASL mechanism */
     char *auth_sasl_plain_username;           /* authentication username under SASL PLAIN */
     char *auth_sasl_plain_password;           /* authentication password under SASL PLAIN */
     char *auth_shared_secret;                 /* REQUIRED shared secret in leiu of a user password when using LOGIN command with SASL PLAIN authentication */

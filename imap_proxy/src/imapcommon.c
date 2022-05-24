@@ -540,7 +540,7 @@ extern ICD_Struct *Get_Server_conn( char *Username,
 
     char EncodedAuthBuf[BUFSIZE];
     char AuthBuf[BUFSIZE];
-    char AuthBufIndex;
+    unsigned int AuthBufIndex;
 
     unsigned int BufLen = BUFSIZE - 1;
     char md5pw[MD5_DIGEST_LENGTH];
@@ -903,11 +903,11 @@ extern ICD_Struct *Get_Server_conn( char *Username,
 	    goto fail;
 	}
     }
-    
+
 
     /*
      * If configured to do so, execute SASL PLAIN authentication
-     * using the static authentication username and password from
+     * using the static authorization username and password from
      * configuration (auth_sasl_plain_username/auth_sasl_plain_password).
      *
      * Note that because this means no password is required from
@@ -937,7 +937,7 @@ extern ICD_Struct *Get_Server_conn( char *Username,
 
 	/*
 	 * Build SASL AUTH PLAIN string:
-	 * username\0authentication_username\0authentication_password
+	 * authentication_username\0authorization_username\0authorization_password
 	 */
 	char *ptr_username;
 	unsigned int username_size;
@@ -996,6 +996,91 @@ extern ICD_Struct *Get_Server_conn( char *Username,
 	}
     }
 
+
+    /*
+     * If configured to do so, use SASL PLAIN instead of IMAP LOGIN to authenticate
+     */
+    else if ( PC_Struct.auth_sasl_mech
+	&& !strcmp( PC_Struct.auth_sasl_mech, "plain" ) )
+    {
+	/*
+	 * Build SASL AUTH PLAIN string:
+	 * username\0username\0password
+	 */
+	char *ptr_username;
+	unsigned int username_size;
+	char *ptr_password;
+	unsigned int password_size;
+	unsigned int total_size;
+
+	/*
+	 * But first, if username is enclosed in quotes, skip the
+	 * first one and overwrite the second with \0 (with pointer
+	 * math for our use below, since we are still working on
+	 * the original Username)
+	 */
+	ptr_username = Username;
+	username_size = strlen( Username );
+	if ( *ptr_username == '"' && *(ptr_username + username_size - 1) == '"' )
+	{
+	    ++ptr_username;
+	    username_size = username_size - 2;
+	}
+
+	/*
+	 * Same with password
+	 */
+	ptr_password = Password;
+	password_size = strlen( Password );
+	if ( *ptr_password == '"' && *(ptr_password + password_size - 1) == '"' )
+	{
+	    ++ptr_password;
+	    password_size = password_size - 2;
+	}
+
+	/*
+	 * Make sure output buffer is big enough ( +3 for three \0 )
+	 */
+	total_size = username_size + username_size + password_size + 3;
+	if ( total_size > BufLen ) {
+	    syslog( LOG_INFO,
+		    "LOGIN: '%s' (%s:%s) failed: PLAIN AUTH needs %d bytes; BUFSIZE is only %d",
+		    Username, ClientAddr, portstr, total_size, BufLen );
+	    goto fail;
+	}
+
+	/*
+	 * Prepare the buffer
+	 */
+	AuthBufIndex = 0;
+
+	memcpy( AuthBuf + AuthBufIndex, ptr_username, username_size );
+	AuthBufIndex += username_size;
+	AuthBuf[AuthBufIndex++] = '\0';
+
+	memcpy( AuthBuf + AuthBufIndex, ptr_username, username_size );
+	AuthBufIndex += username_size;
+	AuthBuf[AuthBufIndex++] = '\0';
+
+	memcpy( AuthBuf + AuthBufIndex, ptr_password, password_size );
+	AuthBufIndex += password_size;
+	AuthBuf[AuthBufIndex++] = '\0';
+
+	EVP_EncodeBlock( EncodedAuthBuf, AuthBuf, AuthBufIndex );
+
+	snprintf( SendBuf, BufLen, "A0001 AUTHENTICATE PLAIN %s\r\n", EncodedAuthBuf );
+
+	/* syslog( LOG_INFO, "sending auth plain '%s'", EncodedAuthBuf ); */
+
+	if ( IMAP_Write( Server.conn, SendBuf, strlen(SendBuf) ) == -1 )
+	{
+	    syslog( LOG_INFO,
+		    "LOGIN: '%s' (%s:%s) failed: IMAP_Write() failed attempting to send AUTHENTICATE command to IMAP server: %s",
+		    Username, ClientAddr, portstr, strerror( errno ) );
+	    goto fail;
+	}
+    }
+    
 
     /*
      * Otherwise, send a normal login command off to the IMAP server.

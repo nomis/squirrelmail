@@ -398,6 +398,9 @@ extern void SetConfigOptions( char *ConfigFile )
     ADD_TO_TABLE( "preauth_command", SetStringValue,
 		  &PC_Struct.preauth_command, index );
 
+    ADD_TO_TABLE( "auth_sasl_mech", SetStringValue,
+		  &PC_Struct.auth_sasl_mech, index );
+
     ADD_TO_TABLE( "auth_sasl_plain_username", SetStringValue,
 		  &PC_Struct.auth_sasl_plain_username, index );
     
