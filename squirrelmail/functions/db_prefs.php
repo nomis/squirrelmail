@@ -47,6 +47,11 @@
  *                                     NOT to quote identifiers by setting
  *                                     this to "none"
  *
+ * If needed, you can also set $prefs_db_charset as a string
+ * (such as "utf8mb4") in config/config_local.php if your system
+ * does not default the SQL connection character set as expected
+ * (most sensible systems will do the right thing transparently).
+ *
  * @copyright 1999-2022 The SquirrelMail Project Team
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @version $Id$
@@ -170,7 +175,7 @@ class dbPrefs {
     }
 
     function open() {
-        global $prefs_dsn, $prefs_table, $use_pdo, $db_identifier_quote_char;
+        global $prefs_dsn, $prefs_db_charset, $prefs_table, $use_pdo, $db_identifier_quote_char;
         global $prefs_user_field, $prefs_key_field, $prefs_val_field;
 
         if(isset($this->dbh)) {
@@ -254,6 +259,8 @@ class dbPrefs {
                 $pdo_prefs_dsn = $matches[1] . ':unix_socket=' . $matches[9] . ';dbname=' . $matches[5];
             else
                 $pdo_prefs_dsn = $matches[1] . ':host=' . $matches[4] . (!empty($matches[6]) ? ';port=' . $matches[6] : '') . ';dbname=' . $matches[5];
+            if (!empty($prefs_db_charset))
+               $pdo_prefs_dsn .= ';charset=' . $prefs_db_charset;
             try {
                 $dbh = new PDO($pdo_prefs_dsn, $matches[2], $matches[3]);
             } catch (Exception $e) {
@@ -270,6 +277,31 @@ class dbPrefs {
         }
 
         $this->dbh = $dbh;
+
+        // Older versions of PHP are buggy with setting charset on the dsn so we also issue a SET NAMES
+        if (!empty($prefs_db_charset)) {
+            if ($use_pdo) {
+                $res = $dbh->exec('SET NAMES \'' . $prefs_db_charset . '\'');
+                /* Purposefully not checking for errors; some setups reportedly botch it on queries like this
+                if ($res === FALSE) {
+                    if ($pdo_show_sql_errors)
+                        $this->error = implode(' - ', $sth->errorInfo());
+                    else
+                        $this->error = _("Could not execute query");
+                }
+                $this->failQuery();
+                */
+            }
+            else {
+                $res = $this->dbh->simpleQuery('SET NAMES \'' . $prefs_db_charset . '\'');
+                /* Purposefully not checking for errors; some setups reportedly botch it on queries like this
+                if(DB::isError($res)) {
+                    $this->failQuery($res);
+                }
+                */
+            }
+        }
+
         return true;
     }
 
