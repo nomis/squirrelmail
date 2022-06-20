@@ -133,6 +133,7 @@ if (($load_draft_folder == '') && ($save_as_draft)) {
 
 $show_num = getPref($data_dir, $username, 'show_num', 15 );
 
+$wrap_at = getPref( $data_dir, $username, 'wrap_at', 86 );
 if ($wrap_at < 15) { $wrap_at = 15; }
 
 $left_size = getPref($data_dir, $username, 'left_size');
