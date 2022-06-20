@@ -176,7 +176,7 @@ function mail_fetch_login() {
                     continue 2;
                 }
 
-                while (list($lineNum, $line) = each ($MessArray)) {
+                foreach ($MessArray as $lineNum => $line) {
                     $Message .= $line;
                 }
 
