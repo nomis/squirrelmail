@@ -7,7 +7,7 @@
  *
  * @version $Id$
  * @author Philippe Mingo
- * @copyright (c) 1999-2022 The SquirrelMail Project Team
+ * @copyright (c) 1999-2023 The SquirrelMail Project Team
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @package plugins
  * @subpackage administrator
