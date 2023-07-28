@@ -748,10 +748,12 @@ function sqimap_get_small_header_list($imap_stream, $msg_list, $show_num=false) 
     }
 
     $internaldate = getPref($data_dir, $username, 'internal_date_sort', SMPREF_ON);
+    if ($extra_small_header_fields !== '')
+        $extra_small_header_fields = ' ' . $extra_small_header_fields;
     if ($internaldate) {
-        $query = "FETCH $msgs_str (FLAGS UID RFC822.SIZE INTERNALDATE BODY.PEEK[HEADER.FIELDS (Date To Cc From Subject X-Priority Importance Priority Content-Type $extra_small_header_fields)])";
+        $query = "FETCH $msgs_str (FLAGS UID RFC822.SIZE INTERNALDATE BODY.PEEK[HEADER.FIELDS (Date To Cc From Subject X-Priority Importance Priority Content-Type$extra_small_header_fields)])";
     } else {
-        $query = "FETCH $msgs_str (FLAGS UID RFC822.SIZE BODY.PEEK[HEADER.FIELDS (Date To Cc From Subject X-Priority Importance Priority Content-Type $extra_small_header_fields)])";
+        $query = "FETCH $msgs_str (FLAGS UID RFC822.SIZE BODY.PEEK[HEADER.FIELDS (Date To Cc From Subject X-Priority Importance Priority Content-Type$extra_small_header_fields)])";
     }
     $read_list = sqimap_run_command_list ($imap_stream, $query, true, $response, $message, $uid_support);
     $i = 0;
