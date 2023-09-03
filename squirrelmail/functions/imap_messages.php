@@ -182,6 +182,7 @@ function sqimap_get_sort_order($imap_stream, $sort, $mbxresponse) {
         return $server_sort_array;
     }
 
+    // TODO: If capabilities include SORT=DISPLAY then 2 and 3 can be DISPLAYFROM... should this be a user or admin option? Maybe it could cycle/switch between FROM and DISPLAYFROM?
     $sort_on = array (0=> 'DATE',
                       1=> 'DATE',
                       2=> 'FROM',
@@ -194,6 +195,7 @@ function sqimap_get_sort_order($imap_stream, $sort, $mbxresponse) {
         $sort_on[0] = 'ARRIVAL';
         $sort_on[1] = 'ARRIVAL';
     }
+    // TODO: If capabilities include SORT=DISPLAY then 2 and 3 can be DISPLAYTO... should this be a user or admin option? Maybe it could cycle/switch between TO and DISPLAYTO?
     if ($sent_folder == $mailbox) {
         $sort_on[2] = 'TO';
         $sort_on[3] = 'TO';
