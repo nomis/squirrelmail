@@ -731,7 +731,7 @@ function sqimap_get_small_header_list($imap_stream, $msg_list, $show_num=false) 
     global $squirrelmail_language, $color, $data_dir, $username, $imap_server_type;
     global $uid_support, $allow_server_sort, $extra_small_header_fields;
     /* Get the small headers for each message in $msg_list */
-    $maxmsg = sizeof($msg_list);
+    $msg_count = is_array($msg_list) ? sizeof($msg_list) : 1;
     if ($show_num != '999999') {
         $msgs_str = sqimap_message_list_squisher($msg_list);
     } else {
@@ -745,8 +745,8 @@ function sqimap_get_small_header_list($imap_stream, $msg_list, $show_num=false) 
      * in $msg_list, but IMAP servers are free to return responses in
      * whatever order they wish... So we need to re-sort manually
      */
-    for ($i = 0; $i < sizeof($msg_list); $i++) {
-        $messages["$msg_list[$i]"] = array();
+    for ($i = 0; $i < $msg_count; $i++) {
+        $messages[$msg_list[$i]] = array();
     }
 
     $internaldate = getPref($data_dir, $username, 'internal_date_sort', SMPREF_ON);
