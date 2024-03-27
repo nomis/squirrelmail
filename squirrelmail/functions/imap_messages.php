@@ -750,9 +750,11 @@ function sqimap_get_small_header_list($imap_stream, $msg_list, $show_num=false) 
     }
 
     $internaldate = getPref($data_dir, $username, 'internal_date_sort', SMPREF_ON);
-    $extra_small_header_fields = trim($extra_small_header_fields);
-    if ($extra_small_header_fields !== '')
-        $extra_small_header_fields = ' ' . $extra_small_header_fields;
+    if (!empty($extra_small_header_fields)) {
+        $extra_small_header_fields = trim($extra_small_header_fields);
+        if (!empty($extra_small_header_fields))
+            $extra_small_header_fields = ' ' . $extra_small_header_fields;
+    }
     if ($internaldate) {
         $query = "FETCH $msgs_str (FLAGS UID RFC822.SIZE INTERNALDATE BODY.PEEK[HEADER.FIELDS (Date To Cc From Subject X-Priority Importance Priority Content-Type$extra_small_header_fields)])";
     } else {
