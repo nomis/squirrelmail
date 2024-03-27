@@ -126,7 +126,7 @@ function select_option_priority($selected) {
     );
 
     foreach($eventpriority as $key => $value) {
-        if($keyj=$selected){
+        if($key==$selected){
             echo '        <option value="'.$key.'" selected="selected">'.$value."</option>\n";
         } else {
             echo '        <option value="'.$key.'">'.$value."</option>\n";
