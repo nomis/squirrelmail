@@ -808,6 +808,8 @@ function sqimap_get_small_header_list($imap_stream, $msg_list, $show_num=false) 
             $read = trim(substr($read,$i));
             $i_len = strlen($read);
             $i = strpos($read,' ');
+            if ($i === FALSE)
+                break;
             $arg = substr($read,0,$i);
             ++$i;
             switch ($arg)
