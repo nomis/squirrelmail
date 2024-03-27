@@ -458,7 +458,7 @@ function compose_Header($color, $mailbox) {
              "\n    if (alreadyFocused) return;\n";
 
             global $action, $reply_focus;
-            if (strpos($action, 'reply') !== FALSE && $reply_focus)
+            if (!empty($action) && strpos($action, 'reply') !== FALSE && $reply_focus)
             {
                 if ($reply_focus == 'select') $js .= "document.forms['compose'].body.select();}\n";
                 else if ($reply_focus == 'focus') $js .= "document.forms['compose'].body.focus();}\n";
