@@ -19,9 +19,12 @@ require_once(SM_PATH . 'class/deliver/Deliver.class.php');
  * @package squirrelmail
  */
 class Deliver_SMTP extends Deliver {
-    var dlv_msg;
-    var dlv_ret_nr;
-    var dlv_server_msg;
+    /** @var string delivery error message */
+    var $dlv_msg = '';
+    /** @var integer delivery error number from server */
+    var $dlv_ret_nr = '';
+    /** @var string delivery error message from server */
+    var $dlv_server_msg = '';
 
     /**
      * Array keys are uppercased ehlo keywords
