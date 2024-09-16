@@ -679,6 +679,10 @@ function decodeHeader ($string, $utfencode=true,$htmlsave=true,$decide=false) {
         $string = implode("\n", $string);
     }
 
+    // loose type checking also catches $string === NULL here:
+    if ($string == '')
+        return '';
+
     if (isset($languages[$squirrelmail_language]['XTRA_CODE']) &&
             function_exists($languages[$squirrelmail_language]['XTRA_CODE'])) {
         $string = $languages[$squirrelmail_language]['XTRA_CODE']('decodeheader', $string);
