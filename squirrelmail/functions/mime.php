@@ -789,7 +789,9 @@ function decodeHeader ($string, $utfencode=true,$htmlsave=true,$decide=false) {
             }
         }
 
-        if (!$encoded && $htmlsave) {
+        // It is possible to slip XSS in here when a header has encoded content followed by unecoded malicious content --- this test was written long ago, but because the leftover $chunk has not been classified or handled in any way, we can't assume it is safe to include as-is.... We'll assume the person who wrote this if() would agree and didn't mean to accidentally allow such and that what they meant was the following corrected line:
+        // if (!$encoded && $htmlsave) {
+        if ($htmlsave) {
             $ret .= sm_encode_html_special_chars($chunk);
         } else {
             $ret .= $chunk;
