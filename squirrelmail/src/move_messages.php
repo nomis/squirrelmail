@@ -146,10 +146,10 @@ sqgetGlobalVar('expungeButton',   $expungeButton,   SQ_POST);
 sqgetGlobalVar('targetMailbox',   $targetMailbox,   SQ_POST);
 sqgetGlobalVar('expungeButton',   $expungeButton,   SQ_POST);
 sqgetGlobalVar('undeleteButton',  $undeleteButton,  SQ_POST);
-sqgetGlobalVar('markRead',        $markRead,        SQ_POST);
-sqgetGlobalVar('markUnread',      $markUnread,      SQ_POST);
 sqgetGlobalVar('attache',         $attache,         SQ_POST);
 sqgetGlobalVar('location',        $location,        SQ_POST);
+sqgetGlobalVar('markFlagged',     $markFlagged,     SQ_POST);
+sqgetGlobalVar('markUnflagged',   $markUnflagged,   SQ_POST);
 
 if (!sqgetGlobalVar('smtoken',$submitted_token, SQ_FORM)) {
     $submitted_token = '';
@@ -222,6 +222,10 @@ if(isset($expungeButton)) {
                 sqimap_toggle_flag($imapConnection, $id, '\\Seen',true,true);
             } else if (isset($markUnread)) {
                 sqimap_toggle_flag($imapConnection, $id, '\\Seen',false,true);
+            } else if (isset($markFlagged)) {
+                sqimap_toggle_flag($imapConnection, $id, '\\Flagged',true,true);
+            } else if (isset($markUnflagged)) {
+                sqimap_toggle_flag($imapConnection, $id, '\\Flagged',false,true);
             } else  {
                 sqimap_msgs_list_delete($imapConnection, $mailbox, $id);
                 if ($auto_expunge) {

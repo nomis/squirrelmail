@@ -816,6 +816,10 @@ function mail_message_listing_beginning ($imapConnection,
 
     echo getButton('SUBMIT', 'markRead',_("Read")) . "\n";
     echo getButton('SUBMIT', 'markUnread',_("Unread")) . "\n";
+    echo "&nbsp;";
+    echo getButton('SUBMIT', 'markFlagged',_("Flag")) . "\n";
+    echo getButton('SUBMIT', 'markUnflagged',_("Unflag")) . "\n";
+    echo "&nbsp;";
     echo getButton('SUBMIT', 'delete',_("Delete")) ."&nbsp;\n";
     if (!strpos($php_self,'mailbox')) {
         $location = $php_self.'?mailbox=INBOX&amp;startMessage=1';
