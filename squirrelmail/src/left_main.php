@@ -305,7 +305,7 @@ $imapConnection = sqimap_login($username, $key, $imapServerAddress, $imapPort, 1
 $xtra = '';
 if (isset($left_refresh) && ($left_refresh != '') &&
     !stristr($left_refresh, 'none')){
-    if ($javascript_on
+    if ($javascript_on && isset($check_mail_mechanism)
      && ($check_mail_mechanism === 'basic' || $check_mail_mechanism === 'advanced')) {
         $script_libs[] = SM_SCRIPT_LIB_REMOTE_REQUEST;
         $script_libs[] = SM_SCRIPT_LIB_RELOAD_PAGE;
