@@ -109,12 +109,12 @@ sqsession_is_active();
 
 if (!$force_login && sqsession_is_registered('user_is_logged_in')) {
     if ($compose_only) {
-        $redirect = 'compose.php?mailtodata=' . urlencode(serialize($data));
+        $redirect = 'compose.php?mailtodata=' . urlencode(json_encode($data));
     } else {
-        $redirect = 'webmail.php?right_frame=compose.php&mailtodata=' . urlencode(serialize($data));
+        $redirect = 'webmail.php?right_frame=compose.php&mailtodata=' . urlencode(json_encode($data));
     }
 } else {
-    $redirect = 'login.php?mailtodata=' . urlencode(serialize($data));
+    $redirect = 'login.php?mailtodata=' . urlencode(json_encode($data));
 }
 
 session_write_close();

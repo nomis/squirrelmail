@@ -132,7 +132,7 @@ if ( sqgetGlobalVar('mailtodata', $mailtodata, SQ_GET) ) {
                  'bcc'          => 'send_to_bcc',
                  'body'         => 'body',
                  'subject'      => 'subject');
-    $mtdata = unserialize($mailtodata);
+    $mtdata = json_decode($mailtodata, TRUE);
 
     foreach ($trtable as $f => $t) {
         if ( !empty($mtdata[$f]) ) {
