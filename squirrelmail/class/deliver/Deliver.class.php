@@ -655,10 +655,7 @@ class Deliver {
                 $header[] = 'X-Squirrel-ProxyHash:'.OneTimePadEncrypt($this->ip2hex($HTTP_X_FORWARDED_FOR),base64_encode($encode_header_key)).$rn;
           } else {
             // use default received headers
-            $header[] = "Received: from $received_from" . $rn;
-            if (!isset($hide_auth_header) || !$hide_auth_header)
-                $header[] = "        (SquirrelMail authenticated user $username)" . $rn;
-            $header[] = "        by $SERVER_NAME with HTTP;" . $rn;
+            $header[] = "Received: from $username with https;" . $rn;
             $header[] = "        $now_date" . $rn;
           }
         }
