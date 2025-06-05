@@ -1729,7 +1729,7 @@ function sq_fixatts($tagname,
          * Use white list based filtering on attributes which can contain url's
          */
         else if ($attname == 'href' || $attname == 'xlink:href' || $attname == 'src'
-              || $attname == 'poster' || $attname == 'formaction'
+              || $attname == 'poster' || $attname == 'formaction' || $attname == 'to'
               || $attname == 'background' || $attname == 'action') {
             sq_fix_url($attname, $attvalue, $message, $id, $mailbox);
             $attary[$attname] = $attvalue;
@@ -2445,6 +2445,10 @@ function magicHTML($body, $id, $message, $mailbox = 'INBOX', $take_mailto_links 
             "iframe",
             "plaintext",
             "marquee",
+            "animate",
+            "form",
+            "math",
+            "param",
             );
 
     $rm_tags_with_content = Array(
