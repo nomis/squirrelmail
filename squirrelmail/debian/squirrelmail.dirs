@@ -1,0 +1,5 @@
+etc/squirrelmail
+usr/share/squirrelmail
+usr/sbin
+var/spool/squirrelmail/attach
+var/lib/squirrelmail/data

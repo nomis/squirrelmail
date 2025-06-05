@@ -1,0 +1,10 @@
+debian/README.locales
+doc/AUTHORS
+doc/ReleaseNotes
+doc/russian_apache.txt
+doc/authentication.txt
+doc/ie_ssl.txt
+doc/presets.txt
+doc/security.txt
+doc/translating.txt
+doc/translating_help.txt

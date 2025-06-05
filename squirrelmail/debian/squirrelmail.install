@@ -1,0 +1,16 @@
+index.php			/usr/share/squirrelmail
+class				/usr/share/squirrelmail
+include				/usr/share/squirrelmail
+functions			/usr/share/squirrelmail
+help				/usr/share/squirrelmail
+images				/usr/share/squirrelmail
+locale				/usr/share/squirrelmail
+plugins				/usr/share/squirrelmail
+po				/usr/share/squirrelmail
+src				/usr/share/squirrelmail
+themes				/usr/share/squirrelmail
+config/*			/etc/squirrelmail
+data/default_pref		/etc/squirrelmail
+debian/apache.conf		/etc/squirrelmail
+
+debian/squirrelmail.lintian /usr/share/lintian/overrides

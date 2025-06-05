@@ -1,0 +1,137 @@
+SquirrelMail for Debian
+=======================
+
+Contents of this file:
+0. IMAP Server           SquirrelMail runs on top of almost any IMAP server
+1. Apache                Configuring Apache with SquirrelMail
+2. Virtual Hosts         How to make a virtual host like webmail.example.com
+3. Other Webservers      Configuring other webservers with SquirrelMail
+4. Security              Some security considerations
+5. Default Preferences   New location for default user preferences file
+6. Recommended packages  Other packages that can be useful with SquirrelMail
+7. Getting help          Still having trouble? Here's where to go.
+
+IMAP Server
+===========
+
+SquirrelMail needs an IMAP server to authorise users and access their
+mailboxes. It does not run on a POP3 server. Almost any server supporting
+IMAP4 will do (see the imap-server virtual package for references to
+IMAP servers packaged for Debian). For optimal behaviour of SquirrelMail
+it is important that you set the predefined setting for your IMAP server
+in squirrelmail-configure through the "D" option in the main menu.
+
+For performance reasons it's wise to have 'server side sorting' set to on
+in your SquirrelMail configuration if your IMAP server supports it (almost
+all modern do). This can also prevent users with very large mailboxes getting
+a timeout or an empty page when viewing it.
+
+
+Apache
+======
+
+If you want to use squirrelmail with apache, it is recommended to modify
+/etc/squirrelmail/apache.conf to your own wishes, and then add a symlink to
+that file from /etc/apache2/conf.d, like:
+
+ $ ln -s /etc/squirrelmail/apache.conf /etc/apache2/conf.d/squirrelmail.conf
+
+Alternatively, you could also 'Include' the configuration file in the relevant
+apache configuration file(s).
+
+
+Virtual Hosts
+=============
+
+Note that users will prefer a simple URL like http://webmail.example.com
+I recommend you set this functionality up even if only so if you ever
+choose to use another webmail package you don't have to change the URL.
+There are some example Apache directives in /etc/squirrelmail/apache.conf
+
+
+Other webservers
+================
+
+You need to create an alias in your web server pointing:
+
+http://localhost/squirrelmail/
+
+at /usr/share/squirrelmail/, then log in using your IMAP credentials.
+Adding a symlink in your webroot may be all you need.
+
+
+Security
+========
+
+Register Globals: Debian does not provide security support for installations
+with the PHP register_globals setting turned On. It's also not required for
+SquirrelMail to operate. Make sure it's off. It's trivial to turn it on just for
+specific legacy sites that may need it.
+
+HTTPS is recommended, to prevent passwords and other sensitive information being
+sent over the Internet in the clear. Most modern web servers support SSL, but
+configuring it is left as an exercise for the reader (and depends on the webserver
+used).
+
+STARTTLS is neither supported nor recommended as SM creates many IMAP
+sessions. You should use a persistent tunnel (e.g. SSH port forwarding) and/or
+an IMAP proxy.
+
+PHP safe_mode is not supported out of the box due to root:root ownerships.
+You may be able to work around this limitation by changing the group of
+the files in /usr/share/squirrelmail to the web server group (www-data). i.e.:
+
+  chgrp -R www-data /usr/share/squirrelmail/
+
+
+Recommended and Suggested Packages
+==================================
+
+The SquirrelMail Debian package recommends or suggests the following other
+Debian packages. Here's a summary of what value they might add to your
+installation:
+
+- squirrelmail-locales: Translations of SquirrelMail.
+  If you only want the English language you don't need this, but if you
+  want your users to select a different translation, install this package.
+
+- squirrelmail-decode: Extra decoding routines for complex character sets.
+  This extra decoding library provides support for some complex Eastern
+  character sets and some rarely used Apple character sets. Only needed if
+  your users actually receive messages encoded with these charsets.
+
+- ispell | aspell: This is needed for the SquirrelSpell spell checking
+  plug-in to work. If you have the choice, choose ispell since that's
+  automatically configured using dictionaries-common.
+
+- imap-server: this is of course needed for SquirrelMail to access mailboxes,
+  but is not a hard depend since the IMAP server can be on a different host.
+
+- php-pear: you need this package only if you want to store user preferences
+  or address books in an SQL database.
+
+- imapproxy: since SquirrelMail is a web application, it needs to reconnect
+  to the IMAP server on each page load. On heavily loaded sites, this can be
+  a problem; use the excellent imapproxy package to cache connections between
+  page requests and reduce the load on your IMAP server.
+
+
+Where to get help
+=================
+
+The first stop would be the SquirrelMail website: http://www.squirrelmail.org
+It has frequently asked questions, tutorials for specific setups and other
+troubleshooting hints.
+
+Still need help? You could check out the
+squirrelmail-users@lists.sourceforge.net mailinglist, or the #squirrelmail IRC
+channel on irc.freenode.net. Seasoned users and developers regularly hang out
+there.
+
+Found a bug or have a wishlist item? In Debian, you can check existing reports
+at http://bugs.debian.org/squirrelmail and report new issues through the
+"reportbug" utility.
+
+
+
+$Id: README.Debian 375 2009-05-13 17:24:13Z kink $

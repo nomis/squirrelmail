@@ -1,0 +1,65 @@
+#!/usr/bin/make -f
+# debian/rules makefile for squirrelmail
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+build: build-arch build-indep
+build-arch: build-stamp
+build-indep: build-stamp
+build-stamp:
+	dh_testdir
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_prep
+	dh_installdirs
+	dh_install
+	mv $(CURDIR)/debian/squirrelmail/etc/squirrelmail/conf.pl \
+		$(CURDIR)/debian/squirrelmail/usr/sbin/squirrelmail-configure
+	mv $(CURDIR)/debian/squirrelmail/usr/share/squirrelmail/plugins/squirrelspell/sqspell_config.php \
+		$(CURDIR)/debian/squirrelmail/etc/squirrelmail/
+	mv $(CURDIR)/debian/squirrelmail/usr/share/squirrelmail/plugins/filters/setup.php \
+		$(CURDIR)/debian/squirrelmail/etc/squirrelmail/filters_setup.php
+	find debian/squirrelmail -name .svn | xargs -r rm -r
+	rm -f debian/squirrelmail/usr/share/squirrelmail/plugins/demo/COPYING \
+		debian/squirrelmail/usr/share/squirrelmail/plugins/test/COPYING
+	chmod +x debian/squirrelmail/usr/share/squirrelmail/plugins/demo/getpot
+
+# Build architecture-independent files here.
+binary-indep: build install
+	dh_testdir
+	dh_testroot
+	dh_installdebconf	
+	dh_installdocs -X.svn
+	dh_installexamples
+	dh_installman
+	dh_installcron
+	mv $(CURDIR)/debian/squirrelmail/usr/share/lintian/overrides/squirrelmail.lintian \
+		$(CURDIR)/debian/squirrelmail/usr/share/lintian/overrides/squirrelmail 
+	dh_installchangelogs doc/ChangeLog
+	chgrp www-data $(CURDIR)/debian/squirrelmail/var/spool/squirrelmail/attach \
+		$(CURDIR)/debian/squirrelmail/var/lib/squirrelmail/data
+	chmod u=rwx,g=wx,o= $(CURDIR)/debian/squirrelmail/var/spool/squirrelmail/attach \
+		$(CURDIR)/debian/squirrelmail/var/lib/squirrelmail/data
+	dh_link
+	dh_compress
+	dh_fixperms -X/var
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+# Build architecture-dependent files here.
+binary-arch:
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install

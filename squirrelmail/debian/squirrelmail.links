@@ -1,0 +1,4 @@
+/etc/squirrelmail			usr/share/squirrelmail/config
+/usr/sbin/squirrelmail-configure	etc/squirrelmail/conf.pl
+/etc/squirrelmail/sqspell_config.php	usr/share/squirrelmail/plugins/squirrelspell/sqspell_config.php
+/etc/squirrelmail/filters_setup.php	usr/share/squirrelmail/plugins/filters/setup.php

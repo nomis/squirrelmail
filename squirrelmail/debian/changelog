@@ -1,0 +1,5 @@
+squirrelmail (2:1.4.23~svn20250402-r15037-sa1) jammy; urgency=medium
+
+  * Build from svn with patches
+
+ -- Simon Arlott <ubuntu@sa.me.uk>  Thu, 05 Jun 2025 22:59:51 +0100

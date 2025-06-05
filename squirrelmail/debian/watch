@@ -1,0 +1,3 @@
+# Site		Directory		Pattern			Version	Script
+version=3
+http://sf.net/squirrelmail/squirrelmail-(\d+\.\d*[02468]\.[^-]+)\.tar\.gz
