@@ -231,13 +231,13 @@ function newmail_plugin() {
                 echo 'window.parent.document.title = "(' . $totalNew .') ' . $org_title . '";';
             } else {
                 if( $totalNew > 1 || $totalNew == 0 ) {
-                    echo 'window.parent.document.title = "' . $org_title . ' [' .
+                    echo 'window.parent.document.title = "' .
                         sprintf(_("%s New Messages"), $totalNew ) . 
-                        "]\";\n";
+                        " (" . $org_title . ")\";\n";
                 } else {
-                    echo 'window.parent.document.title = "' . $org_title . ' [' .
+                    echo 'window.parent.document.title = "' .
                         sprintf(_("%s New Message"), $totalNew ) . 
-                        "]\";\n";
+                        " (" . $org_title . ")\";\n";
                 }
             }
             echo    "if (BeforeChangeTitle != null)\n".
