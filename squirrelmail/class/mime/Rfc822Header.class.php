@@ -882,7 +882,7 @@ class Rfc822Header {
             }
             $s = ($s ? substr($s, 2) : $s);
         } else {
-            $addr = $this->{$arr};
+            $addr = $this->$arr;
             if (is_array($addr)) {
                 foreach ($addr as $addr_o) {
                     if (is_object($addr_o)) {
@@ -920,7 +920,7 @@ class Rfc822Header {
                 $arr = $this->getAddr_a($argument, $excl_arr, $arr);
             }
         } else {
-            $addr = $this->{$arg};
+            $addr = $this->$arg;
             if (is_array($addr)) {
                 foreach ($addr as $next_addr) {
                     if (is_object($next_addr)) {

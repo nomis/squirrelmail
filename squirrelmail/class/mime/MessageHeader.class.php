@@ -77,7 +77,7 @@ class MessageHeader {
      * @param mixed $value
      */
     function setVar($var, $value) {
-        $this->{$var} = $value;
+        $this->$var = $value;
     }
 
     /**
