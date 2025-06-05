@@ -96,20 +96,6 @@ function formatMailboxName($imapConnection, $box_array) {
         $line .= "&nbsp;<small>$unseen_string</small>";
     }
 
-    /* If it's the trash folder, show a purge link when needed */
-    if (($move_to_trash) && ($real_box == $trash_folder)) {
-        if (! isset($numMessages)) {
-            $numMessages = sqimap_get_num_messages($imapConnection, $real_box);
-        }
-
-        if (($numMessages > 0) or ($box_array['parent'] == 1)) {
-            $urlMailbox = urlencode($real_box);
-            $line .= "\n<small>\n" .
-                    '&nbsp;&nbsp;(<a href="empty_trash.php?smtoken=' . sm_generate_security_token() . '" style="text-decoration:none">'._("Purge").'</a>)' .
-                    '</small>';
-        }
-    }
-
     $line .= concat_hook_function('left_main_after_each_folder',
                                   array(isset($numMessages) ? $numMessages : '',
                                         $real_box, $imapConnection));
