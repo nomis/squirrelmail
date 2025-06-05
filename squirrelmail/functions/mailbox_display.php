@@ -845,7 +845,8 @@ function mail_message_listing_beginning ($imapConnection,
         echo html_tag( 'tr' ,
                     html_tag( 'td' ,
                               '&nbsp;<small><a href="' . $source_url . '?sort='
-                              . "$sort" . '&amp;start_messages=1&amp;set_thread=' . "$set_thread"
+                              . "$sort" . '&amp;start_messages=1'
+                              . (isset($set_thread) ? '&amp;set_thread=' . "$set_thread" : '')
                               . '&amp;mailbox=' . urlencode($mailbox) . '">' . $thread_name
                               . '</a></small>&nbsp;'
                      , '', '', ' colspan="2" ' )
