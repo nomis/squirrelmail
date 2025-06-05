@@ -198,6 +198,11 @@ function checkForPrefs($data_dir, $username, $filename = '') {
             $default_pref = SM_PATH . 'data/default_pref';
         }
 
+        /* Check where we'd expect it to be located: under config/ */
+        if (!@file_exists($default_pref)) {
+            $default_pref = SM_PATH . 'config/default_pref';
+        }
+
         /* Otherwise, report an error. */
         $errTitle = sprintf( _("Error opening %s"), $default_pref );
         if (!is_readable($default_pref)) {

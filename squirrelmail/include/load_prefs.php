@@ -33,6 +33,11 @@ $found_theme = false;
 /* need to adjust $chosen_theme path with SM_PATH */
 $chosen_theme = preg_replace("/(\.\.\/){1,}/", SM_PATH, $chosen_theme);
 
+/* need to prepend path where none exists */
+if ( !preg_match("/\//", $chosen_theme) ) {
+    $chosen_theme = SM_PATH . "themes/" . $chosen_theme;
+}
+
 for ($i = 0; $i < count($theme); ++$i){
     if ($theme[$i]['PATH'] == $chosen_theme) {
         $found_theme = true;

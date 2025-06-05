@@ -496,7 +496,7 @@ $noselect_fix_enable = false;
  *   Here are two examples:
  *
  * Absolute:
- *   $data_dir = '/var/local/squirrelmail/data/';
+ *   $data_dir = '/var/lib/squirrelmail/data/';
  *
  * Relative (to main SM directory):
  *   $data_dir = SM_PATH . 'data/';
@@ -505,7 +505,7 @@ $noselect_fix_enable = false;
  *
  * @global string $data_dir
  */
-$data_dir = '/var/local/squirrelmail/data/';
+$data_dir = '/var/lib/squirrelmail/data/';
 
 /**
  * Attachments directory
@@ -523,7 +523,7 @@ $data_dir = '/var/local/squirrelmail/data/';
  *    + It should probably be another directory than data_dir.
  * @global string $attachment_dir
  */
-$attachment_dir = '/var/local/squirrelmail/attach/';
+$attachment_dir = '/var/spool/squirrelmail/attach/';
 
 /**
  * Hash level used for data directory.

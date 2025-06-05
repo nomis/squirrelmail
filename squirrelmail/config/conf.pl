@@ -38,8 +38,9 @@ if ( defined( $ENV{'PATH_INFO'} )
 # (the Basename stuff above will sometimes return '.' as
 # the base directory, which is not helpful here). 
 ############################################################
-use Cwd;
-$dir = cwd();
+#use Cwd;
+#$dir = cwd();
+$dir = '/usr/share/squirrelmail/config';
   
 
 ############################################################              
@@ -61,9 +62,9 @@ if ( -e "../functions/strings.php" && -r "../functions/strings.php") {
 ############################################################              
 # First, let's read in the data already in there...
 ############################################################              
-if ( -e "config.php" ) {
+if ( -e "/etc/squirrelmail/config.php" ) {
     # Make sure that file is readable
-    if (! -r "config.php") {
+    if (! -r "/etc/squirrelmail/config.php") {
         clear_screen();
         print "WARNING:\n";
         print "The file \"config/config.php\" was found, but you don't\n";
@@ -73,7 +74,7 @@ if ( -e "config.php" ) {
         $ctu = <STDIN>;
         exit;
     }
-    open( FILE, "config.php" );
+    open( FILE, "/etc/squirrelmail/config.php" );
     while ( $line = <FILE> ) {
         $line =~ s/^\s+//;
         $line =~ s/^\$//;
@@ -124,9 +125,9 @@ if ( -e "config.php" ) {
     }
 
     $config = 1;
-    open( FILE, "config.php" );
-} elsif ( -e "config_default.php" ) {
-    open( FILE, "config_default.php" );
+    open( FILE, "/etc/squirrelmail/config.php" );
+} elsif ( -e "/etc/squirrelmail/config_default.php" ) {
+    open( FILE, "/etc/squirrelmail/config_default.php" );
     while ( $line = <FILE> ) {
         $line =~ s/^\s+//;
         $line =~ s/^\$//;
@@ -176,7 +177,7 @@ if ( -e "config.php" ) {
         $print_config_version = $config_version;
     }
     $config = 2;
-    open( FILE, "config_default.php" );
+    open( FILE, "/etc/squirrelmail/config_default.php" );
 } else {
     print "No configuration file found. Please get config_default.php\n";
     print "or config.php before running this again. This program needs\n";
@@ -206,8 +207,8 @@ while ( $line = <FILE> ) {
             $sub = $options[0];
             $sub =~ s/\]\[['|"]PATH['|"]\]//;
             $sub =~ s/.*\[//;
-            if ( -e "../themes" ) {
-                $options[1] =~ s/^\.\.\/config/\.\.\/themes/;
+            if ( -e "/usr/share/squirrelmail/themes" ) {
+                $options[1] =~ s/^SM_PATH \. \'config/\.\.\/themes/;
             }
             $theme_path[$sub] = &change_to_rel_path($options[1]);
         } elsif ( $options[0] =~ /^theme\[[0-9]+\]\[['|"]NAME['|"]\]/ ) {
@@ -394,7 +395,7 @@ $fix_broken_base64_encoded_messages = 'false' if ( !$fix_broken_base64_encoded_m
 
 if ( $ARGV[0] eq '--install-plugin' ) {
     print "Activating plugin " . $ARGV[1] . "\n";
-    if ( -d "../plugins/" . $ARGV[1]) {
+    if ( -d "/usr/share/squirrelmail/plugins/" . $ARGV[1]) {
         push @plugins, $ARGV[1];
         save_data();
         exit(0);
@@ -639,12 +640,12 @@ while ( ( $command ne "q" ) && ( $command ne "Q" ) ) {
             print "    $num. $plugins[$count]\n";
         }
         print "\n  Available Plugins:\n";
-        opendir( DIR, "../plugins" );
+        opendir( DIR, "/usr/share/squirrelmail/plugins" );
         @files          = sort(readdir(DIR));
         $pos            = 0;
         @unused_plugins = ();
         for ( $i = 0 ; $i <= $#files ; $i++ ) {
-            if ( -d "../plugins/" . $files[$i] && $files[$i] !~ /^\./ && $files[$i] ne "CVS" ) {
+            if ( -d "/usr/share/squirrelmail/plugins/" . $files[$i] && $files[$i] !~ /^\./ && $files[$i] ne "CVS" ) {
                 $match = 0;
                 for ( $k = 0 ; $k <= $#plugins ; $k++ ) {
                     if ( $plugins[$k] eq $files[$i] ) {
@@ -2881,8 +2882,6 @@ sub command41 {
             $name = <STDIN>;
             $name =~ s/[\r|\n]//g;
             $theme_name[ $#theme_name + 1 ] = $name;
-            print "Be sure to put ../themes/ before the filename.\n";
-            print "What file is this stored in (ex: ../themes/default_theme.php): ";
             $name = <STDIN>;
             $name =~ s/[\r|\n]//g;
             $theme_path[ $#theme_path + 1 ] = $name;
@@ -2916,12 +2915,12 @@ sub command41 {
         } elsif ( $input =~ /^\s*t\s*/i ) {
             print "\nStarting detection...\n\n";
 
-            opendir( DIR, "../themes" );
+            opendir( DIR, "/usr/share/squirrelmail/themes" );
             @files = grep { /\.php$/i } sort(readdir(DIR));
             $cnt = 0;
             while ( $cnt <= $#files ) {
-                $filename = "../themes/" . $files[$cnt];
-                if ( $filename ne "../themes/index.php" ) {
+                $filename = "/usr/share/squirrelmail/themes/" . $files[$cnt];
+                if ( $filename ne "/usr/share/squirrelmail/themes/index.php" ) {
                     $found = 0;
                     for ( $x = 0 ; $x <= $#theme_path ; $x++ ) {
                         if ( $theme_path[$x] eq $filename ) {
@@ -3603,7 +3602,7 @@ sub commandA3 {
 
 sub save_data {
     $tab = "    ";
-    if ( open( CF, ">config.php" ) ) {
+    if ( open( CF, ">/etc/squirrelmail/config.php" ) ) {
         print CF "<?php\n";
         print CF "\n";
 
