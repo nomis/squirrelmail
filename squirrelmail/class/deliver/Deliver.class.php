@@ -610,6 +610,8 @@ class Deliver {
                         . '.squirrel@' . $SERVER_NAME .'>';
         }
 
+        $message_id = '<' . sha1($username . '.' . $SERVER_NAME . '.' . $REMOTE_PORT . '.' . $REMOTE_ADDR . '.' . microtime()) . '@0c853d9a-808e-11ee-8fd8-00805fc181fe.uuid.home.arpa>';
+
         /* Make an RFC822 Received: line */
         if (isset($REMOTE_HOST)) {
             $received_from = "$REMOTE_HOST ([$REMOTE_ADDR])";
