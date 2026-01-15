@@ -1,5 +1,5 @@
 # Vietnamese (vi_VI) gpg Translation (SquirrelMail plugin)
-# Copyright (c) 2003-2025 The SquirrelMail Project Team
+# Copyright (c) 2003-2026 The SquirrelMail Project Team
 # This file is distributed under the same license as the SquirrelMail package.
 # Clytie Siddall <clytie@riverland.net.au>, 2008.
 # $Id$
@@ -1537,7 +1537,7 @@ msgstr "Không thể chỉnh sửa vòng khoá, các chức năng vòng khoá b�
 #. * in keyring_main.php
 #. *
 #. *
-#. * Copyright (c) 1999-2025 The SquirrelMail Project Team
+#. * Copyright (c) 1999-2026 The SquirrelMail Project Team
 #. * Licensed under the GNU GPL. For full terms see the file COPYING.
 #. *
 #. * Copyright (c) 2002-2005 Braverock Ventures
