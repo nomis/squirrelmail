@@ -667,7 +667,7 @@ class SquirrelOption {
      */
     function createWidget_Boolean($checkbox=TRUE) {
         /* Do the whole current value thing. */
-        if ($this->value != SMPREF_NO) {
+        if ((int)$this->value != SMPREF_NO) {
             $yes_chk = ' checked="checked"';
             $no_chk = '';
         } else {
