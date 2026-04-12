@@ -497,6 +497,7 @@ $what_disp = str_replace('"', '&quot;', $what_disp);
 echo '         </select>'
    . '<input type="text" size="35" name="what" value="' . $what_disp . '" />'
    . "<select name=\"where\">";
+// NB: Keep these in sync with functions/page_header.php (approx line 150)
 s_opt( 'BODY', $where, _("Body") );
 s_opt( 'TEXT', $where, _("Everywhere") );
 s_opt( 'SUBJECT', $where, _("Subject") );

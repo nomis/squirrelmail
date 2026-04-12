@@ -122,12 +122,56 @@ function displayHtmlHeader($title='SquirrelMail', $xtra_param='', $do_hook=TRUE,
         do_hook('generic_header');
     }
 
-    // Add message subject to page title (should only have an effect when loaded in its own browser window/tab)
-    // TODO: For search page, could add " - Search: $what" or something like that
-    global $message;
-    if (!empty($message) && !empty($message->rfc822_header) && !empty($message->rfc822_header->subject))
-        // decodeHeader() should already encode the output, so no sm_encode_html_special_chars()
-        $title .= ' - ' . decodeHeader($message->rfc822_header->subject);
+    // Add helpful info to page title
+    // (should only have an effect when loaded in its own browser window/tab)
+    //
+    if ( !defined('PAGE_NAME') ) define('PAGE_NAME', NULL);
+    switch ( PAGE_NAME ) {
+
+        // Add message subject to page title on read message page
+        case 'read_body':
+            global $message;
+            if (!empty($message) && !empty($message->rfc822_header) && !empty($message->rfc822_header->subject))
+                // decodeHeader() should already encode the output, so no sm_encode_html_special_chars()
+                $title .= ' - ' . decodeHeader($message->rfc822_header->subject);
+            break;
+
+        // Add mailbox name to page title on mailbox list page
+        case 'right_main':
+            global $mailbox;
+            sqgetGlobalVar('delimiter', $delimiter, SQ_SESSION );
+            $title .= ' - ' . sm_encode_html_special_chars(imap_utf7_decode_local(readShortMailboxName($mailbox, $delimiter)));
+            break;
+
+        // Add search info to page title
+        case 'search':
+            global $what, $where;
+            $title .= ' - ' . _("Search") . ': ' . sm_encode_html_special_chars($what);
+// NB: Keep these in sync with src/search.php (approx line 510)
+/* Adding this is more than necessary for the page title
+            switch ( $where ) {
+                case 'BODY':
+                    $title .= ' [' . _("Body") . ']';
+                case 'TEXT':
+                    $title .= ' [' . _("Everywhere") . ']';
+                case 'SUBJECT':
+                    $title .= ' [' . _("Subject") . ']';
+                case 'FROM':
+                    $title .= ' [' . _("From") . ']';
+                case 'CC':
+                    $title .= ' [' . _("Cc") . ']';
+                case 'TO':
+                    $title .= ' [' . _("To") . ']';
+                case 'TO_CC':
+                    $title .= ' [' . _("To/Cc") . ']';
+                case 'TO_CC_FROM':
+                    $title .= ' [' . _("To/Cc/From") . ']';
+                case 'TO_CC_FROM_SUBJECT':
+                    $title .= ' [' . _("To/Cc/From/Subject") . ']';
+            }
+*/
+            break;
+    }
 
     echo "\n<title>$title</title>$xtra\n";
 
